@@ -102,11 +102,11 @@ const localStorageDadosPesoKey = "dadosPesagemGlobal";
 const localStorageCertificadoKey = "dadosCertificadoGlobal";
 const localStorageSetorEnviadoKey = "pedidoEnviadoPorSetor";
 const localStoragePedidoStatusKey = "pedidoStatus";
-const localStorageCarregamentoStatusKey = "carregamentoStatus"; // Novo
-const localStorageObservacaoKey = "observacaoCarregamento";
-const localStorageCarregadorKey = "carregadorDesignado"; // Renomeado
-const localStorageItemCarregadoKey = "itemCarregado"; // Novo
-const localStorageNotaFiscalKey = "notaFiscal";
+const localStoragePedidoCarregadoKey = "pedidoCarregadoStatus";
+const localStorageObservacaoCarregamentoKey = "observacaoCarregamento";
+const localStoragePedidoMotoristaKey = "pedidoMotoristaDestino";
+
+const localStorageNotaFiscalKey = "pedidoNotaFiscalNumero";
 
 function getNotaFiscal(pedidoId) {
     const pedido = pedidos.find(p => p.id === pedidoId);
@@ -151,114 +151,122 @@ function inicializarNotasFiscais() {
 const NF_RANGE_START = 222000;
 const NF_RANGE_END = 223000; 
 
-let globalFiltroCarregamento = "todos"; 
-let embarqueSelecionado = null;
-let selectedUserType = null;
-let selectedMaterialType = null;
-let globalFiltroStatus = "todas"; 
+let globalFiltroPedido = "";
 let globalFiltroRota = "todas";
+let globalFiltroStatus = "todas";
 let pedidoUnicoVisualizado = null;
 
-const localStorageItemReasonKey = "itemReason";
+let previousGlobalFiltroRota = "todas";
+let previousGlobalFiltroStatus = "todas";
 
-function setItemReason(pedidoId, itemSlug, reason) {
-    localStorage.setItem(`${localStorageItemReasonKey}_${pedidoId}_${itemSlug}`, reason);
-}
+let globalFiltroMaterial = "Todos";
 
-function getItemReason(pedidoId, itemSlug) {
-    return localStorage.getItem(`${localStorageItemReasonKey}_${pedidoId}_${itemSlug}`) || "";
-}
+let globalFiltroCarregamento = "todos";
+let globalFiltroMotoristaDestino = null;
 
 function getPedidoStatus(id) {
-    return localStorage.getItem(`${localStoragePedidoStatusKey}_${id}`) || "Aguardando separação";
+    return localStorage.getItem(`${localStoragePedidoStatusKey}_${id}`) ||
+        (pedidos.find(p => p.id === id) ? pedidos.find(p => p.id === id).status : "Aguardando separação");
 }
 
 function setPedidoStatus(id, status) {
     localStorage.setItem(`${localStoragePedidoStatusKey}_${id}`, status);
+
     const pedidoIndex = pedidos.findIndex(p => p.id === id);
     if (pedidoIndex !== -1) {
         pedidos[pedidoIndex].status = status;
     }
-}
 
-function getCarregamentoStatus(id) {
-    // Status: aguardando, em_carregamento, carregado, nao_carregado
-    return localStorage.getItem(`${localStorageCarregamentoStatusKey}_${id}`) || "aguardando";
-}
-
-function setCarregamentoStatus(id, status) {
-    localStorage.setItem(`${localStorageCarregamentoStatusKey}_${id}`, status);
-}
-
-function getCarregadorDesignado(embarque) {
-    return localStorage.getItem(`${localStorageCarregadorKey}_${embarque}`) || null;
-}
-
-function setCarregadorDesignado(embarque, carregador) {
-    if (carregador) {
-        localStorage.setItem(`${localStorageCarregadorKey}_${embarque}`, carregador);
-    } else {
-        localStorage.removeItem(`${localStorageCarregadorKey}_${embarque}`);
+    if (document.getElementById("filterScreen").style.display === "flex") {
+        exibirResumoEmbarques();
+    }
+    if (document.getElementById("mainApp").style.display === "block") {
+        renderizarPedidosPorSetor(pedidoUnicoVisualizado);
+        exibirCotasPorEmbarque(pedidoUnicoVisualizado);
+    }
+    if (document.getElementById("loaderOrdersScreen").style.display === "flex") {
+        renderizarPedidosCarregamento();
     }
 }
 
-function getObservacao(idOuEmbarque, isEmbarque = false) {
-    const key = isEmbarque ? `${localStorageObservacaoKey}_embarque_${idOuEmbarque}` : `${localStorageObservacaoKey}_pedido_${idOuEmbarque}`;
-    return localStorage.getItem(key) || "";
+function getPedidoCarregadoStatus(id) {
+    return localStorage.getItem(`${localStoragePedidoCarregadoKey}_${id}`) || "pendente";
 }
 
-function setObservacao(idOuEmbarque, observacao, isEmbarque = false) {
-    const key = isEmbarque ? `${localStorageObservacaoKey}_embarque_${idOuEmbarque}` : `${localStorageObservacaoKey}_pedido_${idOuEmbarque}`;
-    localStorage.setItem(key, observacao);
+function setPedidoCarregadoStatus(id, status) {
+    localStorage.setItem(`${localStoragePedidoCarregadoKey}_${id}`, status);
+    renderizarPedidosCarregamento();
 }
 
-function isItemCarregado(pedidoId, itemSlug) {
-    return localStorage.getItem(`${localStorageItemCarregadoKey}_${pedidoId}_${itemSlug}`) === 'true';
+function getObservacaoCarregamento(id) {
+    return localStorage.getItem(`${localStorageObservacaoCarregamentoKey}_${id}`) || "";
 }
 
-function setItemCarregado(pedidoId, itemSlug, isChecked) {
-    localStorage.setItem(`${localStorageItemCarregadoKey}_${pedidoId}_${itemSlug}`, isChecked);
+function setObservacaoCarregamento(id, observacao) {
+    localStorage.setItem(`${localStorageObservacaoCarregamentoKey}_${id}`, observacao);
+}
+
+function getPedidoMotoristaDestino(id) {
+    const pedido = pedidos.find(p => p.id === id);
+    return localStorage.getItem(`${localStoragePedidoMotoristaKey}_${id}`) || (pedido ? pedido.motorista : null);
+}
+
+function setPedidoMotoristaDestino(id, motorista) {
+    localStorage.setItem(`${localStoragePedidoMotoristaKey}_${id}`, motorista);
+    const pedidoIndex = pedidos.findIndex(p => p.id === id);
+    if (pedidoIndex !== -1) {
+        pedidos[pedidoIndex].motorista = motorista;
+    }
+    renderizarPedidosCarregamento();
 }
 
 function getDadosPesoPedido(id) {
     return JSON.parse(localStorage.getItem(`${localStorageDadosPesoKey}_${id}`)) || {};
 }
+
 function setDadosPesoPedido(id, dados) {
     localStorage.setItem(`${localStorageDadosPesoKey}_${id}`, JSON.stringify(dados));
 }
+
+function gerarProximaNotaFiscal() {
+    let maxNF = NF_RANGE_START - 1;
+    for (let i = 0; i < pedidos.length; i++) {
+        const nf = getNotaFiscal(pedidos[i].id);
+        if (nf !== null && nf >= NF_RANGE_START && nf <= NF_RANGE_END) {
+            if (nf > maxNF) maxNF = nf;
+        }
+    }
+    const proxima = maxNF + 1;
+    return (proxima <= NF_RANGE_END) ? proxima : null;
+}
+
+const _setDadosPesoPedidoOriginal = setDadosPesoPedido;
+setDadosPesoPedido = function(id, dados) {
+    _setDadosPesoPedidoOriginal(id, dados);
+    const novaNF = gerarProximaNotaFiscal();
+    if (novaNF !== null) {
+        setNotaFiscal(id, novaNF);
+    } else {
+        console.warn("Faixa de NF esgotada ao redefinir pesos.");
+    }
+};
+
+
+
 function getDadosCertificadoPedido(id) {
     return JSON.parse(localStorage.getItem(`${localStorageCertificadoKey}_${id}`)) || {};
 }
+
 function setDadosCertificadoPedido(id, dados) {
     localStorage.setItem(`${localStorageCertificadoKey}_${id}`, JSON.stringify(dados));
 }
+
 function isSetorEnviado(id, setor) {
     return localStorage.getItem(`${localStorageSetorEnviadoKey}_${id}_${setor.toLowerCase()}`) === "true";
 }
+
 function setSetorEnviado(id, setor) {
     localStorage.setItem(`${localStorageSetorEnviadoKey}_${id}_${setor.toLowerCase()}`, "true");
-}
-function verificarTodosSetoresEnviados(pedidoId) {
-    const pedido = getPedidoById(pedidoId);
-    if (!pedido) return false;
-    for (const setor in pedido.produtos) {
-        if (Object.prototype.hasOwnProperty.call(pedido.produtos, setor)) {
-            if (!isSetorEnviado(pedidoId, setor)) return false;
-        }
-    }
-    return true;
-}
-
-function getPedidoById(id) {
-    return pedidos.find(p => p.id === id);
-}
-
-// Placeholder - se você tinha uma função para inicializar notas fiscais, pode colocar o código dela aqui
-function inicializarNotasFiscais() {
-    // console.log("Inicializando notas fiscais se necessário...");
-}
-function getNotaFiscal(id) {
-    return localStorage.getItem(`${localStorageNotaFiscalKey}_${id}`);
 }
 
 function verificarTodosSetoresEnviados(pedidoId) {
@@ -289,6 +297,8 @@ function showUserSelectionPage() {
     selectedUserType = null;
 }
 
+let selectedUserType = null;
+let selectedMaterialType = null;
 
 function selectUserType(type) {
     selectedUserType = type;
@@ -349,8 +359,10 @@ function hideAllScreens() {
     document.getElementById("filterScreen").style.display = "none";
     document.getElementById("mainApp").style.display = "none";
     document.getElementById("materialSelectionPage").style.display = "none";
-    document.getElementById("loaderOrdersScreen").style.display = "none";
-    document.getElementById("romaneioScreen").style.display = "none";
+    const rolePage = document.getElementById("operatorRoleSelectionPage");
+    if (rolePage) rolePage.style.display = "none";
+    const loaderPage = document.getElementById("loaderOrdersScreen");
+    if (loaderPage) loaderPage.style.display = "none";
 }
 
 function fazerLogin() {
@@ -383,12 +395,15 @@ function fazerLoginMotorista() {
     const user = document.getElementById("driverUsername").value.trim();
     const pass = document.getElementById("driverPassword").value.trim();
     const erro = document.getElementById("driverLoginErro");
+
     const userIsDriver = ["carregador1", "carregador2", "carregador3"].includes(user);
 
     if (usuarios[user] && usuarios[user] === pass && userIsDriver) {
         usuarioLogado = user;
         isMotoristaLogado = true;
-        showRomaneioScreen(); // <-- MUDANÇA IMPORTANTE AQUI
+        document.getElementById("driverLoginPage").style.display = "none";
+        document.getElementById("resetDataButton").style.display = "none";
+        showLoadingOrdersScreen();
     } else {
         erro.textContent = "Usuário ou senha incorretos ou não é um Operador de Carregamento.";
     }
@@ -410,475 +425,6 @@ function continueToFilterScreen() {
     globalFiltroMaterial = selectedMaterialType;
     document.getElementById("materialSelectionPage").style.display = "none";
     showFilterScreen();
-}
-
-function showRomaneioScreen() {
-    hideAllScreens();
-    document.getElementById("romaneioScreen").style.display = "flex";
-    renderRomaneioSummary();
-}
-
-function goBackToRomaneioScreen() {
-    embarqueSelecionado = null;
-    document.querySelector('#loaderOrdersScreen .loader-status-filters').style.display = 'flex';
-    showRomaneioScreen();
-}
-
-function renderRomaneioSummary() {
-    const container = document.getElementById("romaneioSummaryContainer");
-    container.innerHTML = "";
-
-    const embarques = pedidos.reduce((acc, pedido) => {
-        const statusPedido = getPedidoStatus(pedido.id);
-        const statusCarregamento = getCarregamentoStatus(pedido.id);
-
-        if (statusPedido === "Pedido separado" && statusCarregamento !== 'carregado') {
-            if (!acc[pedido.embarque]) {
-                acc[pedido.embarque] = [];
-            }
-            acc[pedido.embarque].push(pedido);
-        }
-        return acc;
-    }, {});
-
-    if (Object.keys(embarques).length === 0) {
-        container.innerHTML = "<p>Nenhum embarque aguardando carregamento.</p>";
-        return;
-    }
-
-    for (const embarque in embarques) {
-        const carregador = getCarregadorDesignado(embarque);
-        const pedidosDoEmbarque = embarques[embarque];
-        let cotaHTML = '<ul>';
-        pedidosDoEmbarque.forEach(p => {
-            cotaHTML += `<li>COT_${p.id} - ${p.cliente}</li>`;
-        });
-        cotaHTML += '</ul>';
-
-        const block = document.createElement("div");
-        block.className = "romaneio-embarque-block";
-        block.innerHTML = `
-            <h4>Embarque: ${embarque} (${pedidosDoEmbarque.length} cotações)</h4>
-            <p><strong>Destinado para:</strong> ${carregador ? carregador.toUpperCase() : 'Ninguém'}</p>
-            ${cotaHTML}
-            <button onclick="viewEmbarqueDetails('${embarque}')">Ver Detalhes e Carregar</button>
-        `;
-        container.appendChild(block);
-    }
-}
-
-function viewEmbarqueDetails(embarque) {
-    embarqueSelecionado = embarque;
-    hideAllScreens();
-    document.getElementById("loaderOrdersScreen").style.display = "flex";
-    document.getElementById("loaderOrdersTitle").textContent = `Carregamento do Embarque: ${embarque}`;
-    
-    // --- Lógica para criar os botões dinamicamente ---
-    const actionsWrapper = document.getElementById("embarqueActions");
-    actionsWrapper.className = 'embarque-actions-wrapper'; // Adiciona a classe do container
-    actionsWrapper.innerHTML = '<h4>Ações do Embarque</h4><div class="embarque-actions"></div>'; // Adiciona título e container flex
-    
-    const actionsContainer = actionsWrapper.querySelector('.embarque-actions');
-
-    let primaryActionHTML = '';
-    let secondaryActionsHTML = '';
-
-    // Ação Principal: Iniciar Carregamento
-    const needsInitiation = pedidos.some(p => p.embarque === embarque && getCarregamentoStatus(p.id) === 'aguardando' && getPedidoStatus(p.id) === 'Pedido separado');
-    if (needsInitiation) {
-         primaryActionHTML = `<button class="btn-iniciar-carregamento" onclick="iniciarCarregamentoEmbarque('${embarque}')">Iniciar Carregamento</button>`;
-    } else {
-        primaryActionHTML = `<span></span>`; // Espaço vazio para manter o alinhamento
-    }
-
-    // Ações Secundárias (para o menu)
-    if (usuarioLogado === 'carregador1') {
-        secondaryActionsHTML += `<div class="dropdown-item" onclick="showDestinarEmbarqueModal('${embarque}')">Destinar Embarque</div>`;
-        secondaryActionsHTML += `<div class="dropdown-item" onclick="showObservacaoEmbarqueModal('${embarque}')">Adicionar Observação</div>`;
-    }
-    
-    // Monta o HTML final
-    let finalHTML = primaryActionHTML;
-    if (secondaryActionsHTML) {
-        finalHTML += `
-            <div class="dropdown">
-                <button onclick="toggleDropdown(event)" class="dropdown-toggle">Opções &vellip;</button>
-                <div class="dropdown-menu">
-                    ${secondaryActionsHTML}
-                </div>
-            </div>
-        `;
-    }
-    actionsContainer.innerHTML = finalHTML;
-    
-    // Mostra/esconde observação do embarque
-    const obsContainer = document.getElementById("embarqueObservationContainer");
-    const obsText = getObservacao(embarque, true);
-    obsContainer.style.display = obsText ? 'block' : 'none';
-    obsContainer.innerHTML = `<p><strong>Observação do Embarque:</strong> ${obsText}</p>`;
-
-    aplicarFiltroCarregamento('todos', document.querySelector('[data-loader-filter="todos"]'));
-}
-
-function iniciarCarregamentoEmbarque(embarque) {
-    pedidos.forEach(p => {
-        if (p.embarque === embarque && getPedidoStatus(p.id) === "Pedido separado" && getCarregamentoStatus(p.id) === 'aguardando') {
-            setCarregamentoStatus(p.id, 'em_carregamento');
-        }
-    });
-    viewEmbarqueDetails(embarque);
-}
-
-function renderizarPedidosCarregamento(loadedOnly = false) {
-    const listDiv = document.getElementById("loadingOrdersList");
-    listDiv.innerHTML = "";
-    document.getElementById("loaderOrdersTitle").textContent = loadedOnly ? "Embarques Carregados" : `Carregamento do Embarque: ${embarqueSelecionado}`;
-
-    let pedidosParaExibir;
-
-    if (loadedOnly) {
-        pedidosParaExibir = pedidos.filter(p => getCarregamentoStatus(p.id) === 'carregado');
-    } else {
-        pedidosParaExibir = pedidos.filter(p => p.embarque === embarqueSelecionado && getPedidoStatus(p.id) === 'Pedido separado');
-        if (globalFiltroCarregamento !== 'todos') {
-            pedidosParaExibir = pedidosParaExibir.filter(p => getCarregamentoStatus(p.id) === globalFiltroCarregamento);
-        }
-    }
-    
-    if (loadedOnly) {
-        const embarquesCarregados = pedidosParaExibir.reduce((acc, pedido) => {
-            if (!acc[pedido.embarque]) acc[pedido.embarque] = [];
-            acc[pedido.embarque].push(pedido);
-            return acc;
-        }, {});
-
-        if (Object.keys(embarquesCarregados).length === 0) {
-            listDiv.innerHTML = "<p style='text-align:center;'>Nenhum embarque carregado encontrado.</p>";
-            return;
-        }
-
-        for (const embarque in embarquesCarregados) {
-            const embarqueDiv = document.createElement('div');
-            embarqueDiv.className = 'romaneio-embarque-block';
-            embarqueDiv.innerHTML = `<h4>Embarque: ${embarque} (Carregado)</h4>`;
-            embarquesCarregados[embarque].forEach(pedido => {
-                embarqueDiv.appendChild(criarCardPedidoCarregamento(pedido));
-            });
-            listDiv.appendChild(embarqueDiv);
-        }
-    } else {
-        if (pedidosParaExibir.length === 0) {
-            listDiv.innerHTML = "<p style='text-align:center;'>Nenhum pedido com os filtros aplicados para este embarque.</p>";
-            return;
-        }
-        pedidosParaExibir.forEach(pedido => {
-            listDiv.appendChild(criarCardPedidoCarregamento(pedido));
-        });
-    }
-}
-
-function criarCardPedidoCarregamento(pedido) {
-    const carregamentoStatus = getCarregamentoStatus(pedido.id);
-    const carregadorDesignado = getCarregadorDesignado(pedido.embarque);
-
-    let statusText, statusClass, statusBorderClass;
-    switch (carregamentoStatus) {
-        case 'em_carregamento':
-            statusText = 'Em Carregamento';
-            statusClass = 'status-em-carregamento';
-            statusBorderClass = 'border-em-carregamento';
-            break;
-        case 'carregado':
-            statusText = 'Pedido Carregado';
-            statusClass = 'status-pedido-carregado';
-            statusBorderClass = 'border-carregado';
-            break;
-        case 'nao_carregado':
-            statusText = 'Não Carregado';
-            statusClass = 'status-nao-carregado';
-            statusBorderClass = 'border-nao-carregado';
-            break;
-        case 'carregado_parcialmente': // Novo status
-            statusText = 'Carregado Parcialmente';
-            statusClass = 'status-carregado-parcialmente';
-            statusBorderClass = 'border-carregado-parcialmente';
-            break;
-        default:
-            statusText = 'Aguardando Carregamento';
-            statusClass = 'status-aguardando-separacao';
-            statusBorderClass = 'border-aguardando';
-    }
-
-    const card = document.createElement("div");
-    card.className = `card loader-card ${statusBorderClass}`;
-    
-    let cardHeaderHTML = `
-        <div class="pedido-header">
-            <div class="header-main-info">
-                <h3>COT_${pedido.id} - ${pedido.cliente}</h3>
-                <span class="status-badge ${statusClass}">${statusText}</span>
-            </div>
-            <div class="header-sub-info">
-                <p><strong>Endereço:</strong> ${pedido.endereco}</p>
-                <p><strong>Destinado a:</strong> ${carregadorDesignado ? carregadorDesignado.toUpperCase() : 'Não Destinado'}</p>
-            </div>
-        </div>
-    `;
-
-    let cardBodyHTML = '<div class="pedido-body">';
-    Object.keys(pedido.produtos).forEach(setor => {
-        cardBodyHTML += `<div class="setor-group"><h4>Setor: ${setor}</h4>`;
-        pedido.produtos[setor].forEach(produto => {
-            const itemSlug = produto.replace(/\s/g, '-');
-            const isChecked = isItemCarregado(pedido.id, itemSlug);
-            const isFinalizado = ['carregado', 'carregado_parcialmente', 'nao_carregado'].includes(carregamentoStatus);
-            const isDisabled = carregamentoStatus !== 'em_carregamento' || (carregadorDesignado && usuarioLogado !== carregadorDesignado && usuarioLogado !== 'carregador1');
-            
-            let motivoHTML = '';
-            if (isFinalizado && !isChecked) {
-                const motivo = getItemReason(pedido.id, itemSlug);
-                if (motivo) {
-                    motivoHTML = `<span class="item-reason">${motivo}</span>`;
-                }
-            }
-
-            cardBodyHTML += `
-                <div class="item">
-                    <label for="item-${pedido.id}-${itemSlug}">${produto}${motivoHTML}</label>
-                    <div class="item-actions">
-                         <input type="checkbox" class="item-verification-checkbox" id="item-${pedido.id}-${itemSlug}" 
-                                onchange="setItemCarregado(${pedido.id}, '${itemSlug}', this.checked)"
-                                ${isChecked ? 'checked' : ''} ${isDisabled || isFinalizado ? 'disabled' : ''}>
-                    </div>
-                </div>
-            `;
-        });
-        cardBodyHTML += `</div>`;
-    });
-    cardBodyHTML += '</div>';
-
-    let cardFooterHTML = '<div class="pedido-footer">';
-    const obsPedido = getObservacao(pedido.id, false);
-    if (obsPedido) {
-        cardFooterHTML += `<div class="observacao-pedido"><p><strong>Observação Geral:</strong> ${obsPedido}</p></div>`;
-    }
-
-    if (carregamentoStatus === 'em_carregamento' && (!carregadorDesignado || usuarioLogado === carregadorDesignado || usuarioLogado === 'carregador1')) {
-         cardFooterHTML += `
-            <div class="buttons-row">
-                <button onclick="finalizarCarregamentoPedido(${pedido.id})">Finalizar Pedido</button>
-                <button class="btn-nao-carregado" onclick="showObservacaoModal(${pedido.id})">Marcar Não Carregado</button>
-            </div>`;
-    }
-    cardFooterHTML += '</div>';
-
-    card.innerHTML = cardHeaderHTML + cardBodyHTML + cardFooterHTML;
-    return card;
-}
-
-function finalizarCarregamentoPedido(pedidoId) {
-    const pedido = getPedidoById(pedidoId);
-    if (!pedido) return;
-
-    const itensFaltantes = [];
-    for (const setor in pedido.produtos) {
-        for (const produto of pedido.produtos[setor]) {
-            const itemSlug = produto.replace(/\s/g, '-');
-            if (!isItemCarregado(pedidoId, itemSlug)) {
-                itensFaltantes.push({ produto, itemSlug });
-            }
-        }
-    }
-
-    if (itensFaltantes.length === 0) {
-        // Fluxo normal: Pedido 100% carregado
-        setCarregamentoStatus(pedidoId, 'carregado');
-        showModal(
-            "Sucesso!", 
-            `Pedido COT_${pedidoId} finalizado como "Carregado".`, 
-            `<button class="modal-button ok" onclick="closeModal(); renderizarPedidosCarregamento();">OK</button>`
-        );
-        verificarEmbarqueCompleto(pedido.embarque);
-    } else {
-        // Novo fluxo: Abre o modal de pedido parcial
-        showFinalizarParcialModal(pedidoId, itensFaltantes);
-    }
-}
-
-function showFinalizarParcialModal(pedidoId, itensFaltantes) {
-    let listaHtml = '<ul class="partial-item-list">';
-    itensFaltantes.forEach(item => {
-        listaHtml += `
-            <li>
-                <strong>${item.produto}</strong>
-                <input type="text" id="reason-${item.itemSlug}" class="partial-item-reason-input" placeholder="Motivo de não ter carregado este item...">
-            </li>
-        `;
-    });
-    listaHtml += '</ul>';
-
-    showModal(
-        "Finalizar como Parcial?",
-        `Os seguintes itens não foram marcados. Por favor, informe o motivo para cada um antes de finalizar o pedido como parcial.<br>${listaHtml}`,
-        `<button class="modal-button cancel" onclick="closeModal()">Cancelar</button>
-         <button class="modal-button confirm" onclick="salvarPedidoParcial(${pedidoId})">Finalizar como Parcial</button>`
-    );
-}
-
-function salvarPedidoParcial(pedidoId) {
-    const pedido = getPedidoById(pedidoId);
-    let todosMotivosPreenchidos = true;
-
-    // Recria a lista de itens faltantes para pegar os valores dos inputs
-    const itensFaltantes = [];
-    for (const setor in pedido.produtos) {
-        for (const produto of pedido.produtos[setor]) {
-            const itemSlug = produto.replace(/\s/g, '-');
-            if (!isItemCarregado(pedidoId, itemSlug)) {
-                itensFaltantes.push({ produto, itemSlug });
-            }
-        }
-    }
-
-    itensFaltantes.forEach(item => {
-        const input = document.getElementById(`reason-${item.itemSlug}`);
-        const motivo = input.value.trim();
-        if (!motivo) {
-            input.style.border = '1px solid red';
-            todosMotivosPreenchidos = false;
-        } else {
-            input.style.border = '1px solid #ccc';
-            setItemReason(pedidoId, item.itemSlug, motivo);
-        }
-    });
-
-    if (!todosMotivosPreenchidos) {
-        alert("Por favor, preencha o motivo para todos os itens não carregados.");
-        return;
-    }
-
-    setCarregamentoStatus(pedidoId, 'carregado_parcialmente');
-    showModal(
-        "Sucesso!",
-        `Pedido COT_${pedidoId} finalizado como "Carregado Parcialmente".`,
-        `<button class="modal-button ok" onclick="closeModal(); renderizarPedidosCarregamento();">OK</button>`
-    );
-    verificarEmbarqueCompleto(pedido.embarque);
-}
-
-function verificarEmbarqueCompleto(embarque) {
-    const todosProcessados = pedidos
-        .filter(p => p.embarque === embarque && getPedidoStatus(p.id) === 'Pedido separado')
-        .every(p => ['carregado', 'nao_carregado'].includes(getCarregamentoStatus(p.id)));
-
-    if (todosProcessados) {
-        showModal("Embarque Completo!", `Todos os pedidos do embarque ${embarque} foram processados.`, `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
-    }
-}
-
-function viewLoadedShipments() {
-    embarqueSelecionado = null;
-    hideAllScreens();
-    document.getElementById("loaderOrdersScreen").style.display = "flex";
-    document.getElementById("embarqueActions").innerHTML = '';
-    document.getElementById("embarqueObservationContainer").style.display = 'none';
-    document.querySelector('#loaderOrdersScreen .loader-status-filters').style.display = 'none';
-    renderizarPedidosCarregamento(true);
-}
-
-function aplicarFiltroCarregamento(filtro, clickedButton) {
-    globalFiltroCarregamento = filtro;
-    if (clickedButton) {
-        document.querySelectorAll('#loaderOrdersScreen .loader-status-filters button').forEach(b => b.classList.remove('active'));
-        clickedButton.classList.add('active');
-    }
-    renderizarPedidosCarregamento();
-}
-
-function showDestinarEmbarqueModal(embarque) {
-    const carregadores = Object.keys(usuarios).filter(u => u.startsWith('carregador'));
-    let optionsHtml = carregadores.map(c => `<option value="${c}">${c.toUpperCase()}</option>`).join('');
-    const currentCarregador = getCarregadorDesignado(embarque);
-
-    showModal(
-        "Destinar Embarque",
-        `<p>Selecione o carregador para o embarque <strong>${embarque}</strong>:</p>
-         <select id="selectCarregador" class="modal-input">
-            <option value="">NÃO DESTINADO</option>
-            ${optionsHtml}
-         </select>`,
-        `<button class="modal-button cancel" onclick="closeModal()">Cancelar</button>
-         <button class="modal-button confirm" onclick="destinarEmbarque('${embarque}')">Salvar</button>`
-    );
-    document.getElementById('selectCarregador').value = currentCarregador || "";
-}
-
-function destinarEmbarque(embarque) {
-    const carregador = document.getElementById("selectCarregador").value;
-    setCarregadorDesignado(embarque, carregador);
-    closeModal();
-    viewEmbarqueDetails(embarque);
-}
-
-function showObservacaoEmbarqueModal(embarque) {
-    const obsAtual = getObservacao(embarque, true);
-    showModal(
-        "Observação do Embarque",
-        `<p>Adicione uma observação para o embarque <strong>${embarque}</strong>:</p>
-         <textarea id="obsEmbarqueText" class="modal-input" rows="4">${obsAtual}</textarea>`,
-        `<button class="modal-button cancel" onclick="closeModal()">Cancelar</button>
-         <button class="modal-button confirm" onclick="salvarObservacaoEmbarque('${embarque}')">Salvar</button>`
-    );
-}
-
-function salvarObservacaoEmbarque(embarque) {
-    const obs = document.getElementById("obsEmbarqueText").value;
-    setObservacao(embarque, obs, true);
-    closeModal();
-    viewEmbarqueDetails(embarque);
-}
-
-function showObservacaoModal(pedidoId) {
-    const obsAtual = getObservacao(pedidoId, false);
-    showModal(
-        `Motivo "Não Carregado" - COT_${pedidoId}`,
-        `<p>Informe o motivo pelo qual este pedido não foi carregado:</p>
-         <textarea id="obsNaoCarregadoText" class="modal-input" rows="4">${obsAtual}</textarea>`,
-        `<button class="modal-button cancel" onclick="closeModal()">Cancelar</button>
-         <button class="modal-button confirm" onclick="salvarNaoCarregado(${pedidoId})">Salvar</button>`
-    );
-}
-
-function toggleDropdown(event) {
-    event.stopPropagation(); // Impede que o clique feche o menu imediatamente
-    const dropdownMenu = event.currentTarget.nextElementSibling;
-    dropdownMenu.classList.toggle('show');
-}
-
-// Fecha o dropdown se o usuário clicar fora dele
-window.onclick = function(event) {
-    if (!event.target.matches('.dropdown-toggle')) {
-        const dropdowns = document.getElementsByClassName("dropdown-menu");
-        for (let i = 0; i < dropdowns.length; i++) {
-            let openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}
-
-function salvarNaoCarregado(pedidoId) {
-    const obs = document.getElementById("obsNaoCarregadoText").value;
-    if (!obs.trim()) {
-        alert("A observação é obrigatória.");
-        return;
-    }
-    setCarregamentoStatus(pedidoId, 'nao_carregado');
-    setObservacao(pedidoId, obs, false);
-    closeModal();
-    renderizarPedidosCarregamento();
-    verificarEmbarqueCompleto(getPedidoById(pedidoId).embarque);
 }
 
 window.onload = showUserSelectionPage;
@@ -1338,17 +884,261 @@ document.addEventListener("DOMContentLoaded", () => {
     showUserSelectionPage();
 });
 
+function showLoadingOrdersScreen() {
+    hideAllScreens();
+    document.getElementById("loaderOrdersScreen").style.display = "flex";
+    renderizarPedidosCarregamento();
+}
 
+function aplicarFiltroCarregamento(filtro, clickedButton) {
+    globalFiltroCarregamento = filtro;
+    const buttons = document.querySelectorAll('#loaderOrdersScreen .loader-status-filters button');
+    buttons.forEach(button => button.classList.remove('active'));
+    clickedButton.classList.add('active');
+    renderizarPedidosCarregamento();
+}
+
+function renderizarPedidosCarregamento() {
+    const listDiv = document.getElementById("loadingOrdersList");
+        listDiv.innerHTML = "";
+
+    let pedidosParaCarregar = pedidos.filter(p => {
+        const pedidoStatus = getPedidoStatus(p.id);
+        const carregadoStatus = getPedidoCarregadoStatus(p.id);
+        const motoristaDestino = getPedidoMotoristaDestino(p.id);
+
+        if (globalFiltroCarregamento === 'todos') {
+            return true;
+        } else if (globalFiltroCarregamento === 'meus') {
+            return motoristaDestino === usuarioLogado;
+        }
+            return false;
+    });
+
+        if (pedidosParaCarregar.length === 0) {
+            listDiv.innerHTML = "<p style='text-align:center; color:var(--text-secondary)'>Nenhum pedido encontrado com os filtros aplicados.</p>";
+            return;
+        }
+
+        const pedidosPorEmbarque = pedidosParaCarregar.reduce((acc, pedido) => {
+            if (!acc[pedido.embarque]) {
+                acc[pedido.embarque] = [];
+            }
+            acc[pedido.embarque].push(pedido);
+            return acc;
+        }, {});
+
+        const embarquesOrdenados = Object.keys(pedidosPorEmbarque).sort();
+
+        embarquesOrdenados.forEach(embarque => {
+            const embarqueGroupDiv = document.createElement("div");
+            embarqueGroupDiv.classList.add("embarque-group");
+            embarqueGroupDiv.innerHTML = `<h3>Embarque: ${embarque}</h3>`;
+
+            pedidosPorEmbarque[embarque].forEach(pedido => {
+                const pedidoCarregadoStatus = getPedidoCarregadoStatus(pedido.id);
+                const observacaoCarregamento = getObservacaoCarregamento(pedido.id);
+                const pedidoStatus = getPedidoStatus(pedido.id);
+                const motoristaDestino = getPedidoMotoristaDestino(pedido.id);
+
+                let statusClass = '';
+                let statusText = '';
+
+                if (pedidoStatus === "Aguardando separação" || pedidoStatus === "Em separação") {
+                    statusClass = "status-aguardando-separacao";
+                    statusText = pedidoStatus;
+                } else if (pedidoCarregadoStatus === 'carregado') {
+                    statusClass = 'status-carregado';
+                    statusText = 'Carregado';
+                } else if (pedidoCarregadoStatus === 'nao-carregado') {
+                    statusClass = 'status-nao-carregado';
+                    statusText = 'Não Carregado';
+                } else {
+                    statusClass = 'status-pedido-separado';
+                    statusText = 'Aguardando carregamento';
+                }
+
+                const card = document.createElement("div");
+                card.classList.add("card");
+                card.setAttribute("data-pedido-id", pedido.id);
+                card.innerHTML = `
+                    <div class="pedido-header">
+                        <h3>COT_${pedido.id} - ${pedido.cliente}</h3>
+                        <p>Endereço: ${pedido.endereco}</p>
+                <p>NF-e: ${getNotaFiscal(pedido.id) ?? "—"}</p>
+                        <p>Destinado a: ${motoristaDestino ? motoristaDestino.toUpperCase() : 'Não Destinado'}</p>
+                        <p class="status-pedido ${statusClass}">Status: ${statusText}</p>
+                    </div>
+                `;
+
+                Object.keys(pedido.produtos).forEach(setor => {
+                    const setorDiv = document.createElement("div");
+                    setorDiv.innerHTML = `<h4>Setor: ${setor}</h4>`;
+                    pedido.produtos[setor].forEach(item => {
+                        const itemId = `item-${pedido.id}-${setor}-${item.replace(/\s/g, '-')}`;
+                        const isChecked = localStorage.getItem(itemId) === 'true';
+                        setorDiv.innerHTML += `
+                            <div class="item">
+                                <span>${item}</span>
+                                <input type="checkbox" id="${itemId}" ${isChecked ? 'checked' : ''}
+                                    ${pedidoCarregadoStatus !== 'pendente' || pedidoStatus !== "Pedido separado" ? 'disabled' : ''}>
+                            </div>
+                        `;
+                    });
+                    card.appendChild(setorDiv);
+                });
+
+                const loaderButtonsDiv = document.createElement("div");
+                loaderButtonsDiv.classList.add("loader-buttons");
+
+                if (usuarioLogado === "carregador1") {
+                    const btnDestinar = document.createElement("button");
+                    btnDestinar.textContent = "Destinar Cotação para carregamento.";
+                    btnDestinar.classList.add("btn-destinar");
+                    btnDestinar.onclick = () => showDestinarCarregamentoModal(pedido.id);
+                    loaderButtonsDiv.appendChild(btnDestinar);
+                }
+
+                if (pedidoStatus === "Pedido separado" && (motoristaDestino === usuarioLogado || !motoristaDestino)) {
+                    const btnCarregado = document.createElement("button");
+                    btnCarregado.textContent = "Marcar como Carregado";
+                    btnCarregado.classList.add("btn-carregado");
+                    btnCarregado.disabled = pedidoCarregadoStatus !== 'pendente';
+                    btnCarregado.onclick = () => marcarPedidoCarregado(pedido.id);
+                    loaderButtonsDiv.appendChild(btnCarregado);
+
+                    const btnNaoCarregado = document.createElement("button");
+                    btnNaoCarregado.textContent = "Marcar como Não Carregado";
+                    btnNaoCarregado.classList.add("btn-nao-carregado");
+                    btnNaoCarregado.disabled = pedidoCarregadoStatus !== 'pendente';
+                    btnNaoCarregado.onclick = () => showObservacaoModal(pedido.id);
+                    loaderButtonsDiv.appendChild(btnNaoCarregado);
+                } else if (pedidoStatus !== "Pedido separado") {
+                    const infoText = document.createElement("p");
+                    infoText.textContent = "Aguardando separação para carregamento.";
+                    infoText.style.color = "var(--text-secondary)";
+                    infoText.style.fontSize = "14px";
+                    infoText.style.textAlign = "center";
+                    loaderButtonsDiv.appendChild(infoText);
+                }
+
+                if (pedidoCarregadoStatus === 'carregado') {
+                    const btnImprimir = document.createElement("button");
+                    btnImprimir.textContent = "Imprimir Pedido";
+                    btnImprimir.classList.add("btn-print");
+                    btnImprimir.onclick = () => gerarPDF(pedido.id);
+                    loaderButtonsDiv.appendChild(btnImprimir);
+                }
+
+                card.appendChild(loaderButtonsDiv);
+
+                if (pedidoCarregadoStatus === 'nao-carregado' && observacaoCarregamento) {
+                    const obsDiv = document.createElement("div");
+                    obsDiv.classList.add("observacao-nao-carregado");
+                    obsDiv.style.display = 'block';
+                    obsDiv.innerHTML = `<p><strong>Observação:</strong> ${observacaoCarregamento}</p>`;
+                    card.appendChild(obsDiv);
+                }
+
+                embarqueGroupDiv.appendChild(card);
+        });
+            listDiv.appendChild(embarqueGroupDiv);
+    });
+}
+
+function toggleItemCarregado(pedidoId, setor, itemSlug) {
+    const itemId = `item-${pedidoId}-${setor}-${itemSlug}`;
+    const checkbox = document.getElementById(itemId);
+    localStorage.setItem(itemId, checkbox.checked ? 'true' : 'false');
+}
+
+function marcarPedidoCarregado(pedidoId) {
+    const pedido = pedidos.find(p => p.id === pedidoId);
+    let allItemsChecked = true;
+    if (pedido) {
+        for (const setor in pedido.produtos) {
+            pedido.produtos[setor].forEach(item => {
+                const itemId = `item-${pedido.id}-${setor}-${item.replace(/\s/g, '-')}`;
+
+                const checkbox = document.getElementById(itemId);
+                if (checkbox && !checkbox.enabled && localStorage.getItem(itemId) !== 'true') {
+                    allItemsChecked = false;
+                }
+            });
+        }
+    }
+
+    confirmarAcao(
+        "Confirmar Carregamento?",
+        `Você está prestes a marcar a COT_${pedidoId} como "Carregado". Confirma?`,
+        () => {
+            setPedidoCarregadoStatus(pedidoId, "carregado");
+            setObservacaoCarregamento(pedidoId, "");
+            showModal("Sucesso", `Pedido COT_${pedidoId} marcado como "Carregado".`, `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+        }
+    );
+}
 
 function showObservacaoModal(pedidoId) {
-    const obsAtual = getObservacao(pedidoId, false); // <-- A CORREÇÃO ESTÁ AQUI: usando a nova função getObservacao()
+    const currentObs = getObservacaoCarregamento(pedidoId);
     showModal(
-        `Motivo "Não Carregado" - COT_${pedidoId}`,
-        `<p>Informe o motivo pelo qual este pedido não foi carregado:</p>
-         <textarea id="obsNaoCarregadoText" class="modal-input" rows="4">${obsAtual}</textarea>`,
-        `<button class="modal-button cancel" onclick="closeModal()">Cancelar</button>
-         <button class="modal-button confirm" onclick="salvarNaoCarregado(${pedidoId})">Salvar</button>`
+        "Motivo Não Carregado",
+        `
+        <p>Por favor, informe o motivo pelo qual a COT_${pedidoId} não foi carregada:</p>
+        <textarea id="observacaoNaoCarregado" placeholder="Descreva o motivo..." rows="4">${currentObs}</textarea>
+        `,
+        `
+        <button class="modal-button cancel" onclick="closeModal()">Cancelar</button>
+        <button class="modal-button confirm" onclick="salvarObservacaoNaoCarregado(${pedidoId})">Salvar</button>
+        `
     );
+}
+
+function salvarObservacaoNaoCarregado(pedidoId) {
+    const observacao = document.getElementById("observacaoNaoCarregado").value.trim();
+    if (observacao === "") {
+        showModal("Atenção", "Por favor, preencha o motivo para não carregamento.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+        return;
+    }
+    setObservacaoCarregamento(pedidoId, observacao);
+    setPedidoCarregadoStatus(pedidoId, "nao-carregado");
+    closeModal();
+    showModal("Sucesso", `Pedido COT_${pedidoId} marcado como "Não Carregado" com observação.`, `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+}
+
+function showDestinarCarregamentoModal(pedidoId) {
+    const motoristasCarregamento = Object.keys(usuarios).filter(user => user.startsWith('carregador'));
+    let optionsHtml = motoristasCarregamento.map(motorista => `<option value="${motorista}">${motorista.toUpperCase()}</option>`).join('');
+
+    const currentMotorista = getPedidoMotoristaDestino(pedidoId);
+
+    showModal(
+        "Destinar Carregamento",
+        `
+        <p>Selecione o Carregador para destinar o carregamento da COT_${pedidoId}:</p>
+        <select id="selectMotoristaDestino" style="width: 100%; padding: 10px; margin-top: 15px; border-radius: 5px; border: 1px solid var(--medium-gray);">
+            <option value="">Não Destinado</option>
+            ${optionsHtml}
+        </select>
+        `,
+        `
+        <button class="modal-button cancel" onclick="closeModal()">Cancelar</button>
+        <button class="modal-button confirm" onclick="destinarCarregamento(${pedidoId})">Destinar</button>
+        `
+    );
+
+    if (currentMotorista) {
+        document.getElementById('selectMotoristaDestino').value = currentMotorista;
+    }
+}
+
+function destinarCarregamento(pedidoId) {
+    const selectElement = document.getElementById('selectMotoristaDestino');
+    const motoristaSelecionado = selectElement.value;
+
+    setPedidoMotoristaDestino(pedidoId, motoristaSelecionado);
+    closeModal();
+    showModal("Sucesso", `Carregamento da COT_${pedidoId} destinado a ${motoristaSelecionado ? motoristaSelecionado.toUpperCase() : 'Ninguém'}.`, `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
 }
 
 function gerarPDF(pedidoId) {
