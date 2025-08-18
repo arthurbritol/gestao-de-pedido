@@ -124,20 +124,40 @@
     </div>
 </div>
 
+    </div>
 
-    <div class="filter-screen-container" id="loaderOrdersScreen" style="display: none;">
+    <div class="filter-screen-container" id="romaneioScreen" style="display: none;">
         <div class="filter-box">
-            <h2>Pedidos aguardando carregamento</h2>
-            <div class="loader-status-filters">
-                <button data-loader-filter="todos" class="active" onclick="aplicarFiltroCarregamento('todos', this)">Todos os Pedidos</button>
-                <button data-loader-filter="meus" onclick="aplicarFiltroCarregamento('meus', this)">Meus Carregamentos</button>
+            <img src="IMAGES/C_logo.png" alt="Logo" class="logo">
+            <h2>Romaneio de Carregamento</h2>
+            <div class="summary-section">
+                <h3>Embarques para Carregar</h3>
+                <div id="romaneioSummaryContainer"></div>
             </div>
-            <div id="loadingOrdersList"></div>
+            <button class="filter-box-button-bottom" onclick="viewLoadedShipments()" style="background-color: var(--blue-info); margin-top: 20px;">Ver Embarques Carregados</button>
             <button class="filter-box-button-bottom" onclick="logout()" style="background-color: var(--text-secondary); margin-top: 15px;">Sair</button>
         </div>
     </div>
-</div>
-</div>
+
+  <div class="filter-screen-container" id="loaderOrdersScreen" style="display: none;">
+        <div class="filter-box">
+            <h2 id="loaderOrdersTitle">Pedidos para Carregamento</h2>
+            <div id="embarqueObservationContainer"></div>
+            <div class="embarque-actions" id="embarqueActions"></div>
+            
+            <div class="loader-status-filters">
+                <button data-loader-filter="todos" class="active" onclick="aplicarFiltroCarregamento('todos', this)">Todos os Status</button>
+                <button data-loader-filter="aguardando" onclick="aplicarFiltroCarregamento('aguardando', this)">Aguardando</button>
+                <button data-loader-filter="em_carregamento" onclick="aplicarFiltroCarregamento('em_carregamento', this)">Em Carregamento</button>
+                <button data-loader-filter="carregado" onclick="aplicarFiltroCarregamento('carregado', this)">Carregado</button>
+            </div>
+
+            <div id="loadingOrdersList"></div>
+            
+            <button class="filter-box-button-bottom" onclick="goBackToRomaneioScreen()" style="background-color: var(--blue-info); margin-top: 15px;">Voltar para Romaneios</button>
+            <button class="filter-box-button-bottom" onclick="logout()" style="background-color: var(--text-secondary); margin-top: 15px;">Sair</button>
+        </div>
+    </div>
 
 <div id="mainApp">
     <div class="header">
@@ -179,11 +199,8 @@
     </div>
 </div>
 
-
-
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
 
 </html>
-
