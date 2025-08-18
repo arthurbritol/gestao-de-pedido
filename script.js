@@ -858,7 +858,8 @@ function resetAllOrderData() {
             key.startsWith(localStoragePedidoStatusKey) ||
             key.startsWith(localStoragePedidoCarregadoKey) ||
             key.startsWith(localStorageObservacaoCarregamentoKey) ||
-            key.startsWith(localStoragePedidoMotoristaKey)) {
+            key.startsWith(localStoragePedidoMotoristaKey) ||
+            key.startsWith("fardos_")) {
             keysToRemove.push(key);
         }
     }
