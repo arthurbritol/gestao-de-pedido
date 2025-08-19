@@ -1567,7 +1567,7 @@ function imprimirEtiquetasFardos(pedidoId, setor, produto) {
                 }
                 .box { border: 1px solid black; padding: 1mm; }
                 .label { font-weight: bold; }
-                .cliente { grid-column: 1 / 3; grid-row: 1; font-size: 22pt; font-weight: bold; align-self: end; }
+                .cliente { grid-column: 1 / 3; grid-row: 1; font-size: 20pt; font-weight: bold; align-self: end; }
                 .itens { grid-column: 3; grid-row: 1; text-align: center; font-size: 8pt; height: min-content; align-self: end;}
                 .local-entrega { grid-column: 1 / 4; grid-row: 2; }
                 .tipo-material { grid-column: 1 / 4; grid-row: 3; font-size: 9pt; }
@@ -1719,7 +1719,7 @@ function imprimirEtiquetasPorSetor(pedidoId, setor) {
                 }
                 .box { border: 1px solid black; padding: 1mm; }
                 .label { font-weight: bold; }
-                .cliente { grid-column: 1 / 3; grid-row: 1; font-size: 22pt; font-weight: bold; align-self: end; }
+                .cliente { grid-column: 1 / 3; grid-row: 1; font-size: 20pt; font-weight: bold; align-self: end; }
                 .itens { grid-column: 3; grid-row: 1; text-align: center; font-size: 9pt; height: min-content; align-self: end;}
                 .local-entrega { grid-column: 1 / 4; grid-row: 2; }
                 .tipo-material { grid-column: 1 / 4; grid-row: 3; font-size: 9pt; }
@@ -1859,3 +1859,4 @@ function enviarSetor(pedidoId, setor) {
         }
     );
 }
+
