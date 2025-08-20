@@ -1091,8 +1091,8 @@ button:disabled {
 }
 
 .sidebar-logo {
-    width: 80%;
-    margin: 0 auto 30px auto;
+    width: 100%;
+    margin: -40px auto -20px auto;
     height: auto;
 }
 
@@ -1511,3 +1511,4 @@ button:disabled {
 .status-em-separacao { background-color: #6f42c1; }
 .status-separacao-concluída { background-color: #28a745; }
 .status-carregamento-concluído { background-color: #17a2b8; }
+
