@@ -2025,7 +2025,7 @@ function showEmbarqueDetails(embarqueNome) {
                 <img src="IMAGES/pacote.png" alt="ícone" class="item-icon">
                 <div class="cotacao-info">
                     <h5>COT_${pedido.id}</h5>
-                    <p>${pedido.embarque}: 29/07/2025</p>
+                    <p>${pedido.embarque}: 00/00/0000</p>
                 </div>
                 <span class="cotacao-status-tag ${statusClass}">${finalStatus}</span>
             </div>
@@ -2070,4 +2070,5 @@ function toggleDropdown(element, contentSelector) {
         content.style.display = element.classList.contains('expanded') ? 'block' : 'none';
     }
 }
+
 
