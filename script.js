@@ -1205,7 +1205,7 @@ function gerarPDF(pedidoId) {
         
         <div class="header">
             <div class="logo">
-                    <img src="IMAGES/C_logo.png" alt="Logo C" style="width: 150px; display: none;"/>
+                <img src="IMAGES/C_logo.png" alt="Logo Cedisa" style="width: 150px;"/>
                 <h2>Gestão de pedido</h2>
             </div>
             <div class="title">
