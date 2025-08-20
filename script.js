@@ -1,4 +1,3 @@
-// Adicionar o usuário gestor
 const usuarios = {
     "admin": "1234",
     "operador1": "1234",
@@ -1174,30 +1173,106 @@ function gerarPDF(pedidoId) {
     const dadosPeso = getDadosPesoPedido(pedidoId);
     const dadosCertificado = getDadosCertificadoPedido(pedidoId);
 
-    let content = `
-        <h1>Relatório de Carregamento - COT_${pedido.id}</h1>
-        <p><strong>Cliente:</strong> ${pedido.cliente}</p>
-        <p><strong>NF-e:</strong> ${getNotaFiscal(pedido.id) ?? "—"}</p>
-        <p><strong>Endereço:</strong> ${pedido.endereco}</p>
-        <hr>
-        <h2>Materiais Carregados:</h2>
-    `;
+    const itensAgrupados = {};
+    let pesoTotal = 0;
 
     for (const setor in pedido.produtos) {
-        content += `<h3>Setor: ${setor}</h3><ul>`;
         pedido.produtos[setor].forEach(produto => {
-            const peso = dadosPeso[produto] || 'Não registrado';
-            const certificado = dadosCertificado[produto] || 'Não aplicável';
-            content += `
-                <li>
-                    <strong>${produto}</strong><br>
-                    - Peso: ${peso} Kg<br>
-                    - Certificado: ${certificado}
-                </li>
-            `;
+            const peso = parseFloat(dadosPeso[produto]) || 0;
+            const nf = getNotaFiscal(produto.id) ?? "N/A"; 
+
+            if (!itensAgrupados[nf]) {
+                itensAgrupados[nf] = {
+                    ordemEntrega: produto.ordemEntrega || '1', 
+                    emissao: produto.dataEmissao || '15/08/2025', 
+                    cliente: pedido.cliente,
+                    endereco: pedido.endereco,
+                    peso: 0,
+                };
+            }
+            itensAgrupados[nf].peso += peso;
+            pesoTotal += peso;
         });
-        content += `</ul>`;
     }
+
+
+    let content = `
+        <div class="header">
+            <div class="logo">
+                <img src="URL_DA_SUA_LOGO" alt="Logo Cedisa" style="width: 150px; display: none;"/>
+                <h2>Gestão de pedido</h2>
+            </div>
+            <div class="title">
+                <h1>Controle de Transporte</h1>
+            </div>
+        </div>
+
+        <table class="info-table">
+            <tr>
+                <td><strong>Data</strong></td>
+                <td><strong>Hora</strong></td>
+                <td><strong>km</strong></td>
+                <td><strong>Visto</strong></td>
+            </tr>
+            <tr>
+                <td>___/___/_____</td>
+                <td>____:____</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+
+        <table class="details-table">
+            <tr>
+                <td><strong>Embarque</strong> ${pedido.id || pedido.embarque}</td>
+                <td><strong>Motorista</strong> ${pedido.motorista || 'Motorista Teste'}</td>
+                <td><strong>Transportadora</strong> ${pedido.transportadora || 'Transportadora Fictícia LTDA'}</td>
+                <td><strong>Placa</strong> ${pedido.placa || 'AAA-0123'}</td>
+            </tr>
+        </table>
+
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th>Ordem Entrega</th>
+                    <th>Nota Fiscal</th>
+                    <th>Emissão</th>
+                    <th>Peso</th>
+                    <th>Cliente</th>
+                    <th>Endereço e Observação</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    for (const nf in itensAgrupados) {
+        const item = itensAgrupados[nf];
+        content += `
+            <tr>
+                <td>${item.ordemEntrega}</td>
+                <td>${nf}</td>
+                <td>${item.emissao}</td>
+                <td>${item.peso.toFixed(3).replace('.',',')}</td>
+                <td>${item.cliente}</td>
+                <td>${item.endereco}</td>
+            </tr>
+        `;
+    }
+
+    content += `
+            </tbody>
+        </table>
+
+        <div class="footer">
+            <p><strong>Peso total: ${pesoTotal.toFixed(3).replace('.',',')}</strong></p>
+            <p>MATERIAIS RETIRADOS NA CEDISA NO DIA 00/00/0000, CONFORME NOTAS FISCAIS RELACIONADAS.</p>
+            <div class="signature">
+                <p>Assinatura: __________________________________________________</p>
+            </div>
+            <p class="print-info">Impresso por DANIELA COELHO em 00/00/0000 00:00:00</p>
+        </div>
+    `;
+
 
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
@@ -1205,11 +1280,23 @@ function gerarPDF(pedidoId) {
             <head>
                 <title>Relatório COT_${pedido.id}</title>
                 <style>
-                    body { font-family: Arial; margin: 20px; }
-                    h1 { color: #2c3e50; }
-                    h2 { border-bottom: 1px solid #eee; padding-bottom: 5px; }
-                    ul { list-style-type: none; padding-left: 0; }
-                    li { margin-bottom: 10px; padding: 8px; background: #f9f9f9; }
+                    body { font-family: Arial, sans-serif; margin: 20px; font-size: 12px; }
+                    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+                    .header .title { text-align: center; flex-grow: 1; }
+                    .header .logo { flex-basis: 150px; }
+                    h1 { margin: 0; color: #000; font-size: 18px; }
+                    table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+                    th, td { border: 1px solid #ccc; padding: 6px; text-align: left; }
+                    .info-table td { text-align: center; }
+                    .info-table tr:first-child td { border-bottom: none; }
+                    .info-table tr:last-child td { border-top: none; height: 25px; }
+                    .details-table td { padding: 8px; }
+                    .items-table thead { background-color: #f2f2f2; }
+                    .items-table th, .items-table td { text-align: center; vertical-align: middle; }
+                    .items-table td:last-child { text-align: left; }
+                    .footer p { margin: 5px 0; }
+                    .signature { margin-top: 40px; }
+                    .print-info { font-size: 10px; color: #555; margin-top: 20px; }
                 </style>
             </head>
             <body>${content}</body>
