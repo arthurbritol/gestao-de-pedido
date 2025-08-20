@@ -1,8 +1,7 @@
 :root {
-    /* Paleta de cores atualizada para um tom mais moderno e profissional */
-    --primary-blue: #2A4B8D; /* Azul mais escuro e sóbrio */
-    --dark-blue: #1E3A70;    /* Tom mais escuro para hovers e destaques */
-    --light-gray: #F0F2F5;   /* Fundo principal, mais suave que o branco */
+    --primary-blue: #2A4B8D; 
+    --dark-blue: #1E3A70;    
+    --light-gray: #F0F2F5;   
     --medium-gray: #DDE3E8;
     --dark-gray: #333333;
     --text-primary: #1C1C1F;
@@ -19,9 +18,8 @@
     --blue-separacao-text: #004085;
     --orange-warning: #fd7e14;
     --shadow-light: rgba(0, 0, 0, 0.05);
-    --shadow-medium: rgba(42, 75, 141, 0.15); /* Sombra com tom azulado */
+    --shadow-medium: rgba(42, 75, 141, 0.15); 
 
-    /* Bordas mais arredondadas para um visual de app */
     --border-radius-small: 8px;
     --border-radius-medium: 12px;
     --border-radius-large: 24px;
@@ -35,10 +33,10 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--light-gray); /* Fundo principal atualizado */
+    background-color: var(--light-gray);
     color: var(--text-primary);
     line-height: 1.6;
-    font-size: 16px; /* Ajuste de fonte base */
+    font-size: 16px; 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -66,7 +64,7 @@ body {
 .login-box, .filter-box {
     background: var(--white);
     padding: 40px;
-    border-radius: var(--border-radius-large); /* Bordas mais arredondadas */
+    border-radius: var(--border-radius-large); 
     box-shadow: 0 10px 30px var(--shadow-medium);
     width: 100%;
     max-width: 1200px;
@@ -85,7 +83,7 @@ body {
 .login-box input, .login-box button,
 .filter-box input, .filter-box select, .filter-box button {
     width: 100%;
-    padding: 16px 15px; /* Padding ajustado */
+    padding: 16px 15px; 
     margin-bottom: 15px;
     font-size: 16px;
     border-radius: var(--border-radius-small);
@@ -106,10 +104,10 @@ body {
     border: none;
     cursor: pointer;
     font-weight: 600;
-    font-size: 18px; /* Fonte ajustada */
-    letter-spacing: 1px; /* Espaçamento de letra reduzido */
+    font-size: 18px; 
+    letter-spacing: 1px; 
     box-shadow: 0 4px 10px rgba(42, 75, 141, 0.3);
-    margin-top: 20px; /* Margem ajustada */
+    margin-top: 20px; 
 }
 
 .login-box button:hover, .filter-box button:hover {
@@ -126,7 +124,6 @@ body {
     animation: shake 0.5s;
 }
 
-/* Estilo do cabeçalho inspirado na imagem */
 .header {
     background-color: var(--primary-blue);
     color: var(--white);
@@ -147,7 +144,7 @@ body {
 }
 
 .title {
-    font-size: 22px; /* Fonte ajustada */
+    font-size: 22px; 
     font-weight: 600;
 }
 
@@ -155,9 +152,9 @@ body {
     background: transparent;
     border: 1px solid var(--white);
     color: var(--white);
-    padding: 8px 18px; /* Padding ajustado */
+    padding: 8px 18px; 
     font-size: 14px;
-    border-radius: var(--border-radius-large); /* Bordas bem arredondadas */
+    border-radius: var(--border-radius-large); 
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 500;
@@ -170,12 +167,11 @@ body {
 }
 
 .container {
-    padding: 25px 15px; /* Padding ajustado */
+    padding: 25px 15px; 
     max-width: 1000px;
     margin: auto;
 }
 
-/* Estilo de Card principal, inspirado na imagem */
 .card {
     background-color: var(--white);
     margin-bottom: 20px;
@@ -184,7 +180,7 @@ body {
     box-shadow: 0 8px 25px var(--shadow-medium);
     animation: fadeIn 0.8s ease-out;
     border: 1px solid var(--medium-gray);
-    border-left: 5px solid var(--primary-blue); /* Destaque lateral */
+    border-left: 5px solid var(--primary-blue); 
 }
 
 .pedido-header {
@@ -194,7 +190,7 @@ body {
 .pedido-header h3 {
     margin: 0 0 8px;
     color: var(--primary-blue);
-    font-size: 20px; /* Fonte ajustada */
+    font-size: 20px; 
     font-weight: 700;
 }
 
@@ -227,9 +223,8 @@ body {
     text-align: center;
 }
 
-/* Estilo dos itens de produto, agora mais limpo e espaçado */
 .item {
-    display: block; /* Alterado para bloco para empilhamento vertical */
+    display: block; 
     margin-bottom: 20px;
     font-size: 16px;
     color: var(--text-primary);
@@ -249,10 +244,10 @@ body {
     padding: 10px 12px;
     border: 1px solid var(--medium-gray);
     border-radius: var(--border-radius-small);
-    width: 100%; /* Ocupa a largura total */
+    width: 100%; 
     font-size: 16px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: 10px; /* Espaçamento entre inputs */
+    margin-bottom: 10px; 
 }
 
 .item input:disabled {
@@ -262,13 +257,12 @@ body {
     opacity: 1;
 }
 
-/* Ajustes na linha de botões */
 .card .buttons-row {
     margin-top: 20px;
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    justify-content: flex-start; /* Alinhado à esquerda */
+    justify-content: flex-start; 
     border-top: 1px solid var(--medium-gray);
     padding-top: 20px;
 }
@@ -277,7 +271,7 @@ body {
     margin: 0;
     padding: 12px 24px;
     border: none;
-    border-radius: var(--border-radius-large); /* Bordas bem arredondadas */
+    border-radius: var(--border-radius-large); 
     background-color: var(--primary-blue);
     color: var(--white);
     cursor: pointer;
@@ -307,9 +301,6 @@ body {
     box-shadow: none;
     transform: none;
 }
-
-
-/* O restante do CSS continua aqui, com as mesmas variáveis aplicadas */
 
 #mainApp, #filterScreen { display: none; }
 
@@ -1080,7 +1071,7 @@ button:disabled {
 
 .sidebar {
     width: 240px;
-    background-color: #2A4B8D; /* Azul escuro da imagem */
+    background-color: #2A4B8D; 
     color: var(--white);
     display: flex;
     flex-direction: column;
@@ -1121,7 +1112,7 @@ button:disabled {
     margin-left: 240px;
     flex-grow: 1;
     padding: 30px;
-    background-color: #E9EEF2; /* Tom de cinza claro do fundo */
+    background-color: #E9EEF2; 
 }
 
 .dashboard-filters {
@@ -1424,7 +1415,7 @@ button:disabled {
     padding: 15px;
     background-color: var(--light-gray);
     border-radius: var(--border-radius-small);
-    margin: 10px 0 10px 65px; /* Alinhado com o texto da cotação */
+    margin: 10px 0 10px 65px; 
 }
 .cotacao-list-item.expanded + .item-details-dropdown {
     display: block;
@@ -1512,3 +1503,14 @@ button:disabled {
 .status-separacao-concluída { background-color: #28a745; }
 .status-carregamento-concluído { background-color: #17a2b8; }
 
+.map-link {
+    font-size: 0.9em;
+    margin-left: 10px;
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.map-link:hover {
+    text-decoration: underline;
+}
