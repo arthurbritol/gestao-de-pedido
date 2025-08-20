@@ -1170,36 +1170,42 @@ function gerarPDF(pedidoId) {
         return;
     }
 
-    const dadosPeso = getDadosPesoPedido(pedidoId);
-    const dadosCertificado = getDadosCertificadoPedido(pedidoId);
+    const agora = new Date();
+    const dia = String(agora.getDate()).padStart(2, '0');
+    const mes = String(agora.getMonth() + 1).padStart(2, '0'); 
+    const ano = agora.getFullYear();
+    const hora = String(agora.getHours()).padStart(2, '0');
+    const minuto = String(agora.getMinutes()).padStart(2, '0');
+    const segundo = String(agora.getSeconds()).padStart(2, '0');
 
-    const itensAgrupados = {};
+    const dataAtualFormatada = `${dia}/${mes}/${ano}`;
+    const horaAtualFormatada = `${hora}:${minuto}`;
+    const dataHoraImpressao = `${dataAtualFormatada} ${hora}:${minuto}:${segundo}`;
+
+    const usuarioImpressao = usuarioLogado ? usuarioLogado.toUpperCase() : 'N/A';
+
+    const notaFiscal = getNotaFiscal(pedido.id) ?? "N/A";
+
+    const dadosPeso = getDadosPesoPedido(pedidoId);
     let pesoTotal = 0;
 
     for (const setor in pedido.produtos) {
         pedido.produtos[setor].forEach(produto => {
             const peso = parseFloat(dadosPeso[produto]) || 0;
-            const nf = getNotaFiscal(produto.id) ?? "N/A"; 
-
-            if (!itensAgrupados[nf]) {
-                itensAgrupados[nf] = {
-                    ordemEntrega: produto.ordemEntrega || '1', 
-                    emissao: produto.dataEmissao || '15/08/2025', 
-                    cliente: pedido.cliente,
-                    endereco: pedido.endereco,
-                    peso: 0,
-                };
-            }
-            itensAgrupados[nf].peso += peso;
             pesoTotal += peso;
         });
     }
 
-
     let content = `
+        <h1>Relatório de Carregamento - COT_${pedido.id}</h1>
+        <p><strong>Cliente:</strong> ${pedido.cliente}</p>
+        <p><strong>NF-e:</strong> ${notaFiscal}</p>
+        <p><strong>Endereço:</strong> ${pedido.endereco}</p>
+        <hr>
+        
         <div class="header">
             <div class="logo">
-                <img src="URL_DA_SUA_LOGO" alt="Logo Cedisa" style="width: 150px; display: none;"/>
+                    <img src="IMAGES/C_logo.png" alt="Logo C" style="width: 150px; display: none;"/>
                 <h2>Gestão de pedido</h2>
             </div>
             <div class="title">
@@ -1215,8 +1221,8 @@ function gerarPDF(pedidoId) {
                 <td><strong>Visto</strong></td>
             </tr>
             <tr>
-                <td>___/___/_____</td>
-                <td>____:____</td>
+                <td>${dataAtualFormatada}</td>
+                <td>${horaAtualFormatada}</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
@@ -1224,10 +1230,10 @@ function gerarPDF(pedidoId) {
 
         <table class="details-table">
             <tr>
-                <td><strong>Embarque</strong> ${pedido.id || pedido.embarque}</td>
-                <td><strong>Motorista</strong> ${pedido.motorista || 'Motorista Teste'}</td>
-                <td><strong>Transportadora</strong> ${pedido.transportadora || 'Transportadora Fictícia LTDA'}</td>
-                <td><strong>Placa</strong> ${pedido.placa || 'AAA-0123'}</td>
+                <td><strong>Embarque:</strong> ${pedido.embarque || 'N/A'}</td>
+                <td><strong>Motorista:</strong> ${getPedidoMotoristaDestino(pedido.id) || 'Motorista Teste'}</td>
+                <td><strong>Transportadora:</strong> ${pedido.transportadora || 'Transportadora Fictícia LTDA'}</td>
+                <td><strong>Placa:</strong> ${pedido.placa || 'AAA-0123'}</td>
             </tr>
         </table>
 
@@ -1243,60 +1249,49 @@ function gerarPDF(pedidoId) {
                 </tr>
             </thead>
             <tbody>
-    `;
-
-    for (const nf in itensAgrupados) {
-        const item = itensAgrupados[nf];
-        content += `
-            <tr>
-                <td>${item.ordemEntrega}</td>
-                <td>${nf}</td>
-                <td>${item.emissao}</td>
-                <td>${item.peso.toFixed(3).replace('.',',')}</td>
-                <td>${item.cliente}</td>
-                <td>${item.endereco}</td>
-            </tr>
-        `;
-    }
-
-    content += `
+                <tr>
+                    <td>1</td>
+                    <td>${notaFiscal}</td>
+                    <td>${dataAtualFormatada}</td>
+                    <td>${pesoTotal.toFixed(3).replace('.',',')}</td>
+                    <td>${pedido.cliente}</td>
+                    <td>${pedido.endereco}</td>
+                </tr>
             </tbody>
         </table>
 
         <div class="footer">
             <p><strong>Peso total: ${pesoTotal.toFixed(3).replace('.',',')}</strong></p>
-            <p>MATERIAIS RETIRADOS NA CEDISA NO DIA 00/00/0000, CONFORME NOTAS FISCAIS RELACIONADAS.</p>
+            <p>MATERIAIS RETIRADOS NA Empresa Fictícia NO DIA ${dataAtualFormatada}, CONFORME NOTAS FISCAIS RELACIONADAS.</p>
             <div class="signature">
                 <p>Assinatura: __________________________________________________</p>
             </div>
-            <p class="print-info">Impresso por DANIELA COELHO em 00/00/0000 00:00:00</p>
+            <p class="print-info">Impresso por "${usuarioImpressao}" em ${dataHoraImpressao}</p>
         </div>
     `;
-
 
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
         <html>
             <head>
-                <title>Relatório COT_${pedido.id}</title>
+                <title>Controle de Transporte - COT_${pedido.id}</title>
                 <style>
-                    body { font-family: Arial, sans-serif; margin: 20px; font-size: 12px; }
-                    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-                    .header .title { text-align: center; flex-grow: 1; }
-                    .header .logo { flex-basis: 150px; }
-                    h1 { margin: 0; color: #000; font-size: 18px; }
+                    body { font-family: Arial, sans-serif; margin: 20px; font-size: 10pt; }
+                    .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 15px; }
+                    .header .title h1 { margin: 0; font-size: 16pt; }
+                    .header .logo h2 { margin: 0; font-size: 12pt; color: #555; }
                     table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
                     th, td { border: 1px solid #ccc; padding: 6px; text-align: left; }
-                    .info-table td { text-align: center; }
-                    .info-table tr:first-child td { border-bottom: none; }
-                    .info-table tr:last-child td { border-top: none; height: 25px; }
-                    .details-table td { padding: 8px; }
-                    .items-table thead { background-color: #f2f2f2; }
-                    .items-table th, .items-table td { text-align: center; vertical-align: middle; }
-                    .items-table td:last-child { text-align: left; }
-                    .footer p { margin: 5px 0; }
-                    .signature { margin-top: 40px; }
-                    .print-info { font-size: 10px; color: #555; margin-top: 20px; }
+                    th { background-color: #f2f2f2; font-size: 9pt; }
+                    .info-table td, .details-table td { text-align: center; }
+                    .items-table { table-layout: fixed; }
+                    .items-table th, .items-table td { word-wrap: break-word; }
+                    .footer { margin-top: 30px; border-top: 1px solid #ccc; padding-top: 10px; }
+                    .footer .signature { margin-top: 40px; }
+                    .footer .print-info { font-size: 8pt; color: #777; text-align: right; margin-top: 20px; }
+                    @media print {
+                        body { margin: 10mm; }
+                    }
                 </style>
             </head>
             <body>${content}</body>
