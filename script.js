@@ -8,7 +8,7 @@ const usuarios = {
     "carregador2": "1234",
     "carregador3": "1234",
     "joao": "1234",
-    "gestor": "1234" // Novo usuário gestor
+    "gestor": "1234" 
 };
 
 let pedidos = [
@@ -262,8 +262,6 @@ setDadosPesoPedido = function(id, dados) {
         console.warn("Faixa de NF esgotada ao redefinir pesos.");
     }
 };
-
-
 
 function getDadosCertificadoPedido(id) {
     return JSON.parse(localStorage.getItem(`${localStorageCertificadoKey}_${id}`)) || {};
@@ -989,8 +987,8 @@ function renderizarPedidosCarregamento() {
                 card.innerHTML = `
                     <div class="pedido-header">
                         <h3>COT_${pedido.id} - ${pedido.cliente}</h3>
-                        <p>Endereço: ${pedido.endereco}</p>
-                <p>NF-e: ${getNotaFiscal(pedido.id) ?? "—"}</p>
+                        <p>Endereço: ${pedido.endereco} <a href="https://www.google.com/maps?q=${encodeURIComponent(pedido.endereco)}" target="_blank" class="map-link">visualizar endereço no mapa</a></p>
+                        <p>NF-e: ${getNotaFiscal(pedido.id) ?? "—"}</p>
                         <p>Destinado a: ${motoristaDestino ? motoristaDestino.toUpperCase() : 'Não Destinado'}</p>
                         <p class="status-pedido ${statusClass}">Status: ${statusText}</p>
                     </div>
@@ -1624,16 +1622,16 @@ function imprimirEtiquetasFardos(pedidoId, setor, produto) {
                 dataForQR.forEach(function(data) {
                     const el = document.getElementById(data.id);
                     if (el) {
-                        new QRCode(el, { text: data.text, width: 100, height: 100, correctLevel : QRCode.CorrectLevel.L });
+                        new QRCode(el, { text: data.text, width: 100, height: 100, correctLevel: QRCode.CorrectLevel.L });
                     }
                 });
             } catch (e) { console.error('Erro ao gerar QR Code:', e); }
         <\/script>
     </html>`;
 
-    const win = window.open("", "_blank");
-    win.document.write(etiquetaHTML);
-    win.document.close();
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(etiquetaHTML);
+    printWindow.document.close();
 }
 
 function imprimirEtiquetasPorSetor(pedidoId, setor) {
@@ -1833,10 +1831,8 @@ function renderDashboard() {
     const dashboardContainer = document.getElementById('dashboardContainer');
     dashboardContainer.innerHTML = `
         <div class="shipment-details-view" id="shipmentDetailsView" style="display:none;">
-            <!-- Conteúdo dos detalhes do embarque será gerado aqui -->
         </div>
         <div class="dashboard-main-content" id="dashboardMainContent">
-            <!-- Colunas de status serão geradas aqui -->
         </div>
     `;
     renderStatusColumns();
@@ -2070,5 +2066,3 @@ function toggleDropdown(element, contentSelector) {
         content.style.display = element.classList.contains('expanded') ? 'block' : 'none';
     }
 }
-
-
