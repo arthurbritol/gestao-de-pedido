@@ -80,7 +80,6 @@
         </div>
     </div>
     
-    <!-- TELA DE ESCOLHER MATERIAL -->
     <div class="user-selection-container" id="materialSelectionPage" style="display: none;">
         <div class="user-selection-box">
             <img src="IMAGES/C_logo.png" alt="Logo" class="logo">
@@ -105,7 +104,6 @@
         </div>
     </div>
 
-    <!-- TELA DE LOGIN SEPARADOR -->
     <div class="login-container" id="loginPage" style="display: none;">
         <div class="login-box">
             <h2>Acesso de Separador</h2>
@@ -116,7 +114,6 @@
         </div>
     </div>
 
-    <!-- TELA DE LOGIN CARREGAMENTO -->
     <div class="login-container" id="driverLoginPage" style="display: none;">
         <div class="login-box">
             <h2>Acesso de Carregamento</h2>
@@ -140,16 +137,27 @@
             <button class="filter-box-button-bottom" onclick="logout()" style="background-color: var(--text-secondary); margin-top: 15px;">Sair (Logout)</button>
         </div>
     </div>
-    
-    <div class="filter-screen-container" id="loaderOrdersScreen" style="display: none;">
-        <div class="filter-box">
-            <h2>Pedidos aguardando carregamento</h2>
-            <div class="loader-status-filters">
-                <button data-loader-filter="todos" class="active" onclick="aplicarFiltroCarregamento('todos', this)">Todos os Pedidos</button>
-                <button data-loader-filter="meus" onclick="aplicarFiltroCarregamento('meus', this)">Meus Carregamentos</button>
+
+    <div class="dashboard-wrapper" id="loaderDashboardWrapper" style="display: none;">
+        <div class="sidebar" id="loaderSidebar">
+            <img src="IMAGES/C_LOGO_BRANCO.png" alt="Logo" class="sidebar-logo">
+            <ul>
+                <li><a href="#" id="navMeusCarregamentos" class="active" onclick="showLoaderView('meus')">Meus Carregamentos</a></li>
+                <li><a href="#" id="navTodosPedidos" onclick="showLoaderView('todos')">Todos os Pedidos</a></li>
+                <li><a href="#" onclick="logout()">Sair</a></li>
+            </ul>
+        </div>
+        <div class="dashboard-content-container" id="loaderContentContainer">
+            <div class="loader-header">
+                <h2 id="loaderViewTitle">Meus Carregamentos</h2>
             </div>
-            <div id="loadingOrdersList"></div>
-            <button class="filter-box-button-bottom" onclick="logout()" style="background-color: var(--text-secondary); margin-top: 15px;">Sair</button>
+            <div class="main-app-status-filters" id="loaderStatusFilters" style="display:none;">
+                <button data-status-filter="aguardando" class="active" onclick="aplicarFiltroStatusCarregamento('aguardando', this)">Aguardando Carregamento</button>
+                <button data-status-filter="em_carregamento" onclick="aplicarFiltroStatusCarregamento('em_carregamento', this)">Em Carregamento</button>
+                <button data-status-filter="carregado" onclick="aplicarFiltroStatusCarregamento('carregado', this)">Embarque Carregado</button>
+            </div>
+            <div id="loadingOrdersList">
+                </div>
         </div>
     </div>
     
@@ -191,5 +199,3 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
 </html>
-
-
