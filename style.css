@@ -1311,8 +1311,8 @@ button:disabled {
 
 .status-aguardando-separacao { background-color: #6c757d; color: white; }
 .status-em-separacao { background-color: var(--orange-warning); color: white; }
-.status-separacao-concluida { background-color: #28a745; color: white; }
-.status-carregamento-concluido { background-color: #17a2b8; color: white; }
+.status-separacao-concluída { background-color: #28a745; color: white; }
+.status-carregamento-concluído { background-color: #17a2b8; color: white; }
 
 .status-pedido-separado { background-color: var(--blue-separacao-bg); color: var(--blue-separacao-text); border: 1px solid var(--blue-info); }
 .status-carregado { background-color: var(--green-concluido-bg); color: var(--green-concluido-text); border: 1px solid var(--green-success); }
@@ -1554,3 +1554,4 @@ button:disabled {
 }
 .item-detail-status.concluido { color: var(--green-success); }
 .item-detail-status.pendente { color: var(--red-error); }
+
