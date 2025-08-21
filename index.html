@@ -151,13 +151,41 @@
             <div class="loader-header">
                 <h2 id="loaderViewTitle">Meus Carregamentos</h2>
             </div>
-            <div class="main-app-status-filters" id="loaderStatusFilters" style="display:none;">
-                <button data-status-filter="aguardando" class="active" onclick="aplicarFiltroStatusCarregamento('aguardando', this)">Aguardando Carregamento</button>
-                <button data-status-filter="em_carregamento" onclick="aplicarFiltroStatusCarregamento('em_carregamento', this)">Em Carregamento</button>
-                <button data-status-filter="carregado" onclick="aplicarFiltroStatusCarregamento('carregado', this)">Carregamento Concluído</button>
-            </div>
-            <div id="loadingOrdersList">
+            
+            <div class="search-and-filters">
+                <div class="loader-filters-container" id="loaderFiltersContainer" style="display:none;">
+                    <div class="filter-group">
+                        <input type="text" id="loaderFilterCotacao" placeholder="Filtrar por Cotação...">
+                        <div class="suggestions-container" id="suggestionsCotacao"></div>
+                    </div>
+                    <div class="filter-group">
+                        <input type="date" id="loaderFilterData">
+                    </div>
+                    <div class="filter-group">
+                        <input type="text" id="loaderFilterRota" placeholder="Filtrar por Rota...">
+                        <div class="suggestions-container" id="suggestionsRota"></div>
+                    </div>
+                    <div class="filter-group">
+                        <select id="loaderFilterStatus">
+                            <option value="">Todos os Status</option>
+                            <option value="Aguardando separação">Aguardando Separação</option>
+                            <option value="Em separação">Em Separação</option>
+                            <option value="Aguardando carregamento">Aguardando Carregamento</option>
+                            <option value="Em carregamento">Em Carregamento</option>
+                            <option value="Carregamento concluido">Carregamento Concluído</option>
+                        </select>
+                    </div>
                 </div>
+
+                <div class="main-app-status-filters" id="loaderStatusFilters" style="display:none;">
+                    <button data-status-filter="aguardando" class="active" onclick="aplicarFiltroStatusCarregamento('aguardando', this)">Aguardando Carregamento</button>
+                    <button data-status-filter="em_carregamento" onclick="aplicarFiltroStatusCarregamento('em_carregamento', this)">Em Carregamento</button>
+                    <button data-status-filter="carregado" onclick="aplicarFiltroStatusCarregamento('carregado', this)">Carregamento Concluído</button>
+                </div>
+            </div>
+
+            <div id="loadingOrdersList">
+            </div>
         </div>
     </div>
     
@@ -171,12 +199,14 @@
         </div>
         <div class="container">
             <div class="welcome" id="welcomeMessage"></div>
+            
             <div class="main-app-status-filters" id="mainAppStatusFilters" style="display:none;">
                 <button data-status-filter="todas" class="active" onclick="aplicarFiltroStatusPrincipal('todas', this)">Todos os Status</button>
                 <button data-status-filter="Aguardando separação" onclick="aplicarFiltroStatusPrincipal('Aguardando separação', this)">Aguardando Separação</button>
                 <button data-status-filter="Em separação" onclick="aplicarFiltroStatusPrincipal('Em separação', this)">Em Separação</button>
                 <button data-status-filter="Pedido separado" onclick="aplicarFiltroStatusPrincipal('Pedido separado', this)">Pedido Separado</button>
             </div>
+
             <div id="quotationsByEmbarque" class="card quotations-section" style="display:none;">
                 <h3>Cotações Relacionadas ao Embarque</h3>
                 <div id="quotationList"></div>
@@ -188,7 +218,7 @@
 
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
-            <button class="modal-close-button" onclick="closeModal()">&times;</button>
+            <button class="modal-close-button" onclick="closeModal()">×</button>
             <h3 id="modalTitle"></h3>
             <p id="modalMessage"></p>
             <div class="modal-buttons" id="modalButtons"></div>
