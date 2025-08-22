@@ -1,3 +1,5 @@
+let usuarioLogadoRole = null; 
+
 const usuarios = {
     "admin": "1234",
     "operador1": "1234",
@@ -7,7 +9,8 @@ const usuarios = {
     "carregador2": "1234",
     "carregador3": "1234",
     "joao": "1234",
-    "gestor": "1234" 
+    "gestor": "1234",
+    "consultor": "1234" 
 };
 
 let pedidos = [
@@ -451,11 +454,31 @@ function fazerLoginGestor() {
     const pass = document.getElementById("gestorPassword").value.trim();
     const erro = document.getElementById("gestorLoginErro");
 
-    if (usuarios[user] && usuarios[user] === pass && user === "gestor") {
+    const isGestor = user === "gestor";
+    const isConsultor = user === "consultor";
+
+    if (usuarios[user] && usuarios[user] === pass && (isGestor || isConsultor)) {
         usuarioLogado = user;
-        showDashboardScreen();
+        usuarioLogadoRole = user; 
+        
+        hideAllScreens();
+        
+        document.getElementById("dashboardWrapper").style.display = "flex";
+        
+        const sidebarUl = document.getElementById('gestorSidebarUl');
+        let sidebarHTML = `
+            <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo Gerencial</a></li>
+            <li><a href="#" data-view="consulta" onclick="showGestorView('consulta', this)">Consultar Pedidos</a></li>
+        `;
+        if (usuarioLogadoRole === 'gestor') {
+            sidebarHTML += '<li><a href="#" onclick="logout()">Sair</a></li>';
+        }
+        sidebarUl.innerHTML = sidebarHTML;
+        
+        renderResumoGerencial();
+
     } else {
-        erro.textContent = "Usuário ou senha de gestor incorretos.";
+        erro.textContent = "Usuário ou senha gerencial incorretos.";
     }
 }
 
@@ -512,6 +535,7 @@ function showFilterScreen() {
 
 function logout() {
     usuarioLogado = null;
+    usuarioLogadoRole = null;
     selectedUserType = null;
     isMotoristaLogado = false;
     globalFiltroPedido = "";
@@ -2450,3 +2474,302 @@ function toggleDropdown(element, contentSelector) {
     }
 }
 
+function showGestorView(viewName, clickedLink) {
+    // Alterna a classe 'active' no menu lateral
+    const links = document.querySelectorAll('#dashboardWrapper .sidebar a');
+    links.forEach(link => link.classList.remove('active'));
+    if (clickedLink) {
+        clickedLink.classList.add('active');
+    }
+
+    // Renderiza a view selecionada
+    if (viewName === 'resumo') {
+        renderResumoGerencial();
+    } else if (viewName === 'consulta') {
+        renderConsultaPedidos();
+    }
+}
+
+function renderResumoGerencial() {
+    const container = document.getElementById('dashboardContainer');
+    container.innerHTML = `
+        <div class="summary-dashboard">
+            <h2>Resumo Gerencial de Status</h2>
+            
+            <h3 style="margin-top: 20px;">Status de Separação</h3>
+            <div class="dashboard-main-content" id="separacaoStatusContent"></div>
+
+            <h3 style="margin-top: 40px;">Status de Carregamento</h3>
+            <div class="dashboard-main-content" id="carregamentoStatusContent"></div>
+        </div>
+    `;
+
+    // --- Lógica para Status de Separação ---
+    const separacaoContent = document.getElementById('separacaoStatusContent');
+    // CORREÇÃO: As chaves agora correspondem exatamente aos valores de status
+    const pedidosPorStatusSeparacao = {
+        'Aguardando separação': [],
+        'Em separação': [],
+        'Pedido separado': []
+    };
+
+    pedidos.forEach(pedido => {
+        const status = getPedidoStatus(pedido.id);
+        // CORREÇÃO: Garante que "Pedido separado" só apareça aqui se estiver aguardando carregamento
+        if (status === 'Pedido separado' && getPedidoCarregadoStatus(pedido.id) !== 'pendente') {
+            return; // Não adiciona a esta lista, pois já está na fila de carregamento
+        }
+        if (pedidosPorStatusSeparacao[status]) {
+            pedidosPorStatusSeparacao[status].push(pedido);
+        }
+    });
+
+    for (const status in pedidosPorStatusSeparacao) {
+        const column = document.createElement('div');
+        column.className = 'status-column';
+        const statusClass = 'status-' + status.toLowerCase().replace(/ /g, '-').replace(/çã/g, 'ca');
+        
+        let totalPeso = pedidosPorStatusSeparacao[status].reduce((sum, p) => {
+            const pesos = getDadosPesoPedido(p.id);
+            return sum + Object.values(pesos).reduce((s, peso) => s + (parseFloat(peso) || 0), 0);
+        }, 0);
+
+        column.innerHTML = `
+            <div class="status-header ${statusClass}">${status}</div>
+            <div class="status-summary">
+                <div class="summary-item">
+                    <div class="value">${(totalPeso / 1000).toFixed(2).replace('.',',')}</div>
+                    <div class="label">Peso (Ton)</div>
+                </div>
+                <div class="summary-item">
+                    <div class="value">${pedidosPorStatusSeparacao[status].length}</div>
+                    <div class="label">Cotações</div>
+                </div>
+            </div>
+            <div class="cards-container">
+                ${pedidosPorStatusSeparacao[status].map(p => `
+                    <div class="order-card">
+                        <div class="order-info">
+                            <h5>COT_${p.id} - ${p.cliente}</h5>
+                            <p>${p.embarque}</p>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        separacaoContent.appendChild(column);
+    }
+
+    // --- Lógica para Status de Carregamento (mantida como estava, pois já era correta) ---
+    const carregamentoContent = document.getElementById('carregamentoStatusContent');
+    const pedidosPorStatusCarregamento = {
+        'Aguardando Carregamento': [],
+        'Em Carregamento': [],
+        'Carregamento Concluído': []
+    };
+
+    pedidos.forEach(pedido => {
+        const statusSeparacao = getPedidoStatus(pedido.id);
+        const statusCarregamento = getPedidoCarregadoStatus(pedido.id);
+
+        if (statusSeparacao === 'Pedido separado' && statusCarregamento === 'pendente') {
+            pedidosPorStatusCarregamento['Aguardando Carregamento'].push(pedido);
+        } else if (statusCarregamento === 'em_carregamento') {
+            pedidosPorStatusCarregamento['Em Carregamento'].push(pedido);
+        } else if (statusCarregamento === 'carregado') {
+            pedidosPorStatusCarregamento['Carregamento Concluído'].push(pedido);
+        }
+    });
+
+    for (const status in pedidosPorStatusCarregamento) {
+        const column = document.createElement('div');
+        column.className = 'status-column';
+        const statusClass = 'status-' + status.toLowerCase().replace(/ /g, '-').replace('ú', 'u');
+        
+        let totalPeso = pedidosPorStatusCarregamento[status].reduce((sum, p) => {
+            const pesos = getDadosPesoPedido(p.id);
+            return sum + Object.values(pesos).reduce((s, peso) => s + (parseFloat(peso) || 0), 0);
+        }, 0);
+
+        column.innerHTML = `
+            <div class="status-header ${statusClass}">${status}</div>
+            <div class="status-summary">
+                <div class="summary-item">
+                    <div class="value">${(totalPeso / 1000).toFixed(2).replace('.',',')}</div>
+                    <div class="label">Peso (Ton)</div>
+                </div>
+                <div class="summary-item">
+                    <div class="value">${pedidosPorStatusCarregamento[status].length}</div>
+                    <div class="label">Cotações</div>
+                </div>
+            </div>
+            <div class="cards-container">
+                ${pedidosPorStatusCarregamento[status].map(p => `
+                    <div class="order-card">
+                        <div class="order-info">
+                            <h5>COT_${p.id} - ${p.cliente}</h5>
+                            <p>${p.embarque}</p>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        carregamentoContent.appendChild(column);
+    }
+}
+
+function renderConsultaPedidos() {
+    const container = document.getElementById('dashboardContainer');
+    container.innerHTML = `
+        <div class="consulta-container">
+            <h2>Consulta de Pedidos</h2>
+            <div class="consulta-filters">
+                <input type="text" id="gestorFilterCotacao" placeholder="Filtrar por Cotação...">
+                <input type="date" id="gestorFilterData">
+                <input type="text" id="gestorFilterRota" placeholder="Filtrar por Rota...">
+                <select id="gestorFilterStatus">
+                    <option value="">Todos os Status</option>
+                    <option value="Aguardando separação">Aguardando Separação</option>
+                    <option value="Em separação">Em Separação</option>
+                    <option value="Pedido separado">Pedido Separado</option>
+                    <option value="Aguardando carregamento">Aguardando Carregamento</option>
+                    <option value="Em carregamento">Em Carregamento</option>
+                    <option value="Carregamento concluido">Carregamento Concluído</option>
+                    <option value="Nao carregado">Não Carregado</option>
+                </select>
+                <button class="btn-back" style="color: white; border: none;" onclick="updateConsultaPedidosList()">Filtrar</button>
+            </div>
+            <div class="consulta-results" id="gestorPedidosList">
+            </div>
+        </div>
+    `;
+    updateConsultaPedidosList();
+}
+
+function updateConsultaPedidosList() {
+    const filters = {
+        cotacao: document.getElementById('gestorFilterCotacao').value.toLowerCase(),
+        data: document.getElementById('gestorFilterData').value,
+        rota: document.getElementById('gestorFilterRota').value.toLowerCase(),
+        status: document.getElementById('gestorFilterStatus').value
+    };
+
+    const listDiv = document.getElementById('gestorPedidosList');
+    listDiv.innerHTML = '';
+
+    const pedidosFiltrados = pedidos.filter(p => {
+        const cotacaoMatch = filters.cotacao ? String(p.id).includes(filters.cotacao) : true;
+        const dataMatch = filters.data ? p.data === filters.data : true;
+        const rotaMatch = filters.rota ? p.embarque.toLowerCase().includes(filters.rota) : true;
+
+        let statusMatch = true;
+        if (filters.status) {
+            const pStatus = getPedidoStatus(p.id);
+            const pCarregadoStatus = getPedidoCarregadoStatus(p.id);
+
+            switch(filters.status) {
+                case 'Aguardando carregamento':
+                    statusMatch = pStatus === 'Pedido separado' && pCarregadoStatus === 'pendente';
+                    break;
+                case 'Em carregamento':
+                    statusMatch = pCarregadoStatus === 'em_carregamento';
+                    break;
+                case 'Carregamento concluido':
+                    statusMatch = pCarregadoStatus === 'carregado';
+                    break;
+                case 'Nao carregado':
+                    statusMatch = pCarregadoStatus === 'nao-carregado';
+                    break;
+                default:
+                    statusMatch = pStatus === filters.status;
+                    break;
+            }
+        }
+
+        return cotacaoMatch && dataMatch && rotaMatch && statusMatch;
+    });
+
+    if (pedidosFiltrados.length === 0) {
+        listDiv.innerHTML = '<p>Nenhum pedido encontrado com os filtros aplicados.</p>';
+        return;
+    }
+
+    pedidosFiltrados.forEach(pedido => {
+        const statusSeparacao = getPedidoStatus(pedido.id);
+        const statusCarregamento = getPedidoCarregadoStatus(pedido.id);
+        let statusFinalText = statusSeparacao;
+        let statusFinalClass = 'pendente';
+
+        if (statusSeparacao === 'Em separação') {
+            statusFinalClass = 'separacao';
+        } else if (statusSeparacao === 'Pedido separado') {
+             statusFinalClass = 'separado';
+            if (statusCarregamento === 'pendente') {
+                statusFinalText = 'Aguardando Carregamento';
+                statusFinalClass = 'aguardando-carregamento';
+            }
+            if (statusCarregamento === 'em_carregamento') {
+                statusFinalText = 'Em Carregamento';
+                 statusFinalClass = 'carregamento';
+            }
+            if (statusCarregamento === 'carregado') {
+                statusFinalText = 'Carregamento Concluído';
+                 statusFinalClass = 'concluido';
+            }
+            if (statusCarregamento === 'nao-carregado') {
+                statusFinalText = 'Não Carregado';
+                 statusFinalClass = 'nao-carregado';
+            }
+        }
+
+        listDiv.innerHTML += `
+            <div class="consulta-pedido-card">
+                <div class="card-header">
+                    <h4>COT_${pedido.id} - ${pedido.cliente}</h4>
+                    <span class="status-tag ${statusFinalClass}">${statusFinalText}</span>
+                </div>
+                <div class="info-group">
+                    <strong>Data</strong>
+                    ${new Date(pedido.data).toLocaleDateString('pt-BR', {timeZone: 'UTC'})}
+                </div>
+                <div class="info-group">
+                    <strong>Rota/Embarque</strong>
+                    ${pedido.embarque}
+                </div>
+                <div class="info-group">
+                    <strong>Endereço</strong>
+                    ${pedido.endereco}
+                </div>
+                <div class="info-group">
+                    <strong>Destino Motorista</strong>
+                    ${getPedidoMotoristaDestino(pedido.id) || 'Não atribuído'}
+                </div>
+                <div class="produtos-list">
+                    <strong>Produtos:</strong> ${produtosParaTexto(pedido.produtos)}
+                </div>
+            </div>
+        `;
+    });
+}
+
+function renderGestorDashboard() {
+    hideAllScreens();
+    document.getElementById("dashboardWrapper").style.display = "flex";
+    renderGestorSidebar();
+
+    showGestorView('resumo'); 
+}
+
+function renderGestorSidebar() {
+    const sidebarUl = document.getElementById('gestorSidebarUl');
+    let sidebarHTML = `
+        <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo Gerencial</a></li>
+        <li><a href="#" data-view="consulta" onclick="showGestorView('consulta', this)">Consultar Pedidos</a></li>
+    `;
+
+    if (usuarioLogadoRole === 'gestor' || usuarioLogadoRole === 'consultor') {
+        sidebarHTML += '<li><a href="#" onclick="logout()">Sair</a></li>';
+    }
+
+    sidebarUl.innerHTML = sidebarHTML;
+}
