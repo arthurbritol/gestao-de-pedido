@@ -27,7 +27,7 @@
             <div class="user-option" data-user-type="gestor" onclick="selectUserType('gestor')">
                 <img src="IMAGES/logistics.png" alt="Icone Gestor" class="icon">
                 <div class="text-content">
-                    <h3>Gestor de Rota</h3>
+                    <h3>Acesso Gerencial</h3>
                     <p>Visualizar andamento dos pedidos</p>
                 </div>
             </div>
@@ -38,8 +38,7 @@
 
     <div class="login-container" id="gestorLoginPage" style="display: none;">
         <div class="login-box">
-            <h2>Acesso de Gestor de Rota</h2>
-            <input type="text" id="gestorUsername" placeholder="Usuário" autocomplete="username" />
+            <h2>Acesso Gerencial</h2> <input type="text" id="gestorUsername" placeholder="Usuário" autocomplete="username" />
             <input type="password" id="gestorPassword" placeholder="Senha" autocomplete="current-password" />
             <button onclick="fazerLoginGestor()">Acessar Dashboard</button>
             <div class="login-error" id="gestorLoginErro"></div>
@@ -50,7 +49,8 @@
         <div class="sidebar">
             <img src="IMAGES/C_LOGO_BRANCO.png" alt="Logo" class="sidebar-logo">
             <ul>
-                <li><a href="#" class="active" onclick="showDashboardScreen()">Dashboard</a></li>
+                <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo Gerencial</a></li>
+                <li><a href="#" data-view="consulta" onclick="showGestorView('consulta', this)">Consultar Pedidos</a></li>
                 <li><a href="#" onclick="logout()">Sair</a></li>
             </ul>
         </div>
