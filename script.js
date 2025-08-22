@@ -2374,7 +2374,7 @@ function showEmbarqueDetails(embarqueNome) {
 
                 itensHTML += `
                     <div class="item-detail-card">
-                        <div class="item-detail-header" onclick="toggleDropdown(this.parentElement, '.item-detail-content')">
+                        <div class="item-detail-header" onclick="toggleDropdown(this, '.item-detail-content')">
                             <button class="toggle-btn">▼</button>
                             <div class="item-info">
                                 <h6>${produto}</h6>
@@ -2404,7 +2404,7 @@ function showEmbarqueDetails(embarqueNome) {
                 <img src="IMAGES/pacote.png" alt="ícone" class="item-icon">
                 <div class="cotacao-info">
                     <h5>COT_${pedido.id}</h5>
-                    <p>${pedido.embarque}: ${dataAtualFormatada}</p>
+                    <p>${pedido.embarque}: ${new Date(pedido.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</p>
                 </div>
                 <span class="cotacao-status-tag ${statusClass}">${finalStatus}</span>
             </div>
@@ -2449,3 +2449,4 @@ function toggleDropdown(element, contentSelector) {
         content.style.display = element.classList.contains('expanded') ? 'block' : 'none';
     }
 }
+
