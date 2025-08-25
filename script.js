@@ -50,7 +50,7 @@ let pedidos = [
     { id: 329163, cliente: "Soluções em Aço", status: "Aguardando separação", data: "2025-09-07", endereco: "Rua do Progresso, 200 - Guarapari, ES", embarque: "Guarapari", motorista: null, produtos: { Chapa: ["Chapa Inox 430 0.8mm Escovada", "Chapa Xadrez 3/8\" (9.53mm)"], "Cantoneira / Barra": ["Cantoneira 1.1/2\" x 1/8\""] } },
     { id: 330199, cliente: "Estrutura Forte", status: "Aguardando separação", data: "2025-09-07", endereco: "Av. das Américas, 100 - Linhares, ES", embarque: "Linhares", motorista: null, produtos: { Tubo: ["Tubo Redondo 1\" #18 (1.25mm)", "Tubo Industrial Quadrado 50x50 #14 (2.00mm)"], Chapa: ["Chapa Aço Carbono 1/8\" (3.00mm)"] } },
     { id: 328948, cliente: "Cia. do Metal", status: "Aguardando separação", data: "2025-09-08", endereco: "Rua das Acácias, 10 - São Mateus, ES", embarque: "São Mateus", motorista: null, produtos: { Viga: ["Viga U 4\" x 5.4#", "Viga I 3\" x 5.7#"], Chapa: ["Chapa Galvanizada #28 (0.43mm)"] } },
-    { id: 329122, cliente: "Norte Aço", status: "Aguardando separação", data: "2025-09-08", endereco: "Rodovia ES-010, KM 5 - Fundão, ES", embarque: "Fundão", motorista: null, produtos: { Tubo: ["Tubo Quadrado 60x60 #18 (1.25mm)"], Chapa: ["Chapa Fina a Frio #28 (0.43mm)", "Chapa Aço Carbono 3/16\" (4.75mm)"] } },
+    { id: 329722, cliente: "Norte Aço", status: "Aguardando separação", data: "2025-09-08", endereco: "Rodovia ES-010, KM 5 - Fundão, ES", embarque: "Fundão", motorista: null, produtos: { Tubo: ["Tubo Quadrado 60x60 #18 (1.25mm)"], Chapa: ["Chapa Fina a Frio #28 (0.43mm)", "Chapa Aço Carbono 3/16\" (4.75mm)"] } },
     { id: 328400, cliente: "Leste Ferro", status: "Aguardando separação", data: "2025-09-09", endereco: "Rua Central, 30 - Cachoeiro de Itapemirim, ES", embarque: "Cachoeiro de Itapemirim", motorista: null, produtos: { Viga: ["Viga W 100 x 19.3"], Chapa: ["Chapa Xadrez 3.00mm"] } },
     { id: 327904, cliente: "Centro Metal", status: "Aguardando separação", data: "2025-09-09", endereco: "Av. Getúlio Vargas, 15 - Castelo, ES", embarque: "Castelo", motorista: null, produtos: { Tubo: ["Tubo Redondo 2.1/2\" #14 (2.00mm)", "Tubo Estrutural 80x80 #11 (3.00mm)"], Chapa: ["Chapa Aço Carbono 1/8\" (3.00mm)", "Chapa Perfurada 2.00mm"] } },
     { id: 326005, cliente: "Metalúrgica do Aço", status: "Aguardando separação", data: "2025-09-10", endereco: "Rua do Sol, 10 - Serra, ES", embarque: "Serra", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/4\" (6.35mm)", "Chapa Inox 316 1.0mm"], Viga: ["Viga I 4\" x 7.7#"] } },
@@ -2773,5 +2773,6 @@ function renderGestorSidebar() {
 
     sidebarUl.innerHTML = sidebarHTML;
 }
+
 
 
