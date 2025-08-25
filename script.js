@@ -39,7 +39,7 @@ let pedidos = [
     { id: 327413, cliente: "Pegasus Engenharia", status: "Aguardando separação", data: "2025-09-01", endereco: "Rua das Rosas, 77 - Vila Velha, ES", embarque: "Vila Velha", motorista: null, produtos: { Viga: ["Viga U 8\" x 11.5#", "Viga W 310 x 38.7"], Tubo: ["Tubo Aço Inox Quadrado 40x40 1.5mm", "Tubo Redondo 4\" #14 (2.00mm)"] } },
     { id: 334389, cliente: "Centauro Indústria", status: "Aguardando separação", data: "2025-09-02", endereco: "Av. Brasil, 1100 - Colatina, ES", embarque: "Colatina", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 5/16\" (7.94mm)", "Chapa Fina a Frio #26 (0.45mm)"], Viga: ["Viga I 6\" x 12.5#"] } },
     { id: 334702, cliente: "Harpia Estruturas", status: "Aguardando separação", data: "2025-09-02", endereco: "Rua da Serra, 45 - Serra, ES", embarque: "Serra", motorista: null, produtos: { Tubo: ["Tubo SCH 40 3\"", "Tubo Quadrado 90x90 #12 (2.65mm)"], Chapa: ["Chapa Grossa 3/4\" (19.05mm)"] } },
-    { id: 10557, cliente: "Minotauro Construções", status: "Aguardando separação", data: "2025-09-03", endereco: "Estrada Velha, 22 - Cariacica, ES", embarque: "Cariacica", motorista: null, produtos: { Viga: ["Viga I 10\" x 25.4#", "Viga W 200 x 46.1"], Tubo: ["Tubo Retangular 120x60 #12 (2.65mm)"] } },
+    { id: 310557, cliente: "Minotauro Construções", status: "Aguardando separação", data: "2025-09-03", endereco: "Estrada Velha, 22 - Cariacica, ES", embarque: "Cariacica", motorista: null, produtos: { Viga: ["Viga I 10\" x 25.4#", "Viga W 200 x 46.1"], Tubo: ["Tubo Retangular 120x60 #12 (2.65mm)"] } },
     { id: 334016, cliente: "Sereia Naval", status: "Aguardando separação", data: "2025-09-03", endereco: "Rua do Porto, 33 - Vitória, ES", embarque: "Vitória", motorista: null, produtos: { Chapa: ["Chapa Naval A36 1/4\"", "Chapa Aço Carbono 1/2\" (12.70mm)"], "Cantoneira / Barra": ["Cantoneira 3\" x 1/4\""] } },
     { id: 334716, cliente: "Tritão Ferro e Aço", status: "Aguardando separação", data: "2025-09-04", endereco: "Av. dos Navegantes, 150 - Linhares, ES", embarque: "Linhares", motorista: null, produtos: { Tubo: ["Tubo Quadrado 100x100 #11 (3.00mm)", "Tubo Retangular 120x60 #14 (2.00mm)"], Chapa: ["Chapa Xadrez 3/16\" (4.75mm)"] } },
     { id: 331324, cliente: "Atlas Construções", status: "Aguardando separação", data: "2025-09-04", endereco: "Rua Principal, 55 - Serra, ES", embarque: "Serra", motorista: null, produtos: { Viga: ["Viga W 360 x 57.8", "Viga U 8\" x 11.5#"], Chapa: ["Chapa Aço Carbono 3/8\" (9.53mm)"] } },
@@ -2773,4 +2773,5 @@ function renderGestorSidebar() {
 
     sidebarUl.innerHTML = sidebarHTML;
 }
+
 
