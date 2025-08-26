@@ -1,4 +1,4 @@
-let usuarioLogadoRole = null; 
+let usuarioLogadoRole = null;
 
 const usuarios = {
     "admin": "1234",
@@ -10,7 +10,7 @@ const usuarios = {
     "carregador3": "1234",
     "joao": "1234",
     "gestor": "1234",
-    "consultor": "1234" 
+    "consultor": "1234"
 };
 
 let pedidos = [
@@ -74,29 +74,29 @@ let isMotoristaLogado = false;
 
 function handleEnterSeparador(event) {
     if (event.key === 'Enter') {
-      event.preventDefault();
-      fazerLogin();
+        event.preventDefault();
+        fazerLogin();
     }
-  }
+}
 
 function handleEnterCarregamento(event) {
     if (event.key === 'Enter') {
-      event.preventDefault();
-      fazerLoginMotorista();
+        event.preventDefault();
+        fazerLoginMotorista();
     }
-  }
+}
 
-  window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', () => {
     const username = document.getElementById('username');
     const password = document.getElementById('password');
-    if(username && password){
+    if (username && password) {
         username.addEventListener('keydown', handleEnterSeparador);
         password.addEventListener('keydown', handleEnterSeparador);
     }
 
     const driverUsername = document.getElementById('driverUsername');
     const driverPassword = document.getElementById('driverPassword');
-    if(driverUsername && driverPassword){
+    if (driverUsername && driverPassword) {
         driverUsername.addEventListener('keydown', handleEnterCarregamento);
         driverPassword.addEventListener('keydown', handleEnterCarregamento);
     }
@@ -166,14 +166,14 @@ function inicializarNotasFiscais() {
             if (existing >= NF_RANGE_START && existing <= NF_RANGE_END) {
                 if (existing >= current) {
                     current = existing + 1;
+                }
             }
         }
     }
 }
-}
 
 const NF_RANGE_START = 222000;
-const NF_RANGE_END = 223000; 
+const NF_RANGE_END = 223000;
 
 let globalFiltroPedido = "";
 let globalFiltroRota = "todas";
@@ -221,13 +221,17 @@ function setPedidoStatus(id, status) {
     if (document.getElementById("loaderDashboardWrapper") && document.getElementById("loaderDashboardWrapper").style.display === "flex") {
         renderizarPedidosCarregamento();
     }
+
+    if (document.getElementById("dashboardWrapper") && document.getElementById("dashboardWrapper").style.display === "flex") {
+        renderResumoGerencial();
+    }
 }
 
 function getPedidoCarregadoStatus(id) {
     const storedStatus = localStorage.getItem(`${localStoragePedidoCarregadoKey}_${id}`);
-    if(storedStatus) return storedStatus;
+    if (storedStatus) return storedStatus;
     const pedido = pedidos.find(p => p.id === id);
-    if(pedido && pedido.status === 'Carregado') {
+    if (pedido && pedido.status === 'Carregado') {
         return 'carregado';
     }
     return "pendente";
@@ -285,7 +289,7 @@ function gerarProximaNotaFiscal() {
 }
 
 const _setDadosPesoPedidoOriginal = setDadosPesoPedido;
-setDadosPesoPedido = function(id, dados) {
+setDadosPesoPedido = function (id, dados) {
     _setDadosPesoPedidoOriginal(id, dados);
     const novaNF = gerarProximaNotaFiscal();
     if (novaNF !== null) {
@@ -459,12 +463,12 @@ function fazerLoginGestor() {
 
     if (usuarios[user] && usuarios[user] === pass && (isGestor || isConsultor)) {
         usuarioLogado = user;
-        usuarioLogadoRole = user; 
-        
+        usuarioLogadoRole = user;
+
         hideAllScreens();
-        
+
         document.getElementById("dashboardWrapper").style.display = "flex";
-        
+
         const sidebarUl = document.getElementById('gestorSidebarUl');
         let sidebarHTML = `
             <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo Gerencial</a></li>
@@ -474,7 +478,7 @@ function fazerLoginGestor() {
             sidebarHTML += '<li><a href="#" onclick="logout()">Sair</a></li>';
         }
         sidebarUl.innerHTML = sidebarHTML;
-        
+
         renderResumoGerencial();
 
     } else {
@@ -547,9 +551,9 @@ function logout() {
     currentLoaderView = 'meus';
     globalFiltroCarregamentoStatus = 'aguardando';
     globalFiltroMotoristaDestino = null;
-    
+
     loaderFilters = { cotacao: '', data: '', rota: '', status: '' };
-    
+
     document.getElementById("username").value = "";
     document.getElementById("password").value = "";
     document.getElementById("loginErro").textContent = "";
@@ -565,7 +569,7 @@ function renderizarPedidosPorSetor(idPedidoEspecifico = null) {
 
     const isVisualizacaoGeralDeRota = globalFiltroRota === 'todas';
     const isVisualizacaoGeralDeMaterial = globalFiltroMaterial === 'Todos';
-    
+
     const esconderBotaoImpressaoSetor = isVisualizacaoGeralDeRota && isVisualizacaoGeralDeMaterial;
 
     let pedidosFiltrados = pedidos.filter(pedido => {
@@ -574,7 +578,7 @@ function renderizarPedidosPorSetor(idPedidoEspecifico = null) {
         const pedidoCorresponde = !idPedidoEspecifico || pedido.id === idPedidoEspecifico;
         const pertenceAoOperador = ["admin", "operador1", "operador2", "operador3", "joao"].includes(usuarioLogado.toLowerCase());
         const materialCorresponde = globalFiltroMaterial === "Todos" || Object.keys(pedido.produtos).includes(globalFiltroMaterial);
-        
+
         return statusCorresponde && rotaCorresponde && pedidoCorresponde && pertenceAoOperador && materialCorresponde;
     });
 
@@ -640,7 +644,7 @@ function renderizarPedidosPorSetor(idPedidoEspecifico = null) {
                     buttonRow.innerHTML = `<button class="btn-imprimir-setor" onclick="imprimirEtiquetasPorSetor(${pedido.id}, '${setor}')">Imprimir Etiquetas do Setor (${setor})</button>`;
                 }
             }
-            
+
             setorDiv.appendChild(buttonRow);
             pedidoCard.appendChild(setorDiv);
         });
@@ -987,7 +991,7 @@ function showLoaderView(viewName) {
         viewTitle.textContent = 'Meus Carregamentos';
         navMeus.classList.add('active');
         navTodos.classList.remove('active');
-    } else { 
+    } else {
         loaderStatusFilters.style.display = 'none';
         loaderFiltersContainer.style.display = 'grid';
         viewTitle.textContent = 'Todos os Pedidos';
@@ -1017,7 +1021,7 @@ function salvarStatusItemCarregado(pedidoId, produtoSlug, isChecked) {
 function updateSuggestions(filterType) {
     const inputId = `loaderFilter${filterType.charAt(0).toUpperCase() + filterType.slice(1)}`;
     const suggestionsId = `suggestions${filterType.charAt(0).toUpperCase() + filterType.slice(1)}`;
-    
+
     const input = document.getElementById(inputId);
     const suggestionsContainer = document.getElementById(suggestionsId);
     const value = input.value.toLowerCase();
@@ -1029,7 +1033,7 @@ function updateSuggestions(filterType) {
         renderizarPedidosCarregamento();
         return;
     }
-    
+
     let suggestions = [];
     if (filterType === 'cotacao') {
         suggestions = pedidos.map(p => String(p.id));
@@ -1050,7 +1054,7 @@ function updateSuggestions(filterType) {
     } else {
         suggestionsContainer.style.display = 'none';
     }
-    
+
     loaderFilters[filterType] = value;
     renderizarPedidosCarregamento();
 }
@@ -1084,12 +1088,12 @@ function renderizarPedidosCarregamento() {
             const filterCotacao = String(p.id).toLowerCase().includes(loaderFilters.cotacao.toLowerCase());
             const filterData = loaderFilters.data === '' || p.data === loaderFilters.data;
             const filterRota = p.embarque.toLowerCase().includes(loaderFilters.rota.toLowerCase());
-            
+
             let statusMatch = true;
             if (loaderFilters.status) {
                 const pStatus = getPedidoStatus(p.id);
                 const pCarregadoStatus = getPedidoCarregadoStatus(p.id);
-                
+
                 if (loaderFilters.status === 'Aguardando carregamento') {
                     statusMatch = pStatus === 'Pedido separado' && pCarregadoStatus === 'pendente';
                 } else if (loaderFilters.status === 'Em carregamento') {
@@ -1100,11 +1104,11 @@ function renderizarPedidosCarregamento() {
                     statusMatch = pStatus === loaderFilters.status;
                 }
             }
-            
+
             return filterCotacao && filterData && filterRota && statusMatch;
         }
     });
-    
+
     if (currentLoaderView === 'meus') {
         pedidosFiltrados = pedidosFiltrados.filter(p => {
             const pedidoStatus = getPedidoStatus(p.id);
@@ -1141,10 +1145,10 @@ function renderizarPedidosCarregamento() {
     embarquesOrdenados.forEach(embarque => {
         const embarqueGroupDiv = document.createElement("div");
         embarqueGroupDiv.classList.add("embarque-group");
-        
+
         const headerDiv = document.createElement('div');
         headerDiv.className = 'embarque-group-header';
-        
+
         const titleH3 = document.createElement('h3');
         titleH3.textContent = `Embarque: ${embarque}`;
         headerDiv.appendChild(titleH3);
@@ -1156,7 +1160,7 @@ function renderizarPedidosCarregamento() {
             btnDestinarEmbarque.onclick = () => showDestinarEmbarqueModal(embarque);
             headerDiv.appendChild(btnDestinarEmbarque);
         }
-        
+
         embarqueGroupDiv.appendChild(headerDiv);
 
         pedidosPorEmbarque[embarque].forEach(pedido => {
@@ -1198,11 +1202,11 @@ function renderizarPedidosCarregamento() {
                     <p class="status-pedido ${statusClass}">Status: ${statusText}</p>
                 </div>
             `;
-            
+
             if (pedidoStatus === "Pedido separado" || pedidoCarregadoStatus !== 'pendente') {
                 const itemListDiv = document.createElement("div");
                 itemListDiv.classList.add("item-list-container");
-                
+
                 Object.keys(pedido.produtos).forEach(setor => {
                     pedido.produtos[setor].forEach(produto => {
                         const produtoSlug = produto.replace(/\s/g, '-');
@@ -1234,7 +1238,7 @@ function renderizarPedidosCarregamento() {
                 btnDestinar.onclick = () => showDestinarCarregamentoModal(pedido.id);
                 loaderButtonsDiv.appendChild(btnDestinar);
             }
-            
+
             if (motoristaDestino === usuarioLogado) {
                 if (pedidoStatus === "Pedido separado" && pedidoCarregadoStatus === 'pendente') {
                     const btnIniciar = document.createElement("button");
@@ -1268,7 +1272,7 @@ function renderizarPedidosCarregamento() {
             }
 
             card.appendChild(loaderButtonsDiv);
-            
+
             const partialData = JSON.parse(localStorage.getItem(`${localStoragePedidoParcialKey}_${pedido.id}`));
             if (partialData && partialData.items) {
                 const obsDiv = document.createElement("div");
@@ -1277,7 +1281,7 @@ function renderizarPedidosCarregamento() {
                                     <p><strong>Itens não carregados:</strong> ${partialData.items.join(', ')}</p>`;
                 card.appendChild(obsDiv);
             }
-            
+
             if (pedidoCarregadoStatus === 'nao-carregado' && observacaoCarregamento) {
                 const obsDiv = document.createElement("div");
                 obsDiv.classList.add("observacao-nao-carregado");
@@ -1452,7 +1456,7 @@ function destinarEmbarqueCompleto(embarqueNome) {
     const pedidosDoEmbarque = pedidos.filter(p => p.embarque === embarqueNome);
 
     pedidosDoEmbarque.forEach(pedido => {
-        setPedidoMotoristaDestino(pedido.id, motoristaSelecionado, false); 
+        setPedidoMotoristaDestino(pedido.id, motoristaSelecionado, false);
     });
 
     renderizarPedidosCarregamento();
@@ -1556,7 +1560,7 @@ function gerarPDF(pedidoId) {
                     <td>1</td>
                     <td>${notaFiscal}</td>
                     <td>${dataAtualFormatada}</td>
-                    <td>${pesoTotal.toFixed(3).replace('.',',')}</td>
+                    <td>${pesoTotal.toFixed(3).replace('.', ',')}</td>
                     <td>${pedido.cliente}</td>
                     <td>${pedido.endereco}</td>
                 </tr>
@@ -1564,7 +1568,7 @@ function gerarPDF(pedidoId) {
         </table>
 
         <div class="footer">
-            <p><strong>Peso total: ${pesoTotal.toFixed(3).replace('.',',')}</strong></p>
+            <p><strong>Peso total: ${pesoTotal.toFixed(3).replace('.', ',')}</strong></p>
             <p>MATERIAIS RETIRADOS NA Empresa NO DIA ${dataAtualFormatada}, CONFORME NOTAS FISCAIS RELACIONADAS.</p>
             <div class="signature">
                 <p>Assinatura: __________________________________________________</p>
@@ -1834,7 +1838,7 @@ function abrirModalPesosFardos(pedidoId, setor, produto, pesoTotal) {
         return;
     }
 
-let inputsHTML = '';
+    let inputsHTML = '';
     const pesoDistribuido = (pesoTotal / qtdFardos).toFixed(2);
 
     for (let i = 0; i < qtdFardos; i++) {
@@ -1907,7 +1911,7 @@ function salvarPesosFatiados(pedidoId, setor, produto, qtdFardos, pesoTotal, lim
 
     const key = `fardos_${pedidoId}_${setor}_${produto}`;
     localStorage.setItem(key, JSON.stringify(fardosPesos));
-    
+
     renderizarPedidosPorSetor(pedidoUnicoVisualizado);
 
     closeModal();
@@ -1973,7 +1977,7 @@ function imprimirEtiquetasFardos(pedidoId, setor, produto) {
 
     fardos.forEach((peso, i) => {
         const volumeString = `Fardo ${String(i + 1).padStart(3, '0')}/${String(fardos.length).padStart(3, '0')}`;
-        
+
         const params = new URLSearchParams();
         params.append('cotacao', pedido.id);
         params.append('cliente', pedido.cliente);
@@ -2049,7 +2053,7 @@ function imprimirEtiquetasPorSetor(pedidoId, setor) {
     const dadosPeso = getDadosPesoPedido(pedidoId);
     const dadosCertificado = getDadosCertificadoPedido(pedidoId);
     const notaFiscalNumero = getNotaFiscal(pedido.id) ?? "—";
-    
+
     let totalGeralItens = 0;
     for (const s in pedido.produtos) {
         totalGeralItens += pedido.produtos[s].length;
@@ -2058,8 +2062,8 @@ function imprimirEtiquetasPorSetor(pedidoId, setor) {
     let indiceInicialSetor = 0;
     const setoresOrdenados = Object.keys(pedido.produtos).sort();
     for (const s of setoresOrdenados) {
-        if (s === setor) break; 
-        indiceInicialSetor += pedido.produtos[s].length; 
+        if (s === setor) break;
+        indiceInicialSetor += pedido.produtos[s].length;
     }
 
     const itensDoSetor = pedido.produtos[setor];
@@ -2190,7 +2194,7 @@ function iniciarSeparacaoSetor(pedidoId, setor) {
 function enviarSetor(pedidoId, setor) {
     const pedido = getPedidoById(pedidoId);
     if (!pedido) return;
-    
+
     let allWeightsEntered = true;
     pedido.produtos[setor].forEach(produto => {
         const pesoInput = document.getElementById(`peso-${pedidoId}-${setor}-${produto.replace(/\s/g, '-')}`);
@@ -2316,10 +2320,10 @@ function renderStatusColumns() {
         column.className = 'status-column';
 
         const statusClass = 'status-' + status.toLowerCase().replace(/ /g, '-').replace('çã', 'ca').replace('ú', 'u');
-        
+
         let totalPeso = 0;
         let totalCaminhoes = pedidosPorStatus[status].length;
-        
+
         pedidosPorStatus[status].forEach(embarque => {
             embarque.cotacoes.forEach(p => {
                 const pesos = getDadosPesoPedido(p.id);
@@ -2356,7 +2360,7 @@ function renderStatusColumns() {
                 </div>
             `;
         });
-        
+
         column.innerHTML = headerHTML + cardsHTML + '</div>';
         dashboardContent.appendChild(column);
     }
@@ -2369,7 +2373,7 @@ function showEmbarqueDetails(embarqueNome) {
     detailsView.innerHTML = '';
 
     const pedidosDoEmbarque = pedidos.filter(p => p.embarque === embarqueNome);
-    
+
     let cotacoesHTML = '';
     pedidosDoEmbarque.forEach(pedido => {
         const status = getPedidoStatus(pedido.id);
@@ -2468,21 +2472,19 @@ function toggleDropdown(element, contentSelector) {
     } else {
         content = element.querySelector(contentSelector);
     }
-    
+
     if (content) {
         content.style.display = element.classList.contains('expanded') ? 'block' : 'none';
     }
 }
 
 function showGestorView(viewName, clickedLink) {
-    // Alterna a classe 'active' no menu lateral
     const links = document.querySelectorAll('#dashboardWrapper .sidebar a');
     links.forEach(link => link.classList.remove('active'));
     if (clickedLink) {
         clickedLink.classList.add('active');
     }
 
-    // Renderiza a view selecionada
     if (viewName === 'resumo') {
         renderResumoGerencial();
     } else if (viewName === 'consulta') {
@@ -2504,118 +2506,102 @@ function renderResumoGerencial() {
         </div>
     `;
 
-    // --- Lógica para Status de Separação ---
-    const separacaoContent = document.getElementById('separacaoStatusContent');
-    // CORREÇÃO: As chaves agora correspondem exatamente aos valores de status
-    const pedidosPorStatusSeparacao = {
+    const embarques = pedidos.reduce((acc, pedido) => {
+        (acc[pedido.embarque] = acc[pedido.embarque] || []).push(pedido);
+        return acc;
+    }, {});
+
+    const embarquesPorStatusSeparacao = {
         'Aguardando separação': [],
         'Em separação': [],
         'Pedido separado': []
     };
-
-    pedidos.forEach(pedido => {
-        const status = getPedidoStatus(pedido.id);
-        // CORREÇÃO: Garante que "Pedido separado" só apareça aqui se estiver aguardando carregamento
-        if (status === 'Pedido separado' && getPedidoCarregadoStatus(pedido.id) !== 'pendente') {
-            return; // Não adiciona a esta lista, pois já está na fila de carregamento
-        }
-        if (pedidosPorStatusSeparacao[status]) {
-            pedidosPorStatusSeparacao[status].push(pedido);
-        }
-    });
-
-    for (const status in pedidosPorStatusSeparacao) {
-        const column = document.createElement('div');
-        column.className = 'status-column';
-        const statusClass = 'status-' + status.toLowerCase().replace(/ /g, '-').replace(/çã/g, 'ca');
-        
-        let totalPeso = pedidosPorStatusSeparacao[status].reduce((sum, p) => {
-            const pesos = getDadosPesoPedido(p.id);
-            return sum + Object.values(pesos).reduce((s, peso) => s + (parseFloat(peso) || 0), 0);
-        }, 0);
-
-        column.innerHTML = `
-            <div class="status-header ${statusClass}">${status}</div>
-            <div class="status-summary">
-                <div class="summary-item">
-                    <div class="value">${(totalPeso / 1000).toFixed(2).replace('.',',')}</div>
-                    <div class="label">Peso (Ton)</div>
-                </div>
-                <div class="summary-item">
-                    <div class="value">${pedidosPorStatusSeparacao[status].length}</div>
-                    <div class="label">Cotações</div>
-                </div>
-            </div>
-            <div class="cards-container">
-                ${pedidosPorStatusSeparacao[status].map(p => `
-                    <div class="order-card">
-                        <div class="order-info">
-                            <h5>COT_${p.id} - ${p.cliente}</h5>
-                            <p>${p.embarque}</p>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-        separacaoContent.appendChild(column);
-    }
-
-    // --- Lógica para Status de Carregamento (mantida como estava, pois já era correta) ---
-    const carregamentoContent = document.getElementById('carregamentoStatusContent');
-    const pedidosPorStatusCarregamento = {
+    const embarquesPorStatusCarregamento = {
         'Aguardando Carregamento': [],
         'Em Carregamento': [],
         'Carregamento Concluído': []
     };
 
-    pedidos.forEach(pedido => {
-        const statusSeparacao = getPedidoStatus(pedido.id);
-        const statusCarregamento = getPedidoCarregadoStatus(pedido.id);
+    for (const embarqueNome in embarques) {
+        const cotacoesDoEmbarque = embarques[embarqueNome];
+        const embarqueObj = { nome: embarqueNome, cotacoes: cotacoesDoEmbarque };
 
-        if (statusSeparacao === 'Pedido separado' && statusCarregamento === 'pendente') {
-            pedidosPorStatusCarregamento['Aguardando Carregamento'].push(pedido);
-        } else if (statusCarregamento === 'em_carregamento') {
-            pedidosPorStatusCarregamento['Em Carregamento'].push(pedido);
-        } else if (statusCarregamento === 'carregado') {
-            pedidosPorStatusCarregamento['Carregamento Concluído'].push(pedido);
+        const allSeparatedOrBeyond = cotacoesDoEmbarque.every(p => getPedidoStatus(p.id) !== 'Aguardando separação' && getPedidoStatus(p.id) !== 'Em separação');
+        const anyInSeparation = cotacoesDoEmbarque.some(p => getPedidoStatus(p.id) === 'Em separação');
+
+        if (anyInSeparation) {
+            embarquesPorStatusSeparacao['Em separação'].push(embarqueObj);
+        } else if (allSeparatedOrBeyond) {
+            embarquesPorStatusSeparacao['Pedido separado'].push(embarqueObj);
+        } else {
+            embarquesPorStatusSeparacao['Aguardando separação'].push(embarqueObj);
         }
-    });
 
-    for (const status in pedidosPorStatusCarregamento) {
-        const column = document.createElement('div');
-        column.className = 'status-column';
-        const statusClass = 'status-' + status.toLowerCase().replace(/ /g, '-').replace('ú', 'u');
-        
-        let totalPeso = pedidosPorStatusCarregamento[status].reduce((sum, p) => {
-            const pesos = getDadosPesoPedido(p.id);
-            return sum + Object.values(pesos).reduce((s, peso) => s + (parseFloat(peso) || 0), 0);
-        }, 0);
+        const allReadyForLoading = cotacoesDoEmbarque.every(p => getPedidoStatus(p.id) === 'Pedido separado');
 
-        column.innerHTML = `
-            <div class="status-header ${statusClass}">${status}</div>
-            <div class="status-summary">
-                <div class="summary-item">
-                    <div class="value">${(totalPeso / 1000).toFixed(2).replace('.',',')}</div>
-                    <div class="label">Peso (Ton)</div>
-                </div>
-                <div class="summary-item">
-                    <div class="value">${pedidosPorStatusCarregamento[status].length}</div>
-                    <div class="label">Cotações</div>
-                </div>
-            </div>
-            <div class="cards-container">
-                ${pedidosPorStatusCarregamento[status].map(p => `
-                    <div class="order-card">
+        if (allReadyForLoading) {
+            const allLoaded = cotacoesDoEmbarque.every(p => getPedidoCarregadoStatus(p.id) === 'carregado');
+            const anyInLoading = cotacoesDoEmbarque.some(p => getPedidoCarregadoStatus(p.id) === 'em_carregamento');
+
+            if (allLoaded) {
+                embarquesPorStatusCarregamento['Carregamento Concluído'].push(embarqueObj);
+            } else if (anyInLoading) {
+                embarquesPorStatusCarregamento['Em Carregamento'].push(embarqueObj);
+            } else {
+                embarquesPorStatusCarregamento['Aguardando Carregamento'].push(embarqueObj);
+            }
+        }
+    }
+
+    const generateSectionHTML = (contentDivId, statusObject, headerMap) => {
+        const contentDiv = document.getElementById(contentDivId);
+        contentDiv.innerHTML = '';
+        for (const status in statusObject) {
+            const column = document.createElement('div');
+            column.className = 'status-column';
+            const statusClass = 'status-' + headerMap[status].toLowerCase().replace(/\s/g, '-').replace(/[çúã]/g, c => ({ 'ç': 'c', 'ú': 'u', 'ã': 'a' }[c]));
+            const embarquesDaColuna = statusObject[status];
+            const totalEmbarques = embarquesDaColuna.length;
+            let totalPeso = embarquesDaColuna.reduce((sum, emb) => sum + emb.cotacoes.reduce((s, p) => s + Object.values(getDadosPesoPedido(p.id)).reduce((sub, peso) => sub + (parseFloat(peso) || 0), 0), 0), 0);
+
+            const cardsHTML = embarquesDaColuna.map(embarque => {
+                const dropdownItemsHTML = embarque.cotacoes.map(cotacao => {
+                    const clickableAttribute = usuarioLogadoRole === 'gestor'
+                        ? `onclick="showCotacaoDetails(${cotacao.id})" class="dropdown-item clickable"`
+                        : 'class="dropdown-item"';
+                    return `<div ${clickableAttribute}>› COT_${cotacao.id} - ${cotacao.cliente}</div>`;
+                }).join('');
+
+                return `
+                    <div class="order-card" onclick="toggleDropdown(this)">
+                        <button class="toggle-btn">›</button>
                         <div class="order-info">
-                            <h5>COT_${p.id} - ${p.cliente}</h5>
-                            <p>${p.embarque}</p>
+                            <h5>Embarque ${embarque.nome}</h5>
+                            <p>${embarque.cotacoes.length} cotaç${embarque.cotacoes.length > 1 ? 'ões' : 'ão'}</p>
                         </div>
                     </div>
-                `).join('')}
-            </div>
-        `;
-        carregamentoContent.appendChild(column);
-    }
+                    <div class="order-details-dropdown" style="display: none;">
+                        ${dropdownItemsHTML}
+                    </div>
+                `;
+            }).join('');
+
+            column.innerHTML = `
+                <div class="status-header ${statusClass}">${headerMap[status]}</div>
+                <div class="status-summary">
+                    <div class="summary-item"><div class="value">${(totalPeso / 1000).toFixed(2).replace('.', ',')}</div><div class="label">Peso (Ton)</div></div>
+                    <div class="summary-item"><div class="value">${totalEmbarques}</div><div class="label">Embarques</div></div>
+                </div>
+                <div class="cards-container">
+                    ${cardsHTML || '<p class="empty-column-message" style="text-align: center; font-size: 14px; color: #6c757d; margin-top: 20px;">Nenhum embarque neste status.</p>'}
+                </div>
+            `;
+            contentDiv.appendChild(column);
+        }
+    };
+
+    generateSectionHTML('separacaoStatusContent', embarquesPorStatusSeparacao, { 'Aguardando separação': 'Aguardando Separação', 'Em separação': 'Em Separação', 'Pedido separado': 'Separação Concluída' });
+    generateSectionHTML('carregamentoStatusContent', embarquesPorStatusCarregamento, { 'Aguardando Carregamento': 'Aguardando Carregamento', 'Em Carregamento': 'Em Carregamento', 'Carregamento Concluído': 'Carregamento Concluído' });
 }
 
 function renderConsultaPedidos() {
@@ -2667,7 +2653,7 @@ function updateConsultaPedidosList() {
             const pStatus = getPedidoStatus(p.id);
             const pCarregadoStatus = getPedidoCarregadoStatus(p.id);
 
-            switch(filters.status) {
+            switch (filters.status) {
                 case 'Aguardando carregamento':
                     statusMatch = pStatus === 'Pedido separado' && pCarregadoStatus === 'pendente';
                     break;
@@ -2703,22 +2689,22 @@ function updateConsultaPedidosList() {
         if (statusSeparacao === 'Em separação') {
             statusFinalClass = 'separacao';
         } else if (statusSeparacao === 'Pedido separado') {
-             statusFinalClass = 'separado';
+            statusFinalClass = 'separado';
             if (statusCarregamento === 'pendente') {
                 statusFinalText = 'Aguardando Carregamento';
                 statusFinalClass = 'aguardando-carregamento';
             }
             if (statusCarregamento === 'em_carregamento') {
                 statusFinalText = 'Em Carregamento';
-                 statusFinalClass = 'carregamento';
+                statusFinalClass = 'carregamento';
             }
             if (statusCarregamento === 'carregado') {
                 statusFinalText = 'Carregamento Concluído';
-                 statusFinalClass = 'concluido';
+                statusFinalClass = 'concluido';
             }
             if (statusCarregamento === 'nao-carregado') {
                 statusFinalText = 'Não Carregado';
-                 statusFinalClass = 'nao-carregado';
+                statusFinalClass = 'nao-carregado';
             }
         }
 
@@ -2730,7 +2716,7 @@ function updateConsultaPedidosList() {
                 </div>
                 <div class="info-group">
                     <strong>Data</strong>
-                    ${new Date(pedido.data).toLocaleDateString('pt-BR', {timeZone: 'UTC'})}
+                    ${new Date(pedido.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}
                 </div>
                 <div class="info-group">
                     <strong>Rota/Embarque</strong>
@@ -2757,7 +2743,7 @@ function renderGestorDashboard() {
     document.getElementById("dashboardWrapper").style.display = "flex";
     renderGestorSidebar();
 
-    showGestorView('resumo'); 
+    showGestorView('resumo');
 }
 
 function renderGestorSidebar() {
@@ -2774,5 +2760,71 @@ function renderGestorSidebar() {
     sidebarUl.innerHTML = sidebarHTML;
 }
 
+function toggleDropdown(cardElement) {
+    cardElement.classList.toggle('expanded');
+    const dropdown = cardElement.nextElementSibling;
+    if (dropdown && dropdown.classList.contains('order-details-dropdown')) {
+        if (dropdown.style.display === "block") {
+            dropdown.style.display = "none";
+        } else {
+            dropdown.style.display = "block";
+        }
+    }
+}
 
+function showCotacaoDetails(pedidoId) {
+    const container = document.getElementById('dashboardContainer');
+    container.innerHTML = '';
+    container.style.display = 'block';
 
+    const pedido = pedidos.find(p => p.id === pedidoId);
+    if (!pedido) {
+        container.innerHTML = '<p>Erro: Cotação não encontrada.</p><button class="back-btn" onclick="renderResumoGerencial()">Voltar</button>';
+        return;
+    }
+
+    const dadosPeso = getDadosPesoPedido(pedido.id);
+    const dadosCertificado = getDadosCertificadoPedido(pedido.id);
+    let itensHTML = '';
+
+    for (const setor in pedido.produtos) {
+        if (pedido.produtos[setor].length > 0) {
+            itensHTML += `<h4 class="setor-title-details">${setor}</h4>`;
+            pedido.produtos[setor].forEach(produto => {
+                const peso = dadosPeso[produto] !== undefined ? `${dadosPeso[produto]} kg` : 'Pendente';
+                const certificado = dadosCertificado[produto] || 'Pendente';
+
+                const statusClass = (dadosPeso[produto] !== undefined && dadosCertificado[produto]) ? 'concluido' : 'pendente';
+
+                itensHTML += `
+                    <div class="material-detail-card">
+                        <span class="material-name">${produto}</span>
+                        <div class="material-info">
+                            <span class="material-cert">Certificado: <strong>${certificado}</strong></span>
+                            <span class="material-weight">Peso: <strong>${peso}</strong></span>
+                            <span class="material-status ${statusClass}">${statusClass === 'concluido' ? 'Concluído' : 'Pendente'}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    }
+
+    const detailsViewHTML = `
+        <div class="cotacao-details-view">
+            <div class="details-header">
+                <button class="back-btn" onclick="renderResumoGerencial()">< Voltar ao Resumo</button>
+                <h2>Detalhes da Cotação</h2>
+            </div>
+            <div class="details-subheader">
+                <h3>COT_${pedido.id} - ${pedido.cliente}</h3>
+                <p>Embarque: ${pedido.embarque}</p>
+            </div>
+            <div class="details-item-list">
+                ${itensHTML || '<p>Nenhum item encontrado para esta cotação.</p>'}
+            </div>
+        </div>
+    `;
+
+    container.innerHTML = detailsViewHTML;
+}
