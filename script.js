@@ -13,52 +13,61 @@ const usuarios = {
     "consultor": "1234"
 };
 
-let pedidos = [
-    { id: 148264, cliente: "Metalúrgica Central", status: "Aguardando separação", data: "2025-08-21", endereco: "Rua teste, 123 - Serra, ES", embarque: "Serra", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/8 (3.00mm)", "Chapa Galvanizada #18 (1.25mm)", "Chapa Inox 304 1.5mm Escovada"], Tubo: ["Tubo Retangular 40x20 #18 (1.25mm)", "Tubo Redondo 1.1/2 (1.55mm)", "Tubo Quadrado 20x20 #18 (1.25mm)"], Viga: ["Viga U 3 x 4.1", "Viga I 4 x 7.7"] } },
-    { id: 281468, cliente: "Construtora Brasil", status: "Aguardando separação", data: "2025-08-22", endereco: "Av. Exemplo, 456 - Vila Velha, ES", embarque: "Vila Velha", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 3/16 (4.75mm)", "Chapa Xadrez 1/8 (3.00mm)"], Tubo: ["Tubo Redondo 2 (1.55mm)", "Tubo Schedule 40 1"] } },
-    { id: 287180, cliente: "Ferro e Aço LTDA", status: "Aguardando separação", data: "2025-08-22", endereco: "Rua das Indústrias, 1010 - Cariacica, ES", embarque: "Cariacica", motorista: null, produtos: { Viga: ["Viga W 150 x 13.5", "Viga I 3 x 5.7"], Chapa: ["Chapa Xadrez 1/4 (6.35mm)", "Chapa Fina a Frio #20 (0.90mm)"], Tubo: ["Tubo Quadrado 50x50 #16 (1.55mm)", "Tubo Redondo 3 #14 (2.00mm)"] } },
-    { id: 274033, cliente: "ConstruAço", status: "Aguardando separação", data: "2025-08-23", endereco: "Rodovia Norte-Sul, 999 - Serra, ES", embarque: "Serra", motorista: null, produtos: { Tubo: ["Tubo Quadrado 50x50 #18 (1.25mm)", "Tubo Retangular 60x40 #16 (1.55mm)", "Tubo Galvanizado 3/4"], "Cantoneira / Barra": ["Cantoneira 1 x 1/8", "Barra Chata 1.1/2 x 1/4"] } },
-    { id: 280518, cliente: "Montagens Gerais", status: "Aguardando separação", data: "2025-08-23", endereco: "Rua Projetada, 789 - Serra, ES", embarque: "Serra", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/4 (6.35mm)", "Chapa Fina a Frio #22 (0.75mm)", "Chapa Xadrez 1/8 (3.00mm)"], Tubo: ["Tubo Industrial Redondo 3", "Tubo Inox 304 1.1/2"], Viga: ["Viga W 200 x 19.3", "Viga U 4 x 5.4"] } },
-    { id: 259773, cliente: "Aço Forte", status: "Aguardando separação", data: "2025-08-24", endereco: "Av. Atlântica, 321 - Vila Velha, ES", embarque: "Vila Velha", motorista: null, produtos: { Chapa: ["Chapa Galvanizada #26 (0.50mm)", "Chapa Aço Carbono 3/16 (4.75mm)"], Viga: ["Viga I 6 x 12.5", "Viga W 250 x 25.7"] } },
-    { id: 283722, cliente: "Metal Capixaba", status: "Aguardando separação", data: "2025-08-24", endereco: "Rua dos Ferroviários, 12 - Vitória, ES", embarque: "Vitória", motorista: null, produtos: { Tubo: ["Tubo Galvanizado 1.1/2", "Tubo Quadrado 100x100 #14 (2.00mm)"], "Cantoneira / Barra": ["Barra Chata 2 x 1/4", "Ferro Tee 1 x 1/8"] } },
-    { id: 280518, cliente: "Engemetal", status: "Aguardando separação", data: "2025-08-25", endereco: "Rua Industrial, 88 - Linhares, ES", embarque: "Linhares", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/2 (12.70mm)", "Chapa Fina a Frio #18 (1.25mm)"], Tubo: ["Tubo Redondo 3 #16 (1.55mm)", "Tubo Retangular 80x40 #14 (2.00mm)"] } },
-    { id: 296741, cliente: "Ferroleste", status: "Aguardando separação", data: "2025-08-25", endereco: "Avenida Norte, 999 - Colatina, ES", embarque: "Colatina", motorista: null, produtos: { Viga: ["Viga U 5 x 6.7#", "Viga I 5 x 10#"], Chapa: ["Chapa Xadrez 3/16 (4.75mm)", "Chapa Galvanizada #20 (0.95mm)"] } },
-    { id: 301784, cliente: "Metalúrgica União", status: "Aguardando separação", data: "2025-08-26", endereco: "Rod. do Contorno, 400 - Vila Velha, ES", embarque: "Vila Velha", motorista: null, produtos: { Tubo: ["Tubo Quadrado 40x40 #18 (1.25mm)", "Tubo Retangular 80x40 #16 (1.55mm)", "Tubo Redondo 2.1/2 #16 (1.55mm)"], Chapa: ["Chapa Galvanizada #24 (0.65mm)", "Chapa Inox 430 1.2mm Polida"] } },
-    { id: 309377, cliente: "Construmetais", status: "Aguardando separação", data: "2025-08-26", endereco: "Rua das Oficinas, 77 - Serra, ES", embarque: "Serra", motorista: null, produtos: { Viga: ["Viga I 8 x 18.4#", "Viga U 6 x 8.2#"], Chapa: ["Chapa Aço Carbono 3/8 (9.53mm)", "Chapa Xadrez 1/4 (6.35mm)"] } },
-    { id: 308426, cliente: "Alfa Engenharia", status: "Aguardando separação", data: "2025-08-27", endereco: "Rua das Palmeiras, 10 - Cariacica, ES", embarque: "Cariacica", motorista: null, produtos: { Tubo: ["Tubo Redondo 1.1/2 #18 (1.25mm)", "Tubo Quadrado 25x25 #20 (0.90mm)"], "Cantoneira / Barra": ["Cantoneira 1.1/4 x 3/16", "Barra Chata 1 x 3/16"] } },
-    { id: 334874, cliente: "Beta Construções", status: "Aguardando separação", data: "2025-08-27", endereco: "Av. Beira Mar, 2000 - Vitória, ES", embarque: "Vitória", motorista: null, produtos: { Viga: ["Viga U 3 x 4.1#", "Viga W 150 x 18.0"], Chapa: ["Chapa Aço Carbono 1/4 (6.35mm)"] } },
-    { id: 333704, cliente: "Gama Ferragens", status: "Aguardando separação", data: "2025-08-28", endereco: "Rua do Comércio, 50 - Linhares, ES", embarque: "Linhares", motorista: null, produtos: { Chapa: ["Chapa Galvanizada #16 (1.55mm)", "Chapa Fina a Frio #24 (0.60mm)"], Tubo: ["Tubo Retangular 20x10 #20 (0.90mm)", "Tubo Industrial Quadrado 40x40 #14 (2.00mm)"] } },
-    { id: 333083, cliente: "Delta Estruturas", status: "Aguardando separação", data: "2025-08-28", endereco: "BR-101 Sul, KM 25 - Serra, ES", embarque: "Serra", motorista: null, produtos: { Viga: ["Viga I 4 x 7.7#", "Viga U 4 x 5.4#"], Chapa: ["Chapa Aço Carbono 3/16 (4.75mm)", "Chapa Grossa 1/2 (12.70mm)"] } },
-    { id: 333900, cliente: "Épsilon Indústria", status: "Aguardando separação", data: "2025-08-29", endereco: "Av. Central, 300 - Vila Velha, ES", embarque: "Vila Velha", motorista: null, produtos: { Tubo: ["Tubo Redondo 3/4 #18 (1.25mm)", "Tubo Retangular 50x30 #18 (1.25mm)"], Chapa: ["Chapa Inox 304 1.0mm Escovada"] } },
-    { id: 334755, cliente: "Zeta Metalúrgica", status: "Aguardando separação", data: "2025-08-29", endereco: "Rua Norte, 15 - Colatina, ES", embarque: "Colatina", motorista: null, produtos: { Viga: ["Viga I 3 x 5.7#", "Viga W 200 x 22.5"], Tubo: ["Tubo Quadrado 30x30 #18 (1.25mm)", "Tubo Retangular 50x25 #16 (1.55mm)"] } },
-    { id: 334684, cliente: "Ômega Comércio", status: "Aguardando separação", data: "2025-08-30", endereco: "Praça da Matriz, 7 - Serra, ES", embarque: "Serra", motorista: null, produtos: { Chapa: ["Chapa Perfurada Aço Carbono 1.25mm", "Chapa Galvanizada #22 (0.80mm)"], "Cantoneira / Barra": ["Cantoneira 2 x 1/8", "Barra Chata 3/4 x 1/8"] } },
-    { id: 333038, cliente: "Ícaro Soldas", status: "Aguardando separação", data: "2025-08-30", endereco: "Rua da Paz, 123 - Cariacica, ES", embarque: "Cariacica", motorista: null, produtos: { Tubo: ["Tubo Industrial Redondo 2", "Tubo Quadrado 60x60 #16 (1.55mm)"], Chapa: ["Chapa Fina a Frio #16 (1.55mm)"] } },
-    { id: 334823, cliente: "Fênix Construções", status: "Aguardando separação", data: "2025-08-31", endereco: "Av. da República, 500 - Vitória, ES", embarque: "Vitória", motorista: null, produtos: { Viga: ["Viga W 250 x 32.7", "Viga U 6 x 8.2#"], Tubo: ["Tubo Schedule 40 2", "Tubo Galvanizado 2.1/2"] } },
-    { id: 334807, cliente: "Grifo Metais", status: "Aguardando separação", data: "2025-08-31", endereco: "Rua do Sol, 888 - Linhares, ES", embarque: "Linhares", motorista: null, produtos: { Chapa: ["Chapa Xadrez 1/8 (3.00mm)", "Chapa Inox 316 2.0mm"], Viga: ["Viga I 5 x 10#"] } },
-    { id: 334815, cliente: "Draco Montagens", status: "Aguardando separação", data: "2025-09-01", endereco: "Rodovia do Café, KM 5 - Serra, ES", embarque: "Serra", motorista: null, produtos: { Tubo: ["Tubo Oblongo 38x20 #18 (1.25mm)", "Tubo Retangular 70x30 #16 (1.55mm)"], Chapa: ["Chapa Galvanizada #14 (2.00mm)"] } },
-    { id: 327413, cliente: "Pegasus Engenharia", status: "Aguardando separação", data: "2025-09-01", endereco: "Rua das Rosas, 77 - Vila Velha, ES", embarque: "Vila Velha", motorista: null, produtos: { Viga: ["Viga U 8 x 11.5#", "Viga W 310 x 38.7"], Tubo: ["Tubo Aço Inox Quadrado 40x40 1.5mm", "Tubo Redondo 4 #14 (2.00mm)"] } },
-    { id: 334389, cliente: "Centauro Indústria", status: "Aguardando separação", data: "2025-09-02", endereco: "Av. Brasil, 1100 - Colatina, ES", embarque: "Colatina", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 5/16 (7.94mm)", "Chapa Fina a Frio #26 (0.45mm)"], Viga: ["Viga I 6 x 12.5#"] } },
-    { id: 334702, cliente: "Harpia Estruturas", status: "Aguardando separação", data: "2025-09-02", endereco: "Rua da Serra, 45 - Serra, ES", embarque: "Serra", motorista: null, produtos: { Tubo: ["Tubo SCH 40 3", "Tubo Quadrado 90x90 #12 (2.65mm)"], Chapa: ["Chapa Grossa 3/4 (19.05mm)"] } },
-    { id: 310557, cliente: "Minotauro Construções", status: "Aguardando separação", data: "2025-09-03", endereco: "Estrada Velha, 22 - Cariacica, ES", embarque: "Cariacica", motorista: null, produtos: { Viga: ["Viga I 10 x 25.4#", "Viga W 200 x 46.1"], Tubo: ["Tubo Retangular 120x60 #12 (2.65mm)"] } },
-    { id: 334016, cliente: "Sereia Naval", status: "Aguardando separação", data: "2025-09-03", endereco: "Rua do Porto, 33 - Vitória, ES", embarque: "Vitória", motorista: null, produtos: { Chapa: ["Chapa Naval A36 1/4", "Chapa Aço Carbono 1/2 (12.70mm)"], "Cantoneira / Barra": ["Cantoneira 3 x 1/4"] } },
-    { id: 334716, cliente: "Tritão Ferro e Aço", status: "Aguardando separação", data: "2025-09-04", endereco: "Av. dos Navegantes, 150 - Linhares, ES", embarque: "Linhares", motorista: null, produtos: { Tubo: ["Tubo Quadrado 100x100 #11 (3.00mm)", "Tubo Retangular 120x60 #14 (2.00mm)"], Chapa: ["Chapa Xadrez 3/16 (4.75mm)"] } },
-    { id: 331324, cliente: "Atlas Construções", status: "Aguardando separação", data: "2025-09-04", endereco: "Rua Principal, 55 - Serra, ES", embarque: "Serra", motorista: null, produtos: { Viga: ["Viga W 360 x 57.8", "Viga U 8 x 11.5#"], Chapa: ["Chapa Aço Carbono 3/8 (9.53mm)"] } },
-    { id: 334382, cliente: "Titã Fundições", status: "Aguardando separação", data: "2025-09-05", endereco: "Rodovia das Árvores, 99 - Vila Velha, ES", embarque: "Vila Velha", motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #14 (2.00mm)", "Chapa Galvanizada #12 (2.70mm)"], Tubo: ["Tubo Redondo 5 SCH 40"] } },
-    { id: 332901, cliente: "Olimpo Metais", status: "Aguardando separação", data: "2025-09-05", endereco: "Av. do Contorno, 1001 - Colatina, ES", embarque: "Colatina", motorista: null, produtos: { Viga: ["Viga I 12 x 31.8#", "Viga W 150 x 24.0"], Chapa: ["Chapa Inox 304 3.0mm Polida"] } },
-    { id: 333394, cliente: "União Metálica", status: "Aguardando separação", data: "2025-09-06", endereco: "Rua das Flores, 45 - Serra, ES", embarque: "Serra", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/2 (12.70mm)", "Chapa Galvanizada #20 (0.95mm)"], Tubo: ["Tubo Redondo 4 #12 (2.65mm)", "Tubo Quadrado 70x70 #14 (2.00mm)"], Viga: ["Viga I 8 x 18.4#"] } },
-    { id: 333767, cliente: "Expresso Cargas", status: "Aguardando separação", data: "2025-09-06", endereco: "BR-101 Norte, KM 50 - Aracruz, ES", embarque: "Aracruz", motorista: null, produtos: { Tubo: ["Tubo Retangular 50x30 #16 (1.55mm)", "Tubo Galvanizado 2.1/2"], Viga: ["Viga W 250 x 38.5"] } },
-    { id: 329163, cliente: "Soluções em Aço", status: "Aguardando separação", data: "2025-09-07", endereco: "Rua do Progresso, 200 - Guarapari, ES", embarque: "Guarapari", motorista: null, produtos: { Chapa: ["Chapa Inox 430 0.8mm Escovada", "Chapa Xadrez 3/8 (9.53mm)"], "Cantoneira / Barra": ["Cantoneira 1.1/2 x 1/8"] } },
-    { id: 330199, cliente: "Estrutura Forte", status: "Aguardando separação", data: "2025-09-07", endereco: "Av. das Américas, 100 - Linhares, ES", embarque: "Linhares", motorista: null, produtos: { Tubo: ["Tubo Redondo 1 #18 (1.25mm)", "Tubo Industrial Quadrado 50x50 #14 (2.00mm)"], Chapa: ["Chapa Aço Carbono 1/8 (3.00mm)"] } },
-    { id: 328948, cliente: "Cia. do Metal", status: "Aguardando separação", data: "2025-09-08", endereco: "Rua das Acácias, 10 - São Mateus, ES", embarque: "São Mateus", motorista: null, produtos: { Viga: ["Viga U 4 x 5.4#", "Viga I 3 x 5.7#"], Chapa: ["Chapa Galvanizada #28 (0.43mm)"] } },
-    { id: 329722, cliente: "Norte Aço", status: "Aguardando separação", data: "2025-09-08", endereco: "Rodovia ES-010, KM 5 - Fundão, ES", embarque: "Fundão", motorista: null, produtos: { Tubo: ["Tubo Quadrado 60x60 #18 (1.25mm)"], Chapa: ["Chapa Fina a Frio #28 (0.43mm)", "Chapa Aço Carbono 3/16 (4.75mm)"] } },
-    { id: 328400, cliente: "Leste Ferro", status: "Aguardando separação", data: "2025-09-09", endereco: "Rua Central, 30 - Cachoeiro de Itapemirim, ES", embarque: "Cachoeiro de Itapemirim", motorista: null, produtos: { Viga: ["Viga W 100 x 19.3"], Chapa: ["Chapa Xadrez 3.00mm"] } },
-    { id: 327904, cliente: "Centro Metal", status: "Aguardando separação", data: "2025-09-09", endereco: "Av. Getúlio Vargas, 15 - Castelo, ES", embarque: "Castelo", motorista: null, produtos: { Tubo: ["Tubo Redondo 2.1/2 #14 (2.00mm)", "Tubo Estrutural 80x80 #11 (3.00mm)"], Chapa: ["Chapa Aço Carbono 1/8 (3.00mm)", "Chapa Perfurada 2.00mm"] } },
-    { id: 326005, cliente: "Metalúrgica do Aço", status: "Aguardando separação", data: "2025-09-10", endereco: "Rua do Sol, 10 - Serra, ES", embarque: "Serra", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/4 (6.35mm)", "Chapa Inox 316 1.0mm"], Viga: ["Viga I 4 x 7.7#"] } },
-    { id: 328386, cliente: "Construções Modernas", status: "Aguardando separação", data: "2025-09-10", endereco: "Av. da Praia, 50 - Vila Velha, ES", embarque: "Vila Velha", motorista: null, produtos: { Tubo: ["Tubo Redondo 1 #16 (1.55mm)", "Tubo Industrial 2"], Chapa: ["Chapa Galvanizada 3.00mm"] } },
-    { id: 329122, cliente: "Estruturas Metálicas", status: "Aguardando separação", data: "2025-09-11", endereco: "Rua da Paz, 200 - Cariacica, ES", embarque: "Cariacica", motorista: null, produtos: { Viga: ["Viga U 6 x 8.2#", "Viga W 200 x 22.5"], Tubo: ["Tubo Quadrado 30x30 #16 (1.55mm)"] } },
-    { id: 330446, cliente: "Galvanização Brasil", status: "Aguardando separação", data: "2025-09-11", endereco: "Rodovia do Ferro, 700 - Linhares, ES", embarque: "Linhares", motorista: null, produtos: { Chapa: ["Chapa Galvanizada 1/2 (12.70mm)"], Tubo: ["Tubo Retangular 40x20 #16 (1.55mm)"] } },
-    { id: 330886, cliente: "Tubos e Conexões", status: "Aguardando separação", data: "2025-09-12", endereco: "Rua do Comércio, 120 - Colatina, ES", embarque: "Colatina", motorista: null, produtos: { Tubo: ["Tubo Redondo 2 SCH 80", "Tubo Schedule 80 1.1/2"], Viga: ["Viga I 6 x 12.5#"] } }
+let pedidosIniciais = [
+    { id: 148264, cliente: "Metalúrgica Central", status: "Aguardando separação", data: "2025-08-21", endereco: "Rua teste, 123 - Serra, ES", embarque: null, embarqueOriginal: "Serra", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/8 (3.00mm)", "Chapa Galvanizada #18 (1.25mm)", "Chapa Inox 304 1.5mm Escovada"], Tubo: ["Tubo Retangular 40x20 #18 (1.25mm)", "Tubo Redondo 1.1/2 (1.55mm)", "Tubo Quadrado 20x20 #18 (1.25mm)"], Viga: ["Viga U 3 x 4.1", "Viga I 4 x 7.7"] } },
+    { id: 281468, cliente: "Construtora Brasil", status: "Aguardando separação", data: "2025-08-22", endereco: "Av. Exemplo, 456 - Vila Velha, ES", embarque: null, embarqueOriginal: "Vila Velha", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 3/16 (4.75mm)", "Chapa Xadrez 1/8 (3.00mm)"], Tubo: ["Tubo Redondo 2 (1.55mm)", "Tubo Schedule 40 1"] } },
+    { id: 287180, cliente: "Ferro e Aço LTDA", status: "Aguardando separação", data: "2025-08-22", endereco: "Rua das Indústrias, 1010 - Cariacica, ES", embarque: null, embarqueOriginal: "Cariacica", motorista: null, produtos: { Viga: ["Viga W 150 x 13.5", "Viga I 3 x 5.7"], Chapa: ["Chapa Xadrez 1/4 (6.35mm)", "Chapa Fina a Frio #20 (0.90mm)"], Tubo: ["Tubo Quadrado 50x50 #16 (1.55mm)", "Tubo Redondo 3 #14 (2.00mm)"] } },
+    { id: 274033, cliente: "ConstruAço", status: "Aguardando separação", data: "2025-08-23", endereco: "Rodovia Norte-Sul, 999 - Serra, ES", embarque: null, embarqueOriginal: "Serra", motorista: null, produtos: { Tubo: ["Tubo Quadrado 50x50 #18 (1.25mm)", "Tubo Retangular 60x40 #16 (1.55mm)", "Tubo Galvanizado 3/4"], "Cantoneira / Barra": ["Cantoneira 1 x 1/8", "Barra Chata 1.1/2 x 1/4"] } },
+    { id: 280518, cliente: "Montagens Gerais", status: "Aguardando separação", data: "2025-08-23", endereco: "Rua Projetada, 789 - Serra, ES", embarque: null, embarqueOriginal: "Serra", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/4 (6.35mm)", "Chapa Fina a Frio #22 (0.75mm)", "Chapa Xadrez 1/8 (3.00mm)"], Tubo: ["Tubo Industrial Redondo 3", "Tubo Inox 304 1.1/2"], Viga: ["Viga W 200 x 19.3", "Viga U 4 x 5.4"] } },
+    { id: 259773, cliente: "Aço Forte", status: "Aguardando separação", data: "2025-08-24", endereco: "Av. Atlântica, 321 - Vila Velha, ES", embarque: null, embarqueOriginal: "Vila Velha", motorista: null, produtos: { Chapa: ["Chapa Galvanizada #26 (0.50mm)", "Chapa Aço Carbono 3/16 (4.75mm)"], Viga: ["Viga I 6 x 12.5", "Viga W 250 x 25.7"] } },
+    { id: 283722, cliente: "Metal Capixaba", status: "Aguardando separação", data: "2025-08-24", endereco: "Rua dos Ferroviários, 12 - Vitória, ES", embarque: null, embarqueOriginal: "Vitória", motorista: null, produtos: { Tubo: ["Tubo Galvanizado 1.1/2", "Tubo Quadrado 100x100 #14 (2.00mm)"], "Cantoneira / Barra": ["Barra Chata 2 x 1/4", "Ferro Tee 1 x 1/8"] } },
+    { id: 280518, cliente: "Engemetal", status: "Aguardando separação", data: "2025-08-25", endereco: "Rua Industrial, 88 - Linhares, ES", embarque: null, embarqueOriginal: "Linhares", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/2 (12.70mm)", "Chapa Fina a Frio #18 (1.25mm)"], Tubo: ["Tubo Redondo 3 #16 (1.55mm)", "Tubo Retangular 80x40 #14 (2.00mm)"] } },
+    { id: 296741, cliente: "Ferroleste", status: "Aguardando separação", data: "2025-08-25", endereco: "Avenida Norte, 999 - Colatina, ES", embarque: null, embarqueOriginal: "Colatina", motorista: null, produtos: { Viga: ["Viga U 5 x 6.7#", "Viga I 5 x 10#"], Chapa: ["Chapa Xadrez 3/16 (4.75mm)", "Chapa Galvanizada #20 (0.95mm)"] } },
+    { id: 301784, cliente: "Metalúrgica União", status: "Aguardando separação", data: "2025-08-26", endereco: "Rod. do Contorno, 400 - Vila Velha, ES", embarque: null, embarqueOriginal: "Vila Velha", motorista: null, produtos: { Tubo: ["Tubo Quadrado 40x40 #18 (1.25mm)", "Tubo Retangular 80x40 #16 (1.55mm)", "Tubo Redondo 2.1/2 #16 (1.55mm)"], Chapa: ["Chapa Galvanizada #24 (0.65mm)", "Chapa Inox 430 1.2mm Polida"] } },
+    { id: 309377, cliente: "Construmetais", status: "Aguardando separação", data: "2025-08-26", endereco: "Rua das Oficinas, 77 - Serra, ES", embarque: null, embarqueOriginal: "Serra", motorista: null, produtos: { Viga: ["Viga I 8 x 18.4#", "Viga U 6 x 8.2#"], Chapa: ["Chapa Aço Carbono 3/8 (9.53mm)", "Chapa Xadrez 1/4 (6.35mm)"] } },
+    { id: 308426, cliente: "Alfa Engenharia", status: "Aguardando separação", data: "2025-08-27", endereco: "Rua das Palmeiras, 10 - Cariacica, ES", embarque: null, embarqueOriginal: "Cariacica", motorista: null, produtos: { Tubo: ["Tubo Redondo 1.1/2 #18 (1.25mm)", "Tubo Quadrado 25x25 #20 (0.90mm)"], "Cantoneira / Barra": ["Cantoneira 1.1/4 x 3/16", "Barra Chata 1 x 3/16"] } },
+    { id: 334874, cliente: "Beta Construções", status: "Aguardando separação", data: "2025-08-27", endereco: "Av. Beira Mar, 2000 - Vitória, ES", embarque: null, embarqueOriginal: "Vitória", motorista: null, produtos: { Viga: ["Viga U 3 x 4.1#", "Viga W 150 x 18.0"], Chapa: ["Chapa Aço Carbono 1/4 (6.35mm)"] } },
+    { id: 333704, cliente: "Gama Ferragens", status: "Aguardando separação", data: "2025-08-28", endereco: "Rua do Comércio, 50 - Linhares, ES", embarque: null, embarqueOriginal: "Linhares", motorista: null, produtos: { Chapa: ["Chapa Galvanizada #16 (1.55mm)", "Chapa Fina a Frio #24 (0.60mm)"], Tubo: ["Tubo Retangular 20x10 #20 (0.90mm)", "Tubo Industrial Quadrado 40x40 #14 (2.00mm)"] } },
+    { id: 333083, cliente: "Delta Estruturas", status: "Aguardando separação", data: "2025-08-28", endereco: "BR-101 Sul, KM 25 - Serra, ES", embarque: null, embarqueOriginal: "Serra", motorista: null, produtos: { Viga: ["Viga I 4 x 7.7#", "Viga U 4 x 5.4#"], Chapa: ["Chapa Aço Carbono 3/16 (4.75mm)", "Chapa Grossa 1/2 (12.70mm)"] } },
+    { id: 333900, cliente: "Épsilon Indústria", status: "Aguardando separação", data: "2025-08-29", endereco: "Av. Central, 300 - Vila Velha, ES", embarque: null, embarqueOriginal: "Vila Velha", motorista: null, produtos: { Tubo: ["Tubo Redondo 3/4 #18 (1.25mm)", "Tubo Retangular 50x30 #18 (1.25mm)"], Chapa: ["Chapa Inox 304 1.0mm Escovada"] } },
+    { id: 334755, cliente: "Zeta Metalúrgica", status: "Aguardando separação", data: "2025-08-29", endereco: "Rua Norte, 15 - Colatina, ES", embarque: null, embarqueOriginal: "Colatina", motorista: null, produtos: { Viga: ["Viga I 3 x 5.7#", "Viga W 200 x 22.5"], Tubo: ["Tubo Quadrado 30x30 #18 (1.25mm)", "Tubo Retangular 50x25 #16 (1.55mm)"] } },
+    { id: 334684, cliente: "Ômega Comércio", status: "Aguardando separação", data: "2025-08-30", endereco: "Praça da Matriz, 7 - Serra, ES", embarque: null, embarqueOriginal: "Serra", motorista: null, produtos: { Chapa: ["Chapa Perfurada Aço Carbono 1.25mm", "Chapa Galvanizada #22 (0.80mm)"], "Cantoneira / Barra": ["Cantoneira 2 x 1/8", "Barra Chata 3/4 x 1/8"] } },
+    { id: 333038, cliente: "Ícaro Soldas", status: "Aguardando separação", data: "2025-08-30", endereco: "Rua da Paz, 123 - Cariacica, ES", embarque: null, embarqueOriginal: "Cariacica", motorista: null, produtos: { Tubo: ["Tubo Industrial Redondo 2", "Tubo Quadrado 60x60 #16 (1.55mm)"], Chapa: ["Chapa Fina a Frio #16 (1.55mm)"] } },
+    { id: 334823, cliente: "Fênix Construções", status: "Aguardando separação", data: "2025-08-31", endereco: "Av. da República, 500 - Vitória, ES", embarque: null, embarqueOriginal: "Vitória", motorista: null, produtos: { Viga: ["Viga W 250 x 32.7", "Viga U 6 x 8.2#"], Tubo: ["Tubo Schedule 40 2", "Tubo Galvanizado 2.1/2"] } },
+    { id: 334807, cliente: "Grifo Metais", status: "Aguardando separação", data: "2025-08-31", endereco: "Rua do Sol, 888 - Linhares, ES", embarque: null, embarqueOriginal: "Linhares", motorista: null, produtos: { Chapa: ["Chapa Xadrez 1/8 (3.00mm)", "Chapa Inox 316 2.0mm"], Viga: ["Viga I 5 x 10#"] } },
+    { id: 334815, cliente: "Draco Montagens", status: "Aguardando separação", data: "2025-09-01", endereco: "Rodovia do Café, KM 5 - Serra, ES", embarque: null, embarqueOriginal: "Serra", motorista: null, produtos: { Tubo: ["Tubo Oblongo 38x20 #18 (1.25mm)", "Tubo Retangular 70x30 #16 (1.55mm)"], Chapa: ["Chapa Galvanizada #14 (2.00mm)"] } },
+    { id: 327413, cliente: "Pegasus Engenharia", status: "Aguardando separação", data: "2025-09-01", endereco: "Rua das Rosas, 77 - Vila Velha, ES", embarque: null, embarqueOriginal: "Vila Velha", motorista: null, produtos: { Viga: ["Viga U 8 x 11.5#", "Viga W 310 x 38.7"], Tubo: ["Tubo Aço Inox Quadrado 40x40 1.5mm", "Tubo Redondo 4 #14 (2.00mm)"] } },
+    { id: 334389, cliente: "Centauro Indústria", status: "Aguardando separação", data: "2025-09-02", endereco: "Av. Brasil, 1100 - Colatina, ES", embarque: null, embarqueOriginal: "Colatina", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 5/16 (7.94mm)", "Chapa Fina a Frio #26 (0.45mm)"], Viga: ["Viga I 6 x 12.5#"] } },
+    { id: 334702, cliente: "Harpia Estruturas", status: "Aguardando separação", data: "2025-09-02", endereco: "Rua da Serra, 45 - Serra, ES", embarque: null, embarqueOriginal: "Serra", motorista: null, produtos: { Tubo: ["Tubo SCH 40 3", "Tubo Quadrado 90x90 #12 (2.65mm)"], Chapa: ["Chapa Grossa 3/4 (19.05mm)"] } },
+    { id: 310557, cliente: "Minotauro Construções", status: "Aguardando separação", data: "2025-09-03", endereco: "Estrada Velha, 22 - Cariacica, ES", embarque: null, embarqueOriginal: "Cariacica", motorista: null, produtos: { Viga: ["Viga I 10 x 25.4#", "Viga W 200 x 46.1"], Tubo: ["Tubo Retangular 120x60 #12 (2.65mm)"] } },
+    { id: 334016, cliente: "Sereia Naval", status: "Aguardando separação", data: "2025-09-03", endereco: "Rua do Porto, 33 - Vitória, ES", embarque: null, embarqueOriginal: "Vitória", motorista: null, produtos: { Chapa: ["Chapa Naval A36 1/4", "Chapa Aço Carbono 1/2 (12.70mm)"], "Cantoneira / Barra": ["Cantoneira 3 x 1/4"] } },
+    { id: 334716, cliente: "Tritão Ferro e Aço", status: "Aguardando separação", data: "2025-09-04", endereco: "Av. dos Navegantes, 150 - Linhares, ES", embarque: null, embarqueOriginal: "Linhares", motorista: null, produtos: { Tubo: ["Tubo Quadrado 100x100 #11 (3.00mm)", "Tubo Retangular 120x60 #14 (2.00mm)"], Chapa: ["Chapa Xadrez 3/16 (4.75mm)"] } },
+    { id: 331324, cliente: "Atlas Construções", status: "Aguardando separação", data: "2025-09-04", endereco: "Rua Principal, 55 - Serra, ES", embarque: null, embarqueOriginal: "Serra", motorista: null, produtos: { Viga: ["Viga W 360 x 57.8", "Viga U 8 x 11.5#"], Chapa: ["Chapa Aço Carbono 3/8 (9.53mm)"] } },
+    { id: 334382, cliente: "Titã Fundições", status: "Aguardando separação", data: "2025-09-05", endereco: "Rodovia das Árvores, 99 - Vila Velha, ES", embarque: null, embarqueOriginal: "Vila Velha", motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #14 (2.00mm)", "Chapa Galvanizada #12 (2.70mm)"], Tubo: ["Tubo Redondo 5 SCH 40"] } },
+    { id: 332901, cliente: "Olimpo Metais", status: "Aguardando separação", data: "2025-09-05", endereco: "Av. do Contorno, 1001 - Colatina, ES", embarque: null, embarqueOriginal: "Colatina", motorista: null, produtos: { Viga: ["Viga I 12 x 31.8#", "Viga W 150 x 24.0"], Chapa: ["Chapa Inox 304 3.0mm Polida"] } },
+    { id: 333394, cliente: "União Metálica", status: "Aguardando separação", data: "2025-09-06", endereco: "Rua das Flores, 45 - Serra, ES", embarque: null, embarqueOriginal: "Serra", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/2 (12.70mm)", "Chapa Galvanizada #20 (0.95mm)"], Tubo: ["Tubo Redondo 4 #12 (2.65mm)", "Tubo Quadrado 70x70 #14 (2.00mm)"], Viga: ["Viga I 8 x 18.4#"] } },
+    { id: 333767, cliente: "Expresso Cargas", status: "Aguardando separação", data: "2025-09-06", endereco: "BR-101 Norte, KM 50 - Aracruz, ES", embarque: null, embarqueOriginal: "Aracruz", motorista: null, produtos: { Tubo: ["Tubo Retangular 50x30 #16 (1.55mm)", "Tubo Galvanizado 2.1/2"], Viga: ["Viga W 250 x 38.5"] } },
+    { id: 329163, cliente: "Soluções em Aço", status: "Aguardando separação", data: "2025-09-07", endereco: "Rua do Progresso, 200 - Guarapari, ES", embarque: null, embarqueOriginal: "Guarapari", motorista: null, produtos: { Chapa: ["Chapa Inox 430 0.8mm Escovada", "Chapa Xadrez 3/8 (9.53mm)"], "Cantoneira / Barra": ["Cantoneira 1.1/2 x 1/8"] } },
+    { id: 330199, cliente: "Estrutura Forte", status: "Aguardando separação", data: "2025-09-07", endereco: "Av. das Américas, 100 - Linhares, ES", embarque: null, embarqueOriginal: "Linhares", motorista: null, produtos: { Tubo: ["Tubo Redondo 1 #18 (1.25mm)", "Tubo Industrial Quadrado 50x50 #14 (2.00mm)"], Chapa: ["Chapa Aço Carbono 1/8 (3.00mm)"] } },
+    { id: 328948, cliente: "Cia. do Metal", status: "Aguardando separação", data: "2025-09-08", endereco: "Rua das Acácias, 10 - São Mateus, ES", embarque: null, embarqueOriginal: "São Mateus", motorista: null, produtos: { Viga: ["Viga U 4 x 5.4#", "Viga I 3 x 5.7#"], Chapa: ["Chapa Galvanizada #28 (0.43mm)"] } },
+    { id: 329722, cliente: "Norte Aço", status: "Aguardando separação", data: "2025-09-08", endereco: "Rodovia ES-010, KM 5 - Fundão, ES", embarque: null, embarqueOriginal: "Fundão", motorista: null, produtos: { Tubo: ["Tubo Quadrado 60x60 #18 (1.25mm)"], Chapa: ["Chapa Fina a Frio #28 (0.43mm)", "Chapa Aço Carbono 3/16 (4.75mm)"] } },
+    { id: 328400, cliente: "Leste Ferro", status: "Aguardando separação", data: "2025-09-09", endereco: "Rua Central, 30 - Cachoeiro de Itapemirim, ES", embarque: null, embarqueOriginal: "Cachoeiro de Itapemirim", motorista: null, produtos: { Viga: ["Viga W 100 x 19.3"], Chapa: ["Chapa Xadrez 3.00mm"] } },
+    { id: 327904, cliente: "Centro Metal", status: "Aguardando separação", data: "2025-09-09", endereco: "Av. Getúlio Vargas, 15 - Castelo, ES", embarque: null, embarqueOriginal: "Castelo", motorista: null, produtos: { Tubo: ["Tubo Redondo 2.1/2 #14 (2.00mm)", "Tubo Estrutural 80x80 #11 (3.00mm)"], Chapa: ["Chapa Aço Carbono 1/8 (3.00mm)", "Chapa Perfurada 2.00mm"] } },
+    { id: 326005, cliente: "Metalúrgica do Aço", status: "Aguardando separação", data: "2025-09-10", endereco: "Rua do Sol, 10 - Serra, ES", embarque: null, embarqueOriginal: "Serra", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/4 (6.35mm)", "Chapa Inox 316 1.0mm"], Viga: ["Viga I 4 x 7.7#"] } },
+    { id: 328386, cliente: "Construções Modernas", status: "Aguardando separação", data: "2025-09-10", endereco: "Av. da Praia, 50 - Vila Velha, ES", embarque: null, embarqueOriginal: "Vila Velha", motorista: null, produtos: { Tubo: ["Tubo Redondo 1 #16 (1.55mm)", "Tubo Industrial 2"], Chapa: ["Chapa Galvanizada 3.00mm"] } },
+    { id: 329122, cliente: "Estruturas Metálicas", status: "Aguardando separação", data: "2025-09-11", endereco: "Rua da Paz, 200 - Cariacica, ES", embarque: null, embarqueOriginal: "Cariacica", motorista: null, produtos: { Viga: ["Viga U 6 x 8.2#", "Viga W 200 x 22.5"], Tubo: ["Tubo Quadrado 30x30 #16 (1.55mm)"] } },
+    { id: 330446, cliente: "Galvanização Brasil", status: "Aguardando separação", data: "2025-09-11", endereco: "Rodovia do Ferro, 700 - Linhares, ES", embarque: null, embarqueOriginal: "Linhares", motorista: null, produtos: { Chapa: ["Chapa Galvanizada 1/2 (12.70mm)"], Tubo: ["Tubo Retangular 40x20 #16 (1.55mm)"] } },
+    { id: 330886, cliente: "Tubos e Conexões", status: "Aguardando separação", data: "2025-09-12", endereco: "Rua do Comércio, 120 - Colatina, ES", embarque: null, embarqueOriginal: "Colatina", motorista: null, produtos: { Tubo: ["Tubo Redondo 2 SCH 80", "Tubo Schedule 80 1.1/2"], Viga: ["Viga I 6 x 12.5#"] } }
 ];
+
+let pedidos = pedidosIniciais.map(p => {
+    const embarqueSalvo = localStorage.getItem(`embarque_${p.id}`);
+    return {
+        ...p,
+        embarqueOriginal: p.embarque, 
+        embarque: embarqueSalvo || null, 
+    };
+});
 
 function produtosParaTexto(produtos) {
     let arr = [];
@@ -129,7 +138,6 @@ const localStorageObservacaoCarregamentoKey = "observacaoCarregamento";
 const localStoragePedidoMotoristaKey = "pedidoMotoristaDestino";
 const localStorageItemCarregadoKey = "itemCarregadoStatus";
 const localStoragePedidoParcialKey = "pedidoCarregamentoParcial";
-
 const localStorageNotaFiscalKey = "pedidoNotaFiscalNumero";
 
 function getNotaFiscal(pedidoId) {
@@ -175,16 +183,10 @@ function inicializarNotasFiscais() {
 const NF_RANGE_START = 222000;
 const NF_RANGE_END = 223000;
 
-let globalFiltroPedido = "";
+let globalFiltroMaterial = "Todos";
+let pedidoUnicoVisualizado = null;
 let globalFiltroRota = "todas";
 let globalFiltroStatus = "todas";
-let pedidoUnicoVisualizado = null;
-
-let previousGlobalFiltroRota = "todas";
-let previousGlobalFiltroStatus = "todas";
-
-let globalFiltroMaterial = "Todos";
-
 let loaderFilters = {
     cotacao: '',
     data: '',
@@ -192,8 +194,11 @@ let loaderFilters = {
     status: ''
 };
 
-let currentLoaderView = 'meus';
-let globalFiltroCarregamentoStatus = 'aguardando';
+let globalFiltroPedido = "";
+
+let previousGlobalFiltroRota = "todas";
+let previousGlobalFiltroStatus = "todas";
+
 let globalFiltroMotoristaDestino = null;
 
 function getPedidoStatus(id) {
@@ -205,24 +210,11 @@ function getPedidoStatus(id) {
 
 function setPedidoStatus(id, status) {
     localStorage.setItem(`${localStoragePedidoStatusKey}_${id}`, status);
-
     const pedidoIndex = pedidos.findIndex(p => p.id === id);
     if (pedidoIndex !== -1) {
         pedidos[pedidoIndex].status = status;
     }
-
-    if (document.getElementById("filterScreen") && document.getElementById("filterScreen").style.display === "flex") {
-        exibirResumoEmbarques();
-    }
-    if (document.getElementById("mainApp") && document.getElementById("mainApp").style.display === "block") {
-        renderizarPedidosPorSetor(pedidoUnicoVisualizado);
-        exibirCotasPorEmbarque(pedidoUnicoVisualizado);
-    }
-    if (document.getElementById("loaderDashboardWrapper") && document.getElementById("loaderDashboardWrapper").style.display === "flex") {
-        renderizarPedidosCarregamento();
-    }
-
-    if (document.getElementById("dashboardWrapper") && document.getElementById("dashboardWrapper").style.display === "flex") {
+    if (document.getElementById("dashboardWrapper").style.display === "flex") {
         renderResumoGerencial();
     }
 }
@@ -403,7 +395,7 @@ function hideAllScreens() {
     const screenIds = [
         "userSelectionPage", "loginPage", "driverLoginPage", "gestorLoginPage",
         "filterScreen", "mainApp", "materialSelectionPage", "loaderDashboardWrapper",
-        "dashboardWrapper", "operatorRoleSelectionPage"
+        "dashboardWrapper", "operatorRoleSelectionPage", "roteirizacaoPage"
     ];
     screenIds.forEach(id => {
         const screen = document.getElementById(id);
@@ -463,24 +455,23 @@ function fazerLoginGestor() {
 
     if (usuarios[user] && usuarios[user] === pass && (isGestor || isConsultor)) {
         usuarioLogado = user;
-        usuarioLogadoRole = user;
-
+        usuarioLogadoRole = user; 
+        
         hideAllScreens();
-
         document.getElementById("dashboardWrapper").style.display = "flex";
-
-        const sidebarUl = document.getElementById('gestorSidebarUl');
+        
+        const sidebarUl = document.querySelector('#dashboardWrapper .sidebar ul');
         let sidebarHTML = `
             <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo Gerencial</a></li>
+            <li><a href="#" data-view="roteirizacao" onclick="showRoteirizacaoPage(this)">Roteirização Inteligente</a></li>
             <li><a href="#" data-view="consulta" onclick="showGestorView('consulta', this)">Consultar Pedidos</a></li>
         `;
         if (usuarioLogadoRole === 'gestor') {
             sidebarHTML += '<li><a href="#" onclick="logout()">Sair</a></li>';
         }
         sidebarUl.innerHTML = sidebarHTML;
-
-        renderResumoGerencial();
-
+        
+        showGestorView('resumo');
     } else {
         erro.textContent = "Usuário ou senha gerencial incorretos.";
     }
@@ -767,27 +758,11 @@ function salvarTodosPesosDoSetor(pedidoId, setor) {
 
 function exibirResumoEmbarques() {
     const embarqueSummaryDiv = document.getElementById("embarqueSummary");
+    if (!embarqueSummaryDiv) return;
     embarqueSummaryDiv.innerHTML = "";
     const resumo = {};
 
-    let pedidosFiltrados;
-    pedidosFiltrados = pedidos.filter(p => true);
-
-    const regionColors = {
-        'Cariacica, ES': 'red',
-        'Fundão, ES': 'red',
-        'Guarapari, ES': 'red',
-        'Serra, ES': 'red',
-        'Vitória, ES': 'red',
-        'Vila Velha, ES': 'red',
-        'Viana, ES': 'red',
-        'Linhares, ES': 'blue',
-        'Colatina, ES': 'green',
-        'Aracruz, ES': 'yellow',
-        'São Mateus, ES': 'teal',
-        'Cachoeiro de Itapemirim, ES': 'cyan',
-        'Castelo, ES': 'indigo'
-    };
+    let pedidosFiltrados = pedidos.filter(p => p.embarque !== null);
 
     pedidosFiltrados.forEach(pedido => {
         const status = getPedidoStatus(pedido.id);
@@ -797,18 +772,8 @@ function exibirResumoEmbarques() {
             const embarque = pedido.embarque;
             if (!resumo[embarque]) {
                 resumo[embarque] = { count: 0, color: '' };
-
-                for (const [region, color] of Object.entries(regionColors)) {
-                    if (pedido.endereco.includes(region)) {
-                        resumo[embarque].color = color;
-                        break;
-                    }
-                }
-
-                if (!resumo[embarque].color) {
-                    const defaultColors = ['blue', 'green', 'yellow', 'teal', 'pink', 'purple', 'orange', 'cyan'];
-                    resumo[embarque].color = defaultColors[Object.keys(resumo).length % defaultColors.length];
-                }
+                const defaultColors = ['blue', 'green', 'yellow', 'teal', 'pink', 'purple', 'orange', 'cyan'];
+                resumo[embarque].color = defaultColors[Object.keys(resumo).length % defaultColors.length];
             }
             resumo[embarque].count++;
         }
@@ -2484,7 +2449,10 @@ function showGestorView(viewName, clickedLink) {
     if (clickedLink) {
         clickedLink.classList.add('active');
     }
-
+    
+    hideAllScreens();
+    document.getElementById('dashboardWrapper').style.display = 'flex';
+    
     if (viewName === 'resumo') {
         renderResumoGerencial();
     } else if (viewName === 'consulta') {
@@ -2828,3 +2796,276 @@ function showCotacaoDetails(pedidoId) {
 
     container.innerHTML = detailsViewHTML;
 }
+
+let map, currentRouteLayer;
+const OPENROUTESERVICE_API_KEY = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjJlZTY2Nzc2YjRhZjQ5Zjk5OTVhYmI3N2VmOTljMTM3IiwiaCI6Im11cm11cjY0In0=";
+
+function decodePolyline(encoded) { let p = []; let i = 0, len = encoded.length; let lat = 0, lng = 0; while (i < len) { let b, shift = 0, result = 0; do { b = encoded.charAt(i++).charCodeAt(0) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20); let dlat = ((result & 1) ? ~(result >> 1) : (result >> 1)); lat += dlat; shift = 0, result = 0; do { b = encoded.charAt(i++).charCodeAt(0) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20); let dlng = ((result & 1) ? ~(result >> 1) : (result >> 1)); lng += dlng; p.push([lat / 1E5, lng / 1E5]); } return p; }
+function formatDuration(seconds) { if (isNaN(seconds) || seconds < 0) return "00h 00m"; const h = Math.floor(seconds / 3600); const m = Math.floor((seconds % 3600) / 60); return `${h}h ${m}m`; }
+function formatDistance(meters) { if (isNaN(meters) || meters < 0) return "0.0 km"; return (meters / 1000).toFixed(1) + ' km'; }
+
+
+function showRoteirizacaoPage(clickedLink) {
+    const links = document.querySelectorAll('#dashboardWrapper .sidebar a');
+    links.forEach(link => link.classList.remove('active'));
+    if (clickedLink) {
+        clickedLink.classList.add('active');
+    }
+    
+    hideAllScreens();
+    document.getElementById('roteirizacaoPage').style.display = 'grid';
+    initializeMapAndFilters();
+}
+
+function initializeMap() {
+    if (map) { 
+        map.remove(); 
+        map = null; 
+    }
+    map = L.map('map').setView([-20.198, -40.252], 10);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors', maxZoom: 18,
+    }).addTo(map);
+    setTimeout(() => {
+        if (map) map.invalidateSize();
+    }, 10);
+}
+
+function showFeedbackMessage(container, icon, message, isError = false) { 
+    container.innerHTML = `<div class="feedback-message ${isError ? 'error-message' : ''}"><i class="ph-bold ph-${icon}"></i><p>${message}</p></div>`; 
+    if (isError) document.getElementById('route-summary-info').style.display = 'none';
+}
+
+function mostrarBotoesAcao(mostrarConfirmacao) {
+    document.getElementById('sugerirRotaBtn').style.display = mostrarConfirmacao ? 'none' : 'flex';
+    document.getElementById('montarManualBtn').style.display = mostrarConfirmacao ? 'none' : 'flex';
+    document.getElementById('confirmarEmbarqueBtn').style.display = mostrarConfirmacao ? 'flex' : 'none';
+    document.getElementById('cancelarRotaBtn').style.display = mostrarConfirmacao ? 'flex' : 'none';
+}
+
+function initializeMapAndFilters() {
+    showFeedbackMessage(document.getElementById('minuta-content'), 'map-trifold', 'Selecione os pedidos e crie sua rota.');
+    document.getElementById('route-summary-info').style.display = 'none';
+    mostrarBotoesAcao(false);
+    initializeMap();
+    const pedidosList = document.getElementById('pedidos-filtrados-list');
+    pedidosList.innerHTML = '';
+    
+    const filtered = pedidos.filter(p => p.embarque === null);
+
+    if (filtered.length > 0) {
+        filtered.forEach(pedido => {
+            const card = document.createElement('label'); 
+            card.className = 'order-card';
+            card.innerHTML = `<input type="checkbox" data-id="${pedido.id}"><div class="order-card-details"><h4>${pedido.cliente}</h4><p>#${pedido.id} - ${pedido.endereco}</p></div>`;
+            pedidosList.appendChild(card);
+        });
+    } else {
+        showFeedbackMessage(pedidosList, 'check-circle', 'Todos os pedidos já foram roteirizados.');
+    }
+}
+
+async function getCoordsForAddress(address, id) {
+    const url = new URL('https://api.openrouteservice.org/geocode/search');
+    url.searchParams.append('api_key', OPENROUTESERVICE_API_KEY);
+    url.searchParams.append('text', address);
+    url.searchParams.append('boundary.country', 'BR');
+    
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Geocodificação falhou para o pedido #${id}.`);
+    const data = await response.json();
+    if (!data.features || data.features.length === 0) throw new Error(`Endereço do pedido #${id} não encontrado: "${address}"`);
+    return data.features[0].geometry.coordinates;
+}
+
+function gerarNumeroEmbarqueAleatorio() {
+    let novoNumero;
+    const embarquesExistentes = new Set(pedidos.map(p => p.embarque).filter(e => e !== null));
+    do {
+        novoNumero = Math.floor(10000 + Math.random() * 90000);
+    } while (embarquesExistentes.has(String(novoNumero)));
+    return String(novoNumero);
+}
+
+async function generateRoute(optimized) {
+    const selectedCheckboxes = Array.from(document.querySelectorAll('#pedidos-filtrados-list input:checked'));
+    if (selectedCheckboxes.length === 0) {
+        showModal("Atenção", "Selecione pelo menos um pedido para criar a rota.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+        return;
+    }
+    
+    mostrarBotoesAcao(false);
+    document.getElementById('sugerirRotaBtn').disabled = true;
+    document.getElementById('montarManualBtn').disabled = true;
+    document.getElementById('sugerirRotaBtn').innerHTML = `<i class="ph ph-spinner-gap ph-spin"></i> Gerando Rota...`;
+
+    showFeedbackMessage(document.getElementById('minuta-content'), 'spinner-gap ph-spin', 'Buscando coordenadas...');
+    
+    try {
+        const CEDISA_LOCATION = { name: 'Cedisa Calogi', coords: [-40.366593, -20.065453] };
+        
+        const stopsPromises = selectedCheckboxes.map(cb => {
+            const pedido = pedidos.find(p => p.id === parseInt(cb.dataset.id));
+            return getCoordsForAddress(pedido.endereco, pedido.id).then(coords => ({ ...pedido, coords }));
+        });
+        const stops = await Promise.all(stopsPromises);
+        
+        let finalOrderedStops = optimized ? await getOptimizedStops(stops, CEDISA_LOCATION) : stops;
+        
+        const directionCoordinates = [CEDISA_LOCATION.coords, ...finalOrderedStops.map(s => s.coords)];
+        
+        const dirResponse = await fetch('https://api.openrouteservice.org/v2/directions/driving-car', {
+            method: 'POST',
+            headers: { 'Authorization': OPENROUTESERVICE_API_KEY, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ coordinates: directionCoordinates })
+        });
+
+        if (!dirResponse.ok) throw new Error(`Não foi possível encontrar uma rota. Status: ${dirResponse.status}.`);
+
+        const routeJson = await dirResponse.json();
+        if (!routeJson.routes || routeJson.routes.length === 0) {
+            throw new Error("A API não retornou nenhuma rota para os pontos selecionados.");
+        }
+        const route = routeJson.routes[0];
+
+        pedidosPendentes = finalOrderedStops;
+        rotaPendente = route;
+
+        displayRouteOnMapAndPanel(finalOrderedStops, route, CEDISA_LOCATION);
+        mostrarBotoesAcao(true);
+
+    } catch (error) {
+        console.error('Erro ao gerar rota:', error);
+        showFeedbackMessage(document.getElementById('minuta-content'), 'warning-circle', error.message, true);
+    } finally {
+        document.getElementById('sugerirRotaBtn').disabled = false;
+        document.getElementById('montarManualBtn').disabled = false;
+        document.getElementById('sugerirRotaBtn').innerHTML = `<i class="ph ph-magic-wand"></i> Sugerir Rota Otimizada`;
+    }
+}
+
+function confirmarEmbarque() {
+    if (pedidosPendentes.length === 0) {
+        showModal("Erro", "Não há rota pendente para confirmar.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+        return;
+    }
+
+    const nomeEmbarque = gerarNumeroEmbarqueAleatorio();
+
+    pedidosPendentes.forEach(pedidoPendente => {
+        const pedidoId = pedidoPendente.id;
+        const pedidoIndex = pedidos.findIndex(p => p.id === pedidoId);
+        if (pedidoIndex !== -1) {
+            pedidos[pedidoIndex].embarque = nomeEmbarque;
+            localStorage.setItem(`embarque_${pedidoId}`, nomeEmbarque);
+        }
+    });
+
+    showModal("Sucesso!", `O embarque #${nomeEmbarque} foi criado com ${pedidosPendentes.length} pedidos.`, `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+
+    pedidosPendentes = [];
+    rotaPendente = null;
+    initializeMapAndFilters();
+}
+
+function cancelarRota() {
+    pedidosPendentes = [];
+    rotaPendente = null;
+    initializeMapAndFilters();
+}
+
+function zerarTodosEmbarques() {
+    confirmarAcao(
+        "Zerar Todos os Embarques?",
+        "Esta ação irá remover a atribuição de embarque de TODOS os pedidos, tornando-os disponíveis para roteirização novamente. Deseja continuar?",
+        () => {
+            pedidos.forEach(pedido => {
+                pedido.embarque = null;
+                localStorage.removeItem(`embarque_${pedido.id}`);
+            });
+            initializeMapAndFilters();
+            showModal("Sucesso!", "Todos os embarques foram zerados.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+        }
+    );
+}
+
+
+async function getOptimizedStops(stops, origin) {
+    const optimizationRequest = {
+        jobs: stops.map(stop => ({ id: stop.id, location: stop.coords })),
+        vehicles: [{ id: 1, profile: 'driving-car', start: origin.coords }]
+    };
+    const optResponse = await fetch('https://api.openrouteservice.org/optimization', {
+        method: 'POST',
+        headers: { 'Authorization': OPENROUTESERVICE_API_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify(optimizationRequest)
+    });
+    if (!optResponse.ok) throw new Error(`Falha na API de otimização. Status: ${optResponse.status}`);
+    const optResult = await optResponse.json();
+    if (optResult.code === 2) throw new Error(`Otimização inalcançável: ${optResult.error}.`);
+    
+    return optResult.routes[0].steps.filter(step => step.type === 'job').map(step => stops.find(s => s.id === step.id));
+}
+
+function displayRouteOnMapAndPanel(orderedStops, route, origin) {
+    const minutaContent = document.getElementById('minuta-content');
+    const routeSummaryInfo = document.getElementById('route-summary-info');
+    
+    minutaContent.innerHTML = '';
+    const originElement = document.createElement('div');
+    originElement.className = 'route-stop-item';
+    originElement.innerHTML = `<div class="stop-icon origin"><i class="ph-bold ph-house-line"></i></div><div class="stop-details"><h4>Origem: ${origin.name}</h4><p>Ponto de Partida</p></div>`;
+    minutaContent.appendChild(originElement);
+
+    orderedStops.forEach((pedido, index) => {
+        const stopElement = document.createElement('div');
+        stopElement.className = 'route-stop-item';
+        stopElement.innerHTML = `<div class="stop-icon">${index + 1}</div><div class="stop-details"><h4>${pedido.cliente}</h4><p>${pedido.endereco}</p></div>`;
+        minutaContent.appendChild(stopElement);
+    });
+
+    routeSummaryInfo.innerHTML = `
+        <div class="summary-item"><p>${orderedStops.length}</p><span>Paradas</span></div>
+        <div class="summary-item"><p>${formatDistance(route.summary.distance)}</p><span>Distância</span></div>
+        <div class="summary-item"><p>${formatDuration(route.summary.duration)}</p><span>Duração</span></div>`;
+    routeSummaryInfo.style.display = 'flex';
+    
+    if (map) {
+        map.invalidateSize();
+        if (currentRouteLayer) { 
+            map.removeLayer(currentRouteLayer);
+        }
+        
+        map.eachLayer(function (layer) {
+            if (layer instanceof L.Marker) {
+                map.removeLayer(layer);
+            }
+        });
+
+        if (route && route.geometry) {
+
+            const routeLine = L.polyline(decodePolyline(route.geometry), { color: 'var(--route-color)', weight: 5, opacity: 0.8 }).addTo(map);
+
+            map.fitBounds(routeLine.getBounds(), { padding: [50, 50] });
+            currentRouteLayer = routeLine;
+
+            L.marker([origin.coords[1], origin.coords[0]]).addTo(map).bindPopup('<b>Origem:</b><br>Cedisa Calogi');
+            orderedStops.forEach((stop, index) => {
+                L.marker([stop.coords[1], stop.coords[0]]).addTo(map).bindPopup(`<b>Parada ${index + 1}:</b><br>${stop.cliente}`);
+            });
+        }
+    }
+}
+
+function decodePolyline(encoded) { let p = []; let i = 0, len = encoded.length; let lat = 0, lng = 0; while (i < len) { let b, shift = 0, result = 0; do { b = encoded.charAt(i++).charCodeAt(0) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20); let dlat = ((result & 1) ? ~(result >> 1) : (result >> 1)); lat += dlat; shift = 0, result = 0; do { b = encoded.charAt(i++).charCodeAt(0) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20); let dlng = ((result & 1) ? ~(result >> 1) : (result >> 1)); lng += dlng; p.push([lat / 1E5, lng / 1E5]); } return p; }
+
+document.getElementById('sugerirRotaBtn').addEventListener('click', () => generateRoute(true));
+document.getElementById('montarManualBtn').addEventListener('click', () => generateRoute(false));
+document.getElementById('confirmarEmbarqueBtn').addEventListener('click', confirmarEmbarque);
+document.getElementById('cancelarRotaBtn').addEventListener('click', cancelarRota);
+document.getElementById('zerarEmbarquesBtn').addEventListener('click', zerarTodosEmbarques);
+
+document.addEventListener("DOMContentLoaded", () => {
+    showUserSelectionPage();
+    initializeMap(); 
+});
