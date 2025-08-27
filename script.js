@@ -1,3 +1,21 @@
+const originIcon = L.divIcon({
+    html: '<i class="ph-bold ph-buildings" style="font-size: 24px; color: white;"></i>',
+    className: 'custom-map-icon',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40]
+});
+
+const destinationIcon = (number) => {
+    return L.divIcon({
+        html: `<span>${number}</span>`,
+        className: 'custom-destination-icon',
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
+        popupAnchor: [0, -30]
+    });
+};
+
 let usuarioLogadoRole = null;
 
 const usuarios = {
@@ -14,7 +32,6 @@ const usuarios = {
 };
 
 let pedidosIniciais = [
-    { id: 148264, cliente: "Metalúrgica Central", status: "Aguardando separação", data: "2025-08-21", endereco: "Rua São José, 110, Bairro de Fátima, Serra - ES, 29160-790", embarque: "Serra", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/8\" (3.00mm)"], Tubo: ["Tubo Redondo 1.1/2\" #16 (1.55mm)"], Viga: ["Viga I 4\" x 7.7#"] } },
     { id: 259773, cliente: "Aço Forte", status: "Aguardando separação", data: "2025-08-24", endereco: "Rua Castelo Branco, 1010, Centro, Vila Velha - ES, 29100-040", embarque: "Vila Velha", motorista: null, produtos: { Viga: ["Viga I 6\" x 12.5#", "Viga W 250 x 25.7"] } },
     { id: 283722, cliente: "Metal Capixaba", status: "Aguardando separação", data: "2025-08-24", endereco: "Rua Sete de Setembro, 400, Centro, Vitória - ES, 29015-000", embarque: "Vitória", motorista: null, produtos: { Tubo: ["Tubo Galvanizado 1.1/2\""], "Cantoneira / Barra": ["Barra Chata 2\" x 1/4\""] } },
     { id: 280519, cliente: "Engemetal", status: "Aguardando separação", data: "2025-08-25", endereco: "Rua da Conceição, 800, Centro, Linhares - ES, 29900-260", embarque: "Linhares", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/2\" (12.70mm)"], Tubo: ["Tubo Retangular 80x40 #14 (2.00mm)"] } },
@@ -3099,11 +3116,18 @@ async function getOptimizedStops(stops, origin) {
 function displayRouteOnMapAndPanel(orderedStops, route, origin) {
     const minutaContent = document.getElementById('minuta-content');
     const routeSummaryInfo = document.getElementById('route-summary-info');
-
+    
     minutaContent.innerHTML = '';
     const originElement = document.createElement('div');
-    originElement.className = 'route-stop-item';
-    originElement.innerHTML = `<div class="stop-icon origin"><i class="ph-bold ph-house-line"></i></div><div class="stop-details"><h4>Origem: ${origin.name}</h4><p>Ponto de Partida</p></div>`;
+    originElement.className = 'route-stop-item origin-item'; 
+    originElement.innerHTML = `
+        <div class="stop-icon origin">
+            <i class="ph-bold ph-warehouse"></i>
+        </div>
+        <div class="stop-details">
+            <h4>Origem: ${origin.name}</h4>
+            <p>Rod. BR-262, Km 7, Calogi, Serra - ES</p>
+        </div>`;
     minutaContent.appendChild(originElement);
 
     orderedStops.forEach((pedido, index) => {
@@ -3111,7 +3135,7 @@ function displayRouteOnMapAndPanel(orderedStops, route, origin) {
         stopElement.className = 'route-stop-item';
 
         stopElement.innerHTML = `<div class="stop-icon">${index + 1}</div><div class="stop-details"><h4>${pedido.cliente}</h4><p>${pedido.endereco}</p></div>`;
-
+        
         minutaContent.appendChild(stopElement);
     });
 
@@ -3120,13 +3144,13 @@ function displayRouteOnMapAndPanel(orderedStops, route, origin) {
         <div class="summary-item"><p>${formatDistance(route.summary.distance)}</p><span>Distância</span></div>
         <div class="summary-item"><p>${formatDuration(route.summary.duration)}</p><span>Duração</span></div>`;
     routeSummaryInfo.style.display = 'flex';
-
+    
     if (map) {
         map.invalidateSize();
-        if (currentRouteLayer) {
+        if (currentRouteLayer) { 
             map.removeLayer(currentRouteLayer);
         }
-
+        
         map.eachLayer(function (layer) {
             if (layer instanceof L.Marker || layer instanceof L.Polyline) {
                 map.removeLayer(layer);
@@ -3139,9 +3163,16 @@ function displayRouteOnMapAndPanel(orderedStops, route, origin) {
             map.fitBounds(routeLine.getBounds(), { padding: [50, 50] });
             currentRouteLayer = routeLine;
 
-            L.marker([origin.coords[1], origin.coords[0]]).addTo(map).bindPopup('<b>Origem:</b><br>Cedisa Calogi');
+            L.marker([origin.coords[1], origin.coords[0]], { icon: originIcon })
+                .addTo(map)
+                .bindPopup('<b>Origem:</b><br>Cedisa Calogi')
+                .openPopup();
+
             orderedStops.forEach((stop, index) => {
-                L.marker([stop.coords[1], stop.coords[0]]).addTo(map).bindPopup(`<b>Parada ${index + 1}:</b><br>${stop.cliente}`);
+                const stopNumber = index + 1;
+                L.marker([stop.coords[1], stop.coords[0]], { icon: destinationIcon(stopNumber) }) 
+                    .addTo(map)
+                    .bindPopup(`<b>Parada ${stopNumber}:</b><br>${stop.cliente}`);
             });
         }
     }
