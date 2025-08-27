@@ -2550,11 +2550,11 @@ button:disabled {
     height: 100vh;
 }
 
-/* roteirização */
+/* asdasdsa */
 
 .main-layout {
     display: grid;
-    grid-template-columns: 380px 1fr; 
+    grid-template-columns: 380px 1fr; /* Sidebar com largura fixa */
     height: 100vh;
     background-color: var(--light-gray);
 }
@@ -2566,9 +2566,9 @@ button:disabled {
     border-right: 1px solid var(--medium-gray);
     box-shadow: 0 4px 12px var(--shadow-light);
     height: 100vh;
-    position: static; 
+    position: static; /* sobrescreve o 'fixed' anterior */
     padding: 0;
-    width: 100%; 
+    width: 100%; /* Garante que o aside ocupe a coluna do grid */
 }
 
 #roteirizacaoSidebar .panel-header {
@@ -2628,7 +2628,7 @@ button:disabled {
     padding: 0; 
     margin: 0;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Garante uma coluna */
     gap: 15px;
 }
 
@@ -2642,8 +2642,8 @@ button:disabled {
     transition: all 0.2s ease-in-out; 
     cursor: pointer; 
     background-color: var(--white);
-    box-shadow: none; 
-    border-left: none; 
+    box-shadow: none; /* Reseta sombra de outras telas */
+    border-left: none; /* Reseta borda de outras telas */
 }
 #roteirizacaoPage .order-card:hover { 
     border-color: var(--primary-blue);
@@ -2685,7 +2685,7 @@ button:disabled {
 
 .main-content {
     display: grid;
-    grid-template-columns: 400px 1fr; 
+    grid-template-columns: 400px 1fr; /* Colunas para painel de detalhes e mapa */
     padding: 24px;
     gap: 24px;
     overflow: hidden;
@@ -2764,7 +2764,7 @@ button:disabled {
 }
 .route-stop-item {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     padding: 16px 0;
     border-bottom: 1px solid var(--light-gray);
     position: relative;
@@ -2891,4 +2891,43 @@ button:disabled {
 
 @media screen and (max-width: 768px) {
     .route-actions { flex-direction: column; }
+}
+
+.route-stop-item.origin-item {
+    background-color: var(--light-gray);
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius-medium);
+    padding: 12px;
+    margin-bottom: 8px;
+}
+
+.route-stop-item.origin-item::before {
+    display: none;
+}
+
+.custom-map-icon {
+    background-color: var(--primary-blue);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--white);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.custom-map-icon i {
+    transform: rotate(45deg);
+}
+
+.custom-destination-icon {
+    background-color: var(--primary-blue);
+    border: 2px solid white;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    line-height: 26px; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
 }
