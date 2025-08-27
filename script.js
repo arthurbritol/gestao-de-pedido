@@ -26,11 +26,9 @@ let pedidosIniciais = [
     { id: 333704, cliente: "Gama Ferragens", status: "Aguardando separação", data: "2025-08-28", endereco: "Av. Comendador Rafael, 1500, Centro, Linhares - ES, 29900-322", embarque: "Linhares", motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #24 (0.60mm)"], Tubo: ["Tubo Industrial Quadrado 40x40 #14 (2.00mm)"] } },
     { id: 333900, cliente: "Épsilon Indústria", status: "Aguardando separação", data: "2025-08-29", endereco: "Rua Viana, 55, Glória, Vila Velha - ES, 29122-370", embarque: "Vila Velha", motorista: null, produtos: { Tubo: ["Tubo Retangular 50x30 #18 (1.25mm)"], Chapa: ["Chapa Inox 304 1.0mm Escovada"] } },
     { id: 334755, cliente: "Zeta Metalúrgica", status: "Aguardando separação", data: "2025-08-29", endereco: "Rua Moacyr Ávidos, 45, Centro, Colatina - ES, 29700-160", embarque: "Colatina", motorista: null, produtos: { Viga: ["Viga W 200 x 22.5"], Tubo: ["Tubo Quadrado 30x30 #18 (1.25mm)"] } },
-    { id: 334684, cliente: "Ômega Comércio", status: "Aguardando separação", data: "2025-08-30", endereco: "Rua das Acácias, 99, Barcelona, Serra - ES, 29166-200", embarque: "Serra", motorista: null, produtos: { Chapa: ["Chapa Perfurada Aço Carbono 1.25mm"], "Cantoneira / Barra": ["Cantoneira 2\" x 1/8\""] } },
     { id: 333038, cliente: "Ícaro Soldas", status: "Aguardando separação", data: "2025-08-30", endereco: "Avenida Vale do Rio Doce, 20, Porto de Santana, Cariacica - ES, 29153-010", embarque: "Cariacica", motorista: null, produtos: { Tubo: ["Tubo Industrial Redondo 2\""], Chapa: ["Chapa Fina a Frio #16 (1.55mm)"] } },
     { id: 334823, cliente: "Fênix Construções", status: "Aguardando separação", data: "2025-08-31", endereco: "Avenida Vitória, 1500, Jucutuquara, Vitória - ES, 29040-780", embarque: "Vitória", motorista: null, produtos: { Viga: ["Viga W 250 x 32.7", "Viga U 6\" x 8.2#"], Tubo: ["Tubo Galvanizado 2\""] } },
     { id: 334807, cliente: "Grifo Metais", status: "Aguardando separação", data: "2025-08-31", endereco: "Rua Monsenhor Pedrinha, 1020, Centro, Linhares - ES, 29900-110", embarque: "Linhares", motorista: null, produtos: { Chapa: ["Chapa Inox 316 2.0mm"], Viga: ["Viga I 5\" x 10#"] } },
-    { id: 334815, cliente: "Draco Montagens", status: "Aguardando separação", data: "2025-09-01", endereco: "Rua Projetada, 77, Chácara Parreiral, Serra - ES, 29164-321", embarque: "Serra", motorista: null, produtos: { Tubo: ["Tubo Oblongo 38x20 #18 (1.25mm)"], Chapa: ["Chapa Galvanizada #14 (2.00mm)"] } },
     { id: 327413, cliente: "Pegasus Engenharia", status: "Aguardando separação", data: "2025-09-01", endereco: "Rua Quinze de Novembro, 600, Centro, Vila Velha - ES, 29100-300", embarque: "Vila Velha", motorista: null, produtos: { Viga: ["Viga U 8\" x 11.5#"], Tubo: ["Tubo Redondo 4\" #14 (2.00mm)"] } },
     { id: 334389, cliente: "Centauro Indústria", status: "Aguardando separação", data: "2025-09-02", endereco: "Rua Benjamin Constant, 190, Centro, Colatina - ES, 29700-130", embarque: "Colatina", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 5/16\" (7.94mm)"], Viga: ["Viga I 6\" x 12.5#"] } },
     { id: 334702, cliente: "Harpia Estruturas", status: "Aguardando separação", data: "2025-09-02", endereco: "Avenida Talma Rodrigues Ribeiro, 1500, Portal de Jacaraípe, Serra - ES, 29173-735", embarque: "Serra", motorista: null, produtos: { Tubo: ["Tubo SCH 40 3\""], Chapa: ["Chapa Grossa 3/4\" (19.05mm)"] } },
@@ -40,9 +38,7 @@ let pedidosIniciais = [
     { id: 331324, cliente: "Atlas Construções", status: "Aguardando separação", data: "2025-09-04", endereco: "Rua Major Pissarra, 250, Centro, Serra - ES, 29176-030", embarque: "Serra", motorista: null, produtos: { Viga: ["Viga W 360 x 57.8", "Viga U 8\" x 11.5#"], Chapa: ["Chapa Aço Carbono 3/8\" (9.53mm)"] } },
     { id: 334382, cliente: "Titã Fundições", status: "Aguardando separação", data: "2025-09-05", endereco: "Rua Henrique Moscoso, 1001, Centro, Vila Velha - ES, 29100-021", embarque: "Vila Velha", motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #14 (2.00mm)"], Tubo: ["Tubo Redondo 5\" SCH 40"] } },
     { id: 332901, cliente: "Olimpo Metais", status: "Aguardando separação", data: "2025-09-05", endereco: "Rua Expedicionário Abílio dos Santos, 50, Centro, Colatina - ES, 29700-100", embarque: "Colatina", motorista: null, produtos: { Viga: ["Viga I 12\" x 31.8#"], Chapa: ["Chapa Inox 304 3.0mm Polida"] } },
-    { id: 333394, cliente: "União Metálica", status: "Aguardando separação", data: "2025-09-06", endereco: "Rua Flor de Maio, 10, Feu Rosa, Serra - ES, 29172-155", embarque: "Serra", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/2\" (12.70mm)"], Tubo: ["Tubo Redondo 4\" #12 (2.65mm)"], Viga: ["Viga I 8\" x 18.4#"] } },
     { id: 333767, cliente: "Expresso Cargas", status: "Aguardando separação", data: "2025-09-06", endereco: "Rua Padre Luiz Parenzi, 350, Centro, Aracruz - ES, 29190-058", embarque: "Aracruz", motorista: null, produtos: { Tubo: ["Tubo Retangular 50x30 #16 (1.55mm)"], Viga: ["Viga W 250 x 38.5"] } },
-    { id: 329163, cliente: "Soluções em Aço", status: "Aguardando separação", data: "2025-09-07", endereco: "Rua da Praia, 50, Muquiçaba, Guarapari - ES, 29215-410", embarque: "Guarapari", motorista: null, produtos: { Chapa: ["Chapa Inox 430 0.8mm Escovada"], "Cantoneira / Barra": ["Cantoneira 1.1/2\" x 1/8\""] } },
     { id: 330199, cliente: "Estrutura Forte", status: "Aguardando separação", data: "2025-09-07", endereco: "Rua da Linha, 10, Shell, Linhares - ES, 29901-570", embarque: "Linhares", motorista: null, produtos: { Tubo: ["Tubo Redondo 1\" #18 (1.25mm)"], Chapa: ["Chapa Aço Carbono 1/8\" (3.00mm)"] } },
     { id: 328948, cliente: "Cia. do Metal", status: "Aguardando separação", data: "2025-09-08", endereco: "Praça São Benedito, 150, Centro, São Mateus - ES, 29930-190", embarque: "São Mateus", motorista: null, produtos: { Viga: ["Viga U 4\" x 5.4#", "Viga I 3\" x 5.7#"], Chapa: ["Chapa Galvanizada #28 (0.43mm)"] } },
     { id: 329122, cliente: "Norte Aço", status: "Aguardando separação", data: "2025-09-08", endereco: "Avenida 27 de Abril, 80, Centro, Fundão - ES, 29185-000", embarque: "Fundão", motorista: null, produtos: { Tubo: ["Tubo Quadrado 60x60 #18 (1.25mm)"], Chapa: ["Chapa Fina a Frio #28 (0.43mm)"] } },
@@ -57,11 +53,9 @@ let pedidosIniciais = [
     { id: 390002, cliente: "Construções Litorâneas", status: "Aguardando separação", data: "2025-09-13", endereco: "Rua Gastão Roubach, 180, Itapuã, Vila Velha - ES, 29101-700", embarque: null, motorista: null, produtos: { Viga: ["Viga W 150 x 13.5"], Chapa: ["Chapa Xadrez 1/4\" (6.35mm)"] } },
     { id: 390003, cliente: "Viana Aço e Ferro", status: "Aguardando separação", data: "2025-09-14", endereco: "Avenida Vitória, 12, Centro, Viana - ES, 29130-065", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 50x50 #16 (1.55mm)", "Tubo Redondo 3\" #14 (2.00mm)"] } },
     { id: 390004, cliente: "Engenharia Ponto Forte", status: "Aguardando separação", data: "2025-09-14", endereco: "Rua General Osório, 83, Centro, Vitória - ES, 29010-020", embarque: null, motorista: null, produtos: { Viga: ["Viga I 8\" x 18.4#"], Chapa: ["Chapa Aço Carbono 3/8\" (9.53mm)"] } },
-    { id: 390005, cliente: "Obras Rápidas Cariacica", status: "Aguardando separação", data: "2025-09-15", endereco: "Rodovia Leste-Oeste, 1000, Campo Belo, Cariacica - ES, 29143-343", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Galvanizada #20 (0.95mm)"], Tubo: ["Tubo Industrial Redondo 2\""] } },
+    { id: 390005, cliente: "Obras Rápidas Cariacica", status: "Aguardando separação", data: "2025-09-15", endereco: "Rodovia Aloízio Santos, 1000, Campo Belo, Cariacica - ES, 29143-343", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Galvanizada #20 (0.95mm)"], Tubo: ["Tubo Industrial Redondo 2\""] } },
     { id: 390006, cliente: "Metalúrgica Guarapari", status: "Aguardando separação", data: "2025-09-15", endereco: "Rua Santana do Iapó, 20, Ipiranga, Guarapari - ES, 29201-070", embarque: null, motorista: null, produtos: { "Cantoneira / Barra": ["Barra Chata 2\" x 1/4\""], Chapa: ["Chapa Fina a Frio #16 (1.55mm)"] } },
     { id: 390007, cliente: "Indústria de Colatina", status: "Aguardando separação", data: "2025-09-16", endereco: "Rua Aurélio Gatti, 30, Maria das Graças, Colatina - ES, 29705-015", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo 4\" #12 (2.65mm)"], Viga: ["Viga W 200 x 22.5"] } },
-    { id: 390009, cliente: "Porto de Vitória Log", status: "Aguardando separação", data: "2025-09-17", endereco: "Avenida dos Portugueses, 50, Ilha do Príncipe, Vitória - ES, 29020-300", embarque: null, motorista: null, produtos: { Viga: ["Viga U 8\" x 11.5#", "Viga I 10\" x 25.4#"] } },
-    { id: 390010, cliente: "Estruturas Aracruz", status: "Aguardando separação", data: "2025-09-17", endereco: "Rua das Laranjeiras, 5, Jequitibá, Aracruz - ES, 29193-010", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 120x60 #14 (2.00mm)", "Tubo Quadrado 70x70 #14 (2.00mm)"] } },
     { id: 390011, cliente: "Metalúrgica Montanhas", status: "Aguardando separação", data: "2025-09-18", endereco: "Av. Evandi Américo Comarela, 100, Centro, Domingos Martins - ES, 29260-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Xadrez 1/8\" (3.00mm)"], Viga: ["Viga I 3\" x 5.7#"] } },
     { id: 390012, cliente: "Construções Alfredo Chaves", status: "Aguardando separação", data: "2025-09-18", endereco: "Rua Presidente Vargas, 250, Centro, Alfredo Chaves - ES, 29240-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 60x60 #18 (1.25mm)"], Viga: ["Viga W 150 x 18.0"] } },
     { id: 390013, cliente: "Aços de Ibatiba", status: "Aguardando separação", data: "2025-09-19", endereco: "Av. Sete de Setembro, 45, Centro, Ibatiba - ES, 29395-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Galvanizada #16 (1.55mm)"], "Cantoneira / Barra": ["Barra Chata 1\" x 3/16\""] } },
@@ -69,7 +63,6 @@ let pedidosIniciais = [
     { id: 390015, cliente: "Estruturas Itaguaçu", status: "Aguardando separação", data: "2025-09-20", endereco: "Rua Doutor Ferreira Coelho, 30, Centro, Itaguaçu - ES, 29690-000", embarque: null, motorista: null, produtos: { Viga: ["Viga U 5\" x 6.7#"], Tubo: ["Tubo Retangular 50x30 #18 (1.25mm)"] } },
     { id: 390016, cliente: "Comércio de Aço Mimoso", status: "Aguardando separação", data: "2025-09-20", endereco: "Praça Cel. Paiva Gonçalves, 50, Centro, Mimoso do Sul - ES, 29400-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/4\" (6.35mm)"], "Cantoneira / Barra": ["Cantoneira 2\" x 1/8\""] } },
     { id: 390017, cliente: "Obras de Marechal Floriano", status: "Aguardando separação", data: "2025-09-21", endereco: "Rua Sant'Ana, 120, Centro, Marechal Floriano - ES, 29255-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 90x90 #12 (2.65mm)"], Viga: ["Viga I 6\" x 12.5#"] } },
-    { id: 390018, cliente: "Siderúrgica de Alegre", status: "Aguardando separação", data: "2025-09-21", endereco: "Rua Dr. Wanderley, 10, Centro, Alegre - ES, 29500-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Galvanizada #14 (2.00mm)"], Viga: ["Viga W 250 x 32.7"] } },
     { id: 390019, cliente: "Construir Santa Teresa", status: "Aguardando separação", data: "2025-09-22", endereco: "Av. Ângelo Pretti, 255, Centro, Santa Teresa - ES, 29650-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Schedule 40 2\""], Chapa: ["Chapa Grossa 3/4\" (19.05mm)"] } },
     { id: 390020, cliente: "Logística Conceição da Barra", status: "Aguardando separação", data: "2025-09-22", endereco: "Av. Gov. Jones dos Santos Neves, 253, Centro, Conceição da Barra - ES, 29960-000", embarque: null, motorista: null, produtos: { Viga: ["Viga I 10\" x 25.4#", "Viga U 8\" x 11.5#"] } },
     { id: 390021, cliente: "Metalúrgica de Muqui", status: "Aguardando separação", data: "2025-09-23", endereco: "Rua Vieira Machado, 5, Centro, Muqui - ES, 29480-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #14 (2.00mm)"], Tubo: ["Tubo Redondo 5\" SCH 40"] } }
@@ -79,8 +72,8 @@ let pedidos = pedidosIniciais.map(p => {
     const embarqueSalvo = localStorage.getItem(`embarque_${p.id}`);
     return {
         ...p,
-        embarqueOriginal: p.embarque, 
-        embarque: embarqueSalvo || null, 
+        embarqueOriginal: p.embarque,
+        embarque: embarqueSalvo || null,
     };
 });
 
@@ -470,11 +463,11 @@ function fazerLoginGestor() {
 
     if (usuarios[user] && usuarios[user] === pass && (isGestor || isConsultor)) {
         usuarioLogado = user;
-        usuarioLogadoRole = user; 
-        
+        usuarioLogadoRole = user;
+
         hideAllScreens();
         document.getElementById("dashboardWrapper").style.display = "flex";
-        
+
         const sidebarUl = document.querySelector('#dashboardWrapper .sidebar ul');
         let sidebarHTML = `
             <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo Gerencial</a></li>
@@ -485,7 +478,7 @@ function fazerLoginGestor() {
             sidebarHTML += '<li><a href="#" onclick="logout()">Sair</a></li>';
         }
         sidebarUl.innerHTML = sidebarHTML;
-        
+
         showGestorView('resumo');
     } else {
         erro.textContent = "Usuário ou senha gerencial incorretos.";
@@ -802,7 +795,7 @@ function exibirResumoEmbarques() {
             const embarque = pedido.embarque;
             if (!resumo[embarque]) {
                 resumo[embarque] = { count: 0, color: '' };
-                
+
                 if (regionColors[embarque]) {
                     resumo[embarque].color = regionColors[embarque];
                 } else {
@@ -1084,7 +1077,7 @@ function renderizarPedidosCarregamento() {
                 return motoristaDestino === usuarioLogado || !motoristaDestino || motoristaDestino === '';
             }
             return motoristaDestino === usuarioLogado;
-        } else { 
+        } else {
             const filterCotacao = String(p.id).toLowerCase().includes(loaderFilters.cotacao.toLowerCase());
             const filterData = loaderFilters.data === '' || p.data === loaderFilters.data;
             const filterRota = p.embarque.toLowerCase().includes(loaderFilters.rota.toLowerCase());
@@ -2484,10 +2477,10 @@ function showGestorView(viewName, clickedLink) {
     if (clickedLink) {
         clickedLink.classList.add('active');
     }
-    
+
     hideAllScreens();
     document.getElementById('dashboardWrapper').style.display = 'flex';
-    
+
     if (viewName === 'resumo') {
         renderResumoGerencial();
     } else if (viewName === 'consulta') {
@@ -2853,16 +2846,16 @@ function showRoteirizacaoPage(clickedLink) {
     if (clickedLink) {
         clickedLink.classList.add('active');
     }
-    
+
     hideAllScreens();
     document.getElementById('roteirizacaoPage').style.display = 'grid';
     initializeMapAndFilters();
 }
 
 function initializeMap() {
-    if (map) { 
-        map.remove(); 
-        map = null; 
+    if (map) {
+        map.remove();
+        map = null;
     }
     map = L.map('map').setView([-20.198, -40.252], 10);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -2873,8 +2866,8 @@ function initializeMap() {
     }, 10);
 }
 
-function showFeedbackMessage(container, icon, message, isError = false) { 
-    container.innerHTML = `<div class="feedback-message ${isError ? 'error-message' : ''}"><i class="ph-bold ph-${icon}"></i><p>${message}</p></div>`; 
+function showFeedbackMessage(container, icon, message, isError = false) {
+    container.innerHTML = `<div class="feedback-message ${isError ? 'error-message' : ''}"><i class="ph-bold ph-${icon}"></i><p>${message}</p></div>`;
     if (isError) document.getElementById('route-summary-info').style.display = 'none';
 }
 
@@ -2892,12 +2885,12 @@ function initializeMapAndFilters() {
     initializeMap();
     const pedidosList = document.getElementById('pedidos-filtrados-list');
     pedidosList.innerHTML = '';
-    
+
     const filtered = pedidos.filter(p => p.embarque === null);
 
     if (filtered.length > 0) {
         filtered.forEach(pedido => {
-            const card = document.createElement('label'); 
+            const card = document.createElement('label');
             card.className = 'order-card';
             card.innerHTML = `<input type="checkbox" data-id="${pedido.id}"><div class="order-card-details"><h4>${pedido.cliente}</h4><p>#${pedido.id} - ${pedido.endereco}</p></div>`;
             pedidosList.appendChild(card);
@@ -2918,14 +2911,14 @@ async function getCoordsForAddress(address, id) {
     url.searchParams.append('boundary.rect.min_lat', BOUNDING_BOX_ESPIRITO_SANTO.min_lat);
     url.searchParams.append('boundary.rect.max_lon', BOUNDING_BOX_ESPIRITO_SANTO.max_lon);
     url.searchParams.append('boundary.rect.max_lat', BOUNDING_BOX_ESPIRITO_SANTO.max_lat);
-    
+
     const response = await fetch(url);
     const data = await response.json();
 
     if (!response.ok || !data.features || data.features.length === 0) {
         throw new Error(`Endereço do pedido #${id} não foi encontrado no Espírito Santo: "${address}"`);
     }
-    
+
     const feature = data.features[0];
     return {
         details: feature.properties,
@@ -2948,44 +2941,44 @@ async function generateRoute(optimized) {
         showModal("Atenção", "Selecione pelo menos um pedido para criar a rota.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
         return;
     }
-    
+
     mostrarBotoesAcao(false);
     document.getElementById('sugerirRotaBtn').disabled = true;
     document.getElementById('montarManualBtn').disabled = true;
     document.getElementById('sugerirRotaBtn').innerHTML = `<i class="ph ph-spinner-gap ph-spin"></i> Gerando Rota...`;
 
     showFeedbackMessage(document.getElementById('minuta-content'), 'spinner-gap ph-spin', 'Buscando coordenadas...');
-    
+
     try {
         const CEDISA_LOCATION = { name: 'Cedisa Calogi', coords: [-40.366593, -20.065453] };
-        
+
         const stopsPromises = selectedCheckboxes.map(cb => {
             const pedidoId = parseInt(cb.dataset.id);
             const pedidoAtual = pedidos.find(p => p.id === pedidoId);
 
             if (pedidoAtual && pedidoAtual.coords) {
-                return Promise.resolve({ ...pedidoAtual, details: {} }); 
+                return Promise.resolve({ ...pedidoAtual, details: {} });
             }
 
             const pedidoOriginal = pedidosIniciais.find(p => p.id === pedidoId);
             const enderecoCorreto = pedidoOriginal.endereco;
 
-            return getCoordsForAddress(enderecoCorreto, pedidoId).then(result => ({ 
-                ...pedidoAtual, 
-                details: result.details, 
-                coords: result.coords 
+            return getCoordsForAddress(enderecoCorreto, pedidoId).then(result => ({
+                ...pedidoAtual,
+                details: result.details,
+                coords: result.coords
             }));
         });
 
         const stops = await Promise.all(stopsPromises);
-        
+
         let finalOrderedStops = optimized ? await getOptimizedStops(stops, CEDISA_LOCATION) : stops;
-        
+
         const directionCoordinates = [
-            [CEDISA_LOCATION.coords[0], CEDISA_LOCATION.coords[1]], 
+            [CEDISA_LOCATION.coords[0], CEDISA_LOCATION.coords[1]],
             ...finalOrderedStops.map(s => [s.coords[0], s.coords[1]])
         ];
-        
+
         const dirResponse = await fetch('https://api.openrouteservice.org/v2/directions/driving-car', {
             method: 'POST',
             headers: { 'Authorization': OPENROUTESERVICE_API_KEY, 'Content-Type': 'application/json' },
@@ -3079,7 +3072,7 @@ async function getOptimizedStops(stops, origin) {
 
     const optResult = await optResponse.json();
 
-    console.log("Resultado da API de Otimização:", optResult); 
+    console.log("Resultado da API de Otimização:", optResult);
 
     if (optResult.code === 2) {
         throw new Error(`Otimização inalcançável: ${optResult.error}.`);
@@ -3093,7 +3086,7 @@ async function getOptimizedStops(stops, origin) {
             .join(', ');
         throw new Error(`A API de otimização não conseguiu incluir ${optResult.unassigned.length} paradas na rota, possivelmente por exceder o limite de locais. Pedidos não incluídos: ${unassignedClientes}`);
     }
-    
+
     if (!optResult.routes || optResult.routes.length === 0 || !optResult.routes[0].steps) {
         throw new Error("A API de otimização retornou uma resposta inválida sem rota.");
     }
@@ -3106,7 +3099,7 @@ async function getOptimizedStops(stops, origin) {
 function displayRouteOnMapAndPanel(orderedStops, route, origin) {
     const minutaContent = document.getElementById('minuta-content');
     const routeSummaryInfo = document.getElementById('route-summary-info');
-    
+
     minutaContent.innerHTML = '';
     const originElement = document.createElement('div');
     originElement.className = 'route-stop-item';
@@ -3118,7 +3111,7 @@ function displayRouteOnMapAndPanel(orderedStops, route, origin) {
         stopElement.className = 'route-stop-item';
 
         stopElement.innerHTML = `<div class="stop-icon">${index + 1}</div><div class="stop-details"><h4>${pedido.cliente}</h4><p>${pedido.endereco}</p></div>`;
-        
+
         minutaContent.appendChild(stopElement);
     });
 
@@ -3127,13 +3120,13 @@ function displayRouteOnMapAndPanel(orderedStops, route, origin) {
         <div class="summary-item"><p>${formatDistance(route.summary.distance)}</p><span>Distância</span></div>
         <div class="summary-item"><p>${formatDuration(route.summary.duration)}</p><span>Duração</span></div>`;
     routeSummaryInfo.style.display = 'flex';
-    
+
     if (map) {
         map.invalidateSize();
-        if (currentRouteLayer) { 
+        if (currentRouteLayer) {
             map.removeLayer(currentRouteLayer);
         }
-        
+
         map.eachLayer(function (layer) {
             if (layer instanceof L.Marker || layer instanceof L.Polyline) {
                 map.removeLayer(layer);
@@ -3164,5 +3157,5 @@ document.getElementById('zerarEmbarquesBtn').addEventListener('click', zerarTodo
 
 document.addEventListener("DOMContentLoaded", () => {
     showUserSelectionPage();
-    initializeMap(); 
+    initializeMap();
 });
