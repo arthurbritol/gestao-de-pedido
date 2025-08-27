@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8" />
     <title>Gestão de Pedidos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="IMAGES/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" type="image/jpg" href="IMAGES/C_logo.png"/>
+    <link rel="shortcut icon" type="image/jpg" href="IMAGES/C_logo.png" />
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -15,10 +16,8 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
-
-    
-
     <div class="user-selection-container" id="userSelectionPage">
         <div class="user-selection-box">
             <img src="IMAGES/C_logo.png" alt="Logo" class="logo">
@@ -46,7 +45,8 @@
 
     <div class="login-container" id="gestorLoginPage" style="display: none;">
         <div class="login-box">
-            <h2>Acesso Gerencial</h2> <input type="text" id="gestorUsername" placeholder="Usuário" autocomplete="username" />
+            <h2>Acesso Gerencial</h2> <input type="text" id="gestorUsername" placeholder="Usuário"
+                autocomplete="username" />
             <input type="password" id="gestorPassword" placeholder="Senha" autocomplete="current-password" />
             <button onclick="fazerLoginGestor()">Acessar Dashboard</button>
             <div class="login-error" id="gestorLoginErro"></div>
@@ -57,8 +57,10 @@
         <div class="sidebar">
             <img src="IMAGES/C_LOGO_BRANCO.png" alt="Logo" class="sidebar-logo">
             <ul>
-                <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo Gerencial</a></li>
-                <li><a href="#" data-view="consulta" onclick="showGestorView('consulta', this)">Consultar Pedidos</a></li>
+                <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo
+                        Gerencial</a></li>
+                <li><a href="#" data-view="consulta" onclick="showGestorView('consulta', this)">Consultar Pedidos</a>
+                </li>
                 <li><a href="#" onclick="logout()">Sair</a></li>
             </ul>
         </div>
@@ -87,26 +89,38 @@
             <button class="user-option-button" onclick="continueToLoginScreen()">Continuar</button>
         </div>
     </div>
-    
+
     <div class="user-selection-container" id="materialSelectionPage" style="display: none;">
         <div class="user-selection-box">
             <img src="IMAGES/C_logo.png" alt="Logo" class="logo">
             <h2>Qual material você irá separar?</h2>
             <div class="user-option" data-material-type="Chapa" onclick="selectMaterialType('Chapa')">
                 <img src="IMAGES/chapa-de-aco.png" alt="Icone Chapa" class="icon">
-                <div class="text-content"><h3>Chapa</h3><p>Pedidos contendo chapas</p></div>
+                <div class="text-content">
+                    <h3>Chapa</h3>
+                    <p>Pedidos contendo chapas</p>
+                </div>
             </div>
             <div class="user-option" data-material-type="Tubo" onclick="selectMaterialType('Tubo')">
                 <img src="IMAGES/tubos.png" alt="Icone Tubo" class="icon">
-                <div class="text-content"><h3>Tubo</h3><p>Pedidos contendo tubos</p></div>
+                <div class="text-content">
+                    <h3>Tubo</h3>
+                    <p>Pedidos contendo tubos</p>
+                </div>
             </div>
             <div class="user-option" data-material-type="Viga" onclick="selectMaterialType('Viga')">
                 <img src="IMAGES/viga-de-aco.png" alt="Icone Viga" class="icon">
-                <div class="text-content"><h3>Viga</h3><p>Pedidos contendo vigas</p></div>
+                <div class="text-content">
+                    <h3>Viga</h3>
+                    <p>Pedidos contendo vigas</p>
+                </div>
             </div>
             <div class="user-option" data-material-type="Todos" onclick="selectMaterialType('Todos')">
                 <img src="IMAGES/aco-laminado.png" alt="Icone Todos" class="icon">
-                <div class="text-content"><h3>Todos os Materiais</h3><p>Visualizar pedidos de todos os tipos de materiais</p></div>
+                <div class="text-content">
+                    <h3>Todos os Materiais</h3>
+                    <p>Visualizar pedidos de todos os tipos de materiais</p>
+                </div>
             </div>
             <button class="user-option-button" onclick="continueToFilterScreen()">Continuar</button>
         </div>
@@ -131,7 +145,7 @@
             <div class="login-error" id="driverLoginErro"></div>
         </div>
     </div>
-    
+
     <div class="filter-screen-container" id="filterScreen">
         <div class="filter-box">
             <img src="IMAGES/C_logo.png" alt="Logo" class="logo">
@@ -139,10 +153,14 @@
             <div class="summary-section">
                 <h3>Resumo de Pedidos por Embarque</h3>
                 <div id="embarqueSummary"></div>
-                <button onclick="viewPedidosFromSummary('')" class="filter-box-button-bottom">Ver Todos os Pedidos</button>
+                <button onclick="viewPedidosFromSummary('')" class="filter-box-button-bottom">Ver Todos os
+                    Pedidos</button>
             </div>
-            <button class="filter-box-button-bottom" onclick="confirmResetAllData()" id="resetDataButton" style="background-color: var(--red-error); margin-top: 30px; display: block;">Zerar Todos os Dados de Pesagem</button>
-            <button class="filter-box-button-bottom" onclick="logout()" style="background-color: var(--text-secondary); margin-top: 15px;">Sair (Logout)</button>
+            <button class="filter-box-button-bottom" onclick="confirmResetAllData()" id="resetDataButton"
+                style="background-color: var(--red-error); margin-top: 30px; display: block;">Zerar Todos os Dados de
+                Pesagem</button>
+            <button class="filter-box-button-bottom" onclick="logout()"
+                style="background-color: var(--text-secondary); margin-top: 15px;">Sair (Logout)</button>
         </div>
     </div>
 
@@ -150,7 +168,8 @@
         <div class="sidebar" id="loaderSidebar">
             <img src="IMAGES/C_LOGO_BRANCO.png" alt="Logo" class="sidebar-logo">
             <ul>
-                <li><a href="#" id="navMeusCarregamentos" class="active" onclick="showLoaderView('meus')">Meus Carregamentos</a></li>
+                <li><a href="#" id="navMeusCarregamentos" class="active" onclick="showLoaderView('meus')">Meus
+                        Carregamentos</a></li>
                 <li><a href="#" id="navTodosPedidos" onclick="showLoaderView('todos')">Todos os Pedidos</a></li>
                 <li><a href="#" onclick="logout()">Sair</a></li>
             </ul>
@@ -160,7 +179,7 @@
             <div class="loader-header">
                 <h2 id="loaderViewTitle">Meus Carregamentos</h2>
             </div>
-            
+
             <div class="search-and-filters">
                 <div class="loader-filters-container" id="loaderFiltersContainer" style="display:none;">
                     <div class="filter-group">
@@ -187,9 +206,12 @@
                 </div>
 
                 <div class="main-app-status-filters" id="loaderStatusFilters" style="display:none;">
-                    <button data-status-filter="aguardando" class="active" onclick="aplicarFiltroStatusCarregamento('aguardando', this)">Aguardando Carregamento</button>
-                    <button data-status-filter="em_carregamento" onclick="aplicarFiltroStatusCarregamento('em_carregamento', this)">Em Carregamento</button>
-                    <button data-status-filter="carregado" onclick="aplicarFiltroStatusCarregamento('carregado', this)">Carregamento Concluído</button>
+                    <button data-status-filter="aguardando" class="active"
+                        onclick="aplicarFiltroStatusCarregamento('aguardando', this)">Aguardando Carregamento</button>
+                    <button data-status-filter="em_carregamento"
+                        onclick="aplicarFiltroStatusCarregamento('em_carregamento', this)">Em Carregamento</button>
+                    <button data-status-filter="carregado"
+                        onclick="aplicarFiltroStatusCarregamento('carregado', this)">Carregamento Concluído</button>
                 </div>
             </div>
 
@@ -197,7 +219,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="mainApp">
         <div class="header">
             <div class="header-left">
@@ -208,12 +230,16 @@
         </div>
         <div class="container">
             <div class="welcome" id="welcomeMessage"></div>
-            
+
             <div class="main-app-status-filters" id="mainAppStatusFilters" style="display:none;">
-                <button data-status-filter="todas" class="active" onclick="aplicarFiltroStatusPrincipal('todas', this)">Todos os Status</button>
-                <button data-status-filter="Aguardando separação" onclick="aplicarFiltroStatusPrincipal('Aguardando separação', this)">Aguardando Separação</button>
-                <button data-status-filter="Em separação" onclick="aplicarFiltroStatusPrincipal('Em separação', this)">Em Separação</button>
-                <button data-status-filter="Pedido separado" onclick="aplicarFiltroStatusPrincipal('Pedido separado', this)">Pedido Separado</button>
+                <button data-status-filter="todas" class="active"
+                    onclick="aplicarFiltroStatusPrincipal('todas', this)">Todos os Status</button>
+                <button data-status-filter="Aguardando separação"
+                    onclick="aplicarFiltroStatusPrincipal('Aguardando separação', this)">Aguardando Separação</button>
+                <button data-status-filter="Em separação"
+                    onclick="aplicarFiltroStatusPrincipal('Em separação', this)">Em Separação</button>
+                <button data-status-filter="Pedido separado"
+                    onclick="aplicarFiltroStatusPrincipal('Pedido separado', this)">Pedido Separado</button>
             </div>
 
             <div id="quotationsByEmbarque" class="card quotations-section" style="display:none;">
@@ -221,37 +247,52 @@
                 <div id="quotationList"></div>
             </div>
             <div id="pedidosPorSetor" class="card"></div>
-            <button id="backToAllOrdersButton" class="btn-back-to-all-orders" style="display:none; margin-top: 25px; width: 100%;">Voltar para Todos os Pedidos</button>
+            <button id="backToAllOrdersButton" class="btn-back-to-all-orders"
+                style="display:none; margin-top: 25px; width: 100%;">Voltar para Todos os Pedidos</button>
         </div>
     </div>
 
     <div class="main-layout" id="roteirizacaoPage" style="display: none;">
         <aside class="sidebar" id="roteirizacaoSidebar">
-             <div class="panel-header">
-                 <button class="btn-back-roteirizacao" onclick="showGestorView('resumo')"><i class="ph ph-arrow-left"></i> Voltar</button>
-                 <div class="panel-header-title">
-                    <i class="ph-bold ph-list-checks"></i> 
+            <div class="panel-header">
+                <button class="btn-back-roteirizacao" onclick="showGestorView('resumo')"><i
+                        class="ph ph-arrow-left"></i> Voltar</button>
+                <div class="panel-header-title">
+                    <i class="ph-bold ph-list-checks"></i>
                     <h2>Pedidos</h2>
-                 </div>
-             </div>
-             <div class="sidebar-content">
-                 <ul id="pedidos-filtrados-list" class="order-list"></ul>
-             </div>
-             <div class="sidebar-footer">
-                <button id="zerarEmbarquesBtn" class="btn btn-danger-outline"><i class="ph ph-trash"></i>Zerar Todos os Embarques</button>
-             </div>
+                </div>
+            </div>
+            <div class="sidebar-content">
+                <ul id="pedidos-filtrados-list" class="order-list"></ul>
+            </div>
+            <div class="sidebar-footer">
+                <button id="zerarEmbarquesBtn" class="btn btn-danger-outline"><i class="ph ph-trash"></i>Zerar Todos os
+                    Embarques</button>
+            </div>
         </aside>
 
         <main class="main-content">
             <div class="route-details-panel">
-                <div class="panel-header"><i class="ph-bold ph-path"></i> <h2>Minuta da Rota</h2></div>
-                <div class="route-actions">
-                    <button id="sugerirRotaBtn" class="btn btn-primary"><i class="ph ph-magic-wand"></i>Sugerir Rota Otimizada</button>
-                    <button id="montarManualBtn" class="btn btn-secondary"><i class="ph ph-arrows-clockwise"></i>Montar Rota Manualmente</button>
-                    <button id="confirmarEmbarqueBtn" class="btn btn-success" style="display:none;"><i class="ph ph-check-circle"></i>Confirmar Embarque</button>
-                    <button id="cancelarRotaBtn" class="btn btn-danger" style="display:none;"><i class="ph ph-x-circle"></i>Cancelar</button>
+                <div class="panel-header">
+                    <i class="ph-bold ph-path"></i>
+                    <h2>Minuta da Rota</h2>
                 </div>
-                <div id="minuta-content" class="route-stops-list"></div>
+                <div class="route-actions">
+                    <button id="sugerirRotaBtn" class="btn btn-primary"><i class="ph ph-magic-wand"></i>Sugerir Rota
+                        Otimizada</button>
+                    <button id="montarManualBtn" class="btn btn-secondary"><i class="ph ph-arrows-clockwise"></i>Montar
+                        Rota Manualmente</button>
+                    <button id="confirmarEmbarqueBtn" class="btn btn-success" style="display:none;"><i
+                            class="ph ph-check-circle"></i>Confirmar Embarque</button>
+                    <button id="cancelarRotaBtn" class="btn btn-danger" style="display:none;"><i
+                            class="ph ph-x-circle"></i>Cancelar</button>
+                </div>
+                <div id="minuta-content" class="route-stops-list">
+                    <div class="feedback-message">
+                        <i class="ph-bold ph-map-trifold"></i>
+                        <p>Selecione os pedidos e crie sua rota.</p>
+                    </div>
+                </div>
                 <div id="route-summary-info" class="route-summary-footer" style="display:none;"></div>
             </div>
             <div class="map-panel">
@@ -272,4 +313,5 @@
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
+
 </html>
