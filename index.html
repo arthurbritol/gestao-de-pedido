@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8" />
     <title>Gestão de Pedidos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="IMAGES/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" type="image/jpg" href="IMAGES/C_logo.png"/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
+
+    
 
     <div class="user-selection-container" id="userSelectionPage">
         <div class="user-selection-box">
@@ -147,6 +155,7 @@
                 <li><a href="#" onclick="logout()">Sair</a></li>
             </ul>
         </div>
+
         <div class="dashboard-content-container" id="loaderContentContainer">
             <div class="loader-header">
                 <h2 id="loaderViewTitle">Meus Carregamentos</h2>
@@ -216,11 +225,46 @@
         </div>
     </div>
 
+    <div class="main-layout" id="roteirizacaoPage" style="display: none;">
+        <aside class="sidebar" id="roteirizacaoSidebar">
+             <div class="panel-header">
+                 <button class="btn-back-roteirizacao" onclick="showGestorView('resumo')"><i class="ph ph-arrow-left"></i> Voltar</button>
+                 <div class="panel-header-title">
+                    <i class="ph-bold ph-list-checks"></i> 
+                    <h2>Pedidos</h2>
+                 </div>
+             </div>
+             <div class="sidebar-content">
+                 <ul id="pedidos-filtrados-list" class="order-list"></ul>
+             </div>
+             <div class="sidebar-footer">
+                <button id="zerarEmbarquesBtn" class="btn btn-danger-outline"><i class="ph ph-trash"></i>Zerar Todos os Embarques</button>
+             </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="route-details-panel">
+                <div class="panel-header"><i class="ph-bold ph-path"></i> <h2>Minuta da Rota</h2></div>
+                <div class="route-actions">
+                    <button id="sugerirRotaBtn" class="btn btn-primary"><i class="ph ph-magic-wand"></i>Sugerir Rota Otimizada</button>
+                    <button id="montarManualBtn" class="btn btn-secondary"><i class="ph ph-arrows-clockwise"></i>Montar Rota Manualmente</button>
+                    <button id="confirmarEmbarqueBtn" class="btn btn-success" style="display:none;"><i class="ph ph-check-circle"></i>Confirmar Embarque</button>
+                    <button id="cancelarRotaBtn" class="btn btn-danger" style="display:none;"><i class="ph ph-x-circle"></i>Cancelar</button>
+                </div>
+                <div id="minuta-content" class="route-stops-list"></div>
+                <div id="route-summary-info" class="route-summary-footer" style="display:none;"></div>
+            </div>
+            <div class="map-panel">
+                <div id="map"></div>
+            </div>
+        </main>
+    </div>
+
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
             <button class="modal-close-button" onclick="closeModal()">×</button>
             <h3 id="modalTitle"></h3>
-            <p id="modalMessage"></p>
+            <div id="modalMessage"></div>
             <div class="modal-buttons" id="modalButtons"></div>
         </div>
     </div>
