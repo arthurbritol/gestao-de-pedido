@@ -1429,8 +1429,7 @@ button:disabled {
 
 .dashboard-main-content {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 25px;
 }
 
 .status-column {
@@ -1583,6 +1582,15 @@ button:disabled {
     color: var(--orange-warning-text);
 }
 
+.status-header.status-aguardando-rota {
+    background-color: #7d6c6e; 
+}
+
+.status-tag.aguardando-rota {
+    background-color: #e9ecef;
+    color: #57494e;
+    border: 1px solid #ced4da;
+}
 
 .shipment-details-view {
     background-color: var(--white);
@@ -2554,7 +2562,7 @@ button:disabled {
 
 .main-layout {
     display: grid;
-    grid-template-columns: 380px 1fr; /* Sidebar com largura fixa */
+    grid-template-columns: 380px 1fr; 
     height: 100vh;
     background-color: var(--light-gray);
 }
@@ -2566,9 +2574,9 @@ button:disabled {
     border-right: 1px solid var(--medium-gray);
     box-shadow: 0 4px 12px var(--shadow-light);
     height: 100vh;
-    position: static; /* sobrescreve o 'fixed' anterior */
+    position: static; 
     padding: 0;
-    width: 100%; /* Garante que o aside ocupe a coluna do grid */
+    width: 100%; 
 }
 
 #roteirizacaoSidebar .panel-header {
@@ -2628,7 +2636,7 @@ button:disabled {
     padding: 0; 
     margin: 0;
     display: grid;
-    grid-template-columns: 1fr; /* Garante uma coluna */
+    grid-template-columns: 1fr;
     gap: 15px;
 }
 
@@ -2642,8 +2650,8 @@ button:disabled {
     transition: all 0.2s ease-in-out; 
     cursor: pointer; 
     background-color: var(--white);
-    box-shadow: none; /* Reseta sombra de outras telas */
-    border-left: none; /* Reseta borda de outras telas */
+    box-shadow: none;
+    border-left: none; 
 }
 #roteirizacaoPage .order-card:hover { 
     border-color: var(--primary-blue);
@@ -2685,7 +2693,7 @@ button:disabled {
 
 .main-content {
     display: grid;
-    grid-template-columns: 400px 1fr; /* Colunas para painel de detalhes e mapa */
+    grid-template-columns: 400px 1fr; 
     padding: 24px;
     gap: 24px;
     overflow: hidden;
@@ -2931,3 +2939,88 @@ button:disabled {
     line-height: 26px; 
     box-shadow: 0 2px 5px rgba(0,0,0,0.4);
 }
+
+.modal-content {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: var(--border-radius-medium);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    width: 90%;
+    max-width: 800px; 
+    text-align: center;
+    max-height: 85vh;
+    overflow-y: auto;
+    text-align: left;
+}
+
+.embarque-modal-cotacao {
+    background-color: #f8f9fa;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius-small);
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.embarque-modal-cotacao h4 {
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--medium-gray);
+    font-size: 1.1rem;
+}
+
+.embarque-modal-setor {
+    font-size: 0.95rem;
+    color: var(--dark-gray);
+    margin-top: 10px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.embarque-modal-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--white);
+    border-radius: 4px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    border: 1px solid #e9ecef;
+}
+
+.embarque-modal-item .material-name {
+    flex-basis: 50%;
+    font-weight: 500;
+}
+
+.embarque-modal-item .material-info {
+    display: flex;
+    gap: 20px;
+    flex-basis: 50%;
+    justify-content: flex-end;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.embarque-modal-item .material-cert,
+.embarque-modal-item .material-weight {
+    color: var(--text-secondary);
+}
+
+.embarque-modal-item .material-cert strong,
+.embarque-modal-item .material-weight strong {
+    color: var(--dark-blue);
+    font-weight: 600;
+}
+
+.embarque-modal-item .material-status {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+    text-transform: uppercase;
+}
+
+.material-status.concluido { background-color: var(--green-concluido-bg); color: var(--green-concluido-text); }
+.material-status.pendente { background-color: var(--red-pendente-bg); color: var(--red-pendente-text); }
