@@ -3024,3 +3024,220 @@ button:disabled {
 
 .material-status.concluido { background-color: var(--green-concluido-bg); color: var(--green-concluido-text); }
 .material-status.pendente { background-color: var(--red-pendente-bg); color: var(--red-pendente-text); }
+
+/* --- Estilos para a Tela de Geração de Pedido --- */
+.create-order-container {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: var(--border-radius-medium);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.create-order-container h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--medium-gray);
+}
+
+.create-order-container h3 {
+    font-size: 20px;
+    color: var(--dark-blue);
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.order-header-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius-small);
+}
+
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+.items-table th, .items-table td {
+    border: 1px solid var(--medium-gray);
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.items-table th {
+    background-color: var(--light-gray);
+    font-weight: 600;
+}
+
+.items-table input, .items-table select {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius-small);
+}
+
+.items-table .btn-remove-item {
+    background-color: var(--red-error);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+}
+
+.btn-add-item {
+    background-color: var(--green-success);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.order-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    padding-top: 20px;
+    border-top: 1px solid var(--medium-gray);
+}
+
+.order-actions .btn-cancel {
+    background-color: var(--text-secondary);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: var(--border-radius-small);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.order-actions .btn-save {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: var(--border-radius-small);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.address-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.address-fields .cep-group {
+    grid-column: 1 / 3; 
+    position: relative;
+}
+
+.address-fields .logradouro-group {
+    grid-column: 1 / 4; 
+}
+
+.address-fields input[readonly] {
+    background-color: #e9ecef; 
+    cursor: not-allowed;
+}
+
+.loader {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    margin-top: 4px; 
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--primary-blue);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .address-fields {
+        grid-template-columns: 1fr 1fr; 
+    }
+    .address-fields .cep-group,
+    .address-fields .logradouro-group {
+        grid-column: auto;
+    }
+}
+
+.consulta-pedido-card {
+    grid-template-areas:
+        "header header header header"
+        "data rota endereco motorista"
+        "produtos produtos produtos produtos"
+        "actions actions actions actions";
+    grid-template-columns: 1fr 1fr 2fr 1fr;
+}
+
+.consulta-pedido-card .card-header { grid-area: header; }
+.consulta-pedido-card .info-group:nth-of-type(1) { grid-area: data; }
+.consulta-pedido-card .info-group:nth-of-type(2) { grid-area: rota; }
+.consulta-pedido-card .info-group:nth-of-type(3) { grid-area: endereco; }
+.consulta-pedido-card .info-group:nth-of-type(4) { grid-area: motorista; }
+.consulta-pedido-card .produtos-list { grid-area: produtos; }
+
+.card-actions {
+    grid-area: actions;
+    justify-self: end; 
+    margin-top: 10px;
+}
+
+.btn-delete-pedido {
+    background-color: var(--red-error);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-delete-pedido:hover {
+    background-color: #c82333;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+    transform: translateY(-1px);
+}
