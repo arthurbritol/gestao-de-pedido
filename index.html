@@ -66,6 +66,78 @@
         </div>
         <div class="dashboard-content-container" id="dashboardContainer">
         </div>
+
+        <div class="dashboard-content-container" id="createOrderPage" style="display: none;">
+            <div class="create-order-container">
+                <h2>Gerar Novo Pedido</h2>
+                <form id="orderForm">
+                    <h3>Dados do Pedido</h3>
+                    <div class="order-header-fields">
+                        <div class="form-group">
+                            <label for="orderCliente">Cliente</label>
+                            <input type="text" id="orderCliente" required placeholder="Nome do cliente">
+                        </div>
+                        <div class="form-group">
+                            <label for="orderData">Data de Emissão</label>
+                            <input type="date" id="orderData" required>
+                        </div>
+                    </div>
+
+                    <h3>Endereço de Entrega</h3>
+                    <div class="address-fields">
+                        <div class="form-group cep-group">
+                            <label for="orderCep">CEP</label>
+                            <input type="text" id="orderCep" placeholder="Digite o CEP" onblur="buscarCep()">
+                            <span id="cep-loader" class="loader" style="display: none;"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderLogradouro">Logradouro</label>
+                            <input type="text" id="orderLogradouro" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderNumero">Número</label>
+                            <input type="text" id="orderNumero" placeholder="Nº">
+                        </div>
+                        <div class="form-group">
+                            <label for="orderComplemento">Complemento</label>
+                            <input type="text" id="orderComplemento" placeholder="Apto, Bloco, etc.">
+                        </div>
+                        <div class="form-group">
+                            <label for="orderBairro">Bairro</label>
+                            <input type="text" id="orderBairro" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderCidade">Cidade</label>
+                            <input type="text" id="orderCidade" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderUf">Estado</label>
+                            <input type="text" id="orderUf" readonly>
+                        </div>
+                    </div>
+
+                    <h3>Itens do Pedido (sem valor)</h3>
+                    <table class="items-table">
+                        <thead>
+                            <tr>
+                                <th>Descrição do Material</th>
+                                <th>Quantidade</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orderItemsTableBody">
+                        </tbody>
+                    </table>
+                    <button type="button" class="btn-add-item" onclick="addOrderItemRow()">+ Adicionar Item</button>
+
+                    <div class="order-actions">
+                        <button type="button" class="btn-cancel" onclick="showGestorView('resumo')">Cancelar</button>
+                        <button type="submit" class="btn-save">Salvar Pedido</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     </div>
 
     <div class="user-selection-container" id="operatorRoleSelectionPage">
@@ -196,7 +268,7 @@
                     <div class="filter-group">
                         <select id="loaderFilterStatus">
                             <option value="">Todos os Status</option>
-                            <option value="Aguardando rota">Aguardando Rota</option> 
+                            <option value="Aguardando rota">Aguardando Rota</option>
                             <option value="Aguardando separação">Aguardando Separação</option>
                             <option value="Em separação">Em Separação</option>
                             <option value="Aguardando carregamento">Aguardando Carregamento</option>
