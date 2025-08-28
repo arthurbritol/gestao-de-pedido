@@ -16,6 +16,13 @@ const destinationIcon = (number) => {
     });
 };
 
+const BOUNDING_BOX_ESPIRITO_SANTO = {
+    min_lon: -41.879,
+    min_lat: -21.303,
+    max_lon: -39.653,
+    max_lat: -17.892
+};
+
 let usuarioLogadoRole = null;
 
 const usuarios = {
@@ -85,14 +92,40 @@ let pedidosIniciais = [
     { id: 390021, cliente: "Metalúrgica de Muqui", status: "Aguardando rota", data: "2025-09-23", endereco: "Rua Vieira Machado, 5, Centro, Muqui - ES, 29480-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #14 (2.00mm)"], Tubo: ["Tubo Redondo  SCH 40"] } }
 ];
 
-let pedidos = pedidosIniciais.map(p => {
-    const embarqueSalvo = localStorage.getItem(`embarque_${p.id}`);
-    return {
-        ...p,
-        embarqueOriginal: p.embarque,
-        embarque: embarqueSalvo || null,
-    };
+const todosOsProdutos = new Set(); 
+pedidosIniciais.forEach(pedido => {
+    Object.values(pedido.produtos).forEach(listaDeProdutos => {
+        listaDeProdutos.forEach(produto => {
+            todosOsProdutos.add(produto);
+        });
+    });
 });
+
+const listaDeTodosOsProdutos = Array.from(todosOsProdutos).sort(); 
+
+const produtoParaCategoria = {};
+pedidosIniciais.forEach(pedido => {
+    for (const categoria in pedido.produtos) {
+        pedido.produtos[categoria].forEach(produto => {
+            if (!produtoParaCategoria[produto]) {
+                produtoParaCategoria[produto] = categoria;
+            }
+        });
+    }
+});
+
+const pedidosSalvos = localStorage.getItem('todosOsPedidos');
+let pedidos;
+
+if (pedidosSalvos) {
+    pedidos = JSON.parse(pedidosSalvos);
+    console.log('Pedidos carregados do localStorage:', pedidos);
+} else {
+    pedidos = pedidosIniciais.map(p => ({
+        ...p,
+    }));
+    console.log('Nenhum pedido salvo. Carregando lista inicial.');
+}
 
 function produtosParaTexto(produtos) {
     let arr = [];
@@ -238,6 +271,7 @@ function setPedidoStatus(id, status) {
     const pedidoIndex = pedidos.findIndex(p => p.id === id);
     if (pedidoIndex !== -1) {
         pedidos[pedidoIndex].status = status;
+        salvarPedidosNoLocalStorage(); 
     }
     if (document.getElementById("dashboardWrapper").style.display === "flex") {
         renderResumoGerencial();
@@ -315,6 +349,11 @@ setDadosPesoPedido = function (id, dados) {
         console.warn("Faixa de NF esgotada ao redefinir pesos.");
     }
 };
+
+function salvarPedidosNoLocalStorage() {
+    localStorage.setItem('todosOsPedidos', JSON.stringify(pedidos));
+    console.log('Pedidos foram salvos no localStorage.', pedidos); 
+}
 
 function getDadosCertificadoPedido(id) {
     return JSON.parse(localStorage.getItem(`${localStorageCertificadoKey}_${id}`)) || {};
@@ -420,7 +459,8 @@ function hideAllScreens() {
     const screenIds = [
         "userSelectionPage", "loginPage", "driverLoginPage", "gestorLoginPage",
         "filterScreen", "mainApp", "materialSelectionPage", "loaderDashboardWrapper",
-        "dashboardWrapper", "operatorRoleSelectionPage", "roteirizacaoPage"
+        "dashboardWrapper", "operatorRoleSelectionPage", "roteirizacaoPage",
+        "createOrderPage" 
     ];
     screenIds.forEach(id => {
         const screen = document.getElementById(id);
@@ -492,6 +532,7 @@ function fazerLoginGestor() {
             sidebarHTML = `
                 <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo Gerencial</a></li>
                 <li><a href="#" data-view="consulta" onclick="showGestorView('consulta', this)">Consultar Pedidos</a></li>
+                <li><a href="#" data-view="gerar-pedido" onclick="showCreateOrderPage(this)">Gerar Pedido</a></li>
                 <li><a href="#" onclick="logout()">Sair</a></li>
             `;
             sidebarUl.innerHTML = sidebarHTML;
@@ -959,7 +1000,8 @@ function resetAllOrderData() {
     const keysToRemove = [];
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (key.startsWith(localStorageDadosPesoKey) ||
+        if (!key.startsWith('todosOsPedidos') && ( 
+            key.startsWith(localStorageDadosPesoKey) ||
             key.startsWith(localStorageCertificadoKey) ||
             key.startsWith(localStorageSetorEnviadoKey) ||
             key.startsWith(localStoragePedidoStatusKey) ||
@@ -968,27 +1010,22 @@ function resetAllOrderData() {
             key.startsWith(localStoragePedidoMotoristaKey) ||
             key.startsWith(localStorageItemCarregadoKey) ||
             key.startsWith(localStoragePedidoParcialKey) ||
-            key.startsWith("fardos_")) {
+            key.startsWith("fardos_") ||
+            key.startsWith("embarque_"))) {
             keysToRemove.push(key);
         }
     }
     keysToRemove.forEach(key => localStorage.removeItem(key));
 
-    if (key.startsWith("fardos_") || key.startsWith("embarque_")) 
-
-    pedidos.forEach(p => {
-        p.status = "Aguardando rota";
-        p.embarque = null;
-        const originalPedido = pedidos.find(op => op.id === p.id);
-        if (originalPedido) {
-            p.motorista = originalPedido.motorista;
-        }
-    });
+    pedidos = pedidosIniciais.map(p => ({
+        ...p
+    }));
+    salvarPedidosNoLocalStorage();
 
     showModal(
         "Dados Zerados!",
-        "Todos os dados de peso, envio por setor e status de separação foram reiniciados.",
-        `<button class="modal-button ok" onclick="closeModal(); showUserSelectionPage();">Ok</button>`
+        "Todos os dados de peso, status e embarques foram reiniciados.",
+        `<button class="modal-button ok" onclick="closeModal(); logout();">Ok</button>`
     );
 }
 
@@ -1113,7 +1150,7 @@ function renderizarPedidosCarregamento() {
         } else {
             const filterCotacao = String(p.id).toLowerCase().includes(loaderFilters.cotacao.toLowerCase());
             const filterData = loaderFilters.data === '' || p.data === loaderFilters.data;
-            const filterRota = p.embarque.toLowerCase().includes(loaderFilters.rota.toLowerCase());
+            const filterRota = (p.embarque || '').toLowerCase().includes(loaderFilters.rota.toLowerCase());
 
             let statusMatch = true;
             if (loaderFilters.status) {
@@ -1159,10 +1196,11 @@ function renderizarPedidosCarregamento() {
     }
 
     const pedidosPorEmbarque = pedidosFiltrados.reduce((acc, pedido) => {
-        if (!acc[pedido.embarque]) {
-            acc[pedido.embarque] = [];
+        const embarqueKey = pedido.embarque || 'Sem Embarque'; 
+        if (!acc[embarqueKey]) {
+            acc[embarqueKey] = [];
         }
-        acc[pedido.embarque].push(pedido);
+        acc[embarqueKey].push(pedido);
         return acc;
     }, {});
 
@@ -1179,7 +1217,7 @@ function renderizarPedidosCarregamento() {
         titleH3.textContent = `Embarque: ${embarque}`;
         headerDiv.appendChild(titleH3);
 
-        if (usuarioLogado === 'carregador1') {
+        if (usuarioLogado === 'carregador1' && embarque !== 'Sem Embarque') {
             const btnDestinarEmbarque = document.createElement('button');
             btnDestinarEmbarque.textContent = 'Destinar Embarque Completo';
             btnDestinarEmbarque.className = 'btn-destinar-embarque';
@@ -1222,7 +1260,7 @@ function renderizarPedidosCarregamento() {
                 <div class="pedido-header">
                     <h3>COT_${pedido.id} - ${pedido.cliente}</h3>
                     <p>Data: ${new Date(pedido.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</p>
-                    <p>Endereço: ${pedido.endereco} <a href="https://maps.google.com/?q=${encodeURIComponent(pedido.endereco)}" target="_blank" class="map-link">ver no mapa</a></p>
+                    <p>Endereço: ${pedido.endereco} <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(pedido.endereco)}" target="_blank" class="map-link">ver no mapa</a></p>
                     <p>NF-e: ${getNotaFiscal(pedido.id) ?? "—"}</p>
                     <p>Destinado a: ${motoristaDestino ? motoristaDestino.toUpperCase() : 'Não Destinado'}</p>
                     <p class="status-pedido ${statusClass}">Status: ${statusText}</p>
@@ -1253,11 +1291,10 @@ function renderizarPedidosCarregamento() {
                 card.appendChild(itemListDiv);
             }
 
-
             const loaderButtonsDiv = document.createElement("div");
             loaderButtonsDiv.classList.add("loader-buttons");
 
-            if (usuarioLogado === "carregador1" && pedidoStatus === 'Pedido separado') {
+            if (usuarioLogado === "carregador1" && (pedidoStatus === 'Pedido separado' || pedidoStatus === 'Aguardando rota')) {
                 const btnDestinar = document.createElement("button");
                 btnDestinar.textContent = "Destinar Cotação";
                 btnDestinar.classList.add("btn-destinar");
@@ -2477,6 +2514,10 @@ function showGestorView(viewName, clickedLink) {
 
     hideAllScreens();
     document.getElementById('dashboardWrapper').style.display = 'flex';
+    
+    document.getElementById('dashboardContainer').style.display = 'block'; 
+
+    document.getElementById('createOrderPage').style.display = 'none';
 
     if (viewName === 'resumo') {
         renderResumoGerencial();
@@ -2683,7 +2724,7 @@ function updateConsultaPedidosList() {
     const pedidosFiltrados = pedidos.filter(p => {
         const cotacaoMatch = filters.cotacao ? String(p.id).includes(filters.cotacao) : true;
         const dataMatch = filters.data ? p.data === filters.data : true;
-        const rotaMatch = filters.rota ? p.embarque.toLowerCase().includes(filters.rota) : true;
+        const rotaMatch = filters.rota ? (p.embarque || '').toLowerCase().includes(filters.rota) : true;
 
         let statusMatch = true;
         if (filters.status) {
@@ -2691,6 +2732,9 @@ function updateConsultaPedidosList() {
             const pCarregadoStatus = getPedidoCarregadoStatus(p.id);
 
             switch (filters.status) {
+                case 'Aguardando rota':
+                    statusMatch = pStatus === 'Aguardando rota';
+                    break;
                 case 'Aguardando carregamento':
                     statusMatch = pStatus === 'Pedido separado' && pCarregadoStatus === 'pendente';
                     break;
@@ -2725,6 +2769,8 @@ function updateConsultaPedidosList() {
 
         if (statusSeparacao === 'Em separação') {
             statusFinalClass = 'separacao';
+        } else if (statusSeparacao === 'Aguardando rota') {
+            statusFinalClass = 'aguardando-rota';
         } else if (statusSeparacao === 'Pedido separado') {
             statusFinalClass = 'separado';
             if (statusCarregamento === 'pendente') {
@@ -2745,6 +2791,11 @@ function updateConsultaPedidosList() {
             }
         }
 
+        let deleteButtonHTML = '';
+        if (usuarioLogadoRole === 'consultor') {
+            deleteButtonHTML = `<button class="btn-delete-pedido" onclick="confirmarExclusaoPedido('${pedido.id}')">Excluir</button>`;
+        }
+        
         listDiv.innerHTML += `
             <div class="consulta-pedido-card">
                 <div class="card-header">
@@ -2757,7 +2808,7 @@ function updateConsultaPedidosList() {
                 </div>
                 <div class="info-group">
                     <strong>Rota/Embarque</strong>
-                    ${pedido.embarque}
+                    ${pedido.embarque || 'Não definido'}
                 </div>
                 <div class="info-group">
                     <strong>Endereço</strong>
@@ -2770,9 +2821,39 @@ function updateConsultaPedidosList() {
                 <div class="produtos-list">
                     <strong>Produtos:</strong> ${produtosParaTexto(pedido.produtos)}
                 </div>
+                <div class="card-actions">
+                    ${deleteButtonHTML}
+                </div>
             </div>
         `;
     });
+}
+
+function confirmarExclusaoPedido(pedidoId) {
+    const pedido = pedidos.find(p => p.id == pedidoId);
+    if (!pedido) return;
+
+    confirmarAcao(
+        "Confirmar Exclusão",
+        `Tem certeza de que deseja excluir permanentemente o pedido <strong>COT_${pedido.id}</strong> do cliente <strong>${pedido.cliente}</strong>? Esta ação não pode ser desfeita.`,
+        () => excluirPedido(pedidoId)
+    );
+}
+
+function excluirPedido(pedidoId) {
+    const index = pedidos.findIndex(p => p.id == pedidoId);
+
+    if (index > -1) {
+        pedidos.splice(index, 1); 
+        salvarPedidosNoLocalStorage(); 
+        console.log(`Pedido COT_${pedidoId} foi excluído.`);
+        
+        updateConsultaPedidosList();
+
+        showModal("Sucesso", `O pedido COT_${pedidoId} foi excluído.`, `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+    } else {
+        showModal("Erro", "Não foi possível encontrar o pedido para excluir.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+    }
 }
 
 function renderGestorDashboard() {
@@ -2869,13 +2950,6 @@ function showCotacaoDetails(pedidoId) {
 let map, currentRouteLayer;
 const OPENROUTESERVICE_API_KEY = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjJlZTY2Nzc2YjRhZjQ5Zjk5OTVhYmI3N2VmOTljMTM3IiwiaCI6Im11cm11cjY0In0=";
 
-const BOUNDING_BOX_ESPIRITO_SANTO = {
-    min_lon: -41.879,
-    min_lat: -21.303,
-    max_lon: -39.653,
-    max_lat: -17.892
-};
-
 function decodePolyline(encoded) { let p = []; let i = 0, len = encoded.length; let lat = 0, lng = 0; while (i < len) { let b, shift = 0, result = 0; do { b = encoded.charAt(i++).charCodeAt(0) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20); let dlat = ((result & 1) ? ~(result >> 1) : (result >> 1)); lat += dlat; shift = 0, result = 0; do { b = encoded.charAt(i++).charCodeAt(0) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20); let dlng = ((result & 1) ? ~(result >> 1) : (result >> 1)); lng += dlng; p.push([lat / 1E5, lng / 1E5]); } return p; }
 function formatDuration(seconds) { if (isNaN(seconds) || seconds < 0) return "00h 00m"; const h = Math.floor(seconds / 3600); const m = Math.floor((seconds % 3600) / 60); return `${h}h ${m}m`; }
 function formatDistance(meters) { if (isNaN(meters) || meters < 0) return "0.0 km"; return (meters / 1000).toFixed(1) + ' km'; }
@@ -2942,16 +3016,34 @@ function initializeMapAndFilters() {
 }
 
 
-async function getCoordsForAddress(address, id) {
+async function getCoordsForAddress(address, id, focusCoords) {
     const url = new URL('https://api.openrouteservice.org/geocode/search');
     url.searchParams.append('api_key', OPENROUTESERVICE_API_KEY);
     url.searchParams.append('text', address);
     url.searchParams.append('boundary.country', 'BR');
+    
+    try {
+        const parts = address.split(',');
+        if (parts.length >= 3) {
+            const cityStatePart = parts[parts.length - 2].trim();
+            const city = cityStatePart.split('-')[0].trim();
+            if (city) {
+                url.searchParams.append('locality', city);
+            }
+        }
+    } catch(e) {
+        console.warn("Não foi possível extrair a cidade do endereço:", address);
+    }
 
     url.searchParams.append('boundary.rect.min_lon', BOUNDING_BOX_ESPIRITO_SANTO.min_lon);
     url.searchParams.append('boundary.rect.min_lat', BOUNDING_BOX_ESPIRITO_SANTO.min_lat);
     url.searchParams.append('boundary.rect.max_lon', BOUNDING_BOX_ESPIRITO_SANTO.max_lon);
     url.searchParams.append('boundary.rect.max_lat', BOUNDING_BOX_ESPIRITO_SANTO.max_lat);
+
+    if (focusCoords) {
+        url.searchParams.append('focus.point.lon', focusCoords[0]);
+        url.searchParams.append('focus.point.lat', focusCoords[1]);
+    }
 
     const response = await fetch(url);
     const data = await response.json();
@@ -2994,17 +3086,21 @@ async function generateRoute(optimized) {
         const CEDISA_LOCATION = { name: 'Cedisa Calogi', coords: [-40.366593, -20.065453] };
 
         const stopsPromises = selectedCheckboxes.map(cb => {
-            const pedidoId = parseInt(cb.dataset.id);
-            const pedidoAtual = pedidos.find(p => p.id === pedidoId);
+            const pedidoId = cb.dataset.id;
+            
+            const pedidoAtual = pedidos.find(p => p.id == pedidoId);
 
-            if (pedidoAtual && pedidoAtual.coords) {
-                return Promise.resolve({ ...pedidoAtual, details: {} });
+            if (!pedidoAtual) {
+                throw new Error(`Pedido com ID #${pedidoId} não foi encontrado.`);
             }
 
-            const pedidoOriginal = pedidosIniciais.find(p => p.id === pedidoId);
-            const enderecoCorreto = pedidoOriginal.endereco;
+            if (pedidoAtual.coords) {
+                return Promise.resolve({ ...pedidoAtual, details: {} });
+            }
+            
+            const enderecoCorreto = pedidoAtual.endereco; 
 
-            return getCoordsForAddress(enderecoCorreto, pedidoId).then(result => ({
+            return getCoordsForAddress(enderecoCorreto, pedidoId, CEDISA_LOCATION.coords).then(result => ({
                 ...pedidoAtual,
                 details: result.details,
                 coords: result.coords
@@ -3012,7 +3108,6 @@ async function generateRoute(optimized) {
         });
 
         const stops = await Promise.all(stopsPromises);
-
         let finalOrderedStops = optimized ? await getOptimizedStops(stops, CEDISA_LOCATION) : stops;
 
         const directionCoordinates = [
@@ -3063,10 +3158,11 @@ function confirmarEmbarque() {
         const pedidoIndex = pedidos.findIndex(p => p.id === pedidoId);
         if (pedidoIndex !== -1) {
             pedidos[pedidoIndex].embarque = nomeEmbarque;
-            localStorage.setItem(`embarque_${pedidoId}`, nomeEmbarque);
             setPedidoStatus(pedidoId, "Aguardando separação");
         }
     });
+
+    salvarPedidosNoLocalStorage(); 
 
     showModal("Sucesso!", `O embarque #${nomeEmbarque} foi criado com ${pedidosPendentes.length} pedidos.`, `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
 
@@ -3097,8 +3193,11 @@ function zerarTodosEmbarques() {
 }
 
 async function getOptimizedStops(stops, origin) {
+
+    const stopIndexMap = new Map(stops.map((stop, index) => [index, stop]));
+
     const optimizationRequest = {
-        jobs: stops.map(stop => ({ id: stop.id, location: stop.coords })),
+        jobs: stops.map((stop, index) => ({ id: index, location: stop.coords })),
         vehicles: [{ id: 1, profile: 'driving-car', start: origin.coords }]
     };
 
@@ -3114,28 +3213,26 @@ async function getOptimizedStops(stops, origin) {
 
     const optResult = await optResponse.json();
 
-    console.log("Resultado da API de Otimização:", optResult);
-
-    if (optResult.code === 2) {
+    if (optResult.code === 2) { 
         throw new Error(`Otimização inalcançável: ${optResult.error}.`);
     }
 
     if (optResult.unassigned && optResult.unassigned.length > 0) {
         const unassignedIds = optResult.unassigned.map(job => job.id);
         const unassignedClientes = stops
-            .filter(stop => unassignedIds.includes(stop.id))
+            .filter((stop, index) => unassignedIds.includes(index))
             .map(stop => stop.cliente)
             .join(', ');
-        throw new Error(`A API de otimização não conseguiu incluir ${optResult.unassigned.length} paradas na rota, possivelmente por exceder o limite de locais. Pedidos não incluídos: ${unassignedClientes}`);
+        throw new Error(`A API não conseguiu incluir ${optResult.unassigned.length} paradas na rota. Pedidos não incluídos: ${unassignedClientes}`);
     }
-
+    
     if (!optResult.routes || optResult.routes.length === 0 || !optResult.routes[0].steps) {
-        throw new Error("A API de otimização retornou uma resposta inválida sem rota.");
+        throw new Error("A API de otimização retornou uma resposta inválida.");
     }
 
     return optResult.routes[0].steps
         .filter(step => step.type === 'job')
-        .map(step => stops.find(s => s.id === step.id));
+        .map(step => stopIndexMap.get(step.id));
 }
 
 function displayRouteOnMapAndPanel(orderedStops, route, origin) {
@@ -3215,3 +3312,145 @@ document.addEventListener("DOMContentLoaded", () => {
     showUserSelectionPage();
     initializeMap();
 });
+
+
+function showCreateOrderPage(clickedLink) {
+    const links = document.querySelectorAll('#dashboardWrapper .sidebar a');
+    links.forEach(link => link.classList.remove('active'));
+    if (clickedLink) {
+        clickedLink.classList.add('active');
+    }
+    
+    document.getElementById('dashboardContainer').style.display = 'none';
+    document.getElementById('roteirizacaoPage').style.display = 'none';
+    
+    document.getElementById('createOrderPage').style.display = 'block';
+
+    document.getElementById('orderForm').reset();
+    document.getElementById('orderItemsTableBody').innerHTML = '';
+    document.getElementById('orderData').valueAsDate = new Date();
+    addOrderItemRow(); 
+}
+
+function addOrderItemRow() {
+    const tableBody = document.getElementById('orderItemsTableBody');
+    const newRow = tableBody.insertRow();
+
+    let productOptions = listaDeTodosOsProdutos.map(p => `<option value="${p}">${p}</option>`).join('');
+    
+    newRow.innerHTML = `
+        <td>
+            <select class="product-desc">${productOptions}</select>
+        </td>
+        <td><input type="number" class="product-qty" value="1" min="1"></td>
+        <td><button type="button" class="btn-remove-item" onclick="this.closest('tr').remove()">Remover</button></td>
+    `;
+}
+
+function saveOrder() {
+    const cliente = document.getElementById('orderCliente').value;
+    const data = document.getElementById('orderData').value;
+    const itemRows = document.getElementById('orderItemsTableBody').rows;
+
+    const cep = document.getElementById('orderCep').value;
+    const logradouro = document.getElementById('orderLogradouro').value;
+    const numero = document.getElementById('orderNumero').value;
+    const complemento = document.getElementById('orderComplemento').value;
+    const bairro = document.getElementById('orderBairro').value;
+    const cidade = document.getElementById('orderCidade').value;
+    const uf = document.getElementById('orderUf').value;
+    
+    if (!cliente || !data) {
+        showModal("Atenção", "Preencha o Cliente e a Data de Emissão.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+        return;
+    }
+    if (!cep || !logradouro || !numero || !bairro || !cidade || !uf) {
+        showModal("Atenção", "Preencha o endereço completo.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+        return;
+    }
+    if (itemRows.length === 0) {
+        showModal("Atenção", "Adicione pelo menos um item ao pedido.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+        return;
+    }
+
+    let enderecoFinal = `${logradouro}, ${numero}`;
+    if (complemento) {
+        enderecoFinal += `, ${complemento}`;
+    }
+    enderecoFinal += `, ${bairro}, ${cidade} - ${uf}, ${cep}`;
+
+    const produtosAgrupados = {};
+    for (const row of itemRows) {
+        const descricao = row.querySelector('.product-desc').value;
+        const categoria = produtoParaCategoria[descricao] || 'Diversos';
+        if (!produtosAgrupados[categoria]) {
+            produtosAgrupados[categoria] = [];
+        }
+        produtosAgrupados[categoria].push(descricao);
+    }
+
+    const novoId = `${Math.floor(100000 + Math.random() * 900000)}`;
+
+    const novoPedido = {
+        id: novoId,
+        cliente: cliente,
+        status: "Aguardando rota",
+        data: data,
+        endereco: enderecoFinal,
+        embarque: null,
+        motorista: null,
+        produtos: produtosAgrupados
+    };
+
+    pedidos.push(novoPedido);
+    salvarPedidosNoLocalStorage(); 
+    inicializarNotasFiscais();
+
+    showModal("Sucesso!", `Pedido ${novoId} criado para o cliente ${cliente}.`, `<button class="modal-button ok" onclick="closeModal(); showGestorView('consulta');">OK</button>`);
+}
+
+const orderForm = document.getElementById('orderForm');
+if(orderForm) {
+    orderForm.addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        saveOrder();
+    });
+}
+
+async function buscarCep() {
+    const cepInput = document.getElementById('orderCep');
+    const cep = cepInput.value.replace(/\D/g, ''); 
+    const loader = document.getElementById('cep-loader');
+
+    document.getElementById('orderLogradouro').value = '';
+    document.getElementById('orderBairro').value = '';
+    document.getElementById('orderCidade').value = '';
+    document.getElementById('orderUf').value = '';
+
+    if (cep.length !== 8) {
+        if (cepInput.value) alert("CEP inválido. Por favor, digite 8 números.");
+        return;
+    }
+
+    loader.style.display = 'block'; 
+
+    try {
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = await response.json();
+
+        if (data.erro) {
+            alert("CEP não encontrado.");
+        } else {
+            document.getElementById('orderLogradouro').value = data.logradouro;
+            document.getElementById('orderBairro').value = data.bairro;
+            document.getElementById('orderCidade').value = data.localidade;
+            document.getElementById('orderUf').value = data.uf;
+            document.getElementById('orderNumero').focus(); 
+        }
+    } catch (error) {
+        console.error("Erro ao buscar CEP:", error);
+        alert("Não foi possível buscar o CEP. Verifique sua conexão.");
+    } finally {
+        loader.style.display = 'none'; 
+    }
+}
