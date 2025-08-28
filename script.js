@@ -32,57 +32,57 @@ const usuarios = {
 };
 
 let pedidosIniciais = [
-    { id: 259773, cliente: "Aço Forte", status: "Aguardando separação", data: "2025-08-24", endereco: "Rua Castelo Branco, 1010, Centro, Vila Velha - ES, 29100-040", embarque: "Vila Velha", motorista: null, produtos: { Viga: ["Viga I 6\" x 12.5#", "Viga W 250 x 25.7"] } },
-    { id: 283722, cliente: "Metal Capixaba", status: "Aguardando separação", data: "2025-08-24", endereco: "Rua Sete de Setembro, 400, Centro, Vitória - ES, 29015-000", embarque: "Vitória", motorista: null, produtos: { Tubo: ["Tubo Galvanizado 1.1/2\""], "Cantoneira / Barra": ["Barra Chata 2\" x 1/4\""] } },
-    { id: 280519, cliente: "Engemetal", status: "Aguardando separação", data: "2025-08-25", endereco: "Rua da Conceição, 800, Centro, Linhares - ES, 29900-260", embarque: "Linhares", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/2\" (12.70mm)"], Tubo: ["Tubo Retangular 80x40 #14 (2.00mm)"] } },
-    { id: 296741, cliente: "Ferroleste", status: "Aguardando separação", data: "2025-08-25", endereco: "Rua Santa Maria, 320, Vila Nova, Colatina - ES, 29702-230", embarque: "Colatina", motorista: null, produtos: { Viga: ["Viga U 5\" x 6.7#", "Viga I 5\" x 10#"] } },
-    { id: 301784, cliente: "Metalúrgica União", status: "Aguardando separação", data: "2025-08-26", endereco: "Avenida Champagnat, 1085, Praia da Costa, Vila Velha - ES, 29101-920", embarque: "Vila Velha", motorista: null, produtos: { Tubo: ["Tubo Quadrado 40x40 #18 (1.25mm)"], Chapa: ["Chapa Inox 430 1.2mm Polida"] } },
-    { id: 309377, cliente: "Construmetais", status: "Aguardando separação", data: "2025-08-26", endereco: "Avenida Norte Sul, 2200, Jardim Limoeiro, Serra - ES, 29164-140", embarque: "Serra", motorista: null, produtos: { Viga: ["Viga I 8\" x 18.4#"], Chapa: ["Chapa Aço Carbono 3/8\" (9.53mm)"] } },
-    { id: 308426, cliente: "Alfa Engenharia", status: "Aguardando separação", data: "2025-08-27", endereco: "Rua Manoel Joaquim dos Santos, 190, Itacibá, Cariacica - ES, 29150-240", embarque: "Cariacica", motorista: null, produtos: { "Cantoneira / Barra": ["Cantoneira 1.1/4\" x 3/16\"", "Barra Chata 1\" x 3/16\""] } },
-    { id: 334874, cliente: "Beta Construções", status: "Aguardando separação", data: "2025-08-27", endereco: "Av. Princesa Isabel, 500, Centro, Vitória - ES, 29010-360", embarque: "Vitória", motorista: null, produtos: { Viga: ["Viga U 3\" x 4.1#"], Chapa: ["Chapa Aço Carbono 1/4\" (6.35mm)"] } },
-    { id: 333704, cliente: "Gama Ferragens", status: "Aguardando separação", data: "2025-08-28", endereco: "Av. Comendador Rafael, 1500, Centro, Linhares - ES, 29900-322", embarque: "Linhares", motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #24 (0.60mm)"], Tubo: ["Tubo Industrial Quadrado 40x40 #14 (2.00mm)"] } },
-    { id: 333900, cliente: "Épsilon Indústria", status: "Aguardando separação", data: "2025-08-29", endereco: "Rua Viana, 55, Glória, Vila Velha - ES, 29122-370", embarque: "Vila Velha", motorista: null, produtos: { Tubo: ["Tubo Retangular 50x30 #18 (1.25mm)"], Chapa: ["Chapa Inox 304 1.0mm Escovada"] } },
-    { id: 334755, cliente: "Zeta Metalúrgica", status: "Aguardando separação", data: "2025-08-29", endereco: "Rua Moacyr Ávidos, 45, Centro, Colatina - ES, 29700-160", embarque: "Colatina", motorista: null, produtos: { Viga: ["Viga W 200 x 22.5"], Tubo: ["Tubo Quadrado 30x30 #18 (1.25mm)"] } },
-    { id: 333038, cliente: "Ícaro Soldas", status: "Aguardando separação", data: "2025-08-30", endereco: "Avenida Vale do Rio Doce, 20, Porto de Santana, Cariacica - ES, 29153-010", embarque: "Cariacica", motorista: null, produtos: { Tubo: ["Tubo Industrial Redondo 2\""], Chapa: ["Chapa Fina a Frio #16 (1.55mm)"] } },
-    { id: 334823, cliente: "Fênix Construções", status: "Aguardando separação", data: "2025-08-31", endereco: "Avenida Vitória, 1500, Jucutuquara, Vitória - ES, 29040-780", embarque: "Vitória", motorista: null, produtos: { Viga: ["Viga W 250 x 32.7", "Viga U 6\" x 8.2#"], Tubo: ["Tubo Galvanizado 2\""] } },
-    { id: 334807, cliente: "Grifo Metais", status: "Aguardando separação", data: "2025-08-31", endereco: "Rua Monsenhor Pedrinha, 1020, Centro, Linhares - ES, 29900-110", embarque: "Linhares", motorista: null, produtos: { Chapa: ["Chapa Inox 316 2.0mm"], Viga: ["Viga I 5\" x 10#"] } },
-    { id: 327413, cliente: "Pegasus Engenharia", status: "Aguardando separação", data: "2025-09-01", endereco: "Rua Quinze de Novembro, 600, Centro, Vila Velha - ES, 29100-300", embarque: "Vila Velha", motorista: null, produtos: { Viga: ["Viga U 8\" x 11.5#"], Tubo: ["Tubo Redondo 4\" #14 (2.00mm)"] } },
-    { id: 334389, cliente: "Centauro Indústria", status: "Aguardando separação", data: "2025-09-02", endereco: "Rua Benjamin Constant, 190, Centro, Colatina - ES, 29700-130", embarque: "Colatina", motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 5/16\" (7.94mm)"], Viga: ["Viga I 6\" x 12.5#"] } },
-    { id: 334702, cliente: "Harpia Estruturas", status: "Aguardando separação", data: "2025-09-02", endereco: "Avenida Talma Rodrigues Ribeiro, 1500, Portal de Jacaraípe, Serra - ES, 29173-735", embarque: "Serra", motorista: null, produtos: { Tubo: ["Tubo SCH 40 3\""], Chapa: ["Chapa Grossa 3/4\" (19.05mm)"] } },
-    { id: 388994, cliente: "Minotauro Construções", status: "Aguardando separação", data: "2025-09-03", endereco: "Rua Florentino Ávidos, 20, Centro, Cariacica - ES, 29156-020", embarque: "Cariacica", motorista: null, produtos: { Viga: ["Viga I 10\" x 25.4#"], Tubo: ["Tubo Retangular 120x60 #12 (2.65mm)"] } },
-    { id: 334016, cliente: "Sereia Naval", status: "Aguardando separação", data: "2025-09-03", endereco: "Rua do Rosário, 180, Centro, Vitória - ES, 29015-200", embarque: "Vitória", motorista: null, produtos: { Chapa: ["Chapa Naval A36 1/4\""], "Cantoneira / Barra": ["Cantoneira 3\" x 1/4\""] } },
-    { id: 334716, cliente: "Tritão Ferro e Aço", status: "Aguardando separação", data: "2025-09-04", endereco: "Rua Professor Jones, 50, Centro, Linhares - ES, 29900-140", embarque: "Linhares", motorista: null, produtos: { Tubo: ["Tubo Quadrado 100x100 #11 (3.00mm)"], Chapa: ["Chapa Xadrez 3/16\" (4.75mm)"] } },
-    { id: 331324, cliente: "Atlas Construções", status: "Aguardando separação", data: "2025-09-04", endereco: "Rua Major Pissarra, 250, Centro, Serra - ES, 29176-030", embarque: "Serra", motorista: null, produtos: { Viga: ["Viga W 360 x 57.8", "Viga U 8\" x 11.5#"], Chapa: ["Chapa Aço Carbono 3/8\" (9.53mm)"] } },
-    { id: 334382, cliente: "Titã Fundições", status: "Aguardando separação", data: "2025-09-05", endereco: "Rua Henrique Moscoso, 1001, Centro, Vila Velha - ES, 29100-021", embarque: "Vila Velha", motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #14 (2.00mm)"], Tubo: ["Tubo Redondo 5\" SCH 40"] } },
-    { id: 332901, cliente: "Olimpo Metais", status: "Aguardando separação", data: "2025-09-05", endereco: "Rua Expedicionário Abílio dos Santos, 50, Centro, Colatina - ES, 29700-100", embarque: "Colatina", motorista: null, produtos: { Viga: ["Viga I 12\" x 31.8#"], Chapa: ["Chapa Inox 304 3.0mm Polida"] } },
-    { id: 333767, cliente: "Expresso Cargas", status: "Aguardando separação", data: "2025-09-06", endereco: "Rua Padre Luiz Parenzi, 350, Centro, Aracruz - ES, 29190-058", embarque: "Aracruz", motorista: null, produtos: { Tubo: ["Tubo Retangular 50x30 #16 (1.55mm)"], Viga: ["Viga W 250 x 38.5"] } },
-    { id: 330199, cliente: "Estrutura Forte", status: "Aguardando separação", data: "2025-09-07", endereco: "Rua da Linha, 10, Shell, Linhares - ES, 29901-570", embarque: "Linhares", motorista: null, produtos: { Tubo: ["Tubo Redondo 1\" #18 (1.25mm)"], Chapa: ["Chapa Aço Carbono 1/8\" (3.00mm)"] } },
-    { id: 328948, cliente: "Cia. do Metal", status: "Aguardando separação", data: "2025-09-08", endereco: "Praça São Benedito, 150, Centro, São Mateus - ES, 29930-190", embarque: "São Mateus", motorista: null, produtos: { Viga: ["Viga U 4\" x 5.4#", "Viga I 3\" x 5.7#"], Chapa: ["Chapa Galvanizada #28 (0.43mm)"] } },
-    { id: 329122, cliente: "Norte Aço", status: "Aguardando separação", data: "2025-09-08", endereco: "Avenida 27 de Abril, 80, Centro, Fundão - ES, 29185-000", embarque: "Fundão", motorista: null, produtos: { Tubo: ["Tubo Quadrado 60x60 #18 (1.25mm)"], Chapa: ["Chapa Fina a Frio #28 (0.43mm)"] } },
-    { id: 328400, cliente: "Leste Ferro", status: "Aguardando separação", data: "2025-09-09", endereco: "Rua Vinte e Cinco de Março, 150, Centro, Cachoeiro de Itapemirim - ES, 29300-100", embarque: "Cachoeiro de Itapemirim", motorista: null, produtos: { Viga: ["Viga W 100 x 19.3"], Chapa: ["Chapa Xadrez 3.00mm"] } },
-    { id: 327904, cliente: "Centro Metal", status: "Aguardando separação", data: "2025-09-09", endereco: "Rua General Dutra, 30, Centro, Castelo - ES, 29360-000", embarque: "Castelo", motorista: null, produtos: { Tubo: ["Tubo Redondo 2.1/2\" #14 (2.00mm)"], Chapa: ["Chapa Perfurada 2.00mm"] } },
-    { id: 326005, cliente: "Metalúrgica do Aço", status: "Aguardando separação", data: "2025-09-10", endereco: "Avenida Brasil, 800, Olaria, Serra - ES, 29176-237", embarque: "Serra", motorista: null, produtos: { Chapa: ["Chapa Inox 316 1.0mm"], Viga: ["Viga I 4\" x 7.7#"] } },
-    { id: 328386, cliente: "Construções Modernas", status: "Aguardando separação", data: "2025-09-10", endereco: "Av. Resplendor, 750, Itapuã, Vila Velha - ES, 29101-520", embarque: "Vila Velha", motorista: null, produtos: { Tubo: ["Tubo Redondo 1\" #16 (1.55mm)"], Chapa: ["Chapa Galvanizada 3.00mm"] } },
-    { id: 329142, cliente: "Estruturas Metálicas", status: "Aguardando separação", data: "2025-09-11", endereco: "Rua da Lapa, 35, Bela Vista, Cariacica - ES, 29141-260", embarque: "Cariacica", motorista: null, produtos: { Viga: ["Viga U 6\" x 8.2#"], Tubo: ["Tubo Quadrado 30x30 #16 (1.55mm)"] } },
-    { id: 330446, cliente: "Galvanização Brasil", status: "Aguardando separação", data: "2025-09-11", endereco: "Rua da Palha, 10, Juparanã, Linhares - ES, 29900-520", embarque: "Linhares", motorista: null, produtos: { Chapa: ["Chapa Galvanizada 1/2\" (12.70mm)"], Tubo: ["Tubo Retangular 40x20 #16 (1.55mm)"] } },
-    { id: 330886, cliente: "Tubos e Conexões", status: "Aguardando separação", data: "2025-09-12", endereco: "Rua Cassiano Castelo, 250, Centro, Colatina - ES, 29700-060", embarque: "Colatina", motorista: null, produtos: { Tubo: ["Tubo Redondo 2\" SCH 80"], Viga: ["Viga I 6\" x 12.5#"] } },
-    { id: 390001, cliente: "Serralheria Capixaba", status: "Aguardando separação", data: "2025-09-13", endereco: "Avenida Talma Rodrigues Ribeiro, 500, Alterosas, Serra - ES, 29167-005", embarque: null, motorista: null, produtos: { "Cantoneira / Barra": ["Cantoneira 1\" x 1/8\"", "Barra Chata 1.1/2\" x 1/4\""] } },
-    { id: 390002, cliente: "Construções Litorâneas", status: "Aguardando separação", data: "2025-09-13", endereco: "Rua Gastão Roubach, 180, Itapuã, Vila Velha - ES, 29101-700", embarque: null, motorista: null, produtos: { Viga: ["Viga W 150 x 13.5"], Chapa: ["Chapa Xadrez 1/4\" (6.35mm)"] } },
-    { id: 390003, cliente: "Viana Aço e Ferro", status: "Aguardando separação", data: "2025-09-14", endereco: "Avenida Vitória, 12, Centro, Viana - ES, 29130-065", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 50x50 #16 (1.55mm)", "Tubo Redondo 3\" #14 (2.00mm)"] } },
-    { id: 390004, cliente: "Engenharia Ponto Forte", status: "Aguardando separação", data: "2025-09-14", endereco: "Rua General Osório, 83, Centro, Vitória - ES, 29010-020", embarque: null, motorista: null, produtos: { Viga: ["Viga I 8\" x 18.4#"], Chapa: ["Chapa Aço Carbono 3/8\" (9.53mm)"] } },
-    { id: 390005, cliente: "Obras Rápidas Cariacica", status: "Aguardando separação", data: "2025-09-15", endereco: "Rodovia Aloízio Santos, 1000, Campo Belo, Cariacica - ES, 29143-343", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Galvanizada #20 (0.95mm)"], Tubo: ["Tubo Industrial Redondo 2\""] } },
-    { id: 390006, cliente: "Metalúrgica Guarapari", status: "Aguardando separação", data: "2025-09-15", endereco: "Rua Santana do Iapó, 20, Ipiranga, Guarapari - ES, 29201-070", embarque: null, motorista: null, produtos: { "Cantoneira / Barra": ["Barra Chata 2\" x 1/4\""], Chapa: ["Chapa Fina a Frio #16 (1.55mm)"] } },
-    { id: 390007, cliente: "Indústria de Colatina", status: "Aguardando separação", data: "2025-09-16", endereco: "Rua Aurélio Gatti, 30, Maria das Graças, Colatina - ES, 29705-015", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo 4\" #12 (2.65mm)"], Viga: ["Viga W 200 x 22.5"] } },
-    { id: 390011, cliente: "Metalúrgica Montanhas", status: "Aguardando separação", data: "2025-09-18", endereco: "Av. Evandi Américo Comarela, 100, Centro, Domingos Martins - ES, 29260-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Xadrez 1/8\" (3.00mm)"], Viga: ["Viga I 3\" x 5.7#"] } },
-    { id: 390012, cliente: "Construções Alfredo Chaves", status: "Aguardando separação", data: "2025-09-18", endereco: "Rua Presidente Vargas, 250, Centro, Alfredo Chaves - ES, 29240-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 60x60 #18 (1.25mm)"], Viga: ["Viga W 150 x 18.0"] } },
-    { id: 390013, cliente: "Aços de Ibatiba", status: "Aguardando separação", data: "2025-09-19", endereco: "Av. Sete de Setembro, 45, Centro, Ibatiba - ES, 29395-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Galvanizada #16 (1.55mm)"], "Cantoneira / Barra": ["Barra Chata 1\" x 3/16\""] } },
-    { id: 390014, cliente: "Serralheria Venda Nova", status: "Aguardando separação", data: "2025-09-19", endereco: "Av. Nona, 15, Bananeiras, Venda Nova do Imigrante - ES, 29375-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo 2\" #16 (1.55mm)"], Chapa: ["Chapa Fina a Frio #20 (0.90mm)"] } },
-    { id: 390015, cliente: "Estruturas Itaguaçu", status: "Aguardando separação", data: "2025-09-20", endereco: "Rua Doutor Ferreira Coelho, 30, Centro, Itaguaçu - ES, 29690-000", embarque: null, motorista: null, produtos: { Viga: ["Viga U 5\" x 6.7#"], Tubo: ["Tubo Retangular 50x30 #18 (1.25mm)"] } },
-    { id: 390016, cliente: "Comércio de Aço Mimoso", status: "Aguardando separação", data: "2025-09-20", endereco: "Praça Cel. Paiva Gonçalves, 50, Centro, Mimoso do Sul - ES, 29400-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/4\" (6.35mm)"], "Cantoneira / Barra": ["Cantoneira 2\" x 1/8\""] } },
-    { id: 390017, cliente: "Obras de Marechal Floriano", status: "Aguardando separação", data: "2025-09-21", endereco: "Rua Sant'Ana, 120, Centro, Marechal Floriano - ES, 29255-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 90x90 #12 (2.65mm)"], Viga: ["Viga I 6\" x 12.5#"] } },
-    { id: 390019, cliente: "Construir Santa Teresa", status: "Aguardando separação", data: "2025-09-22", endereco: "Av. Ângelo Pretti, 255, Centro, Santa Teresa - ES, 29650-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Schedule 40 2\""], Chapa: ["Chapa Grossa 3/4\" (19.05mm)"] } },
-    { id: 390020, cliente: "Logística Conceição da Barra", status: "Aguardando separação", data: "2025-09-22", endereco: "Av. Gov. Jones dos Santos Neves, 253, Centro, Conceição da Barra - ES, 29960-000", embarque: null, motorista: null, produtos: { Viga: ["Viga I 10\" x 25.4#", "Viga U 8\" x 11.5#"] } },
-    { id: 390021, cliente: "Metalúrgica de Muqui", status: "Aguardando separação", data: "2025-09-23", endereco: "Rua Vieira Machado, 5, Centro, Muqui - ES, 29480-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #14 (2.00mm)"], Tubo: ["Tubo Redondo 5\" SCH 40"] } }
+    { id: 259773, cliente: "Aço Forte", status: "Aguardando rota", data: "2025-08-24", endereco: "Rua Castelo Branco, 1010, Centro, Vila Velha - ES, 29100-040", embarque: null, motorista: null, produtos: { Viga: ["Viga I  x 12.5#", "Viga W 250 x 25.7"] } },
+    { id: 283722, cliente: "Metal Capixaba", status: "Aguardando rota", data: "2025-08-24", endereco: "Rua Sete de Setembro, 400, Centro, Vitória - ES, 29015-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Galvanizado 1.1/"], "Cantoneira / Barra": ["Barra Chata  x 1/"] } },
+    { id: 280519, cliente: "Engemetal", status: "Aguardando rota", data: "2025-08-25", endereco: "Rua da Conceição, 800, Centro, Linhares - ES, 29900-260", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/ (12.70mm)"], Tubo: ["Tubo Retangular 80x40 #14 (2.00mm)"] } },
+    { id: 296741, cliente: "Ferroleste", status: "Aguardando rota", data: "2025-08-25", endereco: "Rua Santa Maria, 320, Vila Nova, Colatina - ES, 29702-230", embarque: null, motorista: null, produtos: { Viga: ["Viga U  x 6.7#", "Viga I  x 10#"] } },
+    { id: 301784, cliente: "Metalúrgica União", status: "Aguardando rota", data: "2025-08-26", endereco: "Avenida Champagnat, 1085, Praia da Costa, Vila Velha - ES, 29101-920", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 40x40 #18 (1.25mm)"], Chapa: ["Chapa Inox 430 1.2mm Polida"] } },
+    { id: 309377, cliente: "Construmetais", status: "Aguardando rota", data: "2025-08-26", endereco: "Avenida Norte Sul, 2200, Jardim Limoeiro, Serra - ES, 29164-140", embarque: null, motorista: null, produtos: { Viga: ["Viga I  x 18.4#"], Chapa: ["Chapa Aço Carbono 3/ (9.53mm)"] } },
+    { id: 308426, cliente: "Alfa Engenharia", status: "Aguardando rota", data: "2025-08-27", endereco: "Rua Manoel Joaquim dos Santos, 190, Itacibá, Cariacica - ES, 29150-240", embarque: null, motorista: null, produtos: { "Cantoneira / Barra": ["Cantoneira 1.1/ x 3/1", "Barra Chata  x 3/1"] } },
+    { id: 334874, cliente: "Beta Construções", status: "Aguardando rota", data: "2025-08-27", endereco: "Av. Princesa Isabel, 500, Centro, Vitória - ES, 29010-360", embarque: null, motorista: null, produtos: { Viga: ["Viga U  x 4.1#"], Chapa: ["Chapa Aço Carbono 1/ (6.35mm)"] } },
+    { id: 333704, cliente: "Gama Ferragens", status: "Aguardando rota", data: "2025-08-28", endereco: "Av. Comendador Rafael, 1500, Centro, Linhares - ES, 29900-322", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #24 (0.60mm)"], Tubo: ["Tubo Industrial Quadrado 40x40 #14 (2.00mm)"] } },
+    { id: 333900, cliente: "Épsilon Indústria", status: "Aguardando rota", data: "2025-08-29", endereco: "Rua Viana, 55, Glória, Vila Velha - ES, 29122-370", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 50x30 #18 (1.25mm)"], Chapa: ["Chapa Inox 304 1.0mm Escovada"] } },
+    { id: 334755, cliente: "Zeta Metalúrgica", status: "Aguardando rota", data: "2025-08-29", endereco: "Rua Moacyr Ávidos, 45, Centro, Colatina - ES, 29700-160", embarque: null, motorista: null, produtos: { Viga: ["Viga W 200 x 22.5"], Tubo: ["Tubo Quadrado 30x30 #18 (1.25mm)"] } },
+    { id: 333038, cliente: "Ícaro Soldas", status: "Aguardando rota", data: "2025-08-30", endereco: "Avenida Vale do Rio Doce, 20, Porto de Santana, Cariacica - ES, 29153-010", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Industrial Redondo "], Chapa: ["Chapa Fina a Frio #16 (1.55mm)"] } },
+    { id: 334823, cliente: "Fênix Construções", status: "Aguardando rota", data: "2025-08-31", endereco: "Avenida Vitória, 1500, Jucutuquara, Vitória - ES, 29040-780", embarque: null, motorista: null, produtos: { Viga: ["Viga W 250 x 32.7", "Viga U  x 8.2#"], Tubo: ["Tubo Galvanizado "] } },
+    { id: 334807, cliente: "Grifo Metais", status: "Aguardando rota", data: "2025-08-31", endereco: "Rua Monsenhor Pedrinha, 1020, Centro, Linhares - ES, 29900-110", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Inox 316 2.0mm"], Viga: ["Viga I  x 10#"] } },
+    { id: 327413, cliente: "Pegasus Engenharia", status: "Aguardando rota", data: "2025-09-01", endereco: "Rua Quinze de Novembro, 600, Centro, Vila Velha - ES, 29100-300", embarque: null, motorista: null, produtos: { Viga: ["Viga U  x 11.5#"], Tubo: ["Tubo Redondo  #14 (2.00mm)"] } },
+    { id: 334389, cliente: "Centauro Indústria", status: "Aguardando rota", data: "2025-09-02", endereco: "Rua Benjamin Constant, 190, Centro, Colatina - ES, 29700-130", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 5/1 (7.94mm)"], Viga: ["Viga I  x 12.5#"] } },
+    { id: 334702, cliente: "Harpia Estruturas", status: "Aguardando rota", data: "2025-09-02", endereco: "Avenida Talma Rodrigues Ribeiro, 1500, Portal de Jacaraípe, Serra - ES, 29173-735", embarque: null, motorista: null, produtos: { Tubo: ["Tubo SCH 40 "], Chapa: ["Chapa Grossa 3/ (19.05mm)"] } },
+    { id: 388994, cliente: "Minotauro Construções", status: "Aguardando rota", data: "2025-09-03", endereco: "Rua Florentino Ávidos, 20, Centro, Cariacica - ES, 29156-020", embarque: null, motorista: null, produtos: { Viga: ["Viga I 1 x 25.4#"], Tubo: ["Tubo Retangular 120x60 #12 (2.65mm)"] } },
+    { id: 334016, cliente: "Sereia Naval", status: "Aguardando rota", data: "2025-09-03", endereco: "Rua do Rosário, 180, Centro, Vitória - ES, 29015-200", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Naval A36 1/"], "Cantoneira / Barra": ["Cantoneira  x 1/"] } },
+    { id: 334716, cliente: "Tritão Ferro e Aço", status: "Aguardando rota", data: "2025-09-04", endereco: "Rua Professor Jones, 50, Centro, Linhares - ES, 29900-140", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 100x100 #11 (3.00mm)"], Chapa: ["Chapa Xadrez 3/1 (4.75mm)"] } },
+    { id: 331324, cliente: "Atlas Construções", status: "Aguardando rota", data: "2025-09-04", endereco: "Rua Major Pissarra, 250, Centro, Serra - ES, 29176-030", embarque: null, motorista: null, produtos: { Viga: ["Viga W 360 x 57.8", "Viga U  x 11.5#"], Chapa: ["Chapa Aço Carbono 3/ (9.53mm)"] } },
+    { id: 334382, cliente: "Titã Fundições", status: "Aguardando rota", data: "2025-09-05", endereco: "Rua Henrique Moscoso, 1001, Centro, Vila Velha - ES, 29100-021", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #14 (2.00mm)"], Tubo: ["Tubo Redondo  SCH 40"] } },
+    { id: 332901, cliente: "Olimpo Metais", status: "Aguardando rota", data: "2025-09-05", endereco: "Rua Expedicionário Abílio dos Santos, 50, Centro, Colatina - ES, 29700-100", embarque: null, motorista: null, produtos: { Viga: ["Viga I 1 x 31.8#"], Chapa: ["Chapa Inox 304 3.0mm Polida"] } },
+    { id: 333767, cliente: "Expresso Cargas", status: "Aguardando rota", data: "2025-09-06", endereco: "Rua Padre Luiz Parenzi, 350, Centro, Aracruz - ES, 29190-058", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 50x30 #16 (1.55mm)"], Viga: ["Viga W 250 x 38.5"] } },
+    { id: 330199, cliente: "Estrutura Forte", status: "Aguardando rota", data: "2025-09-07", endereco: "Rua da Linha, 10, Shell, Linhares - ES, 29901-570", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo  #18 (1.25mm)"], Chapa: ["Chapa Aço Carbono 1/ (3.00mm)"] } },
+    { id: 328948, cliente: "Cia. do Metal", status: "Aguardando rota", data: "2025-09-08", endereco: "Praça São Benedito, 150, Centro, São Mateus - ES, 29930-190", embarque: null, motorista: null, produtos: { Viga: ["Viga U  x 5.4#", "Viga I  x 5.7#"], Chapa: ["Chapa Galvanizada #28 (0.43mm)"] } },
+    { id: 329122, cliente: "Norte Aço", status: "Aguardando rota", data: "2025-09-08", endereco: "Avenida 27 de Abril, 80, Centro, Fundão - ES, 29185-000", embarque: "Fundão", motorista: null, produtos: { Tubo: ["Tubo Quadrado 60x60 #18 (1.25mm)"], Chapa: ["Chapa Fina a Frio #28 (0.43mm)"] } },
+    { id: 328400, cliente: "Leste Ferro", status: "Aguardando rota", data: "2025-09-09", endereco: "Rua Vinte e Cinco de Março, 150, Centro, Cachoeiro de Itapemirim - ES, 29300-100", embarque: null, motorista: null, produtos: { Viga: ["Viga W 100 x 19.3"], Chapa: ["Chapa Xadrez 3.00mm"] } },
+    { id: 327904, cliente: "Centro Metal", status: "Aguardando rota", data: "2025-09-09", endereco: "Rua General Dutra, 30, Centro, Castelo - ES, 29360-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo 2.1/ #14 (2.00mm)"], Chapa: ["Chapa Perfurada 2.00mm"] } },
+    { id: 326005, cliente: "Metalúrgica do Aço", status: "Aguardando rota", data: "2025-09-10", endereco: "Avenida Brasil, 800, Olaria, Serra - ES, 29176-237", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Inox 316 1.0mm"], Viga: ["Viga I  x 7.7#"] } },
+    { id: 328386, cliente: "Construções Modernas", status: "Aguardando rota", data: "2025-09-10", endereco: "Av. Resplendor, 750, Itapuã, Vila Velha - ES, 29101-520", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo  #16 (1.55mm)"], Chapa: ["Chapa Galvanizada 3.00mm"] } },
+    { id: 329142, cliente: "Estruturas Metálicas", status: "Aguardando rota", data: "2025-09-11", endereco: "Rua da Lapa, 35, Bela Vista, Cariacica - ES, 29141-260", embarque: null, motorista: null, produtos: { Viga: ["Viga U  x 8.2#"], Tubo: ["Tubo Quadrado 30x30 #16 (1.55mm)"] } },
+    { id: 330446, cliente: "Galvanização Brasil", status: "Aguardando rota", data: "2025-09-11", endereco: "Rua da Palha, 10, Juparanã, Linhares - ES, 29900-520", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Galvanizada 1/ (12.70mm)"], Tubo: ["Tubo Retangular 40x20 #16 (1.55mm)"] } },
+    { id: 330886, cliente: "Tubos e Conexões", status: "Aguardando rota", data: "2025-09-12", endereco: "Rua Cassiano Castelo, 250, Centro, Colatina - ES, 29700-060", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo  SCH 80"], Viga: ["Viga I  x 12.5#"] } },
+    { id: 390001, cliente: "Serralheria Capixaba", status: "Aguardando rota", data: "2025-09-13", endereco: "Avenida Talma Rodrigues Ribeiro, 500, Alterosas, Serra - ES, 29167-005", embarque: null, motorista: null, produtos: { "Cantoneira / Barra": ["Cantoneira  x 1/", "Barra Chata 1.1/ x 1/"] } },
+    { id: 390002, cliente: "Construções Litorâneas", status: "Aguardando rota", data: "2025-09-13", endereco: "Rua Gastão Roubach, 180, Itapuã, Vila Velha - ES, 29101-700", embarque: null, motorista: null, produtos: { Viga: ["Viga W 150 x 13.5"], Chapa: ["Chapa Xadrez 1/ (6.35mm)"] } },
+    { id: 390003, cliente: "Viana Aço e Ferro", status: "Aguardando rota", data: "2025-09-14", endereco: "Avenida Vitória, 12, Centro, Viana - ES, 29130-065", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 50x50 #16 (1.55mm)", "Tubo Redondo  #14 (2.00mm)"] } },
+    { id: 390004, cliente: "Engenharia Ponto Forte", status: "Aguardando rota", data: "2025-09-14", endereco: "Rua General Osório, 83, Centro, Vitória - ES, 29010-020", embarque: null, motorista: null, produtos: { Viga: ["Viga I  x 18.4#"], Chapa: ["Chapa Aço Carbono 3/ (9.53mm)"] } },
+    { id: 390005, cliente: "Obras Rápidas Cariacica", status: "Aguardando rota", data: "2025-09-15", endereco: "Rodovia Aloízio Santos, 1000, Campo Belo, Cariacica - ES, 29143-343", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Galvanizada #20 (0.95mm)"], Tubo: ["Tubo Industrial Redondo "] } },
+    { id: 390006, cliente: "Metalúrgica Guarapari", status: "Aguardando rota", data: "2025-09-15", endereco: "Rua Santana do Iapó, 20, Ipiranga, Guarapari - ES, 29201-070", embarque: null, motorista: null, produtos: { "Cantoneira / Barra": ["Barra Chata  x 1/"], Chapa: ["Chapa Fina a Frio #16 (1.55mm)"] } },
+    { id: 390007, cliente: "Indústria de Colatina", status: "Aguardando rota", data: "2025-09-16", endereco: "Rua Aurélio Gatti, 30, Maria das Graças, Colatina - ES, 29705-015", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo  #12 (2.65mm)"], Viga: ["Viga W 200 x 22.5"] } },
+    { id: 390011, cliente: "Metalúrgica Montanhas", status: "Aguardando rota", data: "2025-09-18", endereco: "Av. Evandi Américo Comarela, 100, Centro, Domingos Martins - ES, 29260-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Xadrez 1/ (3.00mm)"], Viga: ["Viga I  x 5.7#"] } },
+    { id: 390012, cliente: "Construções Alfredo Chaves", status: "Aguardando rota", data: "2025-09-18", endereco: "Rua Presidente Vargas, 250, Centro, Alfredo Chaves - ES, 29240-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 60x60 #18 (1.25mm)"], Viga: ["Viga W 150 x 18.0"] } },
+    { id: 390013, cliente: "Aços de Ibatiba", status: "Aguardando rota", data: "2025-09-19", endereco: "Av. Sete de Setembro, 45, Centro, Ibatiba - ES, 29395-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Galvanizada #16 (1.55mm)"], "Cantoneira / Barra": ["Barra Chata  x 3/1"] } },
+    { id: 390014, cliente: "Serralheria Venda Nova", status: "Aguardando rota", data: "2025-09-19", endereco: "Av. Nona, 15, Bananeiras, Venda Nova do Imigrante - ES, 29375-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo  #16 (1.55mm)"], Chapa: ["Chapa Fina a Frio #20 (0.90mm)"] } },
+    { id: 390015, cliente: "Estruturas Itaguaçu", status: "Aguardando rota", data: "2025-09-20", endereco: "Rua Doutor Ferreira Coelho, 30, Centro, Itaguaçu - ES, 29690-000", embarque: null, motorista: null, produtos: { Viga: ["Viga U  x 6.7#"], Tubo: ["Tubo Retangular 50x30 #18 (1.25mm)"] } },
+    { id: 390016, cliente: "Comércio de Aço Mimoso", status: "Aguardando rota", data: "2025-09-20", endereco: "Praça Cel. Paiva Gonçalves, 50, Centro, Mimoso do Sul - ES, 29400-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/ (6.35mm)"], "Cantoneira / Barra": ["Cantoneira  x 1/"] } },
+    { id: 390017, cliente: "Obras de Marechal Floriano", status: "Aguardando rota", data: "2025-09-21", endereco: "Rua Sant'Ana, 120, Centro, Marechal Floriano - ES, 29255-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 90x90 #12 (2.65mm)"], Viga: ["Viga I  x 12.5#"] } },
+    { id: 390019, cliente: "Construir Santa Teresa", status: "Aguardando rota", data: "2025-09-22", endereco: "Av. Ângelo Pretti, 255, Centro, Santa Teresa - ES, 29650-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Schedule 40 "], Chapa: ["Chapa Grossa 3/ (19.05mm)"] } },
+    { id: 390020, cliente: "Logística Conceição da Barra", status: "Aguardando rota", data: "2025-09-22", endereco: "Av. Gov. Jones dos Santos Neves, 253, Centro, Conceição da Barra - ES, 29960-000", embarque: null, motorista: null, produtos: { Viga: ["Viga I 1 x 25.4#", "Viga U  x 11.5#"] } },
+    { id: 390021, cliente: "Metalúrgica de Muqui", status: "Aguardando rota", data: "2025-09-23", endereco: "Rua Vieira Machado, 5, Centro, Muqui - ES, 29480-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #14 (2.00mm)"], Tubo: ["Tubo Redondo  SCH 40"] } }
 ];
 
 let pedidos = pedidosIniciais.map(p => {
@@ -230,7 +230,7 @@ function getPedidoStatus(id) {
     const storedStatus = localStorage.getItem(`${localStoragePedidoStatusKey}_${id}`);
     if (storedStatus) return storedStatus;
     const pedido = pedidos.find(p => p.id === id);
-    return pedido ? pedido.status : "Aguardando separação";
+    return pedido ? pedido.status : "Aguardando rota";
 }
 
 function setPedidoStatus(id, status) {
@@ -480,23 +480,34 @@ function fazerLoginGestor() {
 
     if (usuarios[user] && usuarios[user] === pass && (isGestor || isConsultor)) {
         usuarioLogado = user;
-        usuarioLogadoRole = user;
+        usuarioLogadoRole = user; 
 
         hideAllScreens();
         document.getElementById("dashboardWrapper").style.display = "flex";
 
         const sidebarUl = document.querySelector('#dashboardWrapper .sidebar ul');
-        let sidebarHTML = `
-            <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo Gerencial</a></li>
-            <li><a href="#" data-view="roteirizacao" onclick="showRoteirizacaoPage(this)">Roteirização Inteligente</a></li>
-            <li><a href="#" data-view="consulta" onclick="showGestorView('consulta', this)">Consultar Pedidos</a></li>
-        `;
-        if (usuarioLogadoRole === 'gestor') {
-            sidebarHTML += '<li><a href="#" onclick="logout()">Sair</a></li>';
-        }
-        sidebarUl.innerHTML = sidebarHTML;
+        let sidebarHTML = '';
 
-        showGestorView('resumo');
+        if (usuarioLogadoRole === 'consultor') {
+            sidebarHTML = `
+                <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo Gerencial</a></li>
+                <li><a href="#" data-view="consulta" onclick="showGestorView('consulta', this)">Consultar Pedidos</a></li>
+                <li><a href="#" onclick="logout()">Sair</a></li>
+            `;
+            sidebarUl.innerHTML = sidebarHTML;
+            showGestorView('resumo');
+
+        } else { 
+            sidebarHTML = `
+                <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo Gerencial</a></li>
+                <li><a href="#" data-view="roteirizacao" onclick="showRoteirizacaoPage(this)">Roteirização Inteligente</a></li>
+                <li><a href="#" data-view="consulta" onclick="showGestorView('consulta', this)">Consultar Pedidos</a></li>
+                <li><a href="#" onclick="logout()">Sair</a></li>
+            `;
+            sidebarUl.innerHTML = sidebarHTML;
+            showGestorView('resumo');
+        }
+
     } else {
         erro.textContent = "Usuário ou senha gerencial incorretos.";
     }
@@ -808,7 +819,9 @@ function exibirResumoEmbarques() {
         const status = getPedidoStatus(pedido.id);
         const materialCorresponde = globalFiltroMaterial === "Todos" || Object.keys(pedido.produtos).includes(globalFiltroMaterial);
 
-        if (status !== "Pedido separado" && materialCorresponde) {
+        const isSeparationStatus = ['Aguardando separação', 'Em separação'].includes(status);
+
+            if (isSeparationStatus && materialCorresponde) {
             const embarque = pedido.embarque;
             if (!resumo[embarque]) {
                 resumo[embarque] = { count: 0, color: '' };
@@ -961,8 +974,11 @@ function resetAllOrderData() {
     }
     keysToRemove.forEach(key => localStorage.removeItem(key));
 
+    if (key.startsWith("fardos_") || key.startsWith("embarque_")) 
+
     pedidos.forEach(p => {
-        p.status = "Aguardando separação";
+        p.status = "Aguardando rota";
+        p.embarque = null;
         const originalPedido = pedidos.find(op => op.id === p.id);
         if (originalPedido) {
             p.motorista = originalPedido.motorista;
@@ -2376,99 +2392,63 @@ function renderStatusColumns() {
     }
 }
 
-function showEmbarqueDetails(embarqueNome) {
-    document.getElementById('dashboardMainContent').style.display = 'none';
-    const detailsView = document.getElementById('shipmentDetailsView');
-    detailsView.style.display = 'block';
-    detailsView.innerHTML = '';
+function showEmbarqueDetailsModal(embarqueNome) {
+
+    alert(`Perfil de usuário detectado: ${usuarioLogadoRole}`);
 
     const pedidosDoEmbarque = pedidos.filter(p => p.embarque === embarqueNome);
+    
+    let modalContentHTML = '';
 
-    let cotacoesHTML = '';
     pedidosDoEmbarque.forEach(pedido => {
-        const status = getPedidoStatus(pedido.id);
-        const carregadoStatus = getPedidoCarregadoStatus(pedido.id);
-        let finalStatus = 'Pendente';
-        let statusClass = 'pendente';
+        modalContentHTML += `
+            <div class="embarque-modal-cotacao">
+                <h4>COT_${pedido.id} - ${pedido.cliente}</h4>
+        `;
 
-        if (carregadoStatus === 'carregado' || status === 'Pedido separado') {
-            finalStatus = 'Concluído';
-            statusClass = 'concluido';
-        } else if (status === 'Em separação') {
-            finalStatus = 'Em Separação';
-            statusClass = 'em-separacao';
-        }
-
-        let itensHTML = '';
         const dadosPeso = getDadosPesoPedido(pedido.id);
         const dadosCertificado = getDadosCertificadoPedido(pedido.id);
-
+        
+        let itensHTML = '';
         for (const setor in pedido.produtos) {
-            itensHTML += `<h6>Setor: ${setor}</h6>`;
+            itensHTML += `<h5 class="embarque-modal-setor">Setor: ${setor}</h5>`;
             pedido.produtos[setor].forEach(produto => {
-                const peso = dadosPeso[produto];
-                const cert = dadosCertificado[produto];
-                const itemConcluido = peso && cert;
+                const statusClass = (dadosPeso[produto] !== undefined && dadosCertificado[produto]) ? 'concluido' : 'pendente';
 
-                itensHTML += `
-                    <div class="item-detail-card">
-                        <div class="item-detail-header" onclick="toggleDropdown(this, '.item-detail-content')">
-                            <button class="toggle-btn">▼</button>
-                            <div class="item-info">
-                                <h6>${produto}</h6>
+                if (usuarioLogadoRole === 'consultor') {
+                    itensHTML += `
+                        <div class="embarque-modal-item">
+                            <span class="material-name">${produto}</span>
+                            <div class="material-info">
+                                <span class="material-status ${statusClass}">${statusClass === 'concluido' ? 'Concluído' : 'Pendente'}</span>
                             </div>
                         </div>
-                        <div class="item-detail-content">
-                            <div class="item-detail-fields">
-                                <div class="field">
-                                    <label>Peso (Kg)</label>
-                                    <input type="text" value="${peso || ''}" readonly>
-                                </div>
-                                <div class="field">
-                                    <label>Certificado</label>
-                                    <input type="text" value="${cert || ''}" readonly>
-                                </div>
+                    `;
+                } else {
+                    const peso = dadosPeso[produto] !== undefined ? `${dadosPeso[produto]} kg` : 'Pendente';
+                    const certificado = dadosCertificado[produto] || 'Pendente';
+                    itensHTML += `
+                        <div class="embarque-modal-item">
+                            <span class="material-name">${produto}</span>
+                            <div class="material-info">
+                                <span class="material-cert">Certificado: <strong>${certificado}</strong></span>
+                                <span class="material-weight">Peso: <strong>${peso}</strong></span>
+                                <span class="material-status ${statusClass}">${statusClass === 'concluido' ? 'Concluído' : 'Pendente'}</span>
                             </div>
-                            <p class="item-detail-status ${itemConcluido ? 'concluido' : 'pendente'}">${itemConcluido ? 'Concluído' : 'Pendente'}</p>
                         </div>
-                    </div>
-                `;
+                    `;
+                }
             });
         }
 
-        cotacoesHTML += `
-            <div class="cotacao-list-item">
-                <button class="toggle-btn" onclick="toggleDropdown(this.parentElement, '.item-details-dropdown')">></button>
-                <img src="IMAGES/pacote.png" alt="ícone" class="item-icon">
-                <div class="cotacao-info">
-                    <h5>COT_${pedido.id}</h5>
-                    <p>${pedido.embarque}: ${new Date(pedido.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</p>
-                </div>
-                <span class="cotacao-status-tag ${statusClass}">${finalStatus}</span>
-            </div>
-            <div class="item-details-dropdown">
-                ${itensHTML}
-            </div>
-        `;
+        modalContentHTML += itensHTML;
+        modalContentHTML += `</div>`;
     });
 
-    detailsView.innerHTML = `
-        <div class="shipment-details-header">
-            <button class="back-btn" onclick="renderDashboard()"><</button>
-            <img src="IMAGES/pacote.png" alt="ícone" class="header-icon">
-            <div>
-                <h2>${embarqueNome}</h2>
-                <p class="embarque-id">#${pedidosDoEmbarque[0].id}</p>
-            </div>
-        </div>
-        <div class="shipment-location-bar">
-            <span>${embarqueNome}</span>
-            <button class="map-btn">Map ▼</button>
-        </div>
-        <div class="cotacoes-container">
-            ${cotacoesHTML}
-        </div>
-    `;
+    const modalTitle = `Detalhes do Embarque #${embarqueNome}`;
+    const modalButtons = `<button class="modal-button ok" onclick="closeModal()">Fechar</button>`;
+
+    showModal(modalTitle, modalContentHTML, modalButtons);
 }
 
 function toggleDropdown(element, contentSelector) {
@@ -2510,19 +2490,12 @@ function renderResumoGerencial() {
     container.innerHTML = `
         <div class="summary-dashboard">
             <h2>Resumo Gerencial de Status</h2>
-            
             <h3 style="margin-top: 20px;">Status de Separação</h3>
             <div class="dashboard-main-content" id="separacaoStatusContent"></div>
-
             <h3 style="margin-top: 40px;">Status de Carregamento</h3>
             <div class="dashboard-main-content" id="carregamentoStatusContent"></div>
         </div>
     `;
-
-    const embarques = pedidos.reduce((acc, pedido) => {
-        (acc[pedido.embarque] = acc[pedido.embarque] || []).push(pedido);
-        return acc;
-    }, {});
 
     const embarquesPorStatusSeparacao = {
         'Aguardando separação': [],
@@ -2535,24 +2508,27 @@ function renderResumoGerencial() {
         'Carregamento Concluído': []
     };
 
+    const embarques = pedidos.filter(p => p.embarque !== null).reduce((acc, pedido) => {
+        (acc[pedido.embarque] = acc[pedido.embarque] || []).push(pedido);
+        return acc;
+    }, {});
+
     for (const embarqueNome in embarques) {
         const cotacoesDoEmbarque = embarques[embarqueNome];
         const embarqueObj = { nome: embarqueNome, cotacoes: cotacoesDoEmbarque };
 
-        const allSeparatedOrBeyond = cotacoesDoEmbarque.every(p => getPedidoStatus(p.id) !== 'Aguardando separação' && getPedidoStatus(p.id) !== 'Em separação');
-        const anyInSeparation = cotacoesDoEmbarque.some(p => getPedidoStatus(p.id) === 'Em separação');
+        const todosSeparados = cotacoesDoEmbarque.every(p => getPedidoStatus(p.id) === 'Pedido separado');
+        const algumEmSeparacao = cotacoesDoEmbarque.some(p => getPedidoStatus(p.id) === 'Em separação');
 
-        if (anyInSeparation) {
-            embarquesPorStatusSeparacao['Em separação'].push(embarqueObj);
-        } else if (allSeparatedOrBeyond) {
+        if (todosSeparados) {
             embarquesPorStatusSeparacao['Pedido separado'].push(embarqueObj);
+        } else if (algumEmSeparacao) {
+            embarquesPorStatusSeparacao['Em separação'].push(embarqueObj);
         } else {
             embarquesPorStatusSeparacao['Aguardando separação'].push(embarqueObj);
         }
 
-        const allReadyForLoading = cotacoesDoEmbarque.every(p => getPedidoStatus(p.id) === 'Pedido separado');
-
-        if (allReadyForLoading) {
+        if (todosSeparados) {
             const allLoaded = cotacoesDoEmbarque.every(p => getPedidoCarregadoStatus(p.id) === 'carregado');
             const anyInLoading = cotacoesDoEmbarque.some(p => getPedidoCarregadoStatus(p.id) === 'em_carregamento');
 
@@ -2566,55 +2542,103 @@ function renderResumoGerencial() {
         }
     }
 
-    const generateSectionHTML = (contentDivId, statusObject, headerMap) => {
-        const contentDiv = document.getElementById(contentDivId);
-        contentDiv.innerHTML = '';
-        for (const status in statusObject) {
-            const column = document.createElement('div');
-            column.className = 'status-column';
-            const statusClass = 'status-' + headerMap[status].toLowerCase().replace(/\s/g, '-').replace(/[çúã]/g, c => ({ 'ç': 'c', 'ú': 'u', 'ã': 'a' }[c]));
-            const embarquesDaColuna = statusObject[status];
-            const totalEmbarques = embarquesDaColuna.length;
-            let totalPeso = embarquesDaColuna.reduce((sum, emb) => sum + emb.cotacoes.reduce((s, p) => s + Object.values(getDadosPesoPedido(p.id)).reduce((sub, peso) => sub + (parseFloat(peso) || 0), 0), 0), 0);
-
-            const cardsHTML = embarquesDaColuna.map(embarque => {
-                const dropdownItemsHTML = embarque.cotacoes.map(cotacao => {
-                    const clickableAttribute = usuarioLogadoRole === 'gestor'
-                        ? `onclick="showCotacaoDetails(${cotacao.id})" class="dropdown-item clickable"`
-                        : 'class="dropdown-item"';
-                    return `<div ${clickableAttribute}>› COT_${cotacao.id} - ${cotacao.cliente}</div>`;
-                }).join('');
-
-                return `
-                    <div class="order-card" onclick="toggleDropdown(this)">
-                        <button class="toggle-btn">›</button>
-                        <div class="order-info">
-                            <h5>Embarque ${embarque.nome}</h5>
-                            <p>${embarque.cotacoes.length} cotaç${embarque.cotacoes.length > 1 ? 'ões' : 'ão'}</p>
-                        </div>
-                    </div>
-                    <div class="order-details-dropdown" style="display: none;">
-                        ${dropdownItemsHTML}
-                    </div>
-                `;
-            }).join('');
-
-            column.innerHTML = `
-                <div class="status-header ${statusClass}">${headerMap[status]}</div>
-                <div class="status-summary">
-                    <div class="summary-item"><div class="value">${(totalPeso / 1000).toFixed(2).replace('.', ',')}</div><div class="label">Peso (Ton)</div></div>
-                    <div class="summary-item"><div class="value">${totalEmbarques}</div><div class="label">Embarques</div></div>
-                </div>
-                <div class="cards-container">
-                    ${cardsHTML || '<p class="empty-column-message" style="text-align: center; font-size: 14px; color: #6c757d; margin-top: 20px;">Nenhum embarque neste status.</p>'}
-                </div>
-            `;
-            contentDiv.appendChild(column);
-        }
+    const headerMapSeparacao = {
+        'Aguardando separação': 'Aguardando Separação',
+        'Em separação': 'Em Separação',
+        'Pedido separado': 'Separação Concluída'
+    };
+    const headerMapCarregamento = {
+        'Aguardando Carregamento': 'Aguardando Carregamento',
+        'Em Carregamento': 'Em Carregamento',
+        'Carregamento Concluído': 'Carregamento Concluído'
     };
 
-    generateSectionHTML('separacaoStatusContent', embarquesPorStatusSeparacao, { 'Aguardando separação': 'Aguardando Separação', 'Em separação': 'Em Separação', 'Pedido separado': 'Separação Concluída' });
-    generateSectionHTML('carregamentoStatusContent', embarquesPorStatusCarregamento, { 'Aguardando Carregamento': 'Aguardando Carregamento', 'Em Carregamento': 'Em Carregamento', 'Carregamento Concluído': 'Carregamento Concluído' });
+    generateSectionHTML('separacaoStatusContent', embarquesPorStatusSeparacao, headerMapSeparacao);
+    generateSectionHTML('carregamentoStatusContent', embarquesPorStatusCarregamento, headerMapCarregamento);
+}
+
+function generateSectionHTML(contentDivId, statusObject, headerMap) {
+    const contentDiv = document.getElementById(contentDivId);
+    contentDiv.innerHTML = '';
+    contentDiv.style.gridTemplateColumns = `repeat(${Object.keys(statusObject).length}, 1fr)`;
+
+    for (const status in statusObject) {
+        const column = document.createElement('div');
+        column.className = 'status-column';
+        const statusClass = 'status-' + headerMap[status].toLowerCase().replace(/\s/g, '-').replace(/[çúã]/g, c => ({ 'ç': 'c', 'ú': 'u', 'ã': 'a' }[c]));
+
+        const embarquesDaColuna = statusObject[status];
+        const totalEmbarques = embarquesDaColuna.length;
+        let totalPeso = embarquesDaColuna.reduce((sum, emb) => sum + emb.cotacoes.reduce((s, p) => s + Object.values(getDadosPesoPedido(p.id)).reduce((sub, peso) => sub + (parseFloat(peso) || 0), 0), 0), 0);
+
+        const cardsHTML = embarquesDaColuna.map(embarque => {
+            return `
+                <div class="order-card" onclick="showEmbarqueDetailsModal('${embarque.nome}')">
+                    <div class="order-info">
+                        <h5>Embarque #${embarque.nome}</h5>
+                        <p>${embarque.cotacoes.length} cotaç${embarque.cotacoes.length > 1 ? 'ões' : 'ão'}</p>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        column.innerHTML = `
+            <div class="status-header ${statusClass}">${headerMap[status]}</div>
+            <div class="status-summary">
+                <div class="summary-item"><div class="value">${(totalPeso / 1000).toFixed(2).replace('.', ',')}</div><div class="label">Peso (Ton)</div></div>
+                <div class="summary-item"><div class="value">${totalEmbarques}</div><div class="label">Embarques</div></div>
+            </div>
+            <div class="cards-container">
+                ${cardsHTML || '<p class="empty-column-message">Nenhum embarque neste status.</p>'}
+            </div>
+        `;
+        contentDiv.appendChild(column);
+    }
+}
+
+function showEmbarqueDetailsModal(embarqueNome) {
+    const pedidosDoEmbarque = pedidos.filter(p => p.embarque === embarqueNome);
+    
+    let modalContentHTML = '';
+
+    pedidosDoEmbarque.forEach(pedido => {
+        modalContentHTML += `
+            <div class="embarque-modal-cotacao">
+                <h4>COT_${pedido.id} - ${pedido.cliente}</h4>
+        `;
+
+        const dadosPeso = getDadosPesoPedido(pedido.id);
+        const dadosCertificado = getDadosCertificadoPedido(pedido.id);
+        
+        let itensHTML = '';
+        for (const setor in pedido.produtos) {
+            itensHTML += `<h5 class="embarque-modal-setor">Setor: ${setor}</h5>`;
+            pedido.produtos[setor].forEach(produto => {
+                const peso = dadosPeso[produto] !== undefined ? `${dadosPeso[produto]} kg` : 'Pendente';
+                const certificado = dadosCertificado[produto] || 'Pendente';
+                const statusClass = (dadosPeso[produto] !== undefined && dadosCertificado[produto]) ? 'concluido' : 'pendente';
+
+                itensHTML += `
+                    <div class="embarque-modal-item">
+                        <span class="material-name">${produto}</span>
+                        <div class="material-info">
+                            <span class="material-cert">Certificado: <strong>${certificado}</strong></span>
+                            <span class="material-weight">Peso: <strong>${peso}</strong></span>
+                            <span class="material-status ${statusClass}">${statusClass === 'concluido' ? 'Concluído' : 'Pendente'}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        modalContentHTML += itensHTML;
+        modalContentHTML += `</div>`; 
+    });
+
+    const modalTitle = `Detalhes do Embarque #${embarqueNome}`;
+    const modalButtons = `<button class="modal-button ok" onclick="closeModal()">Fechar</button>`;
+
+    showModal(modalTitle, modalContentHTML, modalButtons);
 }
 
 function renderConsultaPedidos() {
@@ -3040,6 +3064,7 @@ function confirmarEmbarque() {
         if (pedidoIndex !== -1) {
             pedidos[pedidoIndex].embarque = nomeEmbarque;
             localStorage.setItem(`embarque_${pedidoId}`, nomeEmbarque);
+            setPedidoStatus(pedidoId, "Aguardando separação");
         }
     });
 
