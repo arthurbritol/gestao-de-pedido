@@ -4,13 +4,20 @@
 
 Este projeto é uma aplicação web front-end desenvolvida para otimizar o processo de gestão e acompanhamento de pedidos numa operação logística. A plataforma permite a separação de materiais, registo de pesagem, atribuição de motoristas, e visualização do estado dos pedidos em tempo real, tudo através de uma interface intuitiva e responsiva.
 
-A aplicação foi desenhada com diferentes perfis de utilizador, cada um com as suas próprias permissões e funcionalidades, garantindo que cada membro da equipa tenha acesso apenas às ferramentas necessárias para a sua função.
+A aplicação foi desenhada com diferentes perfis de utilizador, cada um com as suas próprias permissões e funcionalidades, garantindo que cada membro da equipa tenha acesso apenas às ferramentas necessárias para a sua função. As mais recentes atualizações incluem um módulo de **roteirização inteligente** para gestores e uma funcionalidade de **geração de pedidos** para consultores.
 
 ## ✨ Funcionalidades Principais
 
-- **Múltiplos Perfis de Utilizador**: Acesso diferenciado para Gestores, Operadores (Separadores) e Motoristas (Carregamento).
-- **Dashboard de Gestão**: Visualização geral do estado dos pedidos, com resumos por rota de embarque e filtros avançados.
-- **Interface de Operador**:
+- **Múltiplos Perfis de Utilizador**: Acesso diferenciado para Gestores, Consultores, Operadores (Separadores) e Motoristas (Carregamento).
+- **Dashboard de Gestão**: Visualização geral do estado dos pedidos em formato Kanban, com resumos por rota de embarque e filtros avançados.
+- **Roteirização Inteligente (Gestor)**:
+    - Interface com mapa interativo para visualização de pedidos sem rota.
+    - Geração de rotas otimizadas ou manuais, utilizando a API do OpenRouteService para calcular o melhor trajeto.
+    - Visualização da rota no mapa, com resumo de distância, paradas e tempo estimado.
+- **Geração de Pedidos (Consultor)**:
+    - Formulário para criação de novos pedidos, com busca de endereço automática via CEP.
+    - Adição dinâmica de produtos ao pedido.
+- **Interface de Operador (Separador)**:
     - Seleção de pedidos por tipo de material (Chapa, Tubo, Viga, etc.).
     - Início do processo de separação, alterando o estado do pedido.
     - Registo de peso e número de certificado para cada item.
@@ -18,10 +25,11 @@ A aplicação foi desenhada com diferentes perfis de utilizador, cada um com as 
     - Impressão de etiquetas de identificação para produtos e fardos.
 - **Interface de Carregamento (Motorista)**:
     - Visualização de carregamentos atribuídos.
+    - Possibilidade de destinar um embarque completo a um motorista específico.
     - Check-list de itens para carregar.
     - Início e finalização do processo de carregamento.
     - Registo de carregamento parcial ou não carregamento com justificação.
-    - Geração de PDF para controlo de transporte.
+    - Geração de PDF para controlo de transporte individual e por embarque.
 - **Persistência de Dados**: Utilização do `localStorage` do navegador para guardar o estado dos pedidos, pesos, certificados e outras informações, permitindo que os dados não se percam ao recarregar a página.
 - **Responsividade**: Interface adaptada para uma boa experiência de utilização em diferentes dispositivos.
 
@@ -29,16 +37,21 @@ A aplicação foi desenhada com diferentes perfis de utilizador, cada um com as 
 
 O sistema contempla os seguintes perfis:
 
-1.  **Acesso Gerencial (Gestor/Consultor)**:
-    - Tem acesso a um dashboard com um resumo geral de todos os pedidos.
-    - Pode consultar o estado de qualquer pedido, utilizando filtros por cotação, data, rota ou estado.
+1.  **Acesso Gerencial (Gestor)**:
+    - Acesso a um dashboard com resumo geral de todos os pedidos.
+    - Ferramenta de **Roteirização Inteligente** para criar e otimizar rotas de entrega.
+    - Consulta o estado de qualquer pedido, utilizando filtros avançados.
 
-2.  **Operador (Separador)**:
+2.  **Acesso Gerencial (Consultor)**:
+    - Acesso ao dashboard de resumo e à ferramenta de consulta de pedidos.
+    - Funcionalidade para **Gerar Novos Pedidos** diretamente no sistema.
+
+3.  **Operador (Separador)**:
     - Responsável pela separação dos materiais.
     - Visualiza os pedidos pendentes e pode filtrar por material e rota de embarque.
     - Inicia a separação, insere os pesos e certificados, e finaliza a sua etapa, mudando o estado do pedido para "Pedido Separado".
 
-3.  **Carregamento (Motorista)**:
+4.  **Carregamento (Motorista)**:
     - Visualiza os pedidos que já foram separados e estão prontos para carregar.
     - Pode ver os seus carregamentos ou todos os pedidos disponíveis.
     - Realiza o check-list de carregamento e finaliza o processo, gerando o documento de transporte.
@@ -49,6 +62,9 @@ O sistema contempla os seguintes perfis:
 - **CSS3**: Para a estilização e responsividade da interface.
 - **JavaScript (Vanilla)**: Para toda a lógica da aplicação, manipulação de dados e interatividade.
 - **html2pdf.js**: Biblioteca externa para a geração de documentos PDF.
+- **Leaflet.js**: Para a integração e visualização de mapas interativos.
+- **OpenRouteService API**: Utilizada para geocodificação de endereços e otimização de rotas.
+- **ViaCEP API**: Para busca automática de endereços a partir do CEP no formulário de geração de pedidos.
 
 ## ⚙️ Como Executar
 
