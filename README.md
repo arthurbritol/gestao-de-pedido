@@ -8,7 +8,7 @@ A aplicação foi desenhada com diferentes perfis de utilizador, cada um com as 
 
 ## ✨ Funcionalidades Principais
 
-- **Múltiplos Perfis de Utilizador**: Acesso diferenciado para Gestores, Consultores, Operadores (Separadores) e Motoristas (Carregamento).
+- **Múltiplos Perfis de Utilizador**: Acesso diferenciado para Gestores, Consultores, Operadores (Separadores e Carregamento).
 - **Dashboard de Gestão**: Visualização geral do estado dos pedidos em formato Kanban, com resumos por rota de embarque e filtros avançados.
 - **Roteirização Inteligente (Gestor)**:
     - Interface com mapa interativo para visualização de pedidos sem rota.
@@ -23,7 +23,7 @@ A aplicação foi desenhada com diferentes perfis de utilizador, cada um com as 
     - Registo de peso e número de certificado para cada item.
     - Funcionalidade para "Fatiar Fardos", permitindo dividir o peso de um item em múltiplos volumes.
     - Impressão de etiquetas de identificação para produtos e fardos.
-- **Interface de Carregamento (Motorista)**:
+- **Interface de Operador (Carregamento)**:
     - Visualização de carregamentos atribuídos.
     - Possibilidade de destinar um embarque completo a um motorista específico.
     - Check-list de itens para carregar.
@@ -51,7 +51,7 @@ O sistema contempla os seguintes perfis:
     - Visualiza os pedidos pendentes e pode filtrar por material e rota de embarque.
     - Inicia a separação, insere os pesos e certificados, e finaliza a sua etapa, mudando o estado do pedido para "Pedido Separado".
 
-4.  **Carregamento (Motorista)**:
+4.  **Operador (Carregamento)**:
     - Visualiza os pedidos que já foram separados e estão prontos para carregar.
     - Pode ver os seus carregamentos ou todos os pedidos disponíveis.
     - Realiza o check-list de carregamento e finaliza o processo, gerando o documento de transporte.
