@@ -3241,3 +3241,106 @@ button:disabled {
     box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
     transform: translateY(-1px);
 }
+
+#roteirizacaoSidebar .panel-header {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.panel-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.roteirizacao-filters {
+    display: flex;
+    gap: 10px;
+}
+
+.roteirizacao-filters select {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 14px;
+    border-radius: var(--border-radius-small);
+    border: 1px solid var(--medium-gray);
+    background-color: var(--light-gray);
+}
+
+.roteirizacao-filters {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.filter-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.filter-btn {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: var(--border-radius-small);
+    border: 1px solid var(--medium-gray);
+    background-color: var(--white);
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.filter-btn span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--white);
+    min-width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius-small);
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 5px;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.dropdown-content label {
+    color: var(--text-primary);
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.dropdown-content label:hover {
+    background-color: var(--light-gray);
+}
+
+.dropdown-content input {
+    margin-right: 10px;
+}
+
+.btn-limpar-filtros {
+    background: transparent;
+    border: none;
+    color: var(--primary-blue);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 10px;
+    text-align: right;
+}
