@@ -3304,23 +3304,14 @@ function initializeMapAndFilters() {
 }
 
 
-async function getCoordsForAddress(address, id, focusCoords) {
+async function getCoordsForAddress(address, id, focusCoords, estado) {
     const url = new URL('https://api.openrouteservice.org/geocode/search');
     url.searchParams.append('api_key', OPENROUTESERVICE_API_KEY);
     url.searchParams.append('text', address);
     url.searchParams.append('boundary.country', 'BR');
-    
-    try {
-        const parts = address.split(',');
-        if (parts.length >= 3) {
-            const cityStatePart = parts[parts.length - 2].trim();
-            const city = cityStatePart.split('-')[0].trim();
-            if (city) {
-                url.searchParams.append('locality', city);
-            }
-        }
-    } catch(e) {
-        console.warn("Não foi possível extrair a cidade do endereço:", address);
+
+    if (estado) {
+        url.searchParams.append('boundary.administrative.region', estado);
     }
 
     url.searchParams.append('boundary.rect.min_lon', BOUNDING_BOX_BRASIL.min_lon);
@@ -3337,7 +3328,11 @@ async function getCoordsForAddress(address, id, focusCoords) {
     const data = await response.json();
 
     if (!response.ok || !data.features || data.features.length === 0) {
-        throw new Error(`Endereço do pedido #${id} não foi encontrado no Espírito Santo: "${address}"`);
+        let errorMessage = `Endereço do pedido #${id} não foi encontrado: "${address}"`;
+        if (estado) {
+            errorMessage = `Endereço do pedido #${id} não foi encontrado no estado de ${estado}: "${address}"`;
+        }
+        throw new Error(errorMessage);
     }
 
     const feature = data.features[0];
@@ -3363,6 +3358,10 @@ async function generateRoute(optimized) {
         return;
     }
 
+    const estadosSelecionados = Array.from(document.querySelectorAll('#filtro-estado-content input:checked')).map(cb => cb.value);
+    const estadoParaFoco = estadosSelecionados.length === 1 ? estadosSelecionados[0] : null;
+
+
     mostrarBotoesAcao(false);
     document.getElementById('sugerirRotaBtn').disabled = true;
     document.getElementById('montarManualBtn').disabled = true;
@@ -3375,7 +3374,6 @@ async function generateRoute(optimized) {
 
         const stopsPromises = selectedCheckboxes.map(cb => {
             const pedidoId = cb.dataset.id;
-            
             const pedidoAtual = pedidos.find(p => p.id == pedidoId);
 
             if (!pedidoAtual) {
@@ -3388,7 +3386,7 @@ async function generateRoute(optimized) {
             
             const enderecoCorreto = pedidoAtual.endereco; 
 
-            return getCoordsForAddress(enderecoCorreto, pedidoId, CEDISA_LOCATION.coords).then(result => ({
+            return getCoordsForAddress(enderecoCorreto, pedidoId, CEDISA_LOCATION.coords, estadoParaFoco).then(result => ({
                 ...pedidoAtual,
                 details: result.details,
                 coords: result.coords
