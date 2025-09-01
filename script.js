@@ -690,8 +690,10 @@ function renderizarPedidosPorSetor(idPedidoEspecifico = null) {
                     <div class="item">
                         <span>${produto}:</span>
                         <div>
-                            <input type="number" step="5" placeholder="Peso (kg)*" value="${peso}" id="peso-${pedido.id}-${setor}-${produto.replace(/\s/g, '-')}" ${botoesDesabilitados ? 'disabled' : ''} />
-                            <input type="text" placeholder="Certificado*" value="${certificado}" id="certificado-${pedido.id}-${setor}-${produto.replace(/\s/g, '-')}" ${botoesDesabilitados ? 'disabled' : ''} style="margin-left: 10px; width: 220px;" />
+                            <div class="weight-input-container">
+                                <input type="text" inputmode="decimal" placeholder="Peso*" value="${formatarPesoCompleto(peso)}" id="peso-${pedido.id}-${setor}-${produto.replace(/\s/g, '-')}" ${botoesDesabilitados ? 'disabled' : ''} oninput="formatarMilhar(this)" onblur="salvarPesoCertificadoItem(${pedido.id}, '${setor}', '${produto}')" />
+                            </div>
+                            <input type="text" placeholder="Certificado*" value="${certificado}" id="certificado-${pedido.id}-${setor}-${produto.replace(/\s/g, '-')}" ${botoesDesabilitados ? 'disabled' : ''} style="margin-left: 10px; width: 220px;" onblur="salvarPesoCertificadoItem(${pedido.id}, '${setor}', '${produto}')" />
                             <button class="btn-fatiar-fardos" onclick="abrirTelaFatiarFardos(${pedido.id}, '${setor}', '${produto}')" ${botoesDesabilitados ? 'disabled' : ''}>Fatiar Fardos</button>
                             <button class="btn-imprimir-fardos" onclick="imprimirEtiquetasFardos(${pedido.id}, '${setor}', '${produto}')" ${botoesDesabilitados || !fardosExistem ? 'disabled' : ''}>Imprimir Fardos</button>
                         </div>
@@ -705,7 +707,6 @@ function renderizarPedidosPorSetor(idPedidoEspecifico = null) {
             if (!isSetorAlreadySent) {
                 buttonRow.innerHTML = `
                     <button class="btn-iniciar-separacao" onclick="iniciarSeparacaoSetor(${pedido.id}, '${setor}')" ${statusAtual !== "Aguardando separação" ? 'disabled' : ''}>Iniciar Separação (${setor})</button>
-                    <button class="btn-salvar-peso" onclick="salvarTodosPesosDoSetor(${pedido.id}, '${setor}')" ${statusAtual !== "Em separação" ? 'disabled' : ''}>Salvar Pesos (${setor})</button>
                     <button class="btn-enviar" onclick="enviarSetor(${pedido.id}, '${setor}')" ${statusAtual !== "Em separação" ? 'disabled' : ''}>Enviar (${setor})</button>`;
             } else {
 
@@ -740,22 +741,49 @@ function iniciarSeparacaoSetor(pedidoId, setor) {
         }
     );
 }
+
 function enviarSetor(pedidoId, setor) {
-    let allWeightsEntered = true;
     const pedido = getPedidoById(pedidoId);
     if (!pedido) return;
 
+    let dadosPeso = getDadosPesoPedido(pedidoId);
+    let dadosCertificado = getDadosCertificadoPedido(pedidoId);
+
+    pedido.produtos[setor].forEach(produto => {
+        const produtoSlug = produto.replace(/\s/g, '-');
+        const pesoInput = document.getElementById(`peso-${pedidoId}-${setor}-${produtoSlug}`);
+        const certificadoInput = document.getElementById(`certificado-${pedidoId}-${setor}-${produtoSlug}`);
+
+        if (pesoInput && !pesoInput.disabled) {
+            dadosPeso[produto] = desformatarPeso(pesoInput.value);
+        }
+        if (certificadoInput && !certificadoInput.disabled) {
+            dadosCertificado[produto] = certificadoInput.value.trim();
+        }
+    });
+
+    setDadosPesoPedido(pedidoId, dadosPeso);
+    setDadosCertificadoPedido(pedidoId, dadosCertificado);
+
+    let allWeightsEntered = true;
     pedido.produtos[setor].forEach(produto => {
         const pesoInput = document.getElementById(`peso-${pedidoId}-${setor}-${produto.replace(/\s/g, '-')}`);
         const certificadoInput = document.getElementById(`certificado-${pedidoId}-${setor}-${produto.replace(/\s/g, '-')}`);
-        if (!pesoInput || pesoInput.value === '' || parseFloat(pesoInput.value) <= 0) allWeightsEntered = false;
-        if (!certificadoInput || certificadoInput.value.trim() === '') allWeightsEntered = false;
+        
+        const pesoNumerico = desformatarPeso(pesoInput.value); 
+        if (!pesoInput || pesoNumerico <= 0) {
+            allWeightsEntered = false;
+        }
+        if (!certificadoInput || certificadoInput.value.trim() === '') {
+            allWeightsEntered = false;
+        }
     });
 
     if (!allWeightsEntered) {
         showModal("Erro", "Preencha o peso e o certificado para todos os produtos antes de enviar.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
         return;
     }
+
     confirmarAcao(
         `Confirmar Envio para ${setor}?`,
         `Você está prestes a finalizar o envio do setor ${setor}. Confirma?`,
@@ -769,69 +797,31 @@ function enviarSetor(pedidoId, setor) {
     );
 }
 
-function salvarTodosPesosDoSetor(pedidoId, setor) {
-    const pedido = getPedidoById(pedidoId);
-    if (!pedido || !pedido.produtos[setor]) {
-        showModal("Erro", `Não foi possível encontrar produtos para o setor ${setor}.`, `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
-        return;
-    }
-    const produtosDoSetor = pedido.produtos[setor];
+function salvarPesoCertificadoItem(pedidoId, setor, produto) {
+    const produtoSlug = produto.replace(/\s/g, '-');
+    const pesoInput = document.getElementById(`peso-${pedidoId}-${setor}-${produtoSlug}`);
+    const certificadoInput = document.getElementById(`certificado-${pedidoId}-${setor}-${produtoSlug}`);
 
-    let dadosPeso = getDadosPesoPedido(pedidoId);
-    let dadosCertificado = getDadosCertificadoPedido(pedidoId);
-    let inputsAtualizados = 0;
-    let validationError = false;
+    if (pesoInput && certificadoInput) {
+        const pesoFormatado = pesoInput.value;
+        const certificado = certificadoInput.value.trim();
 
-    produtosDoSetor.forEach(produto => {
-        const pesoInput = document.getElementById(`peso-${pedidoId}-${setor}-${produto.replace(/\s/g, '-')}`);
-        const certificadoInput = document.getElementById(`certificado-${pedidoId}-${setor}-${produto.replace(/\s/g, '-')}`);
+        const pesoNumerico = desformatarPeso(pesoFormatado);
 
-        if (pesoInput && !pesoInput.disabled) {
-            const peso = parseFloat(pesoInput.value);
-            if (isNaN(peso) || peso <= 0) {
-                validationError = true;
-            } else {
-                dadosPeso[produto] = peso;
-                inputsAtualizados++;
-            }
+        pesoInput.value = formatarPesoCompleto(pesoNumerico);
+
+        if (pesoNumerico > 0 || certificado) {
+            let dadosPeso = getDadosPesoPedido(pedidoId);
+            let dadosCertificado = getDadosCertificadoPedido(pedidoId);
+
+            dadosPeso[produto] = pesoNumerico;
+            dadosCertificado[produto] = certificado;
+
+            setDadosPesoPedido(pedidoId, dadosPeso);
+            setDadosCertificadoPedido(pedidoId, dadosCertificado);
+            console.log(`Dados para COT_${pedidoId}, Produto: ${produto} salvos automaticamente.`);
         }
-
-        if (certificadoInput && !certificadoInput.disabled) {
-            const certificado = certificadoInput.value.trim();
-            if (certificado === '') {
-                validationError = true;
-            } else {
-                dadosCertificado[produto] = certificado;
-                inputsAtualizados++;
-            }
-        }
-    });
-
-    if (validationError) {
-        showModal(
-            "Erro de Validação",
-            "Por favor, insira um peso válido (número maior que zero) e um certificado para todos os produtos antes de salvar.",
-            `<button class="modal-button ok" onclick="closeModal()">OK</button>`
-        );
-        return;
     }
-
-    if (inputsAtualizados > 0) {
-        setDadosPesoPedido(pedidoId, dadosPeso);
-        setDadosCertificadoPedido(pedidoId, dadosCertificado);
-        showModal(
-            "Pesos Salvos!",
-            `Os pesos e certificados para o setor ${setor} da COT_${pedidoId} foram salvos com sucesso.`,
-            `<button class="modal-button ok" onclick="closeModal()">OK</button>`
-        );
-    } else {
-        showModal(
-            "Nenhuma Alteração!",
-            "Nenhum peso ou certificado foi alterado.",
-            `<button class="modal-button ok" onclick="closeModal()">OK</button>`
-        );
-    }
-    renderizarPedidosPorSetor(pedidoUnicoVisualizado);
 }
 
 function exibirResumoEmbarques() {
@@ -3590,3 +3580,29 @@ async function buscarCep() {
     }
 }
 
+function formatarPesoCompleto(valor) {
+    if (valor === null || valor === undefined || valor === '') return '';
+    const numero = Number(valor).toFixed(2);
+    let [inteiro, decimal] = String(numero).split('.');
+    inteiro = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return `${inteiro},${decimal}`;
+}
+
+function desformatarPeso(valorFormatado) {
+    if (typeof valorFormatado !== 'string' || !valorFormatado) return 0;
+    const valorNumerico = valorFormatado.replace(/\./g, '').replace(',', '.');
+    return parseFloat(valorNumerico) || 0;
+}
+
+function formatarMilhar(input) {
+    let valor = input.value;
+    valor = valor.replace(/[^\d,]/g, '');
+    let [inteiro, decimal] = valor.split(',');
+    inteiro = inteiro.replace(/\./g, '');
+    inteiro = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    if (decimal !== undefined) {
+        input.value = `${inteiro},${decimal.substring(0,2)}`;
+    } else {
+        input.value = inteiro;
+    }
+}
