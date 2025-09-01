@@ -58,7 +58,7 @@
             <img src="IMAGES/C_LOGO_BRANCO.png" alt="Logo" class="sidebar-logo">
             <ul>
                 <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo
-                        Operacional</a></li>
+                        Gerencial</a></li>
                 <li><a href="#" data-view="consulta" onclick="showGestorView('consulta', this)">Consultar Pedidos</a>
                 </li>
                 <li><a href="#" onclick="logout()">Sair</a></li>
@@ -328,12 +328,31 @@
     <div class="main-layout" id="roteirizacaoPage" style="display: none;">
         <aside class="sidebar" id="roteirizacaoSidebar">
             <div class="panel-header">
-                <button class="btn-back-roteirizacao" onclick="showGestorView('resumo')"><i
-                        class="ph ph-arrow-left"></i> Voltar</button>
-                <div class="panel-header-title">
-                    <i class="ph-bold ph-list-checks"></i>
-                    <h2>Pedidos</h2>
+                <div class="panel-header-top">
+                    <button class="btn-back-roteirizacao" onclick="showGestorView('resumo')"><i
+                            class="ph ph-arrow-left"></i> Voltar</button>
+                    <div class="panel-header-title">
+                        <i class="ph-bold ph-list-checks"></i>
+                        <h2>Pedidos</h2>
+                    </div>
                 </div>
+                <div class="roteirizacao-filters">
+                    <div class="filter-dropdown">
+                        <button class="filter-btn" onclick="toggleFilterDropdown('estado')">
+                            <span id="filtro-estado-label">Estados</span> <i class="ph ph-caret-down"></i>
+                        </button>
+                        <div id="filtro-estado-content" class="dropdown-content">
+                            </div>
+                    </div>
+                    <div class="filter-dropdown">
+                        <button class="filter-btn" onclick="toggleFilterDropdown('cidade')">
+                            <span id="filtro-cidade-label">Cidades</span> <i class="ph ph-caret-down"></i>
+                        </button>
+                        <div id="filtro-cidade-content" class="dropdown-content">
+                            </div>
+                    </div>
+                </div>
+                 <button id="limparFiltrosBtn" class="btn-limpar-filtros">Limpar Filtros</button>
             </div>
             <div class="sidebar-content">
                 <ul id="pedidos-filtrados-list" class="order-list"></ul>
@@ -388,4 +407,3 @@
 </body>
 
 </html>
-
