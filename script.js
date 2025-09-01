@@ -65,7 +65,7 @@ let pedidosIniciais = [
     { id: 333767, cliente: "Expresso Cargas", status: "Aguardando rota", data: "2025-09-06", endereco: "Rua Padre Luiz Parenzi, 350, Centro, Aracruz - ES, 29190-058", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 50x30 #16 (1.55mm)"], Viga: ["Viga W 250 x 38.5"] } },
     { id: 330199, cliente: "Estrutura Forte", status: "Aguardando rota", data: "2025-09-07", endereco: "Rua da Linha, 10, Shell, Linhares - ES, 29901-570", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo  #18 (1.25mm)"], Chapa: ["Chapa Aço Carbono 1/ (3.00mm)"] } },
     { id: 328948, cliente: "Cia. do Metal", status: "Aguardando rota", data: "2025-09-08", endereco: "Praça São Benedito, 150, Centro, São Mateus - ES, 29930-190", embarque: null, motorista: null, produtos: { Viga: ["Viga U  x 5.4#", "Viga I  x 5.7#"], Chapa: ["Chapa Galvanizada #28 (0.43mm)"] } },
-    { id: 329122, cliente: "Norte Aço", status: "Aguardando rota", data: "2025-09-08", endereco: "Avenida 27 de Abril, 80, Centro, Fundão - ES, 29185-000", embarque: "Fundão", motorista: null, produtos: { Tubo: ["Tubo Quadrado 60x60 #18 (1.25mm)"], Chapa: ["Chapa Fina a Frio #28 (0.43mm)"] } },
+    { id: 329122, cliente: "Norte Aço", status: "Aguardando rota", data: "2025-09-08", endereco: "Avenida 27 de Abril, 80, Centro, Fundão - ES, 29185-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 60x60 #18 (1.25mm)"], Chapa: ["Chapa Fina a Frio #28 (0.43mm)"] } },
     { id: 328400, cliente: "Leste Ferro", status: "Aguardando rota", data: "2025-09-09", endereco: "Rua Vinte e Cinco de Março, 150, Centro, Cachoeiro de Itapemirim - ES, 29300-100", embarque: null, motorista: null, produtos: { Viga: ["Viga W 100 x 19.3"], Chapa: ["Chapa Xadrez 3.00mm"] } },
     { id: 327904, cliente: "Centro Metal", status: "Aguardando rota", data: "2025-09-09", endereco: "Rua General Dutra, 30, Centro, Castelo - ES, 29360-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo 2.1/ #14 (2.00mm)"], Chapa: ["Chapa Perfurada 2.00mm"] } },
     { id: 326005, cliente: "Metalúrgica do Aço", status: "Aguardando rota", data: "2025-09-10", endereco: "Avenida Brasil, 800, Olaria, Serra - ES, 29176-237", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Inox 316 1.0mm"], Viga: ["Viga I  x 7.7#"] } },
@@ -3589,3 +3589,4 @@ async function buscarCep() {
         loader.style.display = 'none'; 
     }
 }
+
