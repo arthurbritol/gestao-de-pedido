@@ -3344,3 +3344,16 @@ button:disabled {
     margin-top: 10px;
     text-align: right;
 }
+
+.info-icon {
+    font-size: 18px;
+    color: var(--primary-color);
+    margin-left: 5px;
+    cursor: help;
+    vertical-align: middle;
+}
+
+.weight-input-container {
+    display: inline-flex;
+    align-items: center;
+}
