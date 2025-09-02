@@ -1475,6 +1475,9 @@ let pedidosIniciais = [
     }
 ];
 
+let pedidosPendentes = []; 
+const CEDISA_LOCATION = { name: 'Cedisa Calogi', coords: [-40.366593, -20.065453] };
+
 const pesosTeoricosProdutos = {
     "Viga I  x 12.5#": 18.6,
     "Viga W 250 x 25.7": 154.2,
@@ -4742,6 +4745,7 @@ function mostrarBotoesAcao(mostrarConfirmacao) {
     document.getElementById('montarManualBtn').style.display = mostrarConfirmacao ? 'none' : 'flex';
     document.getElementById('confirmarEmbarqueBtn').style.display = mostrarConfirmacao ? 'flex' : 'none';
     document.getElementById('cancelarRotaBtn').style.display = mostrarConfirmacao ? 'flex' : 'none';
+    document.getElementById('exportarGoogleMapsBtn').style.display = mostrarConfirmacao ? 'flex' : 'none';
 }
 
 let localizacoes = {}; 
@@ -4840,7 +4844,6 @@ async function generateRoute(optimized) {
     const estadosSelecionados = Array.from(document.querySelectorAll('#filtro-estado-content input:checked')).map(cb => cb.value);
     const estadoParaFoco = estadosSelecionados.length === 1 ? estadosSelecionados[0] : null;
 
-
     mostrarBotoesAcao(false);
     document.getElementById('sugerirRotaBtn').disabled = true;
     document.getElementById('montarManualBtn').disabled = true;
@@ -4849,22 +4852,16 @@ async function generateRoute(optimized) {
     showFeedbackMessage(document.getElementById('minuta-content'), 'spinner-gap ph-spin', 'Buscando coordenadas...');
 
     try {
-        const CEDISA_LOCATION = { name: 'Cedisa Calogi', coords: [-40.366593, -20.065453] };
-
         const stopsPromises = selectedCheckboxes.map(cb => {
             const pedidoId = cb.dataset.id;
             const pedidoAtual = pedidos.find(p => p.id == pedidoId);
-
             if (!pedidoAtual) {
                 throw new Error(`Pedido com ID #${pedidoId} não foi encontrado.`);
             }
-
             if (pedidoAtual.coords) {
                 return Promise.resolve({ ...pedidoAtual, details: {} });
             }
-            
-            const enderecoCorreto = pedidoAtual.endereco; 
-
+            const enderecoCorreto = pedidoAtual.endereco;
             return getCoordsForAddress(enderecoCorreto, pedidoId, CEDISA_LOCATION.coords, estadoParaFoco).then(result => ({
                 ...pedidoAtual,
                 details: result.details,
@@ -4873,13 +4870,14 @@ async function generateRoute(optimized) {
         });
 
         const stops = await Promise.all(stopsPromises);
+
         let finalOrderedStops = optimized ? await getOptimizedStops(stops, CEDISA_LOCATION) : stops;
 
         const directionCoordinates = [
             [CEDISA_LOCATION.coords[0], CEDISA_LOCATION.coords[1]],
             ...finalOrderedStops.map(s => [s.coords[0], s.coords[1]])
         ];
-
+        
         const dirResponse = await fetch('https://api.openrouteservice.org/v2/directions/driving-car', {
             method: 'POST',
             headers: { 'Authorization': OPENROUTESERVICE_API_KEY, 'Content-Type': 'application/json' },
@@ -4895,7 +4893,7 @@ async function generateRoute(optimized) {
         const route = routeJson.routes[0];
 
         pedidosPendentes = finalOrderedStops;
-        rotaPendente = route;
+        rotaPendente = route; 
 
         displayRouteOnMapAndPanel(finalOrderedStops, route, CEDISA_LOCATION);
         mostrarBotoesAcao(true);
@@ -4908,6 +4906,23 @@ async function generateRoute(optimized) {
         document.getElementById('montarManualBtn').disabled = false;
         document.getElementById('sugerirRotaBtn').innerHTML = `<i class="ph ph-magic-wand"></i> Sugerir Rota Otimizada`;
     }
+}
+
+function exportToGoogleMaps() {
+    if (pedidosPendentes.length === 0) {
+        showModal("Atenção", "Nenhuma rota foi gerada para exportar.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+        return;
+    }
+
+    const baseUrl = "https://www.google.com/maps/dir/";
+
+    const originCoords = `${CEDISA_LOCATION.coords[1]},${CEDISA_LOCATION.coords[0]}`;
+
+    const destinationCoords = pedidosPendentes.map(pedido => `${pedido.coords[1]},${pedido.coords[0]}`);
+
+    const finalUrl = baseUrl + originCoords + "/" + destinationCoords.join('/');
+
+    window.open(finalUrl, '_blank');
 }
 
 function confirmarEmbarque() {
@@ -4943,10 +4958,12 @@ function confirmarEmbarque() {
 }
 
 function cancelarRota() {
-    pedidosPendentes = [];
+    pedidosPendentes = []; 
     rotaPendente = null;
     initializeMapAndFilters();
 }
+
+document.getElementById('exportarGoogleMapsBtn').addEventListener('click', exportToGoogleMaps);
 
 function zerarTodosEmbarques() {
     confirmarAcao(
