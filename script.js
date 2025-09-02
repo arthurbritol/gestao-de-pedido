@@ -39,193 +39,1718 @@ const usuarios = {
 };
 
 let pedidosIniciais = [
-    { id: 259773, cliente: "Aço Forte", status: "Aguardando rota", data: "2025-08-24", endereco: "Rua Castelo Branco, 1010, Centro, Vila Velha - ES, 29100-040", embarque: null, motorista: null, produtos: { Viga: ["Viga I  x 12.5#", "Viga W 250 x 25.7"] } },
-    { id: 283722, cliente: "Metal Capixaba", status: "Aguardando rota", data: "2025-08-24", endereco: "Rua Sete de Setembro, 400, Centro, Vitória - ES, 29015-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Galvanizado 1.1/"], "Cantoneira / Barra": ["Barra Chata  x 1/"] } },
-    { id: 280519, cliente: "Engemetal", status: "Aguardando rota", data: "2025-08-25", endereco: "Rua da Conceição, 800, Centro, Linhares - ES, 29900-260", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/ (12.70mm)"], Tubo: ["Tubo Retangular 80x40 #14 (2.00mm)"] } },
-    { id: 296741, cliente: "Ferroleste", status: "Aguardando rota", data: "2025-08-25", endereco: "Rua Santa Maria, 320, Vila Nova, Colatina - ES, 29702-230", embarque: null, motorista: null, produtos: { Viga: ["Viga U  x 6.7#", "Viga I  x 10#"] } },
-    { id: 301784, cliente: "Metalúrgica União", status: "Aguardando rota", data: "2025-08-26", endereco: "Avenida Champagnat, 1085, Praia da Costa, Vila Velha - ES, 29101-920", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 40x40 #18 (1.25mm)"], Chapa: ["Chapa Inox 430 1.2mm Polida"] } },
-    { id: 309377, cliente: "Construmetais", status: "Aguardando rota", data: "2025-08-26", endereco: "Avenida Norte Sul, 2200, Jardim Limoeiro, Serra - ES, 29164-140", embarque: null, motorista: null, produtos: { Viga: ["Viga I  x 18.4#"], Chapa: ["Chapa Aço Carbono 3/ (9.53mm)"] } },
-    { id: 308426, cliente: "Alfa Engenharia", status: "Aguardando rota", data: "2025-08-27", endereco: "Rua Manoel Joaquim dos Santos, 190, Itacibá, Cariacica - ES, 29150-240", embarque: null, motorista: null, produtos: { "Cantoneira / Barra": ["Cantoneira 1.1/ x 3/1", "Barra Chata  x 3/1"] } },
-    { id: 334874, cliente: "Beta Construções", status: "Aguardando rota", data: "2025-08-27", endereco: "Av. Princesa Isabel, 500, Centro, Vitória - ES, 29010-360", embarque: null, motorista: null, produtos: { Viga: ["Viga U  x 4.1#"], Chapa: ["Chapa Aço Carbono 1/ (6.35mm)"] } },
-    { id: 333704, cliente: "Gama Ferragens", status: "Aguardando rota", data: "2025-08-28", endereco: "Av. Comendador Rafael, 1500, Centro, Linhares - ES, 29900-322", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #24 (0.60mm)"], Tubo: ["Tubo Industrial Quadrado 40x40 #14 (2.00mm)"] } },
-    { id: 333900, cliente: "Épsilon Indústria", status: "Aguardando rota", data: "2025-08-29", endereco: "Rua Viana, 55, Glória, Vila Velha - ES, 29122-370", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 50x30 #18 (1.25mm)"], Chapa: ["Chapa Inox 304 1.0mm Escovada"] } },
-    { id: 334755, cliente: "Zeta Metalúrgica", status: "Aguardando rota", data: "2025-08-29", endereco: "Rua Moacyr Ávidos, 45, Centro, Colatina - ES, 29700-160", embarque: null, motorista: null, produtos: { Viga: ["Viga W 200 x 22.5"], Tubo: ["Tubo Quadrado 30x30 #18 (1.25mm)"] } },
-    { id: 333038, cliente: "Ícaro Soldas", status: "Aguardando rota", data: "2025-08-30", endereco: "Avenida Vale do Rio Doce, 20, Porto de Santana, Cariacica - ES, 29153-010", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Industrial Redondo "], Chapa: ["Chapa Fina a Frio #16 (1.55mm)"] } },
-    { id: 334823, cliente: "Fênix Construções", status: "Aguardando rota", data: "2025-08-31", endereco: "Avenida Vitória, 1500, Jucutuquara, Vitória - ES, 29040-780", embarque: null, motorista: null, produtos: { Viga: ["Viga W 250 x 32.7", "Viga U  x 8.2#"], Tubo: ["Tubo Galvanizado "] } },
-    { id: 334807, cliente: "Grifo Metais", status: "Aguardando rota", data: "2025-08-31", endereco: "Rua Monsenhor Pedrinha, 1020, Centro, Linhares - ES, 29900-110", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Inox 316 2.0mm"], Viga: ["Viga I  x 10#"] } },
-    { id: 327413, cliente: "Pegasus Engenharia", status: "Aguardando rota", data: "2025-09-01", endereco: "Rua Quinze de Novembro, 600, Centro, Vila Velha - ES, 29100-300", embarque: null, motorista: null, produtos: { Viga: ["Viga U  x 11.5#"], Tubo: ["Tubo Redondo  #14 (2.00mm)"] } },
-    { id: 334389, cliente: "Centauro Indústria", status: "Aguardando rota", data: "2025-09-02", endereco: "Rua Benjamin Constant, 190, Centro, Colatina - ES, 29700-130", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 5/1 (7.94mm)"], Viga: ["Viga I  x 12.5#"] } },
-    { id: 334702, cliente: "Harpia Estruturas", status: "Aguardando rota", data: "2025-09-02", endereco: "Avenida Talma Rodrigues Ribeiro, 1500, Portal de Jacaraípe, Serra - ES, 29173-735", embarque: null, motorista: null, produtos: { Tubo: ["Tubo SCH 40 "], Chapa: ["Chapa Grossa 3/ (19.05mm)"] } },
-    { id: 388994, cliente: "Minotauro Construções", status: "Aguardando rota", data: "2025-09-03", endereco: "Rua Florentino Ávidos, 20, Centro, Cariacica - ES, 29156-020", embarque: null, motorista: null, produtos: { Viga: ["Viga I 1 x 25.4#"], Tubo: ["Tubo Retangular 120x60 #12 (2.65mm)"] } },
-    { id: 334016, cliente: "Sereia Naval", status: "Aguardando rota", data: "2025-09-03", endereco: "Rua do Rosário, 180, Centro, Vitória - ES, 29015-200", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Naval A36 1/"], "Cantoneira / Barra": ["Cantoneira  x 1/"] } },
-    { id: 334716, cliente: "Tritão Ferro e Aço", status: "Aguardando rota", data: "2025-09-04", endereco: "Rua Professor Jones, 50, Centro, Linhares - ES, 29900-140", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 100x100 #11 (3.00mm)"], Chapa: ["Chapa Xadrez 3/1 (4.75mm)"] } },
-    { id: 331324, cliente: "Atlas Construções", status: "Aguardando rota", data: "2025-09-04", endereco: "Rua Major Pissarra, 250, Centro, Serra - ES, 29176-030", embarque: null, motorista: null, produtos: { Viga: ["Viga W 360 x 57.8", "Viga U  x 11.5#"], Chapa: ["Chapa Aço Carbono 3/ (9.53mm)"] } },
-    { id: 334382, cliente: "Titã Fundições", status: "Aguardando rota", data: "2025-09-05", endereco: "Rua Henrique Moscoso, 1001, Centro, Vila Velha - ES, 29100-021", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #14 (2.00mm)"], Tubo: ["Tubo Redondo  SCH 40"] } },
-    { id: 332901, cliente: "Olimpo Metais", status: "Aguardando rota", data: "2025-09-05", endereco: "Rua Expedicionário Abílio dos Santos, 50, Centro, Colatina - ES, 29700-100", embarque: null, motorista: null, produtos: { Viga: ["Viga I 1 x 31.8#"], Chapa: ["Chapa Inox 304 3.0mm Polida"] } },
-    { id: 333767, cliente: "Expresso Cargas", status: "Aguardando rota", data: "2025-09-06", endereco: "Rua Padre Luiz Parenzi, 350, Centro, Aracruz - ES, 29190-058", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 50x30 #16 (1.55mm)"], Viga: ["Viga W 250 x 38.5"] } },
-    { id: 330199, cliente: "Estrutura Forte", status: "Aguardando rota", data: "2025-09-07", endereco: "Rua da Linha, 10, Shell, Linhares - ES, 29901-570", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo  #18 (1.25mm)"], Chapa: ["Chapa Aço Carbono 1/ (3.00mm)"] } },
-    { id: 328948, cliente: "Cia. do Metal", status: "Aguardando rota", data: "2025-09-08", endereco: "Praça São Benedito, 150, Centro, São Mateus - ES, 29930-190", embarque: null, motorista: null, produtos: { Viga: ["Viga U  x 5.4#", "Viga I  x 5.7#"], Chapa: ["Chapa Galvanizada #28 (0.43mm)"] } },
-    { id: 329122, cliente: "Norte Aço", status: "Aguardando rota", data: "2025-09-08", endereco: "Avenida 27 de Abril, 80, Centro, Fundão - ES, 29185-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 60x60 #18 (1.25mm)"], Chapa: ["Chapa Fina a Frio #28 (0.43mm)"] } },
-    { id: 328400, cliente: "Leste Ferro", status: "Aguardando rota", data: "2025-09-09", endereco: "Rua Vinte e Cinco de Março, 150, Centro, Cachoeiro de Itapemirim - ES, 29300-100", embarque: null, motorista: null, produtos: { Viga: ["Viga W 100 x 19.3"], Chapa: ["Chapa Xadrez 3.00mm"] } },
-    { id: 327904, cliente: "Centro Metal", status: "Aguardando rota", data: "2025-09-09", endereco: "Rua General Dutra, 30, Centro, Castelo - ES, 29360-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo 2.1/ #14 (2.00mm)"], Chapa: ["Chapa Perfurada 2.00mm"] } },
-    { id: 326005, cliente: "Metalúrgica do Aço", status: "Aguardando rota", data: "2025-09-10", endereco: "Avenida Brasil, 800, Olaria, Serra - ES, 29176-237", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Inox 316 1.0mm"], Viga: ["Viga I  x 7.7#"] } },
-    { id: 328386, cliente: "Construções Modernas", status: "Aguardando rota", data: "2025-09-10", endereco: "Av. Resplendor, 750, Itapuã, Vila Velha - ES, 29101-520", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo  #16 (1.55mm)"], Chapa: ["Chapa Galvanizada 3.00mm"] } },
-    { id: 329142, cliente: "Estruturas Metálicas", status: "Aguardando rota", data: "2025-09-11", endereco: "Rua da Lapa, 35, Bela Vista, Cariacica - ES, 29141-260", embarque: null, motorista: null, produtos: { Viga: ["Viga U  x 8.2#"], Tubo: ["Tubo Quadrado 30x30 #16 (1.55mm)"] } },
-    { id: 330446, cliente: "Galvanização Brasil", status: "Aguardando rota", data: "2025-09-11", endereco: "Rua da Palha, 10, Juparanã, Linhares - ES, 29900-520", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Galvanizada 1/ (12.70mm)"], Tubo: ["Tubo Retangular 40x20 #16 (1.55mm)"] } },
-    { id: 330886, cliente: "Tubos e Conexões", status: "Aguardando rota", data: "2025-09-12", endereco: "Rua Cassiano Castelo, 250, Centro, Colatina - ES, 29700-060", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo  SCH 80"], Viga: ["Viga I  x 12.5#"] } },
-    { id: 390001, cliente: "Serralheria Capixaba", status: "Aguardando rota", data: "2025-09-13", endereco: "Avenida Talma Rodrigues Ribeiro, 500, Alterosas, Serra - ES, 29167-005", embarque: null, motorista: null, produtos: { "Cantoneira / Barra": ["Cantoneira  x 1/", "Barra Chata 1.1/ x 1/"] } },
-    { id: 390002, cliente: "Construções Litorâneas", status: "Aguardando rota", data: "2025-09-13", endereco: "Rua Gastão Roubach, 180, Itapuã, Vila Velha - ES, 29101-700", embarque: null, motorista: null, produtos: { Viga: ["Viga W 150 x 13.5"], Chapa: ["Chapa Xadrez 1/ (6.35mm)"] } },
-    { id: 390003, cliente: "Viana Aço e Ferro", status: "Aguardando rota", data: "2025-09-14", endereco: "Avenida Vitória, 12, Centro, Viana - ES, 29130-065", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 50x50 #16 (1.55mm)", "Tubo Redondo  #14 (2.00mm)"] } },
-    { id: 390004, cliente: "Engenharia Ponto Forte", status: "Aguardando rota", data: "2025-09-14", endereco: "Rua General Osório, 83, Centro, Vitória - ES, 29010-020", embarque: null, motorista: null, produtos: { Viga: ["Viga I  x 18.4#"], Chapa: ["Chapa Aço Carbono 3/ (9.53mm)"] } },
-    { id: 390005, cliente: "Obras Rápidas Cariacica", status: "Aguardando rota", data: "2025-09-15", endereco: "Rodovia Aloízio Santos, 1000, Campo Belo, Cariacica - ES, 29143-343", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Galvanizada #20 (0.95mm)"], Tubo: ["Tubo Industrial Redondo "] } },
-    { id: 390006, cliente: "Metalúrgica Guarapari", status: "Aguardando rota", data: "2025-09-15", endereco: "Rua Santana do Iapó, 20, Ipiranga, Guarapari - ES, 29201-070", embarque: null, motorista: null, produtos: { "Cantoneira / Barra": ["Barra Chata  x 1/"], Chapa: ["Chapa Fina a Frio #16 (1.55mm)"] } },
-    { id: 390007, cliente: "Indústria de Colatina", status: "Aguardando rota", data: "2025-09-16", endereco: "Rua Aurélio Gatti, 30, Maria das Graças, Colatina - ES, 29705-015", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo  #12 (2.65mm)"], Viga: ["Viga W 200 x 22.5"] } },
-    { id: 390011, cliente: "Metalúrgica Montanhas", status: "Aguardando rota", data: "2025-09-18", endereco: "Av. Evandi Américo Comarela, 100, Centro, Domingos Martins - ES, 29260-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Xadrez 1/ (3.00mm)"], Viga: ["Viga I  x 5.7#"] } },
-    { id: 390012, cliente: "Construções Alfredo Chaves", status: "Aguardando rota", data: "2025-09-18", endereco: "Rua Presidente Vargas, 250, Centro, Alfredo Chaves - ES, 29240-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 60x60 #18 (1.25mm)"], Viga: ["Viga W 150 x 18.0"] } },
-    { id: 390013, cliente: "Aços de Ibatiba", status: "Aguardando rota", data: "2025-09-19", endereco: "Av. Sete de Setembro, 45, Centro, Ibatiba - ES, 29395-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Galvanizada #16 (1.55mm)"], "Cantoneira / Barra": ["Barra Chata  x 3/1"] } },
-    { id: 390014, cliente: "Serralheria Venda Nova", status: "Aguardando rota", data: "2025-09-19", endereco: "Av. Nona, 15, Bananeiras, Venda Nova do Imigrante - ES, 29375-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo  #16 (1.55mm)"], Chapa: ["Chapa Fina a Frio #20 (0.90mm)"] } },
-    { id: 390015, cliente: "Estruturas Itaguaçu", status: "Aguardando rota", data: "2025-09-20", endereco: "Rua Doutor Ferreira Coelho, 30, Centro, Itaguaçu - ES, 29690-000", embarque: null, motorista: null, produtos: { Viga: ["Viga U  x 6.7#"], Tubo: ["Tubo Retangular 50x30 #18 (1.25mm)"] } },
-    { id: 390016, cliente: "Comércio de Aço Mimoso", status: "Aguardando rota", data: "2025-09-20", endereco: "Praça Cel. Paiva Gonçalves, 50, Centro, Mimoso do Sul - ES, 29400-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/ (6.35mm)"], "Cantoneira / Barra": ["Cantoneira  x 1/"] } },
-    { id: 390017, cliente: "Obras de Marechal Floriano", status: "Aguardando rota", data: "2025-09-21", endereco: "Rua Sant'Ana, 120, Centro, Marechal Floriano - ES, 29255-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 90x90 #12 (2.65mm)"], Viga: ["Viga I  x 12.5#"] } },
-    { id: 390019, cliente: "Construir Santa Teresa", status: "Aguardando rota", data: "2025-09-22", endereco: "Av. Ângelo Pretti, 255, Centro, Santa Teresa - ES, 29650-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Schedule 40 "], Chapa: ["Chapa Grossa 3/ (19.05mm)"] } },
-    { id: 390020, cliente: "Logística Conceição da Barra", status: "Aguardando rota", data: "2025-09-22", endereco: "Av. Gov. Jones dos Santos Neves, 253, Centro, Conceição da Barra - ES, 29960-000", embarque: null, motorista: null, produtos: { Viga: ["Viga I 1 x 25.4#", "Viga U  x 11.5#"] } },
-    { id: 390021, cliente: "Metalúrgica de Muqui", status: "Aguardando rota", data: "2025-09-23", endereco: "Rua Vieira Machado, 5, Centro, Muqui - ES, 29480-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #14 (2.00mm)"], Tubo: ["Tubo Redondo  SCH 40"] } },
-    { id: 390036, cliente: "Cerrado Construções", status: "Aguardando rota", data: "2025-10-03", endereco: "Avenida Mato Grosso, 800 - Centro, Cuiabá - MT, 78020-050", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/ (6.35mm)"], Tubo: ["Tubo Industrial Redondo"] } },
-    { id: 390037, cliente: "Metais do Planalto", status: "Aguardando rota", data: "2025-10-03", endereco: "Avenida Anhanguera, 5500 - Setor Coimbra, Goiânia - GO, 74535-010", embarque: null, motorista: null, produtos: { Viga: ["Viga U x 10#"], Chapa: ["Chapa Galvanizada #28 (0.43mm)"] } },
-    { id: 390040, cliente: "Amazonas Metais", status: "Aguardando rota", data: "2025-10-05", endereco: "Avenida Djalma Batista, 1500 - Chapada, Manaus - AM, 69050-010", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #20 (0.95mm)"], Viga: ["Viga I x 10#"] } },
-    { id: 390041, cliente: "Comércio Paraense", status: "Aguardando rota", data: "2025-10-05", endereco: "Avenida Presidente Vargas, 300 - Campina, Belém - PA, 66010-010", embarque: null, motorista: null, produtos: { Viga: ["Viga I x 18.4#"], Tubo: ["Tubo Redondo 2.1/ #14 (2.00mm)"] } },
-    { id: 390042, cliente: "Metalúrgica Potiguar", status: "Aguardando rota", data: "2025-10-06", endereco: "Avenida Salgado Filho, 1200 - Lagoa Nova, Natal - RN, 59056-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 50x30 #18 (1.25mm)"], Chapa: ["Chapa Inox 304 1.0mm Escovada"] } },
-    { id: 390043, cliente: "Aço Alagoano", status: "Aguardando rota", data: "2025-10-07", endereco: "Avenida Fernandes Lima, 2500 - Farol, Maceió - AL, 57055-055", embarque: null, motorista: null, produtos: { Viga: ["Viga W 200 x 22.5"], Chapa: ["Chapa Xadrez 3/1 (4.75mm)"] } },
-    { id: 390044, cliente: "Paraíba Ferro", status: "Aguardando rota", data: "2025-10-07", endereco: "Avenida Epitácio Pessoa, 100 - Tambiá, João Pessoa - PB, 58030-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #16 (1.55mm)"], Tubo: ["Tubo Quadrado 30x30 #18 (1.25mm)"] } },
-    { id: 390045, cliente: "Piauí Tubos", status: "Aguardando rota", data: "2025-10-08", endereco: "Avenida Frei Serafim, 100 - Centro, Teresina - PI, 64000-010", embarque: null, motorista: null, produtos: { Viga: ["Viga I 1 x 31.8#"], Tubo: ["Tubo Redondo SCH 40"] } },
-    { id: 390046, cliente: "Acre Metalúrgica", status: "Aguardando rota", data: "2025-10-08", endereco: "Avenida Getúlio Vargas, 300 - Bosque, Rio Branco - AC, 69908-720", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Industrial Redondo"], "Cantoneira / Barra": ["Barra Chata x 1/"] } },
-    { id: 390047, cliente: "Roraima Cargas", status: "Aguardando rota", data: "2025-10-09", endereco: "Avenida Capitão Ene Garcez, 500 - São Francisco, Boa Vista - RR, 69305-130", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #24 (0.60mm)"], Viga: ["Viga U x 4.1#"] } },
-    { id: 390048, cliente: "Amapá Construções", status: "Aguardando rota", data: "2025-10-09", endereco: "Avenida Padre Júlio Maria Lombaerd, 1500 - Centro, Macapá - AP, 68900-030", embarque: null, motorista: null, produtos: { Viga: ["Viga W 250 x 32.7"], Chapa: ["Chapa Inox 316 2.0mm"] } },
-    { id: 390050, cliente: "Aço de Tocantins", status: "Aguardando rota", data: "2025-10-10", endereco: "Avenida Juscelino Kubitschek, 1000 - Centro, Palmas - TO, 77020-022", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 3/ (9.53mm)"], Viga: ["Viga I x 12.5#"] } },
-    { id: 390051, cliente: "Empresa do Norte", status: "Aguardando rota", data: "2025-10-11", endereco: "Avenida Brigadeiro Eduardo Gomes, 50 - São Francisco, Boa Vista - RR, 69305-090", embarque: null, motorista: null, produtos: { Viga: ["Viga U x 11.5#"], Tubo: ["Tubo Redondo #14 (2.00mm)"] } },
-    { id: 390052, cliente: "Metalúrgica Central", status: "Aguardando rota", data: "2025-10-11", endereco: "Avenida Mato Grosso, 300 - Centro, Campo Grande - MS, 79002-220", embarque: null, motorista: null, produtos: { Tubo: ["Tubo SCH 40 "], Chapa: ["Chapa Grossa 3/ (19.05mm)"] } },
-    { id: 390053, cliente: "Engenharia do Sul", status: "Aguardando rota", data: "2025-10-12", endereco: "Avenida Brasil, 2500 - Centro, Balneário Camboriú - SC, 88330-003", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Xadrez 3/1 (4.75mm)"], Viga: ["Viga I 1 x 25.4#"] } },
-    { id: 390054, cliente: "Minas Aço Forte", status: "Aguardando rota", data: "2025-10-13", endereco: "Avenida Rio Branco, 2500 - Centro, Juiz de Fora - MG, 36010-001", embarque: null, motorista: null, produtos: { Viga: ["Viga W 360 x 57.8", "Viga U x 11.5#"], Chapa: ["Chapa Aço Carbono 3/ (9.53mm)"] } },
-    { id: 390055, cliente: "Bahia Metais e Tubos", status: "Aguardando rota", data: "2025-10-13", endereco: "Rua Direita de Santo Antônio, 120 - Santo Antônio Além do Carmo, Salvador - BA, 40301-200", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo #16 (1.55mm)"], Chapa: ["Chapa Galvanizada 3.00mm"] } },
-    { id: 390056, cliente: "Pernambuco Chapas", status: "Aguardando rota", data: "2025-10-14", endereco: "Rua do Imperador Pedro II, 50 - Santo Antônio, Recife - PE, 50010-240", embarque: null, motorista: null, produtos: { "Cantoneira / Barra": ["Cantoneira 1.1/ x 3/1"], Tubo: ["Tubo Quadrado 30x30 #16 (1.55mm)"] } },
-    { id: 390057, cliente: "Rio Grande do Norte Metalúrgica", status: "Aguardando rota", data: "2025-10-14", endereco: "Avenida Rui Barbosa, 100 - Tirol, Natal - RN, 59015-100", embarque: null, motorista: null, produtos: { Viga: ["Viga U x 8.2#"], Chapa: ["Chapa Fina a Frio #18 (1.25mm)"] } },
-    { id: 390058, cliente: "Sergipe Indústria", status: "Aguardando rota", data: "2025-10-15", endereco: "Avenida Barão de Maruim, 500 - Centro, Aracaju - SE, 49010-380", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Perfurada 2.00mm"], Viga: ["Viga I x 7.7#"] } },
-    { id: 390060, cliente: "Paraíba Aço e Ferro", status: "Aguardando rota", data: "2025-10-16", endereco: "Avenida Rodrigues Alves, 300 - Centro, Campina Grande - PB, 58400-000", embarque: null, motorista: null, produtos: { Viga: ["Viga W 100 x 19.3"], Chapa: ["Chapa Xadrez 1/ (3.00mm)"] } },
-    { id: 390061, cliente: "Maranhão Cargas", status: "Aguardando rota", data: "2025-10-17", endereco: "Avenida Jerônimo de Albuquerque, 500 - Cohab Anil, São Luís - MA, 65051-210", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Galvanizada 1/ (12.70mm)"], Tubo: ["Tubo Retangular 40x20 #16 (1.55mm)"] } },
-    { id: 390062, cliente: "Ceará Indústria", status: "Aguardando rota", data: "2025-10-17", endereco: "Rua do Comercio, 150 - Centro, Juazeiro do Norte - CE, 63010-005", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo SCH 80"], Viga: ["Viga I x 12.5#"] } },
-    { id: 390063, cliente: "Paraíba Construções", status: "Aguardando rota", data: "2025-10-18", endereco: "Rua Barão do Triunfo, 10 - Centro, Patos - PB, 58700-010", embarque: null, motorista: null, produtos: { "Cantoneira / Barra": ["Cantoneira 1.1/ x 1/"], Tubo: ["Tubo Retangular 50x30 #18 (1.25mm)"] } },
-    { id: 390064, cliente: "Rio Grande do Sul Estruturas", status: "Aguardando rota", data: "2025-10-18", endereco: "Avenida Borges de Medeiros, 200 - Centro, Porto Alegre - RS, 90020-020", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #18 (1.25mm)"], Viga: ["Viga W 150 x 13.5"] } },
-    { id: 390065, cliente: "Paraná Galvanização", status: "Aguardando rota", data: "2025-10-19", endereco: "Rua Marechal Deodoro, 1000 - Centro, Curitiba - PR, 80010-010", embarque: null, motorista: null, produtos: { Viga: ["Viga U x 11.5#"], Chapa: ["Chapa Naval A36 3/ (9.53mm)"] } },
-    { id: 390067, cliente: "Goiás Tubos e Barras", status: "Aguardando rota", data: "2025-10-20", endereco: "Avenida Goiás, 900 - Centro, Goiânia - GO, 74005-010", embarque: null, motorista: null, produtos: { "Cantoneira / Barra": ["Barra Chata  x 1/"], Chapa: ["Chapa Naval A36 3/ (9.53mm)"] } },
-    { id: 390068, cliente: "Minas Estruturas", status: "Aguardando rota", data: "2025-10-21", endereco: "Rua dos Inconfidentes, 100 - Savassi, Belo Horizonte - MG, 30140-120", embarque: null, motorista: null, produtos: { Viga: ["Viga I x 18.4#"], Tubo: ["Tubo Galvanizado "] } },
-    { id: 390069, cliente: "Rio de Janeiro Ferragens", status: "Aguardando rota", data: "2025-10-21", endereco: "Rua Visconde de Pirajá, 1000 - Ipanema, Rio de Janeiro - RJ, 22410-003", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 1/ (12.70mm)"], Viga: ["Viga W 250 x 25.7"] } },
-    { id: 390070, cliente: "São Paulo Comércio", status: "Aguardando rota", data: "2025-10-22", endereco: "Avenida Paulista, 100 - Bela Vista, São Paulo - SP, 01311-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 80x40 #14 (2.00mm)"], Chapa: ["Chapa Aço Carbono 1/ (12.70mm)"] } },
-    { id: 390071, cliente: "Espírito Santo Aço", status: "Aguardando rota", data: "2025-10-22", endereco: "Avenida Américo Buaiz, 800 - Enseada do Suá, Vitória - ES, 29050-911", embarque: null, motorista: null, produtos: { Viga: ["Viga U x 6.7#", "Viga I x 10#"] } },
-    { id: 390072, cliente: "Goiânia Metalúrgica", status: "Aguardando rota", data: "2025-10-23", endereco: "Rua 25-A, 100 - Setor Aeroporto, Goiânia - GO, 74070-130", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 40x40 #18 (1.25mm)"], Chapa: ["Chapa Inox 430 1.2mm Polida"] } },
-    { id: 390075, cliente: "Indústria Nordeste", status: "Aguardando rota", data: "2025-10-24", endereco: "Rua Visconde de Mauá, 1500 - Meireles, Fortaleza - CE, 60125-160", embarque: null, motorista: null, produtos: { Viga: ["Viga U x 4.1#"], Chapa: ["Chapa Aço Carbono 1/ (6.35mm)"] } },
-    { id: 390076, cliente: "Aço Amazônia", status: "Aguardando rota", data: "2025-10-25", endereco: "Avenida Coronel Teixeira, 5000 - Ponta Negra, Manaus - AM, 69037-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #24 (0.60mm)"], Tubo: ["Tubo Industrial Quadrado 40x40 #14 (2.00mm)"] } },
-    { id: 390078, cliente: "Brasília Fundições", status: "Aguardando rota", data: "2025-10-26", endereco: "Setor Comercial Sul, Quadra 100 - Asa Sul, Brasília - DF, 70300-500", embarque: null, motorista: null, produtos: { Viga: ["Viga W 200 x 22.5"], Tubo: ["Tubo Quadrado 30x30 #18 (1.25mm)"] } },
-    { id: 390079, cliente: "Aço Gaúcho", status: "Aguardando rota", data: "2025-10-26", endereco: "Avenida Ipiranga, 5000 - Jardim Botânico, Porto Alegre - RS, 90610-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Industrial Redondo"], Chapa: ["Chapa Fina a Frio #16 (1.55mm)"] } },
-    { id: 390080, cliente: "Caminhos do Paraná", status: "Aguardando rota", data: "2025-10-27", endereco: "Rua João Negrão, 800 - Centro, Curitiba - PR, 80010-200", embarque: null, motorista: null, produtos: { Viga: ["Viga W 250 x 32.7", "Viga U x 8.2#"], Tubo: ["Tubo Galvanizado "] } },
-    { id: 400001, cliente: "Usiminas Mecânica", status: "Aguardando rota", data: "2025-10-28", endereco: "Avenida Afonso Pena, 4000 - Cruzeiro, Belo Horizonte - MG, 30130-009", embarque: null, motorista: null, produtos: { Viga: ["Viga W 310 x 38.7"], Chapa: ["Chapa Aço Carbono 1/2 (12.70mm)"] } },
-    { id: 400002, cliente: "Siderúrgica Alterosa", status: "Aguardando rota", data: "2025-10-28", endereco: "Rua dos Timbiras, 1532 - Lourdes, Belo Horizonte - MG, 30140-061", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 80x80 #11 (3.00mm)"], "Cantoneira / Barra": ["Barra Chata 3 x 1/2"] } },
-    { id: 400003, cliente: "Metalferco Ltda", status: "Aguardando rota", data: "2025-10-29", endereco: "Avenida do Contorno, 6594 - Savassi, Belo Horizonte - MG, 30110-044", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #18 (1.25mm)"], Viga: ["Viga U 6 x 8.2#"] } },
-    { id: 400004, cliente: "Fábrica de Aço Minas", status: "Aguardando rota", data: "2025-10-29", endereco: "Rua Rio de Janeiro, 927 - Centro, Juiz de Fora - MG, 36016-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Industrial Redondo 3"], Chapa: ["Chapa Galvanizada #26 (0.50mm)"] } },
-    { id: 400005, cliente: "Minasfer Comércio", status: "Aguardando rota", data: "2025-10-30", endereco: "Avenida Brasil, 2001 - Centro, Uberlândia - MG, 38400-714", embarque: null, motorista: null, produtos: { Viga: ["Viga I 8 x 18.4#"], "Cantoneira / Barra": ["Cantoneira 2 x 1/4"] } },
-    { id: 410001, cliente: "CSN - Cia Siderúrgica", status: "Aguardando rota", data: "2025-11-01", endereco: "Avenida Rio Branco, 1 - Centro, Rio de Janeiro - RJ, 20090-003", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Grossa A36 1 pol"], Viga: ["Viga W 610 x 101"] } },
-    { id: 410002, cliente: "Gerdau Aços Longos", status: "Aguardando rota", data: "2025-11-01", endereco: "Rua do Passeio, 38 - Centro, Rio de Janeiro - RJ, 20021-290", embarque: null, motorista: null, produtos: { "Cantoneira / Barra": ["Vergalhão CA50 12.5mm"], Tubo: ["Tubo Schedule 40 4"] } },
-    { id: 410003, cliente: "Engenharia Carioca", status: "Aguardando rota", data: "2025-11-02", endereco: "Avenida Atlântica, 1702 - Copacabana, Rio de Janeiro - RJ, 22021-001", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Inox 304 2.0mm"], Viga: ["Viga I 4 x 7.7#"] } },
-    { id: 410004, cliente: "Construções Fluminense", status: "Aguardando rota", data: "2025-11-02", endereco: "Avenida Presidente Vargas, 583 - Centro, Rio de Janeiro - RJ, 20071-003", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 100x50 #14 (2.00mm)"], Chapa: ["Chapa Xadrez 1/8"] } },
-    { id: 410005, cliente: "Aço & Cia Niterói", status: "Aguardando rota", data: "2025-11-03", endereco: "Rua Gavião Peixoto, 124 - Icaraí, Niterói - RJ, 24230-101", embarque: null, motorista: null, produtos: { Viga: ["Viga U 8 x 11.5#"], "Cantoneira / Barra": ["Barra Chata 2 x 1/4"] } },
-    { id: 420002, cliente: "Açometal Comércio", status: "Aguardando rota", data: "2025-11-05", endereco: "Rua da Consolação, 222 - Consolação, São Paulo - SP, 01302-000", embarque: null, motorista: null, produtos: { Viga: ["Viga W 200 x 15"], "Cantoneira / Barra": ["Cantoneira 1.1/2 x 1/8"] } },
-    { id: 420003, cliente: "Construtora Bandeirante", status: "Aguardando rota", data: "2025-11-06", endereco: "Avenida Brigadeiro Faria Lima, 2232 - Jardim Paulistano, São Paulo - SP, 01451-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo 2 SCH 40"], Chapa: ["Chapa Galvanizada #24 (0.65mm)"] } },
-    { id: 420004, cliente: "Metal Leve S.A.", status: "Aguardando rota", data: "2025-11-06", endereco: "Rua Vergueiro, 1353 - Paraíso, São Paulo - SP, 04101-100", embarque: null, motorista: null, produtos: { Viga: ["Viga I 3 x 5.7#"], Chapa: ["Chapa Inox 430 0.5mm"] } },
-    { id: 420005, cliente: "Ferroart Campinas", status: "Aguardando rota", data: "2025-11-07", endereco: "Avenida Francisco Glicério, 1058 - Centro, Campinas - SP, 13012-100", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 60x40 #16 (1.55mm)"], "Cantoneira / Barra": ["Barra Chata 1 x 3/16"] } },
-    { id: 500001, cliente: "Aço Gaúcho", status: "Aguardando rota", data: "2025-11-10", endereco: "Avenida Borges de Medeiros, 2100 - Praia de Belas, Porto Alegre - RS, 90110-150", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Xadrez 1/4"], Viga: ["Viga I 10 x 25.4#"] } },
-    { id: 500002, cliente: "Serralheria Pampeana", status: "Aguardando rota", data: "2025-11-10", endereco: "Rua dos Andradas, 1001 - Centro Histórico, Porto Alegre - RS, 90020-007", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 50x50 #14"], "Cantoneira / Barra": ["Cantoneira 1 x 1/8"] } },
-    { id: 500003, cliente: "Sulfer Caxias", status: "Aguardando rota", data: "2025-11-11", endereco: "Avenida Júlio de Castilhos, 2030 - Centro, Caxias do Sul - RS, 95010-001", embarque: null, motorista: null, produtos: { Viga: ["Viga W 250 x 18"], Chapa: ["Chapa Galvanizada #22 (0.80mm)"] } },
-    { id: 500005, cliente: "Estruturas de Aço Paraná", status: "Aguardando rota", data: "2025-11-12", endereco: "Rua XV de Novembro, 1299 - Centro, Curitiba - PR, 80060-000", embarque: null, motorista: null, produtos: { Viga: ["Viga U 4 x 5.4#"], Chapa: ["Chapa Aço Carbono 3/16"] } },
-    { id: 500006, cliente: "Ferro Londrina", status: "Aguardando rota", data: "2025-11-12", endereco: "Avenida Higienópolis, 100 - Centro, Londrina - PR, 86020-080", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 30x20 #20"], "Cantoneira / Barra": ["Barra Chata 1 1/4 x 1/4"] } },
-    { id: 500007, cliente: "Aços Catarinenses", status: "Aguardando rota", data: "2025-11-13", endereco: "Rua Felipe Schmidt, 249 - Centro, Florianópolis - SC, 88010-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Inox 316 1.5mm"], Tubo: ["Tubo Quadrado 70x70 #12"] } },
-    { id: 500008, cliente: "Joinville Metais", status: "Aguardando rota", data: "2025-11-13", endereco: "Rua do Príncipe, 330 - Centro, Joinville - SC, 89201-000", embarque: null, motorista: null, produtos: { Viga: ["Viga I 5 x 10#"], "Cantoneira / Barra": ["Cantoneira 2 1/2 x 3/16"] } },
-    { id: 500010, cliente: "Serralheria do Cerrado", status: "Aguardando rota", data: "2025-11-14", endereco: "Avenida Anhanguera, 7840 - Setor Aeroviário, Goiânia - GO, 74435-315", embarque: null, motorista: null, produtos: { "Cantoneira / Barra": ["Barra Chata 4 x 3/8"], Viga: ["Viga U 10 x 15.3#"] } },
-    { id: 500011, cliente: "Aço Bahia", status: "Aguardando rota", data: "2025-11-15", endereco: "Avenida Sete de Setembro, 555 - Centro, Salvador - BA, 40060-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Naval A131"], Tubo: ["Tubo Retangular 150x50 #11"] } },
-    { id: 500012, cliente: "Metalúrgica do Dendê", status: "Aguardando rota", data: "2025-11-15", endereco: "Rua Chile, 21 - Centro, Salvador - BA, 40020-000", embarque: null, motorista: null, produtos: { Viga: ["Viga W 410 x 60"], "Cantoneira / Barra": ["Cantoneira 3 x 1/4"] } },
-    { id: 500014, cliente: "Estruturas do Nordeste", status: "Aguardando rota", data: "2025-11-16", endereco: "Rua Barão do Rio Branco, 1071 - Centro, Fortaleza - CE, 60025-060", embarque: null, motorista: null, produtos: { Viga: ["Viga I 12 x 31.8#"], "Cantoneira / Barra": ["Barra Redonda 1 pol"] } },
-    { id: 500016, cliente: "Construções da Amazônia", status: "Aguardando rota", data: "2025-11-17", endereco: "Rua Marcílio Dias, 256 - Centro, Manaus - AM, 69005-270", embarque: null, motorista: null, produtos: { Viga: ["Viga W 530 x 82"], "Cantoneira / Barra": ["Barra Chata 5 x 1/2"] } },
-    { id: 500018, cliente: "Metal Belém", status: "Aguardando rota", data: "2025-11-18", endereco: "Travessa Padre Eutíquio, 1078 - Batista Campos, Belém - PA, 66023-710", embarque: null, motorista: null, produtos: { Viga: ["Viga U 12 x 20.7#"], "Cantoneira / Barra": ["Cantoneira 4 x 3/8"] } },
-    { id: 500019, cliente: "Pernambuco Aços", status: "Aguardando rota", data: "2025-11-19", endereco: "Avenida Conde da Boa Vista, 800 - Boa Vista, Recife - PE, 50060-004", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Inox 304L 3.0mm"], Tubo: ["Tubo Redondo 5 SCH 40"] } },
-    { id: 500020, cliente: "Recife Estruturas", status: "Aguardando rota", data: "2025-11-19", endereco: "Rua da Aurora, 1259 - Santo Amaro, Recife - PE, 50040-090", embarque: null, motorista: null, produtos: { Viga: ["Viga I 6 x 12.5#"], "Cantoneira / Barra": ["Barra Quadrada 1/2"] } },
-    { id: 500021, cliente: "Aço Brasília", status: "Aguardando rota", data: "2025-11-20", endereco: "SCS Quadra 08 Bloco B-60 - Asa Sul, Brasília - DF, 70333-900", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 150x150 #10"], Chapa: ["Chapa Aço Carbono 3/4"] } },
-    { id: 500022, cliente: "Capital do Aço", status: "Aguardando rota", data: "2025-11-20", endereco: "W3 Sul Quadra 502 - Asa Sul, Brasília - DF, 70330-500", embarque: null, motorista: null, produtos: { Viga: ["Viga W 610 x 125"], "Cantoneira / Barra": ["Barra Chata 6 x 1"] } },
-    { id: 500023, cliente: "Serralheria Potiguar", status: "Aguardando rota", data: "2025-11-21", endereco: "Avenida Engenheiro Roberto Freire, 3132 - Ponta Negra, Natal - RN, 59090-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Xadrez 1/4"], Tubo: ["Tubo Retangular 80x30 #18"] } },
-    { id: 500025, cliente: "Metalúrgica Pantanal", status: "Aguardando rota", data: "2025-11-22", endereco: "Avenida Afonso Pena, 4909 - Santa Fé, Campo Grande - MS, 79031-010", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Industrial Redondo 6"], Chapa: ["Chapa Fina a Quente 4.75mm"] } },
-    { id: 500028, cliente: "Campina Grande Metais", status: "Aguardando rota", data: "2025-11-23", endereco: "Rua Maciel Pinheiro, 250 - Centro, Campina Grande - PB, 58400-117", embarque: null, motorista: null, produtos: { Viga: ["Viga W 150 x 13"], "Cantoneira / Barra": ["Barra Chata 1 1/2 x 1/8"] } },
-    { id: 500029, cliente: "Siderúrgica Alagoana", status: "Aguardando rota", data: "2025-11-24", endereco: "Avenida da Paz, 1864 - Centro, Maceió - AL, 57020-440", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 70x30 #14"], Chapa: ["Chapa Inox 430 1.0mm"] } },
-    { id: 500030, cliente: "Maceió Aços", status: "Aguardando rota", data: "2025-11-24", endereco: "Rua do Comércio, 550 - Centro, Maceió - AL, 57020-000", embarque: null, motorista: null, produtos: { Viga: ["Viga U 5 x 6.7#"], "Cantoneira / Barra": ["Cantoneira 2 x 1/8"] } },
-    { id: 500032, cliente: "Aracaju Ferro e Aço", status: "Aguardando rota", data: "2025-11-25", endereco: "Rua Laranjeiras, 300 - Centro, Aracaju - SE, 49010-000", embarque: null, motorista: null, produtos: { Viga: ["Viga I 4 x 7.7#"], "Cantoneira / Barra": ["Barra Redonda 5/8"] } },
-    { id: 500034, cliente: "Teresina Aços", status: "Aguardando rota", data: "2025-11-26", endereco: "Rua Álvaro Mendes, 1221 - Centro, Teresina - PI, 64000-060", embarque: null, motorista: null, produtos: { Viga: ["Viga W 200 x 22.5"], "Cantoneira / Barra": ["Barra Chata 2 x 3/16"] } },
-    { id: 500035, cliente: "Aço Maranhense", status: "Aguardando rota", data: "2025-11-27", endereco: "Rua Grande, 478 - Centro, São Luís - MA, 65020-250", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Xadrez 1/8"], Tubo: ["Tubo Retangular 50x20 #16"] } },
-    { id: 500036, cliente: "São Luís Estruturas", status: "Aguardando rota", data: "2025-11-27", endereco: "Avenida dos Holandeses, 1 - Calhau, São Luís - MA, 65071-380", embarque: null, motorista: null, produtos: { Viga: ["Viga U 8 x 13.75#"], "Cantoneira / Barra": ["Cantoneira 2 1/2 x 1/4"] } },
-    { id: 500037, cliente: "Metalúrgica Cuiabana", status: "Aguardando rota", data: "2025-11-28", endereco: "Avenida Getúlio Vargas, 650 - Centro Norte, Cuiabá - MT, 78005-370", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo 3 SCH 40"], Chapa: ["Chapa Fina a Quente 2.65mm"] } },
-    { id: 500038, cliente: "Aço Tocantinense", status: "Aguardando rota", data: "2025-11-28", endereco: "Avenida Juscelino Kubitschek, 141 - Plano Diretor Sul, Palmas - TO, 77020-022", embarque: null, motorista: null, produtos: { Viga: ["Viga I 5 x 10#"], "Cantoneira / Barra": ["Barra Quadrada 3/8"] } },
-    { id: 500039, cliente: "Ferro Acreano", status: "Aguardando rota", data: "2025-11-29", endereco: "Avenida Ceará, 3000 - Centro, Rio Branco - AC, 69900-349", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Inox 304 0.8mm"], Tubo: ["Tubo Quadrado 25x25 #20"] } },
-    { id: 500040, cliente: "Amapá Metais", status: "Aguardando rota", data: "2025-11-29", endereco: "Avenida Fab, 550 - Central, Macapá - AP, 68900-073", embarque: null, motorista: null, produtos: { Viga: ["Viga W 310 x 21"], "Cantoneira / Barra": ["Barra Chata 1 1/2 x 3/16"] } },
-    { id: 500041, cliente: "Roraima Aços", status: "Aguardando rota", data: "2025-11-30", endereco: "Avenida Jaime Brasil, 441 - Centro, Boa Vista - RR, 69301-120", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 40x30 #18"], Chapa: ["Chapa Galvanizada #26"] } },
-    { id: 500045, cliente: "Boa Vista Construções", status: "Aguardando rota", data: "2025-12-02", endereco: "Avenida General Ataíde Teive, 1500 - Liberdade, Boa Vista - RR, 69305-080", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #26"], Viga: ["Viga W 150 x 22.5"] } },
-    { id: 500047, cliente: "Macapá Siderúrgica", status: "Aguardando rota", data: "2025-12-03", endereco: "Rua Cândido Mendes, 1123 - Central, Macapá - AP, 68900-100", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 3/8"], Viga: ["Viga U 4 x 5.4#"] } },
-    { id: 600001, cliente: "Guarapari Metais", status: "Aguardando rota", data: "2025-12-04", endereco: "Avenida Meaípe, 1500 - Meaípe, Guarapari - ES, 29208-050", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Industrial Redondo 1 1/4"], Chapa: ["Chapa Xadrez 1/8"] } },
-    { id: 600002, cliente: "Aços Viana", status: "Aguardando rota", data: "2025-12-04", endereco: "Rodovia BR-262, km 15 - Universal, Viana - ES, 29135-000", embarque: null, motorista: null, produtos: { Viga: ["Viga I 6 x 12.5#"], "Cantoneira / Barra": ["Barra Chata 2 x 1/8"] } },
-    { id: 600003, cliente: "Serras & Montanhas Aço", status: "Aguardando rota", data: "2025-12-05", endereco: "Avenida Presidente Vargas, 500 - Centro, Domingos Martins - ES, 29260-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Galvanizada #24"], Tubo: ["Tubo Quadrado 20x20 #18"] } },
-    { id: 600004, cliente: "Aracruz Celulose Aços", status: "Aguardando rota", data: "2025-12-05", endereco: "Rodovia ES-010, km 25 - Barra do Sahy, Aracruz - ES, 29199-010", embarque: null, motorista: null, produtos: { Viga: ["Viga W 460 x 60"], Chapa: ["Chapa Aço Carbono 3/8"] } },
-    { id: 600005, cliente: "Norte Capixaba Aço", status: "Aguardando rota", data: "2025-12-06", endereco: "Avenida Jones dos Santos Neves, 1234 - Sernamby, São Mateus - ES, 29930-220", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 70x50 #14"], "Cantoneira / Barra": ["Cantoneira 3 x 1/4"] } },
-    { id: 600006, cliente: "Indústria de Contagem", status: "Aguardando rota", data: "2025-12-07", endereco: "Avenida João César de Oliveira, 1210 - Eldorado, Contagem - MG, 32315-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Quente 2.25mm"], Viga: ["Viga U 10 x 20#"] } },
-    { id: 600007, cliente: "Betim Ferramentaria", status: "Aguardando rota", data: "2025-12-07", endereco: "Rua do Rosário, 800 - Angola, Betim - MG, 32604-128", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Schedule 40 3"], "Cantoneira / Barra": ["Barra Redonda 1 1/2"] } },
-    { id: 600008, cliente: "Vale do Rio Doce Aços", status: "Aguardando rota", data: "2025-12-08", endereco: "Avenida Minas Gerais, 700 - Centro, Governador Valadares - MG, 35010-151", embarque: null, motorista: null, produtos: { Viga: ["Viga W 360 x 44"], Chapa: ["Chapa Inox 304 0.8mm"] } },
-    { id: 600009, cliente: "Acesita Metalúrgica", status: "Aguardando rota", data: "2025-12-08", endereco: "Avenida Brasil, 350 - Iguaçu, Ipatinga - MG, 35162-036", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 90x90 #11"], Chapa: ["Chapa Aço Carbono 1/2"] } },
-    { id: 600010, cliente: "Sete Lagoas Estruturas", status: "Aguardando rota", data: "2025-12-09", endereco: "Rua Major Campos, 155 - Centro, Sete Lagoas - MG, 35700-010", embarque: null, motorista: null, produtos: { Viga: ["Viga I 10 x 25.4#"], "Cantoneira / Barra": ["Cantoneira 4 x 5/16"] } },
-    { id: 600011, cliente: "Baixada Aços", status: "Aguardando rota", data: "2025-12-10", endereco: "Avenida Brigadeiro Lima e Silva, 1800 - Jardim Vinte e Cinco de Agosto, Duque de Caxias - RJ, 25071-182", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Xadrez 3.00mm"], Tubo: ["Tubo Industrial Redondo 4"] } },
-    { id: 600012, cliente: "São Gonçalo Ferros", status: "Aguardando rota", data: "2025-12-10", endereco: "Rua Doutor Nilo Peçanha, 350 - Centro, São Gonçalo - RJ, 24445-300", embarque: null, motorista: null, produtos: { Viga: ["Viga U 8 x 18.75#"], "Cantoneira / Barra": ["Barra Chata 3 x 3/8"] } },
-    { id: 600013, cliente: "Serra Imperial Aço", status: "Aguardando rota", data: "2025-12-11", endereco: "Rua do Imperador, 700 - Centro, Petrópolis - RJ, 25620-002", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 120x80 #12"], Chapa: ["Chapa Galvanizada #20"] } },
-    { id: 600014, cliente: "Campos Aço e Petróleo", status: "Aguardando rota", data: "2025-12-11", endereco: "Avenida Pelinca, 200 - Parque Tamandaré, Campos dos Goytacazes - RJ, 28035-053", embarque: null, motorista: null, produtos: { Viga: ["Viga W 250 x 32.7"], Chapa: ["Chapa Fina a Frio #20"] } },
-    { id: 600015, cliente: "Volta Redonda Metalurgia", status: "Aguardando rota", data: "2025-12-12", endereco: "Avenida Amaral Peixoto, 450 - Centro, Volta Redonda - RJ, 27253-221", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 100x100 #10"], "Cantoneira / Barra": ["Cantoneira 5 x 1/2"] } },
-    { id: 600016, cliente: "Guarulhos Indústria", status: "Aguardando rota", data: "2025-12-13", endereco: "Avenida Paulo Faccini, 800 - Macedo, Guarulhos - SP, 07111-000", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 5/8"], Viga: ["Viga I 12 x 35#"] } },
-    { id: 600017, cliente: "ABC Aços", status: "Aguardando rota", data: "2025-12-13", endereco: "Rua Coronel Oliveira Lima, 455 - Centro, Santo André - SP, 09010-000", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 90x50 #14"], "Cantoneira / Barra": ["Barra Redonda 2"] } },
-    { id: 600018, cliente: "São Bernardo Indústria", status: "Aguardando rota", data: "2025-12-14", endereco: "Rua Jurubatuba, 1200 - Centro, São Bernardo do Campo - SP, 09725-220", embarque: null, motorista: null, produtos: { Viga: ["Viga W 610 x 113"], Chapa: ["Chapa Xadrez 1/4"] } },
-    { id: 600019, cliente: "Osasco Metal Center", status: "Aguardando rota", data: "2025-12-14", endereco: "Avenida dos Autonomistas, 2500 - Centro, Osasco - SP, 06090-020", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 75x75 #12"], "Cantoneira / Barra": ["Barra Chata 4 x 1/4"] } },
-    { id: 600020, cliente: "Porto de Santos Aços", status: "Aguardando rota", data: "2025-12-15", endereco: "Avenida Ana Costa, 400 - Gonzaga, Santos - SP, 11060-002", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Naval A36 1/2"], Viga: ["Viga U 12 x 30#"] } },
-    { id: 700001, cliente: "Bahia Siderúrgica", status: "Aguardando rota", data: "2025-12-16", endereco: "Avenida Tancredo Neves, 148, Caminho das Árvores, Salvador - BA, 41820-020", embarque: null, motorista: null, produtos: { Viga: ["Viga W 200 x 22.5"], Chapa: ["Chapa Aço Carbono 1/4"] } },
-    { id: 700002, cliente: "Polo Petroquímico Camaçari", status: "Aguardando rota", data: "2025-12-16", endereco: "Rua Eteno, 1561 - Polo Industrial, Camaçari - BA, 42816-100", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Schedule 80 6"], Chapa: ["Chapa Inox 316L 3.0mm"] } },
-    { id: 700003, cliente: "Sul da Bahia Aços", status: "Aguardando rota", data: "2025-12-17", endereco: "Avenida do Cinquentenário, 1001 - Centro, Itabuna - BA, 45600-004", embarque: null, motorista: null, produtos: { "Cantoneira / Barra": ["Barra Redonda 2 1/2"], Viga: ["Viga I 10 x 30#"] } },
-    { id: 700004, cliente: "Ferro e Aço Paranaense", status: "Aguardando rota", data: "2025-12-18", endereco: "Rua Marechal Deodoro, 869 - Centro, Curitiba - PR, 80060-010", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Xadrez 1/8"], Tubo: ["Tubo Quadrado 80x80 #16"] } },
-    { id: 700005, cliente: "Metalúrgica Iguaçu", status: "Aguardando rota", data: "2025-12-18", endereco: "Avenida Brasil, 1150 - Centro, Foz do Iguaçu - PR, 85851-000", embarque: null, motorista: null, produtos: { Viga: ["Viga U 6 x 10.5#"], "Cantoneira / Barra": ["Cantoneira 3 x 3/16"] } },
-    { id: 700006, cliente: "Aços Longos PE", status: "Aguardando rota", data: "2025-12-19", endereco: "Avenida Governador Agamenon Magalhães, 4775 - Boa Viagem, Recife - PE, 51021-170", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 120x60 #11"], Chapa: ["Chapa Galvanizada #16"] } },
-    { id: 700008, cliente: "Amazonas Indústria", status: "Aguardando rota", data: "2025-12-20", endereco: "Avenida Constantino Nery, 1272 - São Geraldo, Manaus - AM, 69050-001", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Quente 3.75mm"], Tubo: ["Tubo Redondo 5 SCH 80"] } },
-    { id: 700010, cliente: "Siderúrgica do Ceará", status: "Aguardando rota", data: "2025-12-21", endereco: "Avenida Dom Luís, 500 - Aldeota, Fortaleza - CE, 60160-230", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Quadrado 150x150 #12"], Chapa: ["Chapa Inox 430 1.5mm"] } },
-    { id: 700011, cliente: "Sergipe Industrial", status: "Aguardando rota", data: "2025-12-21", endereco: "Rua Itabaiana, 442 - Centro, Aracaju - SE, 49015-130", embarque: null, motorista: null, produtos: { Viga: ["Viga W 250 x 25.7"], Chapa: ["Chapa Xadrez 1/4"] } },
-    { id: 700012, cliente: "Aços e Metais de Goiás", status: "Aguardando rota", data: "2025-12-22", endereco: "Rua 82, 400 - Setor Sul, Goiânia - GO, 74083-010", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 80x40 #12"], "Cantoneira / Barra": ["Barra Redonda 1 1/4"] } },
-    { id: 700013, cliente: "Maranhão Metalúrgica", status: "Aguardando rota", data: "2025-12-22", endereco: "Avenida dos Franceses, 200 - Alemanha, São Luís - MA, 65036-282", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Galvanizada #14"], Viga: ["Viga I 6 x 17.2#"] } },
-    { id: 700014, cliente: "Paraíba Aço Industrial", status: "Aguardando rota", data: "2025-12-23", endereco: "Avenida Maximiano Figueiredo, 222 - Centro, João Pessoa - PB, 58013-470", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Redondo 3 1/2 SCH 40"], Viga: ["Viga U 10 x 25#"] } },
-    { id: 700015, cliente: "Mato Grosso Siderúrgica", status: "Aguardando rota", data: "2025-12-23", endereco: "Rua Cândido Mariano, 1111 - Centro Sul, Cuiabá - MT, 78020-300", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Frio #14"], "Cantoneira / Barra": ["Barra Chata 3 x 1/4"] } },
-    { id: 700017, cliente: "Piauí Ferro e Aço", status: "Aguardando rota", data: "2025-12-24", endereco: "Avenida Miguel Rosa, 3515 - Centro, Teresina - PI, 64000-490", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 5/16"], "Cantoneira / Barra": ["Cantoneira 2 1/2 x 1/4"] } },
-    { id: 700019, cliente: "Aços Alagoas", status: "Aguardando rota", data: "2025-12-26", endereco: "Rua do Sol, 290 - Centro, Maceió - AL, 57020-070", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Xadrez 3/16"], "Cantoneira / Barra": ["Barra Redonda 7/8"] } },
-    { id: 700020, cliente: "Planalto Central Aço", status: "Aguardando rota", data: "2025-12-27", endereco: "SBN Quadra 2 Bloco F - Asa Norte, Brasília - DF, 70040-908", embarque: null, motorista: null, produtos: { Viga: ["Viga W 530 x 92"], Tubo: ["Tubo Quadrado 120x120 #12"] } },
-    { id: 700021, cliente: "RN Construções", status: "Aguardando rota", data: "2025-12-27", endereco: "Avenida Prudente de Morais, 744 - Tirol, Natal - RN, 59020-505", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Fina a Quente 4.25mm"], "Cantoneira / Barra": ["Barra Chata 3 x 1/2"] } },
-    { id: 700024, cliente: "Amapá Metal", status: "Aguardando rota", data: "2025-12-29", endereco: "Rua General Rondon, 2380 - Central, Macapá - AP, 68900-100", embarque: null, motorista: null, produtos: { Viga: ["Viga I 5 x 10#"], Tubo: ["Tubo Quadrado 50x50 #12"] } },
-    { id: 700025, cliente: "Roraima Siderurgia", status: "Aguardando rota", data: "2025-12-29", endereco: "Avenida Ville Roy, 5500 - São Francisco, Boa Vista - RR, 69305-130", embarque: null, motorista: null, produtos: { Chapa: ["Chapa Aço Carbono 3/16"], "Cantoneira / Barra": ["Barra Redonda 1/2"] } },
-    { id: 700026, cliente: "Tocantins Ferro", status: "Aguardando rota", data: "2025-12-30", endereco: "Quadra 103 Norte, Rua NO 3, 50 - Plano Diretor Norte, Palmas - TO, 77001-018", embarque: null, motorista: null, produtos: { Tubo: ["Tubo Retangular 60x30 #16"], Viga: ["Viga W 150 x 18"] } }
+    { 
+        id: 259773, cliente: "Aço Forte", status: "Aguardando rota", data: "2025-08-24", endereco: "Rua Castelo Branco, 1010, Centro, Vila Velha - ES, 29100-040", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [
+                { nome: "Viga I  x 12.5#", pesoSolicitado: 1850 }, 
+                { nome: "Viga W 250 x 25.7", pesoSolicitado: 650 }
+            ] 
+        } 
+    },
+    { 
+        id: 283722, cliente: "Metal Capixaba", status: "Aguardando rota", data: "2025-08-24", endereco: "Rua Sete de Setembro, 400, Centro, Vitória - ES, 29015-000", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Galvanizado 1.1/", pesoSolicitado: 980 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata  x 1/", pesoSolicitado: 440 } ] 
+        } 
+    },
+    { 
+        id: 280519, cliente: "Engemetal", status: "Aguardando rota", data: "2025-08-25", endereco: "Rua da Conceição, 800, Centro, Linhares - ES, 29900-260", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Aço Carbono 1/ (12.70mm)", pesoSolicitado: 2400 } ], 
+            Tubo: [ { nome: "Tubo Retangular 80x40 #14 (2.00mm)", pesoSolicitado: 220 } ] 
+        } 
+    },
+    { 
+        id: 296741, cliente: "Ferroleste", status: "Aguardando rota", data: "2025-08-25", endereco: "Rua Santa Maria, 320, Vila Nova, Colatina - ES, 29702-230", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [
+                { nome: "Viga U  x 6.7#", pesoSolicitado: 1200 }, 
+                { nome: "Viga I  x 10#", pesoSolicitado: 950 }
+            ] 
+        } 
+    },
+    { 
+        id: 301784, cliente: "Metalúrgica União", status: "Aguardando rota", data: "2025-08-26", endereco: "Avenida Champagnat, 1085, Praia da Costa, Vila Velha - ES, 29101-920", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Quadrado 40x40 #18 (1.25mm)", pesoSolicitado: 350 } ], 
+            Chapa: [ { nome: "Chapa Inox 430 1.2mm Polida", pesoSolicitado: 880 } ] 
+        } 
+    },
+    { 
+        id: 309377, cliente: "Construmetais", status: "Aguardando rota", data: "2025-08-26", endereco: "Avenida Norte Sul, 2200, Jardim Limoeiro, Serra - ES, 29164-140", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I  x 18.4#", pesoSolicitado: 2100 } ], 
+            Chapa: [ { nome: "Chapa Aço Carbono 3/ (9.53mm)", pesoSolicitado: 1500 } ] 
+        } 
+    },
+    { 
+        id: 308426, cliente: "Alfa Engenharia", status: "Aguardando rota", data: "2025-08-27", endereco: "Rua Manoel Joaquim dos Santos, 190, Itacibá, Cariacica - ES, 29150-240", embarque: null, motorista: null, 
+        produtos: { 
+            "Cantoneira / Barra": [
+                { nome: "Cantoneira 1.1/ x 3/1", pesoSolicitado: 480 }, 
+                { nome: "Barra Chata  x 3/1", pesoSolicitado: 320 }
+            ] 
+        } 
+    },
+    { 
+        id: 334874, cliente: "Beta Construções", status: "Aguardando rota", data: "2025-08-27", endereco: "Av. Princesa Isabel, 500, Centro, Vitória - ES, 29010-360", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U  x 4.1#", pesoSolicitado: 750 } ], 
+            Chapa: [ { nome: "Chapa Aço Carbono 1/ (6.35mm)", pesoSolicitado: 1800 } ] 
+        } 
+    },
+    { 
+        id: 333704, cliente: "Gama Ferragens", status: "Aguardando rota", data: "2025-08-28", endereco: "Av. Comendador Rafael, 1500, Centro, Linhares - ES, 29900-322", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Fina a Frio #24 (0.60mm)", pesoSolicitado: 250 } ], 
+            Tubo: [ { nome: "Tubo Industrial Quadrado 40x40 #14 (2.00mm)", pesoSolicitado: 400 } ] 
+        } 
+    },
+    { 
+        id: 333900, cliente: "Épsilon Indústria", status: "Aguardando rota", data: "2025-08-29", endereco: "Rua Viana, 55, Glória, Vila Velha - ES, 29122-370", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 50x30 #18 (1.25mm)", pesoSolicitado: 330 } ], 
+            Chapa: [ { nome: "Chapa Inox 304 1.0mm Escovada", pesoSolicitado: 150 } ] 
+        } 
+    },
+    { 
+        id: 334755, cliente: "Zeta Metalúrgica", status: "Aguardando rota", data: "2025-08-29", endereco: "Rua Moacyr Ávidos, 45, Centro, Colatina - ES, 29700-160", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 200 x 22.5", pesoSolicitado: 1900 } ], 
+            Tubo: [ { nome: "Tubo Quadrado 30x30 #18 (1.25mm)", pesoSolicitado: 280 } ] 
+        } 
+    },
+    { 
+        id: 333038, cliente: "Ícaro Soldas", status: "Aguardando rota", data: "2025-08-30", endereco: "Avenida Vale do Rio Doce, 20, Porto de Santana, Cariacica - ES, 29153-010", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Industrial Redondo ", pesoSolicitado: 600 } ], 
+            Chapa: [ { nome: "Chapa Fina a Frio #16 (1.55mm)", pesoSolicitado: 1100 } ] 
+        } 
+    },
+    { 
+        id: 334823, cliente: "Fênix Construções", status: "Aguardando rota", data: "2025-08-31", endereco: "Avenida Vitória, 1500, Jucutuquara, Vitória - ES, 29040-780", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 250 x 32.7", pesoSolicitado: 2500 }, { nome: "Viga U  x 8.2#", pesoSolicitado: 800 } ], 
+            Tubo: [ { nome: "Tubo Galvanizado ", pesoSolicitado: 450 } ] 
+        } 
+    },
+    { 
+        id: 334807, cliente: "Grifo Metais", status: "Aguardando rota", data: "2025-08-31", endereco: "Rua Monsenhor Pedrinha, 1020, Centro, Linhares - ES, 29900-110", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Inox 316 2.0mm", pesoSolicitado: 700 } ], 
+            Viga: [ { nome: "Viga I  x 10#", pesoSolicitado: 1300 } ] 
+        } 
+    },
+    { 
+        id: 327413, cliente: "Pegasus Engenharia", status: "Aguardando rota", data: "2025-09-01", endereco: "Rua Quinze de Novembro, 600, Centro, Vila Velha - ES, 29100-300", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U  x 11.5#", pesoSolicitado: 1650 } ], 
+            Tubo: [ { nome: "Tubo Redondo  #14 (2.00mm)", pesoSolicitado: 550 } ] 
+        } 
+    },
+    { 
+        id: 334389, cliente: "Centauro Indústria", status: "Aguardando rota", data: "2025-09-02", endereco: "Rua Benjamin Constant, 190, Centro, Colatina - ES, 29700-130", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Aço Carbono 5/1 (7.94mm)", pesoSolicitado: 1900 } ], 
+            Viga: [ { nome: "Viga I  x 12.5#", pesoSolicitado: 1400 } ] 
+        } 
+    },
+    { 
+        id: 334702, cliente: "Harpia Estruturas", status: "Aguardando rota", data: "2025-09-02", endereco: "Avenida Talma Rodrigues Ribeiro, 1500, Portal de Jacaraípe, Serra - ES, 29173-735", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo SCH 40 ", pesoSolicitado: 2800 } ], 
+            Chapa: [ { nome: "Chapa Grossa 3/ (19.05mm)", pesoSolicitado: 3500 } ] 
+        } 
+    },
+    { 
+        id: 388994, cliente: "Minotauro Construções", status: "Aguardando rota", data: "2025-09-03", endereco: "Rua Florentino Ávidos, 20, Centro, Cariacica - ES, 29156-020", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I 1 x 25.4#", pesoSolicitado: 1800 } ], 
+            Tubo: [ { nome: "Tubo Retangular 120x60 #12 (2.65mm)", pesoSolicitado: 900 } ] 
+        } 
+    },
+    { 
+        id: 334016, cliente: "Sereia Naval", status: "Aguardando rota", data: "2025-09-03", endereco: "Rua do Rosário, 180, Centro, Vitória - ES, 29015-200", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Naval A36 1/", pesoSolicitado: 4500 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira  x 1/", pesoSolicitado: 600 } ] 
+        } 
+    },
+    { 
+        id: 334716, cliente: "Tritão Ferro e Aço", status: "Aguardando rota", data: "2025-09-04", endereco: "Rua Professor Jones, 50, Centro, Linhares - ES, 29900-140", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Quadrado 100x100 #11 (3.00mm)", pesoSolicitado: 1200 } ], 
+            Chapa: [ { nome: "Chapa Xadrez 3/1 (4.75mm)", pesoSolicitado: 850 } ] 
+        } 
+    },
+    { 
+        id: 331324, cliente: "Atlas Construções", status: "Aguardando rota", data: "2025-09-04", endereco: "Rua Major Pissarra, 250, Centro, Serra - ES, 29176-030", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 360 x 57.8", pesoSolicitado: 3100 }, { nome: "Viga U  x 11.5#", pesoSolicitado: 1500 } ], 
+            Chapa: [ { nome: "Chapa Aço Carbono 3/ (9.53mm)", pesoSolicitado: 2200 } ] 
+        } 
+    },
+    { 
+        id: 334382, cliente: "Titã Fundições", status: "Aguardando rota", data: "2025-09-05", endereco: "Rua Henrique Moscoso, 1001, Centro, Vila Velha - ES, 29100-021", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Fina a Frio #14 (2.00mm)", pesoSolicitado: 980 } ], 
+            Tubo: [ { nome: "Tubo Redondo  SCH 40", pesoSolicitado: 720 } ] 
+        } 
+    },
+    { 
+        id: 332901, cliente: "Olimpo Metais", status: "Aguardando rota", data: "2025-09-05", endereco: "Rua Expedicionário Abílio dos Santos, 50, Centro, Colatina - ES, 29700-100", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I 1 x 31.8#", pesoSolicitado: 2800 } ], 
+            Chapa: [ { nome: "Chapa Inox 304 3.0mm Polida", pesoSolicitado: 1300 } ] 
+        } 
+    },
+    { 
+        id: 333767, cliente: "Expresso Cargas", status: "Aguardando rota", data: "2025-09-06", endereco: "Rua Padre Luiz Parenzi, 350, Centro, Aracruz - ES, 29190-058", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 50x30 #16 (1.55mm)", pesoSolicitado: 450 } ], 
+            Viga: [ { nome: "Viga W 250 x 38.5", pesoSolicitado: 2000 } ] 
+        } 
+    },
+    { 
+        id: 330199, cliente: "Estrutura Forte", status: "Aguardando rota", data: "2025-09-07", endereco: "Rua da Linha, 10, Shell, Linhares - ES, 29901-570", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Redondo  #18 (1.25mm)", pesoSolicitado: 300 } ], 
+            Chapa: [ { nome: "Chapa Aço Carbono 1/ (3.00mm)", pesoSolicitado: 1500 } ] 
+        } 
+    },
+    { 
+        id: 328948, cliente: "Cia. do Metal", status: "Aguardando rota", data: "2025-09-08", endereco: "Praça São Benedito, 150, Centro, São Mateus - ES, 29930-190", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U  x 5.4#", pesoSolicitado: 900 }, { nome: "Viga I  x 5.7#", pesoSolicitado: 750 } ], 
+            Chapa: [ { nome: "Chapa Galvanizada #28 (0.43mm)", pesoSolicitado: 120 } ] 
+        } 
+    },
+    { 
+        id: 329122, cliente: "Norte Aço", status: "Aguardando rota", data: "2025-09-08", endereco: "Avenida 27 de Abril, 80, Centro, Fundão - ES, 29185-000", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Quadrado 60x60 #18 (1.25mm)", pesoSolicitado: 500 } ], 
+            Chapa: [ { nome: "Chapa Fina a Frio #28 (0.43mm)", pesoSolicitado: 180 } ] 
+        } 
+    },
+    { 
+        id: 328400, cliente: "Leste Ferro", status: "Aguardando rota", data: "2025-09-09", endereco: "Rua Vinte e Cinco de Março, 150, Centro, Cachoeiro de Itapemirim - ES, 29300-100", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 100 x 19.3", pesoSolicitado: 1100 } ], 
+            Chapa: [ { nome: "Chapa Xadrez 3.00mm", pesoSolicitado: 950 } ] 
+        } 
+    },
+    { 
+        id: 327904, cliente: "Centro Metal", status: "Aguardando rota", data: "2025-09-09", endereco: "Rua General Dutra, 30, Centro, Castelo - ES, 29360-000", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Redondo 2.1/ #14 (2.00mm)", pesoSolicitado: 680 } ], 
+            Chapa: [ { nome: "Chapa Perfurada 2.00mm", pesoSolicitado: 400 } ] 
+        } 
+    },
+    { 
+        id: 326005, cliente: "Metalúrgica do Aço", status: "Aguardando rota", data: "2025-09-10", endereco: "Avenida Brasil, 800, Olaria, Serra - ES, 29176-237", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Inox 316 1.0mm", pesoSolicitado: 350 } ], 
+            Viga: [ { nome: "Viga I  x 7.7#", pesoSolicitado: 920 } ] 
+        } 
+    },
+    { 
+        id: 328386, cliente: "Construções Modernas", status: "Aguardando rota", data: "2025-09-10", endereco: "Av. Resplendor, 750, Itapuã, Vila Velha - ES, 29101-520", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Redondo  #16 (1.55mm)", pesoSolicitado: 410 } ], 
+            Chapa: [ { nome: "Chapa Galvanizada 3.00mm", pesoSolicitado: 780 } ] 
+        } 
+    },
+    { 
+        id: 329142, cliente: "Estruturas Metálicas", status: "Aguardando rota", data: "2025-09-11", endereco: "Rua da Lapa, 35, Bela Vista, Cariacica - ES, 29141-260", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U  x 8.2#", pesoSolicitado: 1250 } ], 
+            Tubo: [ { nome: "Tubo Quadrado 30x30 #16 (1.55mm)", pesoSolicitado: 310 } ] 
+        } 
+    },
+    { 
+        id: 330446, cliente: "Galvanização Brasil", status: "Aguardando rota", data: "2025-09-11", endereco: "Rua da Palha, 10, Juparanã, Linhares - ES, 29900-520", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Galvanizada 1/ (12.70mm)", pesoSolicitado: 2500 } ], 
+            Tubo: [ { nome: "Tubo Retangular 40x20 #16 (1.55mm)", pesoSolicitado: 190 } ] 
+        } 
+    },
+    { 
+        id: 330886, cliente: "Tubos e Conexões", status: "Aguardando rota", data: "2025-09-12", endereco: "Rua Cassiano Castelo, 250, Centro, Colatina - ES, 29700-060", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Redondo  SCH 80", pesoSolicitado: 1800 } ], 
+            Viga: [ { nome: "Viga I  x 12.5#", pesoSolicitado: 1600 } ] 
+        } 
+    },
+    { 
+        id: 390001, cliente: "Serralheria Capixaba", status: "Aguardando rota", data: "2025-09-13", endereco: "Avenida Talma Rodrigues Ribeiro, 500, Alterosas, Serra - ES, 29167-005", embarque: null, motorista: null, 
+        produtos: { 
+            "Cantoneira / Barra": [
+                { nome: "Cantoneira  x 1/", pesoSolicitado: 380 }, 
+                { nome: "Barra Chata 1.1/ x 1/", pesoSolicitado: 250 }
+            ] 
+        } 
+    },
+    { 
+        id: 390002, cliente: "Construções Litorâneas", status: "Aguardando rota", data: "2025-09-13", endereco: "Rua Gastão Roubach, 180, Itapuã, Vila Velha - ES, 29101-700", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 150 x 13.5", pesoSolicitado: 1400 } ], 
+            Chapa: [ { nome: "Chapa Xadrez 1/ (6.35mm)", pesoSolicitado: 1100 } ] 
+        } 
+    },
+    { 
+        id: 390003, cliente: "Viana Aço e Ferro", status: "Aguardando rota", data: "2025-09-14", endereco: "Avenida Vitória, 12, Centro, Viana - ES, 29130-065", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [
+                { nome: "Tubo Quadrado 50x50 #16 (1.55mm)", pesoSolicitado: 550 }, 
+                { nome: "Tubo Redondo  #14 (2.00mm)", pesoSolicitado: 430 }
+            ] 
+        } 
+    },
+    { 
+        id: 390004, cliente: "Engenharia Ponto Forte", status: "Aguardando rota", data: "2025-09-14", endereco: "Rua General Osório, 83, Centro, Vitória - ES, 29010-020", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I  x 18.4#", pesoSolicitado: 2300 } ], 
+            Chapa: [ { nome: "Chapa Aço Carbono 3/ (9.53mm)", pesoSolicitado: 1750 } ] 
+        } 
+    },
+    { 
+        id: 390005, cliente: "Obras Rápidas Cariacica", status: "Aguardando rota", data: "2025-09-15", endereco: "Rodovia Aloízio Santos, 1000, Campo Belo, Cariacica - ES, 29143-343", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Galvanizada #20 (0.95mm)", pesoSolicitado: 320 } ], 
+            Tubo: [ { nome: "Tubo Industrial Redondo ", pesoSolicitado: 480 } ] 
+        } 
+    },
+    { 
+        id: 390006, cliente: "Metalúrgica Guarapari", status: "Aguardando rota", data: "2025-09-15", endereco: "Rua Santana do Iapó, 20, Ipiranga, Guarapari - ES, 29201-070", embarque: null, motorista: null, 
+        produtos: { 
+            "Cantoneira / Barra": [ { nome: "Barra Chata  x 1/", pesoSolicitado: 600 } ], 
+            Chapa: [ { nome: "Chapa Fina a Frio #16 (1.55mm)", pesoSolicitado: 950 } ] 
+        } 
+    },
+    { 
+        id: 390007, cliente: "Indústria de Colatina", status: "Aguardando rota", data: "2025-09-16", endereco: "Rua Aurélio Gatti, 30, Maria das Graças, Colatina - ES, 29705-015", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Redondo  #12 (2.65mm)", pesoSolicitado: 770 } ], 
+            Viga: [ { nome: "Viga W 200 x 22.5", pesoSolicitado: 1500 } ] 
+        } 
+    },
+    { 
+        id: 390011, cliente: "Metalúrgica Montanhas", status: "Aguardando rota", data: "2025-09-18", endereco: "Av. Evandi Américo Comarela, 100, Centro, Domingos Martins - ES, 29260-000", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Xadrez 1/ (3.00mm)", pesoSolicitado: 650 } ], 
+            Viga: [ { nome: "Viga I  x 5.7#", pesoSolicitado: 880 } ] 
+        } 
+    },
+    { 
+        id: 390012, cliente: "Construções Alfredo Chaves", status: "Aguardando rota", data: "2025-09-18", endereco: "Rua Presidente Vargas, 250, Centro, Alfredo Chaves - ES, 29240-000", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Quadrado 60x60 #18 (1.25mm)", pesoSolicitado: 420 } ], 
+            Viga: [ { nome: "Viga W 150 x 18.0", pesoSolicitado: 1950 } ] 
+        } 
+    },
+    { 
+        id: 390013, cliente: "Aços de Ibatiba", status: "Aguardando rota", data: "2025-09-19", endereco: "Av. Sete de Setembro, 45, Centro, Ibatiba - ES, 29395-000", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Galvanizada #16 (1.55mm)", pesoSolicitado: 1100 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata  x 3/1", pesoSolicitado: 530 } ] 
+        } 
+    },
+    { 
+        id: 390014, cliente: "Serralheria Venda Nova", status: "Aguardando rota", data: "2025-09-19", endereco: "Av. Nona, 15, Bananeiras, Venda Nova do Imigrante - ES, 29375-000", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Redondo  #16 (1.55mm)", pesoSolicitado: 380 } ], 
+            Chapa: [ { nome: "Chapa Fina a Frio #20 (0.90mm)", pesoSolicitado: 210 } ] 
+        } 
+    },
+    { 
+        id: 390015, cliente: "Estruturas Itaguaçu", status: "Aguardando rota", data: "2025-09-20", endereco: "Rua Doutor Ferreira Coelho, 30, Centro, Itaguaçu - ES, 29690-000", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U  x 6.7#", pesoSolicitado: 1300 } ], 
+            Tubo: [ { nome: "Tubo Retangular 50x30 #18 (1.25mm)", pesoSolicitado: 450 } ] 
+        } 
+    },
+    { 
+        id: 390016, cliente: "Comércio de Aço Mimoso", status: "Aguardando rota", data: "2025-09-20", endereco: "Praça Cel. Paiva Gonçalves, 50, Centro, Mimoso do Sul - ES, 29400-000", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Aço Carbono 1/ (6.35mm)", pesoSolicitado: 1600 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira  x 1/", pesoSolicitado: 290 } ] 
+        } 
+    },
+    { 
+        id: 390017, cliente: "Obras de Marechal Floriano", status: "Aguardando rota", data: "2025-09-21", endereco: "Rua Sant'Ana, 120, Centro, Marechal Floriano - ES, 29255-000", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Quadrado 90x90 #12 (2.65mm)", pesoSolicitado: 1150 } ], 
+            Viga: [ { nome: "Viga I  x 12.5#", pesoSolicitado: 1700 } ] 
+        } 
+    },
+    { 
+        id: 390019, cliente: "Construir Santa Teresa", status: "Aguardando rota", data: "2025-09-22", endereco: "Av. Ângelo Pretti, 255, Centro, Santa Teresa - ES, 29650-000", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Schedule 40 ", pesoSolicitado: 2400 } ], 
+            Chapa: [ { nome: "Chapa Grossa 3/ (19.05mm)", pesoSolicitado: 3100 } ] 
+        } 
+    },
+    { 
+        id: 390020, cliente: "Logística Conceição da Barra", status: "Aguardando rota", data: "2025-09-22", endereco: "Av. Gov. Jones dos Santos Neves, 253, Centro, Conceição da Barra - ES, 29960-000", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [
+                { nome: "Viga I 1 x 25.4#", pesoSolicitado: 2900 }, 
+                { nome: "Viga U  x 11.5#", pesoSolicitado: 1400 }
+            ] 
+        } 
+    },
+    { 
+        id: 390021, cliente: "Metalúrgica de Muqui", status: "Aguardando rota", data: "2025-09-23", endereco: "Rua Vieira Machado, 5, Centro, Muqui - ES, 29480-000", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Fina a Frio #14 (2.00mm)", pesoSolicitado: 880 } ], 
+            Tubo: [ { nome: "Tubo Redondo  SCH 40", pesoSolicitado: 640 } ] 
+        } 
+    },
+    { 
+        id: 390036, cliente: "Cerrado Construções", status: "Aguardando rota", data: "2025-10-03", endereco: "Avenida Mato Grosso, 800 - Centro, Cuiabá - MT, 78020-050", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Aço Carbono 1/ (6.35mm)", pesoSolicitado: 1500 } ], 
+            Tubo: [ { nome: "Tubo Industrial Redondo", pesoSolicitado: 800 } ] 
+        } 
+    },
+    { 
+        id: 390037, cliente: "Metais do Planalto", status: "Aguardando rota", data: "2025-10-03", endereco: "Avenida Anhanguera, 5500 - Setor Coimbra, Goiânia - GO, 74535-010", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U x 10#", pesoSolicitado: 1800 } ], 
+            Chapa: [ { nome: "Chapa Galvanizada #28 (0.43mm)", pesoSolicitado: 250 } ] 
+        } 
+    },
+    { 
+        id: 390038, cliente: "Serralheria da Ilha", status: "Aguardando rota", data: "2025-10-04", endereco: "Rua Bocaiúva, 2000 - Centro, Florianópolis - SC, 88015-530", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Quadrado 60x60 #18 (1.25mm)", pesoSolicitado: 480 } ], 
+            Viga: [ { nome: "Viga W 150 x 13.5", pesoSolicitado: 1300 } ] 
+        } 
+    },
+    { 
+        id: 390039, cliente: "Nordeste Aço", status: "Aguardando rota", data: "2025-10-04", endereco: "Avenida Beira Mar, 2000 - Meireles, Fortaleza - CE, 60165-120", embarque: null, motorista: null, 
+        produtos: { 
+            "Cantoneira / Barra": [ { nome: "Cantoneira x 1/", pesoSolicitado: 700 } ], 
+            Chapa: [ { nome: "Chapa Naval A36 1/", pesoSolicitado: 3200 } ] 
+        } 
+    },
+    { 
+        id: 390040, cliente: "Amazonas Metais", status: "Aguardando rota", data: "2025-10-05", endereco: "Avenida Djalma Batista, 1500 - Chapada, Manaus - AM, 69050-010", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Fina a Frio #20 (0.95mm)", pesoSolicitado: 400 } ], 
+            Viga: [ { nome: "Viga I x 10#", pesoSolicitado: 1100 } ] 
+        } 
+    },
+    { 
+        id: 390041, cliente: "Comércio Paraense", status: "Aguardando rota", data: "2025-10-05", endereco: "Avenida Presidente Vargas, 300 - Campina, Belém - PA, 66010-010", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I x 18.4#", pesoSolicitado: 2000 } ], 
+            Tubo: [ { nome: "Tubo Redondo 2.1/ #14 (2.00mm)", pesoSolicitado: 650 } ] 
+        } 
+    },
+    { 
+        id: 390042, cliente: "Metalúrgica Potiguar", status: "Aguardando rota", data: "2025-10-06", endereco: "Avenida Salgado Filho, 1200 - Lagoa Nova, Natal - RN, 59056-000", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 50x30 #18 (1.25mm)", pesoSolicitado: 300 } ], 
+            Chapa: [ { nome: "Chapa Inox 304 1.0mm Escovada", pesoSolicitado: 200 } ] 
+        } 
+    },
+    { 
+        id: 390043, cliente: "Aço Alagoano", status: "Aguardando rota", data: "2025-10-07", endereco: "Avenida Fernandes Lima, 2500 - Farol, Maceió - AL, 57055-055", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 200 x 22.5", pesoSolicitado: 1800 } ], 
+            Chapa: [ { nome: "Chapa Xadrez 3/1 (4.75mm)", pesoSolicitado: 900 } ] 
+        } 
+    },
+    { 
+        id: 390044, cliente: "Paraíba Ferro", status: "Aguardando rota", data: "2025-10-07", endereco: "Avenida Epitácio Pessoa, 100 - Tambiá, João Pessoa - PB, 58030-000", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Fina a Frio #16 (1.55mm)", pesoSolicitado: 800 } ], 
+            Tubo: [ { nome: "Tubo Quadrado 30x30 #18 (1.25mm)", pesoSolicitado: 250 } ] 
+        } 
+    },
+    { 
+        id: 390045, cliente: "Piauí Tubos", status: "Aguardando rota", data: "2025-10-08", endereco: "Avenida Frei Serafim, 100 - Centro, Teresina - PI, 64000-010", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I 1 x 31.8#", pesoSolicitado: 3000 } ], 
+            Tubo: [ { nome: "Tubo Redondo SCH 40", pesoSolicitado: 1200 } ] 
+        } 
+    },
+    { 
+        id: 390046, cliente: "Acre Metalúrgica", status: "Aguardando rota", data: "2025-10-08", endereco: "Avenida Getúlio Vargas, 300 - Bosque, Rio Branco - AC, 69908-720", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Industrial Redondo", pesoSolicitado: 500 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata x 1/", pesoSolicitado: 350 } ] 
+        } 
+    },
+    { 
+        id: 390047, cliente: "Roraima Cargas", status: "Aguardando rota", data: "2025-10-09", endereco: "Avenida Capitão Ene Garcez, 500 - São Francisco, Boa Vista - RR, 69305-130", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Fina a Frio #24 (0.60mm)", pesoSolicitado: 200 } ], 
+            Viga: [ { nome: "Viga U x 4.1#", pesoSolicitado: 900 } ] 
+        } 
+    },
+    { 
+        id: 390048, cliente: "Amapá Construções", status: "Aguardando rota", data: "2025-10-09", endereco: "Avenida Padre Júlio Maria Lombaerd, 1500 - Centro, Macapá - AP, 68900-030", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 250 x 32.7", pesoSolicitado: 2200 } ], 
+            Chapa: [ { nome: "Chapa Inox 316 2.0mm", pesoSolicitado: 600 } ] 
+        } 
+    },
+    { 
+        id: 390049, cliente: "Rondônia Ferro", status: "Aguardando rota", data: "2025-10-10", endereco: "Avenida Sete de Setembro, 2000 - Centro, Porto Velho - RO, 76801-001", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Galvanizado 1.1/", pesoSolicitado: 800 } ], 
+            Chapa: [ { nome: "Chapa Aço Carbono 1/ (12.70mm)", pesoSolicitado: 2800 } ] 
+        } 
+    },
+    { 
+        id: 390050, cliente: "Aço de Tocantins", status: "Aguardando rota", data: "2025-10-10", endereco: "Avenida Juscelino Kubitschek, 1000 - Centro, Palmas - TO, 77020-022", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Aço Carbono 3/ (9.53mm)", pesoSolicitado: 1900 } ], 
+            Viga: [ { nome: "Viga I x 12.5#", pesoSolicitado: 1500 } ] 
+        } 
+    },
+    { 
+        id: 390051, cliente: "Empresa do Norte", status: "Aguardando rota", data: "2025-10-11", endereco: "Avenida Brigadeiro Eduardo Gomes, 50 - São Francisco, Boa Vista - RR, 69305-090", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U x 11.5#", pesoSolicitado: 1400 } ], 
+            Tubo: [ { nome: "Tubo Redondo #14 (2.00mm)", pesoSolicitado: 400 } ] 
+        } 
+    },
+    { 
+        id: 390052, cliente: "Metalúrgica Central", status: "Aguardando rota", data: "2025-10-11", endereco: "Avenida Mato Grosso, 300 - Centro, Campo Grande - MS, 79002-220", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo SCH 40 ", pesoSolicitado: 2000 } ], 
+            Chapa: [ { nome: "Chapa Grossa 3/ (19.05mm)", pesoSolicitado: 3500 } ] 
+        } 
+    },
+    { 
+        id: 390053, cliente: "Engenharia do Sul", status: "Aguardando rota", data: "2025-10-12", endereco: "Avenida Brasil, 2500 - Centro, Balneário Camboriú - SC, 88330-003", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Xadrez 3/1 (4.75mm)", pesoSolicitado: 1100 } ], 
+            Viga: [ { nome: "Viga I 1 x 25.4#", pesoSolicitado: 2300 } ] 
+        } 
+    },
+    { 
+        id: 390054, cliente: "Minas Aço Forte", status: "Aguardando rota", data: "2025-10-13", endereco: "Avenida Rio Branco, 2500 - Centro, Juiz de Fora - MG, 36010-001", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 360 x 57.8", pesoSolicitado: 3200 }, { nome: "Viga U x 11.5#", pesoSolicitado: 1300 } ], 
+            Chapa: [ { nome: "Chapa Aço Carbono 3/ (9.53mm)", pesoSolicitado: 2100 } ] 
+        } 
+    },
+    { 
+        id: 390055, cliente: "Bahia Metais e Tubos", status: "Aguardando rota", data: "2025-10-13", endereco: "Rua Direita de Santo Antônio, 120 - Santo Antônio Além do Carmo, Salvador - BA, 40301-200", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Redondo #16 (1.55mm)", pesoSolicitado: 450 } ], 
+            Chapa: [ { nome: "Chapa Galvanizada 3.00mm", pesoSolicitado: 800 } ] 
+        } 
+    },
+    { 
+        id: 390056, cliente: "Pernambuco Chapas", status: "Aguardando rota", data: "2025-10-14", endereco: "Rua do Imperador Pedro II, 50 - Santo Antônio, Recife - PE, 50010-240", embarque: null, motorista: null, 
+        produtos: { 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 1.1/ x 3/1", pesoSolicitado: 550 } ], 
+            Tubo: [ { nome: "Tubo Quadrado 30x30 #16 (1.55mm)", pesoSolicitado: 320 } ] 
+        } 
+    },
+    { 
+        id: 390057, cliente: "Rio Grande do Norte Metalúrgica", status: "Aguardando rota", data: "2025-10-14", endereco: "Avenida Rui Barbosa, 100 - Tirol, Natal - RN, 59015-100", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U x 8.2#", pesoSolicitado: 1100 } ], 
+            Chapa: [ { nome: "Chapa Fina a Frio #18 (1.25mm)", pesoSolicitado: 600 } ] 
+        } 
+    },
+    { 
+        id: 390058, cliente: "Sergipe Indústria", status: "Aguardando rota", data: "2025-10-15", endereco: "Avenida Barão de Maruim, 500 - Centro, Aracaju - SE, 49010-380", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Perfurada 2.00mm", pesoSolicitado: 450 } ], 
+            Viga: [ { nome: "Viga I x 7.7#", pesoSolicitado: 950 } ] 
+        } 
+    },
+    { 
+        id: 390059, cliente: "Alagoas Ferragens", status: "Aguardando rota", data: "2025-10-15", endereco: "Rua do Comércio, 1500 - Centro, Maceió - AL, 57020-000", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Redondo 3.1/ #16 (1.55mm)", pesoSolicitado: 700 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata x 1/", pesoSolicitado: 300 } ] 
+        } 
+    },
+    { 
+        id: 390060, cliente: "Paraíba Aço e Ferro", status: "Aguardando rota", data: "2025-10-16", endereco: "Avenida Rodrigues Alves, 300 - Centro, Campina Grande - PB, 58400-000", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 100 x 19.3", pesoSolicitado: 1200 } ], 
+            Chapa: [ { nome: "Chapa Xadrez 1/ (3.00mm)", pesoSolicitado: 700 } ] 
+        } 
+    },
+    { 
+        id: 390061, cliente: "Maranhão Cargas", status: "Aguardando rota", data: "2025-10-17", endereco: "Avenida Jerônimo de Albuquerque, 500 - Cohab Anil, São Luís - MA, 65051-210", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Galvanizada 1/ (12.70mm)", pesoSolicitado: 2700 } ], 
+            Tubo: [ { nome: "Tubo Retangular 40x20 #16 (1.55mm)", pesoSolicitado: 220 } ] 
+        } 
+    },
+    { 
+        id: 390062, cliente: "Ceará Indústria", status: "Aguardando rota", data: "2025-10-17", endereco: "Rua do Comercio, 150 - Centro, Juazeiro do Norte - CE, 63010-005", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Redondo SCH 80", pesoSolicitado: 1900 } ], 
+            Viga: [ { nome: "Viga I x 12.5#", pesoSolicitado: 1700 } ] 
+        } 
+    },
+    { 
+        id: 390063, cliente: "Paraíba Construções", status: "Aguardando rota", data: "2025-10-18", endereco: "Rua Barão do Triunfo, 10 - Centro, Patos - PB, 58700-010", embarque: null, motorista: null, 
+        produtos: { 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 1.1/ x 1/", pesoSolicitado: 400 } ], 
+            Tubo: [ { nome: "Tubo Retangular 50x30 #18 (1.25mm)", pesoSolicitado: 350 } ] 
+        } 
+    },
+    { 
+        id: 390064, cliente: "Rio Grande do Sul Estruturas", status: "Aguardando rota", data: "2025-10-18", endereco: "Avenida Borges de Medeiros, 200 - Centro, Porto Alegre - RS, 90020-020", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Fina a Frio #18 (1.25mm)", pesoSolicitado: 550 } ], 
+            Viga: [ { nome: "Viga W 150 x 13.5", pesoSolicitado: 1400 } ] 
+        } 
+    },
+    { 
+        id: 390065, cliente: "Paraná Galvanização", status: "Aguardando rota", data: "2025-10-19", endereco: "Rua Marechal Deodoro, 1000 - Centro, Curitiba - PR, 80010-010", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U x 11.5#", pesoSolicitado: 1500 } ], 
+            Chapa: [ { nome: "Chapa Naval A36 3/ (9.53mm)", pesoSolicitado: 2500 } ] 
+        } 
+    },
+    { 
+        id: 390066, cliente: "Santa Catarina Metal", status: "Aguardando rota", data: "2025-10-20", endereco: "Rua Sete de Setembro, 500 - Centro, Joinville - SC, 89201-200", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Quadrado 60x60 #14 (2.00mm)", pesoSolicitado: 600 } ], 
+            Chapa: [ { nome: "Chapa Inox 430 1.5mm Polida", pesoSolicitado: 350 } ] 
+        } 
+    },
+    { 
+        id: 390067, cliente: "Goiás Tubos e Barras", status: "Aguardando rota", data: "2025-10-20", endereco: "Avenida Goiás, 900 - Centro, Goiânia - GO, 74005-010", embarque: null, motorista: null, 
+        produtos: { 
+            "Cantoneira / Barra": [ { nome: "Barra Chata  x 1/", pesoSolicitado: 400 } ], 
+            Chapa: [ { nome: "Chapa Naval A36 3/ (9.53mm)", pesoSolicitado: 2600 } ] 
+        } 
+    },
+    { 
+        id: 390068, cliente: "Minas Estruturas", status: "Aguardando rota", data: "2025-10-21", endereco: "Rua dos Inconfidentes, 100 - Savassi, Belo Horizonte - MG, 30140-120", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I x 18.4#", pesoSolicitado: 2100 } ], 
+            Tubo: [ { nome: "Tubo Galvanizado ", pesoSolicitado: 500 } ] 
+        } 
+    },
+    { 
+        id: 390069, cliente: "Rio de Janeiro Ferragens", status: "Aguardando rota", data: "2025-10-21", endereco: "Rua Visconde de Pirajá, 1000 - Ipanema, Rio de Janeiro - RJ, 22410-003", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Aço Carbono 1/ (12.70mm)", pesoSolicitado: 3000 } ], 
+            Viga: [ { nome: "Viga W 250 x 25.7", pesoSolicitado: 1700 } ] 
+        } 
+    },
+    { 
+        id: 390070, cliente: "São Paulo Comércio", status: "Aguardando rota", data: "2025-10-22", endereco: "Avenida Paulista, 100 - Bela Vista, São Paulo - SP, 01311-000", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 80x40 #14 (2.00mm)", pesoSolicitado: 600 } ], 
+            Chapa: [ { nome: "Chapa Aço Carbono 1/ (12.70mm)", pesoSolicitado: 2900 } ] 
+        } 
+    },
+    { 
+        id: 390071, cliente: "Espírito Santo Aço", status: "Aguardando rota", data: "2025-10-22", endereco: "Avenida Américo Buaiz, 800 - Enseada do Suá, Vitória - ES, 29050-911", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U x 6.7#", pesoSolicitado: 1100 }, { nome: "Viga I x 10#", pesoSolicitado: 1300 } ] 
+        } 
+    },
+    { 
+        id: 390072, cliente: "Goiânia Metalúrgica", status: "Aguardando rota", data: "2025-10-23", endereco: "Rua 25-A, 100 - Setor Aeroporto, Goiânia - GO, 74070-130", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Quadrado 40x40 #18 (1.25mm)", pesoSolicitado: 300 } ], 
+            Chapa: [ { nome: "Chapa Inox 430 1.2mm Polida", pesoSolicitado: 250 } ] 
+        } 
+    },
+    { 
+        id: 390073, cliente: "Metalúrgica do Mato Grosso", status: "Aguardando rota", data: "2025-10-23", endereco: "Rua Pedro Celestino, 50 - Centro, Campo Grande - MS, 79002-370", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I x 18.4#", pesoSolicitado: 2400 } ], 
+            Chapa: [ { nome: "Chapa Aço Carbono 3/ (9.53mm)", pesoSolicitado: 1800 } ] 
+        } 
+    },
+    { 
+        id: 390074, cliente: "Florianópolis Fundições", status: "Aguardando rota", data: "2025-10-24", endereco: "Avenida Beira Mar Norte, 100 - Centro, Florianópolis - SC, 88015-000", embarque: null, motorista: null, 
+        produtos: { 
+            "Cantoneira / Barra": [
+                { nome: "Cantoneira 1.1/ x 3/1", pesoSolicitado: 600 }, 
+                { nome: "Barra Chata x 3/1", pesoSolicitado: 450 }
+            ] 
+        } 
+    },
+    { 
+        id: 390075, cliente: "Indústria Nordeste", status: "Aguardando rota", data: "2025-10-24", endereco: "Rua Visconde de Mauá, 1500 - Meireles, Fortaleza - CE, 60125-160", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U x 4.1#", pesoSolicitado: 800 } ], 
+            Chapa: [ { nome: "Chapa Aço Carbono 1/ (6.35mm)", pesoSolicitado: 1400 } ] 
+        } 
+    },
+    { 
+        id: 390076, cliente: "Aço Amazônia", status: "Aguardando rota", data: "2025-10-25", endereco: "Avenida Coronel Teixeira, 5000 - Ponta Negra, Manaus - AM, 69037-000", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Fina a Frio #24 (0.60mm)", pesoSolicitado: 280 } ], 
+            Tubo: [ { nome: "Tubo Industrial Quadrado 40x40 #14 (2.00mm)", pesoSolicitado: 450 } ] 
+        } 
+    },
+    { 
+        id: 390077, cliente: "Ferro e Aço Pará", status: "Aguardando rota", data: "2025-10-25", endereco: "Travessa Padre Eutíquio, 200 - Cidade Velha, Belém - PA, 66020-030", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 50x30 #18 (1.25mm)", pesoSolicitado: 380 } ], 
+            Chapa: [ { nome: "Chapa Inox 304 1.0mm Escovada", pesoSolicitado: 220 } ] 
+        } 
+    },
+    { 
+        id: 390078, cliente: "Brasília Fundições", status: "Aguardando rota", data: "2025-10-26", endereco: "Setor Comercial Sul, Quadra 100 - Asa Sul, Brasília - DF, 70300-500", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 200 x 22.5", pesoSolicitado: 2100 } ], 
+            Tubo: [ { nome: "Tubo Quadrado 30x30 #18 (1.25mm)", pesoSolicitado: 310 } ] 
+        } 
+    },
+    { 
+        id: 390079, cliente: "Aço Gaúcho", status: "Aguardando rota", data: "2025-10-26", endereco: "Avenida Ipiranga, 5000 - Jardim Botânico, Porto Alegre - RS, 90610-000", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Industrial Redondo", pesoSolicitado: 650 } ], 
+            Chapa: [ { nome: "Chapa Fina a Frio #16 (1.55mm)", pesoSolicitado: 1200 } ] 
+        } 
+    },
+    { 
+        id: 390080, cliente: "Caminhos do Paraná", status: "Aguardando rota", data: "2025-10-27", endereco: "Rua João Negrão, 800 - Centro, Curitiba - PR, 80010-200", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 250 x 32.7", pesoSolicitado: 2700 }, { nome: "Viga U x 8.2#", pesoSolicitado: 900 } ], 
+            Tubo: [ { nome: "Tubo Galvanizado ", pesoSolicitado: 550 } ] 
+        } 
+    },
+    { 
+        id: 400001, cliente: "Usiminas Mecânica", status: "Aguardando rota", data: "2025-10-28", endereco: "Avenida Afonso Pena, 4000 - Cruzeiro, Belo Horizonte - MG, 30130-009", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 310 x 38.7", pesoSolicitado: 3500 } ], 
+            Chapa: [ { nome: "Chapa Aço Carbono 1/2 (12.70mm)", pesoSolicitado: 2800 } ] 
+        } 
+    },
+    { 
+        id: 400002, cliente: "Siderúrgica Alterosa", status: "Aguardando rota", data: "2025-10-28", endereco: "Rua dos Timbiras, 1532 - Lourdes, Belo Horizonte - MG, 30140-061", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Quadrado 80x80 #11 (3.00mm)", pesoSolicitado: 1100 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata 3 x 1/2", pesoSolicitado: 850 } ] 
+        } 
+    },
+    { 
+        id: 400003, cliente: "Metalferco Ltda", status: "Aguardando rota", data: "2025-10-29", endereco: "Avenida do Contorno, 6594 - Savassi, Belo Horizonte - MG, 30110-044", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Fina a Frio #18 (1.25mm)", pesoSolicitado: 650 } ], 
+            Viga: [ { nome: "Viga U 6 x 8.2#", pesoSolicitado: 1200 } ] 
+        } 
+    },
+    { 
+        id: 400004, cliente: "Fábrica de Aço Minas", status: "Aguardando rota", data: "2025-10-29", endereco: "Rua Rio de Janeiro, 927 - Centro, Juiz de Fora - MG, 36016-000", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Industrial Redondo 3", pesoSolicitado: 750 } ], 
+            Chapa: [ { nome: "Chapa Galvanizada #26 (0.50mm)", pesoSolicitado: 300 } ] 
+        } 
+    },
+    { 
+        id: 400005, cliente: "Minasfer Comércio", status: "Aguardando rota", data: "2025-10-30", endereco: "Avenida Brasil, 2001 - Centro, Uberlândia - MG, 38400-714", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I 8 x 18.4#", pesoSolicitado: 1900 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 2 x 1/4", pesoSolicitado: 500 } ] 
+        } 
+    },
+    { 
+        id: 410001, cliente: "CSN - Cia Siderúrgica", status: "Aguardando rota", data: "2025-11-01", endereco: "Avenida Rio Branco, 1 - Centro, Rio de Janeiro - RJ, 20090-003", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Grossa A36 1 pol", pesoSolicitado: 5500 } ], 
+            Viga: [ { nome: "Viga W 610 x 101", pesoSolicitado: 6000 } ] 
+        } 
+    },
+    { 
+        id: 410002, cliente: "Gerdau Aços Longos", status: "Aguardando rota", data: "2025-11-01", endereco: "Rua do Passeio, 38 - Centro, Rio de Janeiro - RJ, 20021-290", embarque: null, motorista: null, 
+        produtos: { 
+            "Cantoneira / Barra": [ { nome: "Vergalhão CA50 12.5mm", pesoSolicitado: 1500 } ], 
+            Tubo: [ { nome: "Tubo Schedule 40 4", pesoSolicitado: 1800 } ] 
+        } 
+    },
+    { 
+        id: 410003, cliente: "Engenharia Carioca", status: "Aguardando rota", data: "2025-11-02", endereco: "Avenida Atlântica, 1702 - Copacabana, Rio de Janeiro - RJ, 22021-001", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Inox 304 2.0mm", pesoSolicitado: 900 } ], 
+            Viga: [ { nome: "Viga I 4 x 7.7#", pesoSolicitado: 1100 } ] 
+        } 
+    },
+    { 
+        id: 410004, cliente: "Construções Fluminense", status: "Aguardando rota", data: "2025-11-02", endereco: "Avenida Presidente Vargas, 583 - Centro, Rio de Janeiro - RJ, 20071-003", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 100x50 #14 (2.00mm)", pesoSolicitado: 800 } ], 
+            Chapa: [ { nome: "Chapa Xadrez 1/8", pesoSolicitado: 1300 } ] 
+        } 
+    },
+    { 
+        id: 410005, cliente: "Aço & Cia Niterói", status: "Aguardando rota", data: "2025-11-03", endereco: "Rua Gavião Peixoto, 124 - Icaraí, Niterói - RJ, 24230-101", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U 8 x 11.5#", pesoSolicitado: 1400 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata 2 x 1/4", pesoSolicitado: 450 } ] 
+        } 
+    },
+    { 
+        id: 420001, cliente: "Usiminas SP", status: "Aguardando rota", data: "2025-11-05", endereco: "Avenida Paulista, 1313 - Bela Vista, São Paulo - SP, 01311-923", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Fina a Quente 3.00mm", pesoSolicitado: 1200 } ], 
+            Tubo: [ { nome: "Tubo Quadrado 20x20 #18 (1.25mm)", pesoSolicitado: 200 } ] 
+        } 
+    },
+    { 
+        id: 420002, cliente: "Açometal Comércio", status: "Aguardando rota", data: "2025-11-05", endereco: "Rua da Consolação, 222 - Consolação, São Paulo - SP, 01302-000", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 200 x 15", pesoSolicitado: 1600 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 1.1/2 x 1/8", pesoSolicitado: 350 } ] 
+        } 
+    },
+    { 
+        id: 420003, cliente: "Construtora Bandeirante", status: "Aguardando rota", data: "2025-11-06", endereco: "Avenida Brigadeiro Faria Lima, 2232 - Jardim Paulistano, São Paulo - SP, 01451-000", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Redondo 2 SCH 40", pesoSolicitado: 900 } ], 
+            Chapa: [ { nome: "Chapa Galvanizada #24 (0.65mm)", pesoSolicitado: 400 } ] 
+        } 
+    },
+    { 
+        id: 420004, cliente: "Metal Leve S.A.", status: "Aguardando rota", data: "2025-11-06", endereco: "Rua Vergueiro, 1353 - Paraíso, São Paulo - SP, 04101-100", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I 3 x 5.7#", pesoSolicitado: 850 } ], 
+            Chapa: [ { nome: "Chapa Inox 430 0.5mm", pesoSolicitado: 150 } ] 
+        } 
+    },
+    { 
+        id: 420005, cliente: "Ferroart Campinas", status: "Aguardando rota", data: "2025-11-07", endereco: "Avenida Francisco Glicério, 1058 - Centro, Campinas - SP, 13012-100", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 60x40 #16 (1.55mm)", pesoSolicitado: 550 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata 1 x 3/16", pesoSolicitado: 280 } ] 
+        } 
+    },
+    { 
+        id: 500001, cliente: "Aço Gaúcho", status: "Aguardando rota", data: "2025-11-10", endereco: "Avenida Borges de Medeiros, 2100 - Praia de Belas, Porto Alegre - RS, 90110-150", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Xadrez 1/4", pesoSolicitado: 2200 } ], 
+            Viga: [ { nome: "Viga I 10 x 25.4#", pesoSolicitado: 2800 } ] 
+        } 
+    },
+    { 
+        id: 500002, cliente: "Serralheria Pampeana", status: "Aguardando rota", data: "2025-11-10", endereco: "Rua dos Andradas, 1001 - Centro Histórico, Porto Alegre - RS, 90020-007", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Quadrado 50x50 #14", pesoSolicitado: 600 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 1 x 1/8", pesoSolicitado: 250 } ] 
+        } 
+    },
+    { 
+        id: 500003, cliente: "Sulfer Caxias", status: "Aguardando rota", data: "2025-11-11", endereco: "Avenida Júlio de Castilhos, 2030 - Centro, Caxias do Sul - RS, 95010-001", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 250 x 18", pesoSolicitado: 1900 } ], 
+            Chapa: [ { nome: "Chapa Galvanizada #22 (0.80mm)", pesoSolicitado: 500 } ] 
+        } 
+    },
+    { 
+        id: 500004, cliente: "Metalúrgica Farroupilha", status: "Aguardando rota", data: "2025-11-11", endereco: "Rua da República, 455 - Centro, Farroupilha - RS, 95180-000", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Redondo 1 1/2 #16", pesoSolicitado: 420 } ], 
+            Chapa: [ { nome: "Chapa Fina a Frio #22 (0.75mm)", pesoSolicitado: 380 } ] 
+        } 
+    },
+    { 
+        id: 500005, cliente: "Estruturas de Aço Paraná", status: "Aguardando rota", data: "2025-11-12", endereco: "Rua XV de Novembro, 1299 - Centro, Curitiba - PR, 80060-000", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U 4 x 5.4#", pesoSolicitado: 950 } ], 
+            Chapa: [ { nome: "Chapa Aço Carbono 3/16", pesoSolicitado: 1100 } ] 
+        } 
+    },
+    { 
+        id: 500006, cliente: "Ferro Londrina", status: "Aguardando rota", data: "2025-11-12", endereco: "Avenida Higienópolis, 100 - Centro, Londrina - PR, 86020-080", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 30x20 #20", pesoSolicitado: 180 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata 1 1/4 x 1/4", pesoSolicitado: 320 } ] 
+        } 
+    },
+    { 
+        id: 500007, cliente: "Aços Catarinenses", status: "Aguardando rota", data: "2025-11-13", endereco: "Rua Felipe Schmidt, 249 - Centro, Florianópolis - SC, 88010-000", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Inox 316 1.5mm", pesoSolicitado: 700 } ], 
+            Tubo: [ { nome: "Tubo Quadrado 70x70 #12", pesoSolicitado: 980 } ] 
+        } 
+    },
+    { 
+        id: 500008, cliente: "Joinville Metais", status: "Aguardando rota", data: "2025-11-13", endereco: "Rua do Príncipe, 330 - Centro, Joinville - SC, 89201-000", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I 5 x 10#", pesoSolicitado: 1300 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 2 1/2 x 3/16", pesoSolicitado: 550 } ] 
+        } 
+    },
+    { 
+        id: 500009, cliente: "Construtora Goiana", status: "Aguardando rota", data: "2025-11-14", endereco: "Avenida Goiás, 623 - Centro, Goiânia - GO, 74010-010", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Redondo 4 SCH 80", pesoSolicitado: 2500 } ], 
+            Chapa: [ { nome: "Chapa Grossa A572 1/2 pol", pesoSolicitado: 4000 } ] 
+        } 
+    },
+    { 
+        id: 500010, cliente: "Serralheria do Cerrado", status: "Aguardando rota", data: "2025-11-14", endereco: "Avenida Anhanguera, 7840 - Setor Aeroviário, Goiânia - GO, 74435-315", embarque: null, motorista: null, 
+        produtos: { 
+            "Cantoneira / Barra": [ { nome: "Barra Chata 4 x 3/8", pesoSolicitado: 1100 } ], 
+            Viga: [ { nome: "Viga U 10 x 15.3#", pesoSolicitado: 1800 } ] 
+        } 
+    },
+    { 
+        id: 500011, cliente: "Aço Bahia", status: "Aguardando rota", data: "2025-11-15", endereco: "Avenida Sete de Setembro, 555 - Centro, Salvador - BA, 40060-000", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Naval A131", pesoSolicitado: 3500 } ], 
+            Tubo: [ { nome: "Tubo Retangular 150x50 #11", pesoSolicitado: 1300 } ] 
+        } 
+    },
+    { 
+        id: 500012, cliente: "Metalúrgica do Dendê", status: "Aguardando rota", data: "2025-11-15", endereco: "Rua Chile, 21 - Centro, Salvador - BA, 40020-000", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 410 x 60", pesoSolicitado: 4200 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 3 x 1/4", pesoSolicitado: 700 } ] 
+        } 
+    },
+    { 
+        id: 500013, cliente: "Ferro e Aço Cearense", status: "Aguardando rota", data: "2025-11-16", endereco: "Avenida Monsenhor Tabosa, 1000 - Meireles, Fortaleza - CE, 60165-010", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Galvanizado 2 1/2", pesoSolicitado: 900 } ], 
+            Chapa: [ { nome: "Chapa Xadrez 3/16", pesoSolicitado: 1500 } ] 
+        } 
+    },
+    { 
+        id: 500014, cliente: "Estruturas do Nordeste", status: "Aguardando rota", data: "2025-11-16", endereco: "Rua Barão do Rio Branco, 1071 - Centro, Fortaleza - CE, 60025-060", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I 12 x 31.8#", pesoSolicitado: 3300 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Redonda 1 pol", pesoSolicitado: 600 } ] 
+        } 
+    },
+    { 
+        id: 500015, cliente: "Amazonas Siderurgia", status: "Aguardando rota", data: "2025-11-17", endereco: "Avenida Eduardo Ribeiro, 520 - Centro, Manaus - AM, 69005-160", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Aço Carbono 1 pol", pesoSolicitado: 5000 } ], 
+            Tubo: [ { nome: "Tubo Quadrado 120x120 #11", pesoSolicitado: 1600 } ] 
+        } 
+    },
+    { 
+        id: 500016, cliente: "Construções da Amazônia", status: "Aguardando rota", data: "2025-11-17", endereco: "Rua Marcílio Dias, 256 - Centro, Manaus - AM, 69005-270", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 530 x 82", pesoSolicitado: 4800 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata 5 x 1/2", pesoSolicitado: 1800 } ] 
+        } 
+    },
+    { 
+        id: 500017, cliente: "Aços do Pará", status: "Aguardando rota", data: "2025-11-18", endereco: "Avenida Presidente Vargas, 850 - Campina, Belém - PA, 66017-000", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 200x100 #10", pesoSolicitado: 2000 } ], 
+            Chapa: [ { nome: "Chapa Galvanizada #20", pesoSolicitado: 800 } ] 
+        } 
+    },
+    { 
+        id: 500018, cliente: "Metal Belém", status: "Aguardando rota", data: "2025-11-18", endereco: "Travessa Padre Eutíquio, 1078 - Batista Campos, Belém - PA, 66023-710", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U 12 x 20.7#", pesoSolicitado: 2500 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 4 x 3/8", pesoSolicitado: 900 } ] 
+        } 
+    },
+    { 
+        id: 500019, cliente: "Pernambuco Aços", status: "Aguardando rota", data: "2025-11-19", endereco: "Avenida Conde da Boa Vista, 800 - Boa Vista, Recife - PE, 50060-004", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Inox 304L 3.0mm", pesoSolicitado: 1200 } ], 
+            Tubo: [ { nome: "Tubo Redondo 5 SCH 40", pesoSolicitado: 1700 } ] 
+        } 
+    },
+    { 
+        id: 500020, cliente: "Recife Estruturas", status: "Aguardando rota", data: "2025-11-19", endereco: "Rua da Aurora, 1259 - Santo Amaro, Recife - PE, 50040-090", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I 6 x 12.5#", pesoSolicitado: 1500 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Quadrada 1/2", pesoSolicitado: 300 } ] 
+        } 
+    },
+    { 
+        id: 500021, cliente: "Aço Brasília", status: "Aguardando rota", data: "2025-11-20", endereco: "SCS Quadra 08 Bloco B-60 - Asa Sul, Brasília - DF, 70333-900", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Quadrado 150x150 #10", pesoSolicitado: 2200 } ], 
+            Chapa: [ { nome: "Chapa Aço Carbono 3/4", pesoSolicitado: 4500 } ] 
+        } 
+    },
+    { 
+        id: 500022, cliente: "Capital do Aço", status: "Aguardando rota", data: "2025-11-20", endereco: "W3 Sul Quadra 502 - Asa Sul, Brasília - DF, 70330-500", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 610 x 125", pesoSolicitado: 7000 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata 6 x 1", pesoSolicitado: 2500 } ] 
+        } 
+    },
+    { 
+        id: 500023, cliente: "Serralheria Potiguar", status: "Aguardando rota", data: "2025-11-21", endereco: "Avenida Engenheiro Roberto Freire, 3132 - Ponta Negra, Natal - RN, 59090-000", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Xadrez 1/4", pesoSolicitado: 1800 } ], 
+            Tubo: [ { nome: "Tubo Retangular 80x30 #18", pesoSolicitado: 500 } ] 
+        } 
+    },
+    { 
+        id: 500024, cliente: "Aço Potengi", status: "Aguardando rota", data: "2025-11-21", endereco: "Rua Mossoró, 356 - Tirol, Natal - RN, 59020-270", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U 3 x 4.1#", pesoSolicitado: 700 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 1 1/4 x 3/16", pesoSolicitado: 300 } ] 
+        } 
+    },
+    { 
+        id: 500025, cliente: "Metalúrgica Pantanal", status: "Aguardando rota", data: "2025-11-22", endereco: "Avenida Afonso Pena, 4909 - Santa Fé, Campo Grande - MS, 79031-010", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Industrial Redondo 6", pesoSolicitado: 1900 } ], 
+            Chapa: [ { nome: "Chapa Fina a Quente 4.75mm", pesoSolicitado: 1300 } ] 
+        } 
+    },
+    { 
+        id: 500026, cliente: "Ferro Sul-Mato-Grossense", status: "Aguardando rota", data: "2025-11-22", endereco: "Rua 14 de Julho, 1859 - Centro, Campo Grande - MS, 79002-331", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I 8 x 23#", pesoSolicitado: 2100 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Redonda 3/4", pesoSolicitado: 400 } ] 
+        } 
+    },
+    { 
+        id: 500027, cliente: "Aço Paraibano", status: "Aguardando rota", data: "2025-11-23", endereco: "Avenida Epitácio Pessoa, 2460 - Tambauzinho, João Pessoa - PB, 58042-006", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Galvanizada #18", pesoSolicitado: 600 } ], 
+            Tubo: [ { nome: "Tubo Quadrado 45x45 #16", pesoSolicitado: 400 } ] 
+        } 
+    },
+    { 
+        id: 500028, cliente: "Campina Grande Metais", status: "Aguardando rota", data: "2025-11-23", endereco: "Rua Maciel Pinheiro, 250 - Centro, Campina Grande - PB, 58400-117", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 150 x 13", pesoSolicitado: 1450 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata 1 1/2 x 1/8", pesoSolicitado: 280 } ] 
+        } 
+    },
+    { 
+        id: 500029, cliente: "Siderúrgica Alagoana", status: "Aguardando rota", data: "2025-11-24", endereco: "Avenida da Paz, 1864 - Centro, Maceió - AL, 57020-440", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 70x30 #14", pesoSolicitado: 680 } ], 
+            Chapa: [ { nome: "Chapa Inox 430 1.0mm", pesoSolicitado: 320 } ] 
+        } 
+    },
+    { 
+        id: 500030, cliente: "Maceió Aços", status: "Aguardando rota", data: "2025-11-24", endereco: "Rua do Comércio, 550 - Centro, Maceió - AL, 57020-000", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U 5 x 6.7#", pesoSolicitado: 1100 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 2 x 1/8", pesoSolicitado: 310 } ] 
+        } 
+    },
+    { 
+        id: 500031, cliente: "Sergipe Construções", status: "Aguardando rota", data: "2025-11-25", endereco: "Avenida Barão de Maruim, 642 - Centro, Aracaju - SE, 49010-380", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Fina a Frio #16", pesoSolicitado: 900 } ], 
+            Tubo: [ { nome: "Tubo Industrial Redondo 2 1/2", pesoSolicitado: 550 } ] 
+        } 
+    },
+    { 
+        id: 500032, cliente: "Aracaju Ferro e Aço", status: "Aguardando rota", data: "2025-11-25", endereco: "Rua Laranjeiras, 300 - Centro, Aracaju - SE, 49010-000", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I 4 x 7.7#", pesoSolicitado: 1000 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Redonda 5/8", pesoSolicitado: 380 } ] 
+        } 
+    },
+    { 
+        id: 500033, cliente: "Metalúrgica do Piauí", status: "Aguardando rota", data: "2025-11-26", endereco: "Avenida Frei Serafim, 2197 - Centro, Teresina - PI, 64000-020", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Quadrado 35x35 #18", pesoSolicitado: 290 } ], 
+            Chapa: [ { nome: "Chapa Galvanizada #28", pesoSolicitado: 150 } ] 
+        } 
+    },
+    { 
+        id: 500034, cliente: "Teresina Aços", status: "Aguardando rota", data: "2025-11-26", endereco: "Rua Álvaro Mendes, 1221 - Centro, Teresina - PI, 64000-060", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 200 x 22.5", pesoSolicitado: 1900 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata 2 x 3/16", pesoSolicitado: 420 } ] 
+        } 
+    },
+    { 
+        id: 500035, cliente: "Aço Maranhense", status: "Aguardando rota", data: "2025-11-27", endereco: "Rua Grande, 478 - Centro, São Luís - MA, 65020-250", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Xadrez 1/8", pesoSolicitado: 1400 } ], 
+            Tubo: [ { nome: "Tubo Retangular 50x20 #16", pesoSolicitado: 360 } ] 
+        } 
+    },
+    { 
+        id: 500036, cliente: "São Luís Estruturas", status: "Aguardando rota", data: "2025-11-27", endereco: "Avenida dos Holandeses, 1 - Calhau, São Luís - MA, 65071-380", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U 8 x 13.75#", pesoSolicitado: 1600 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 2 1/2 x 1/4", pesoSolicitado: 600 } ] 
+        } 
+    },
+    { 
+        id: 500037, cliente: "Metalúrgica Cuiabana", status: "Aguardando rota", data: "2025-11-28", endereco: "Avenida Getúlio Vargas, 650 - Centro Norte, Cuiabá - MT, 78005-370", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Redondo 3 SCH 40", pesoSolicitado: 1300 } ], 
+            Chapa: [ { nome: "Chapa Fina a Quente 2.65mm", pesoSolicitado: 850 } ] 
+        } 
+    },
+    { 
+        id: 500038, cliente: "Aço Tocantinense", status: "Aguardando rota", data: "2025-11-28", endereco: "Avenida Juscelino Kubitschek, 141 - Plano Diretor Sul, Palmas - TO, 77020-022", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I 5 x 10#", pesoSolicitado: 1250 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Quadrada 3/8", pesoSolicitado: 220 } ] 
+        } 
+    },
+    { 
+        id: 500039, cliente: "Ferro Acreano", status: "Aguardando rota", data: "2025-11-29", endereco: "Avenida Ceará, 3000 - Centro, Rio Branco - AC, 69900-349", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Inox 304 0.8mm", pesoSolicitado: 280 } ], 
+            Tubo: [ { nome: "Tubo Quadrado 25x25 #20", pesoSolicitado: 150 } ] 
+        } 
+    },
+    { 
+        id: 500040, cliente: "Amapá Metais", status: "Aguardando rota", data: "2025-11-29", endereco: "Avenida Fab, 550 - Central, Macapá - AP, 68900-073", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 310 x 21", pesoSolicitado: 2300 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata 1 1/2 x 3/16", pesoSolicitado: 400 } ] 
+        } 
+    },
+    { 
+        id: 500041, cliente: "Roraima Aços", status: "Aguardando rota", data: "2025-11-30", endereco: "Avenida Jaime Brasil, 441 - Centro, Boa Vista - RR, 69301-120", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 40x30 #18", pesoSolicitado: 330 } ], 
+            Chapa: [ { nome: "Chapa Galvanizada #26", pesoSolicitado: 210 } ] 
+        } 
+    },
+    { 
+        id: 500042, cliente: "Siderúrgica de Rondônia", status: "Aguardando rota", data: "2025-11-30", endereco: "Avenida Carlos Gomes, 1000 - Centro, Porto Velho - RO, 76801-131", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U 6 x 10.5#", pesoSolicitado: 1400 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 2 x 1/4", pesoSolicitado: 520 } ] 
+        } 
+    },
+    { 
+        id: 500043, cliente: "ConstruAcre", status: "Aguardando rota", data: "2025-12-01", endereco: "Rua Benjamin Constant, 150 - Centro, Rio Branco - AC, 69900-066", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I 3 x 5.7#", pesoSolicitado: 950 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata 1 x 1/8", pesoSolicitado: 180 } ] 
+        } 
+    },
+    { 
+        id: 500044, cliente: "Palmas Ferro", status: "Aguardando rota", data: "2025-12-01", endereco: "Quadra 104 Sul, Rua SE 3, 25 - Plano Diretor Sul, Palmas - TO, 77020-016", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Quadrado 60x60 #14", pesoSolicitado: 750 } ], 
+            Chapa: [ { nome: "Chapa Xadrez 3.00mm", pesoSolicitado: 880 } ] 
+        } 
+    },
+    { 
+        id: 500045, cliente: "Boa Vista Construções", status: "Aguardando rota", data: "2025-12-02", endereco: "Avenida General Ataíde Teive, 1500 - Liberdade, Boa Vista - RR, 69305-080", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Fina a Frio #26", pesoSolicitado: 320 } ], 
+            Viga: [ { nome: "Viga W 150 x 22.5", pesoSolicitado: 1600 } ] 
+        } 
+    },
+    { 
+        id: 500046, cliente: "Porto Velho Aços", status: "Aguardando rota", data: "2025-12-02", endereco: "Rua José de Alencar, 2500 - Caiari, Porto Velho - RO, 76801-048", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 100x40 #12", pesoSolicitado: 950 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Redonda 1 1/4", pesoSolicitado: 500 } ] 
+        } 
+    },
+    { 
+        id: 500047, cliente: "Macapá Siderúrgica", status: "Aguardando rota", data: "2025-12-03", endereco: "Rua Cândido Mendes, 1123 - Central, Macapá - AP, 68900-100", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Aço Carbono 3/8", pesoSolicitado: 1900 } ], 
+            Viga: [ { nome: "Viga U 4 x 5.4#", pesoSolicitado: 800 } ] 
+        } 
+    },
+    { 
+        id: 600001, cliente: "Guarapari Metais", status: "Aguardando rota", data: "2025-12-04", endereco: "Avenida Meaípe, 1500 - Meaípe, Guarapari - ES, 29208-050", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Industrial Redondo 1 1/4", pesoSolicitado: 350 } ], 
+            Chapa: [ { nome: "Chapa Xadrez 1/8", pesoSolicitado: 980 } ] 
+        } 
+    },
+    { 
+        id: 600002, cliente: "Aços Viana", status: "Aguardando rota", data: "2025-12-04", endereco: "Rodovia BR-262, km 15 - Universal, Viana - ES, 29135-000", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I 6 x 12.5#", pesoSolicitado: 1400 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata 2 x 1/8", pesoSolicitado: 380 } ] 
+        } 
+    },
+    { 
+        id: 600003, cliente: "Serras & Montanhas Aço", status: "Aguardando rota", data: "2025-12-05", endereco: "Avenida Presidente Vargas, 500 - Centro, Domingos Martins - ES, 29260-000", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Galvanizada #24", pesoSolicitado: 290 } ], 
+            Tubo: [ { nome: "Tubo Quadrado 20x20 #18", pesoSolicitado: 180 } ] 
+        } 
+    },
+    { 
+        id: 600004, cliente: "Aracruz Celulose Aços", status: "Aguardando rota", data: "2025-12-05", endereco: "Rodovia ES-010, km 25 - Barra do Sahy, Aracruz - ES, 29199-010", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 460 x 60", pesoSolicitado: 4500 } ], 
+            Chapa: [ { nome: "Chapa Aço Carbono 3/8", pesoSolicitado: 2300 } ] 
+        } 
+    },
+    { 
+        id: 600005, cliente: "Norte Capixaba Aço", status: "Aguardando rota", data: "2025-12-06", endereco: "Avenida Jones dos Santos Neves, 1234 - Sernamby, São Mateus - ES, 29930-220", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 70x50 #14", pesoSolicitado: 850 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 3 x 1/4", pesoSolicitado: 650 } ] 
+        } 
+    },
+    { 
+        id: 600006, cliente: "Indústria de Contagem", status: "Aguardando rota", data: "2025-12-07", endereco: "Avenida João César de Oliveira, 1210 - Eldorado, Contagem - MG, 32315-000", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Fina a Quente 2.25mm", pesoSolicitado: 1100 } ], 
+            Viga: [ { nome: "Viga U 10 x 20#", pesoSolicitado: 2200 } ] 
+        } 
+    },
+    { 
+        id: 600007, cliente: "Betim Ferramentaria", status: "Aguardando rota", data: "2025-12-07", endereco: "Rua do Rosário, 800 - Angola, Betim - MG, 32604-128", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Schedule 40 3", pesoSolicitado: 1400 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Redonda 1 1/2", pesoSolicitado: 750 } ] 
+        } 
+    },
+    { 
+        id: 600008, cliente: "Vale do Rio Doce Aços", status: "Aguardando rota", data: "2025-12-08", endereco: "Avenida Minas Gerais, 700 - Centro, Governador Valadares - MG, 35010-151", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 360 x 44", pesoSolicitado: 3100 } ], 
+            Chapa: [ { nome: "Chapa Inox 304 0.8mm", pesoSolicitado: 400 } ] 
+        } 
+    },
+    { 
+        id: 600009, cliente: "Acesita Metalúrgica", status: "Aguardando rota", data: "2025-12-08", endereco: "Avenida Brasil, 350 - Iguaçu, Ipatinga - MG, 35162-036", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Quadrado 90x90 #11", pesoSolicitado: 1200 } ], 
+            Chapa: [ { nome: "Chapa Aço Carbono 1/2", pesoSolicitado: 2900 } ] 
+        } 
+    },
+    { 
+        id: 600010, cliente: "Sete Lagoas Estruturas", status: "Aguardando rota", data: "2025-12-09", endereco: "Rua Major Campos, 155 - Centro, Sete Lagoas - MG, 35700-010", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I 10 x 25.4#", pesoSolicitado: 2800 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 4 x 5/16", pesoSolicitado: 800 } ] 
+        } 
+    },
+    { 
+        id: 600011, cliente: "Baixada Aços", status: "Aguardando rota", data: "2025-12-10", endereco: "Avenida Brigadeiro Lima e Silva, 1800 - Jardim Vinte e Cinco de Agosto, Duque de Caxias - RJ, 25071-182", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Xadrez 3.00mm", pesoSolicitado: 1300 } ], 
+            Tubo: [ { nome: "Tubo Industrial Redondo 4", pesoSolicitado: 850 } ] 
+        } 
+    },
+    { 
+        id: 600012, cliente: "São Gonçalo Ferros", status: "Aguardando rota", data: "2025-12-10", endereco: "Rua Doutor Nilo Peçanha, 350 - Centro, São Gonçalo - RJ, 24445-300", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U 8 x 18.75#", pesoSolicitado: 1900 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata 3 x 3/8", pesoSolicitado: 700 } ] 
+        } 
+    },
+    { 
+        id: 600013, cliente: "Serra Imperial Aço", status: "Aguardando rota", data: "2025-12-11", endereco: "Rua do Imperador, 700 - Centro, Petrópolis - RJ, 25620-002", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 120x80 #12", pesoSolicitado: 1100 } ], 
+            Chapa: [ { nome: "Chapa Galvanizada #20", pesoSolicitado: 600 } ] 
+        } 
+    },
+    { 
+        id: 600014, cliente: "Campos Aço e Petróleo", status: "Aguardando rota", data: "2025-12-11", endereco: "Avenida Pelinca, 200 - Parque Tamandaré, Campos dos Goytacazes - RJ, 28035-053", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 250 x 32.7", pesoSolicitado: 2500 } ], 
+            Chapa: [ { nome: "Chapa Fina a Frio #20", pesoSolicitado: 750 } ] 
+        } 
+    },
+    { 
+        id: 600015, cliente: "Volta Redonda Metalurgia", status: "Aguardando rota", data: "2025-12-12", endereco: "Avenida Amaral Peixoto, 450 - Centro, Volta Redonda - RJ, 27253-221", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Quadrado 100x100 #10", pesoSolicitado: 1500 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 5 x 1/2", pesoSolicitado: 950 } ] 
+        } 
+    },
+    { 
+        id: 600016, cliente: "Guarulhos Indústria", status: "Aguardando rota", data: "2025-12-13", endereco: "Avenida Paulo Faccini, 800 - Macedo, Guarulhos - SP, 07111-000", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Aço Carbono 5/8", pesoSolicitado: 3500 } ], 
+            Viga: [ { nome: "Viga I 12 x 35#", pesoSolicitado: 3800 } ] 
+        } 
+    },
+    { 
+        id: 600017, cliente: "ABC Aços", status: "Aguardando rota", data: "2025-12-13", endereco: "Rua Coronel Oliveira Lima, 455 - Centro, Santo André - SP, 09010-000", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 90x50 #14", pesoSolicitado: 900 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Redonda 2", pesoSolicitado: 600 } ] 
+        } 
+    },
+    { 
+        id: 600018, cliente: "São Bernardo Indústria", status: "Aguardando rota", data: "2025-12-14", endereco: "Rua Jurubatuba, 1200 - Centro, São Bernardo do Campo - SP, 09725-220", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 610 x 113", pesoSolicitado: 6500 } ], 
+            Chapa: [ { nome: "Chapa Xadrez 1/4", pesoSolicitado: 2500 } ] 
+        } 
+    },
+    { 
+        id: 600019, cliente: "Osasco Metal Center", status: "Aguardando rota", data: "2025-12-14", endereco: "Avenida dos Autonomistas, 2500 - Centro, Osasco - SP, 06090-020", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Quadrado 75x75 #12", pesoSolicitado: 1100 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata 4 x 1/4", pesoSolicitado: 700 } ] 
+        } 
+    },
+    { 
+        id: 600020, cliente: "Porto de Santos Aços", status: "Aguardando rota", data: "2025-12-15", endereco: "Avenida Ana Costa, 400 - Gonzaga, Santos - SP, 11060-002", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Naval A36 1/2", pesoSolicitado: 4200 } ], 
+            Viga: [ { nome: "Viga U 12 x 30#", pesoSolicitado: 3500 } ] 
+        } 
+    },
+    { 
+        id: 700001, cliente: "Bahia Siderúrgica", status: "Aguardando rota", data: "2025-12-16", endereco: "Avenida Tancredo Neves, 148, Caminho das Árvores, Salvador - BA, 41820-020", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 200 x 22.5", pesoSolicitado: 2500 } ], 
+            Chapa: [ { nome: "Chapa Aço Carbono 1/4", pesoSolicitado: 1800 } ] 
+        } 
+    },
+    { 
+        id: 700002, cliente: "Polo Petroquímico Camaçari", status: "Aguardando rota", data: "2025-12-16", endereco: "Rua Eteno, 1561 - Polo Industrial, Camaçari - BA, 42816-100", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Schedule 80 6", pesoSolicitado: 3200 } ], 
+            Chapa: [ { nome: "Chapa Inox 316L 3.0mm", pesoSolicitado: 1500 } ] 
+        } 
+    },
+    { 
+        id: 700003, cliente: "Sul da Bahia Aços", status: "Aguardando rota", data: "2025-12-17", endereco: "Avenida do Cinquentenário, 1001 - Centro, Itabuna - BA, 45600-004", embarque: null, motorista: null, 
+        produtos: { 
+            "Cantoneira / Barra": [ { nome: "Barra Redonda 2 1/2", pesoSolicitado: 900 } ], 
+            Viga: [ { nome: "Viga I 10 x 30#", pesoSolicitado: 3100 } ] 
+        } 
+    },
+    { 
+        id: 700004, cliente: "Ferro e Aço Paranaense", status: "Aguardando rota", data: "2025-12-18", endereco: "Rua Marechal Deodoro, 869 - Centro, Curitiba - PR, 80060-010", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Xadrez 1/8", pesoSolicitado: 1350 } ], 
+            Tubo: [ { nome: "Tubo Quadrado 80x80 #16", pesoSolicitado: 950 } ] 
+        } 
+    },
+    { 
+        id: 700005, cliente: "Metalúrgica Iguaçu", status: "Aguardando rota", data: "2025-12-18", endereco: "Avenida Brasil, 1150 - Centro, Foz do Iguaçu - PR, 85851-000", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga U 6 x 10.5#", pesoSolicitado: 1250 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 3 x 3/16", pesoSolicitado: 480 } ] 
+        } 
+    },
+    { 
+        id: 700006, cliente: "Aços Longos PE", status: "Aguardando rota", data: "2025-12-19", endereco: "Avenida Governador Agamenon Magalhães, 4775 - Boa Viagem, Recife - PE, 51021-170", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 120x60 #11", pesoSolicitado: 1100 } ], 
+            Chapa: [ { nome: "Chapa Galvanizada #16", pesoSolicitado: 820 } ] 
+        } 
+    },
+    { 
+        id: 700008, cliente: "Amazonas Indústria", status: "Aguardando rota", data: "2025-12-20", endereco: "Avenida Constantino Nery, 1272 - São Geraldo, Manaus - AM, 69050-001", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Fina a Quente 3.75mm", pesoSolicitado: 1400 } ], 
+            Tubo: [ { nome: "Tubo Redondo 5 SCH 80", pesoSolicitado: 2100 } ] 
+        } 
+    },
+    { 
+        id: 700009, cliente: "Norte Metal", status: "Aguardando rota", data: "2025-12-20", endereco: "Rua Leonardo Malcher, 894 - Centro, Manaus - AM, 69010-170", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I 8 x 18.4#", pesoSolicitado: 1950 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 2 x 3/16", pesoSolicitado: 450 } ] 
+        } 
+    },
+    { 
+        id: 700010, cliente: "Siderúrgica do Ceará", status: "Aguardando rota", data: "2025-12-21", endereco: "Avenida Dom Luís, 500 - Aldeota, Fortaleza - CE, 60160-230", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Quadrado 150x150 #12", pesoSolicitado: 1800 } ], 
+            Chapa: [ { nome: "Chapa Inox 430 1.5mm", pesoSolicitado: 600 } ] 
+        } 
+    },
+    { 
+        id: 700011, cliente: "Sergipe Industrial", status: "Aguardando rota", data: "2025-12-21", endereco: "Rua Itabaiana, 442 - Centro, Aracaju - SE, 49015-130", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 250 x 25.7", pesoSolicitado: 2600 } ], 
+            Chapa: [ { nome: "Chapa Xadrez 1/4", pesoSolicitado: 1700 } ] 
+        } 
+    },
+    { 
+        id: 700012, cliente: "Aços e Metais de Goiás", status: "Aguardando rota", data: "2025-12-22", endereco: "Rua 82, 400 - Setor Sul, Goiânia - GO, 74083-010", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 80x40 #12", pesoSolicitado: 880 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Redonda 1 1/4", pesoSolicitado: 520 } ] 
+        } 
+    },
+    { 
+        id: 700013, cliente: "Maranhão Metalúrgica", status: "Aguardando rota", data: "2025-12-22", endereco: "Avenida dos Franceses, 200 - Alemanha, São Luís - MA, 65036-282", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Galvanizada #14", pesoSolicitado: 1100 } ], 
+            Viga: [ { nome: "Viga I 6 x 17.2#", pesoSolicitado: 1800 } ] 
+        } 
+    },
+    { 
+        id: 700014, cliente: "Paraíba Aço Industrial", status: "Aguardando rota", data: "2025-12-23", endereco: "Avenida Maximiano Figueiredo, 222 - Centro, João Pessoa - PB, 58013-470", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Redondo 3 1/2 SCH 40", pesoSolicitado: 1600 } ], 
+            Viga: [ { nome: "Viga U 10 x 25#", pesoSolicitado: 2400 } ] 
+        } 
+    },
+    { 
+        id: 700015, cliente: "Mato Grosso Siderúrgica", status: "Aguardando rota", data: "2025-12-23", endereco: "Rua Cândido Mariano, 1111 - Centro Sul, Cuiabá - MT, 78020-300", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Fina a Frio #14", pesoSolicitado: 950 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata 3 x 1/4", pesoSolicitado: 650 } ] 
+        } 
+    },
+    { 
+        id: 700016, cliente: "Indústria Sul-Matogrossense", status: "Aguardando rota", data: "2025-12-24", endereco: "Rua 25 de Dezembro, 924 - Centro, Campo Grande - MS, 79002-061", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 460 x 74", pesoSolicitado: 4800 } ], 
+            Tubo: [ { nome: "Tubo Quadrado 90x90 #14", pesoSolicitado: 1100 } ] 
+        } 
+    },
+    { 
+        id: 700017, cliente: "Piauí Ferro e Aço", status: "Aguardando rota", data: "2025-12-24", endereco: "Avenida Miguel Rosa, 3515 - Centro, Teresina - PI, 64000-490", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Aço Carbono 5/16", pesoSolicitado: 1700 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 2 1/2 x 1/4", pesoSolicitado: 580 } ] 
+        } 
+    },
+    { 
+        id: 700018, cliente: "Santa Catarina Construções", status: "Aguardando rota", data: "2025-12-26", endereco: "Avenida Hercílio Luz, 639 - Centro, Florianópolis - SC, 88020-001", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 150x100 #11", pesoSolicitado: 1900 } ], 
+            Viga: [ { nome: "Viga I 12 x 35#", pesoSolicitado: 3600 } ] 
+        } 
+    },
+    { 
+        id: 700019, cliente: "Aços Alagoas", status: "Aguardando rota", data: "2025-12-26", endereco: "Rua do Sol, 290 - Centro, Maceió - AL, 57020-070", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Xadrez 3/16", pesoSolicitado: 1450 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Redonda 7/8", pesoSolicitado: 420 } ] 
+        } 
+    },
+    { 
+        id: 700020, cliente: "Planalto Central Aço", status: "Aguardando rota", data: "2025-12-27", endereco: "SBN Quadra 2 Bloco F - Asa Norte, Brasília - DF, 70040-908", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga W 530 x 92", pesoSolicitado: 5500 } ], 
+            Tubo: [ { nome: "Tubo Quadrado 120x120 #12", pesoSolicitado: 1700 } ] 
+        } 
+    },
+    { 
+        id: 700021, cliente: "RN Construções", status: "Aguardando rota", data: "2025-12-27", endereco: "Avenida Prudente de Morais, 744 - Tirol, Natal - RN, 59020-505", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Fina a Quente 4.25mm", pesoSolicitado: 1200 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Chata 3 x 1/2", pesoSolicitado: 950 } ] 
+        } 
+    },
+    { 
+        id: 700022, cliente: "Ferro e Aço de Rondônia", status: "Aguardando rota", data: "2025-12-28", endereco: "Avenida Sete de Setembro, 830 - Centro, Porto Velho - RO, 76801-084", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Industrial Redondo 5", pesoSolicitado: 1100 } ], 
+            Viga: [ { nome: "Viga U 8 x 11.5#", pesoSolicitado: 1300 } ] 
+        } 
+    },
+    { 
+        id: 700023, cliente: "Metalúrgica Acre", status: "Aguardando rota", data: "2025-12-28", endereco: "Rua Rio de Janeiro, 245 - Centro, Rio Branco - AC, 69908-400", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Galvanizada #22", pesoSolicitado: 480 } ], 
+            "Cantoneira / Barra": [ { nome: "Cantoneira 1 1/2 x 1/4", pesoSolicitado: 350 } ] 
+        } 
+    },
+    { 
+        id: 700024, cliente: "Amapá Metal", status: "Aguardando rota", data: "2025-12-29", endereco: "Rua General Rondon, 2380 - Central, Macapá - AP, 68900-100", embarque: null, motorista: null, 
+        produtos: { 
+            Viga: [ { nome: "Viga I 5 x 10#", pesoSolicitado: 1200 } ], 
+            Tubo: [ { nome: "Tubo Quadrado 50x50 #12", pesoSolicitado: 600 } ] 
+        } 
+    },
+    { 
+        id: 700025, cliente: "Roraima Siderurgia", status: "Aguardando rota", data: "2025-12-29", endereco: "Avenida Ville Roy, 5500 - São Francisco, Boa Vista - RR, 69305-130", embarque: null, motorista: null, 
+        produtos: { 
+            Chapa: [ { nome: "Chapa Aço Carbono 3/16", pesoSolicitado: 1000 } ], 
+            "Cantoneira / Barra": [ { nome: "Barra Redonda 1/2", pesoSolicitado: 250 } ] 
+        } 
+    },
+    { 
+        id: 700026, cliente: "Tocantins Ferro", status: "Aguardando rota", data: "2025-12-30", endereco: "Quadra 103 Norte, Rua NO 3, 50 - Plano Diretor Norte, Palmas - TO, 77001-018", embarque: null, motorista: null, 
+        produtos: { 
+            Tubo: [ { nome: "Tubo Retangular 60x30 #16", pesoSolicitado: 480 } ], 
+            Viga: [ { nome: "Viga W 150 x 18", pesoSolicitado: 1650 } ] 
+        } 
+    }
 ];
+
+const pesosTeoricosProdutos = {
+    "Viga I  x 12.5#": 18.6,
+    "Viga W 250 x 25.7": 154.2,
+    "Tubo Galvanizado 1.1/": 15.5,
+    "Cantoneira / Barra": 12.0, 
+    "Barra Chata  x 1/": 7.5,
+    "Chapa Aço Carbono 1/ (12.70mm)": 608.0,
+    "Tubo Retangular 80x40 #14 (2.00mm)": 29.2,
+    "Viga U  x 6.7#": 40.2,
+    "Viga I  x 10#": 14.9,
+    "Tubo Quadrado 40x40 #18 (1.25mm)": 11.7,
+    "Chapa Inox 430 1.2mm Polida": 23.0,
+    "Viga I  x 18.4#": 27.4,
+    "Chapa Aço Carbono 3/ (9.53mm)": 457.0,
+    "Cantoneira 1.1/ x 3/1": 13.3,
+    "Barra Chata  x 3/1": 8.9,
+    "Viga U  x 4.1#": 24.6,
+    "Chapa Aço Carbono 1/ (6.35mm)": 304.0,
+    "Chapa Fina a Frio #24 (0.60mm)": 28.8,
+    "Tubo Industrial Quadrado 40x40 #14 (2.00mm)": 23.5,
+    "Tubo Retangular 50x30 #18 (1.25mm)": 15.5,
+    "Chapa Inox 304 1.0mm Escovada": 19.2,
+    "Viga W 200 x 22.5": 135.0,
+    "Tubo Quadrado 30x30 #18 (1.25mm)": 8.8,
+    "Tubo Industrial Redondo ": 15.0, 
+    "Chapa Fina a Frio #16 (1.55mm)": 74.4,
+    "Viga W 250 x 32.7": 196.2,
+    "Viga U  x 8.2#": 49.2,
+    "Tubo Galvanizado ": 20.0, 
+    "Chapa Inox 316 2.0mm": 38.4,
+    "Viga U  x 11.5#": 69.0,
+    "Tubo Redondo  #14 (2.00mm)": 20.0,
+    "Chapa Aço Carbono 5/1 (7.94mm)": 381.0,
+    "Tubo SCH 40 ": 30.0, 
+    "Chapa Grossa 3/ (19.05mm)": 914.0,
+    "Viga I 1 x 25.4#": 37.8,
+    "Tubo Retangular 120x60 #12 (2.65mm)": 58.0,
+    "Chapa Naval A36 1/": 120.0,
+    "Cantoneira  x 1/": 8.5,
+    "Tubo Quadrado 100x100 #11 (3.00mm)": 70.0,
+    "Chapa Xadrez 3/1 (4.75mm)": 228.0,
+    "Viga W 360 x 57.8": 346.8,
+    "Chapa Aço Carbono 3/ (9.53mm)": 457.0,
+    "Chapa Fina a Frio #14 (2.00mm)": 96.0,
+    "Tubo Redondo  SCH 40": 25.0, 
+    "Viga I 1 x 31.8#": 47.3,
+    "Chapa Inox 304 3.0mm Polida": 57.6,
+    "Tubo Retangular 50x30 #16 (1.55mm)": 19.0,
+    "Viga W 250 x 38.5": 231.0,
+    "Tubo Redondo  #18 (1.25mm)": 14.5,
+    "Chapa Aço Carbono 1/ (3.00mm)": 144.0,
+    "Viga U  x 5.4#": 32.4,
+    "Viga I  x 5.7#": 8.5,
+    "Chapa Galvanizada #28 (0.43mm)": 20.6,
+    "Tubo Quadrado 60x60 #18 (1.25mm)": 18.0,
+    "Chapa Fina a Frio #28 (0.43mm)": 20.6,
+    "Viga W 100 x 19.3": 115.8,
+    "Chapa Xadrez 3.00mm": 144.0,
+    "Tubo Redondo 2.1/ #14 (2.00mm)": 25.0,
+    "Chapa Perfurada 2.00mm": 96.0,
+    "Chapa Inox 316 1.0mm": 19.2,
+    "Viga I  x 7.7#": 11.5,
+    "Tubo Redondo  #16 (1.55mm)": 18.0,
+    "Chapa Galvanizada 3.00mm": 144.0,
+    "Tubo Quadrado 30x30 #16 (1.55mm)": 11.0,
+    "Chapa Galvanizada 1/ (12.70mm)": 610.0,
+    "Tubo Retangular 40x20 #16 (1.55mm)": 14.5,
+    "Tubo Redondo  SCH 80": 45.0, 
+    "Cantoneira  x 1/": 12.0,
+    "Barra Chata 1.1/ x 1/": 10.0,
+    "Viga W 150 x 13.5": 81.0,
+    "Chapa Xadrez 1/ (6.35mm)": 305.0,
+    "Tubo Quadrado 50x50 #16 (1.55mm)": 15.0,
+    "Chapa Galvanizada #20 (0.95mm)": 45.6,
+    "Barra Chata  x 1/": 15.0,
+    "Viga W 200 x 22.5": 135.0,
+    "Tubo Redondo  #12 (2.65mm)": 26.0,
+    "Chapa Xadrez 1/ (3.00mm)": 144.0,
+    "Viga W 150 x 18.0": 108.0,
+    "Chapa Galvanizada #16 (1.55mm)": 74.4,
+    "Chapa Fina a Frio #20 (0.90mm)": 43.2,
+    "Tubo Schedule 40 ": 35.0, 
+    "Viga I 1 x 25.4#": 152.4,
+    "Viga U  x 11.5#": 69.0,
+    "Viga U x 10#": 60.0,
+    "Viga W 150 x 13.5": 81.0,
+    "Cantoneira x 1/": 10.0, 
+    "Viga I x 10#": 60.0,
+    "Viga I x 18.4#": 110.4,
+    "Viga W 360 x 57.8": 346.8,
+    "Vergalhão CA50 12.5mm": 11.7,
+    "Tubo Schedule 40 4": 97.2,
+    "Chapa Xadrez 1/8": 76.2,
+    "Viga U 8 x 11.5#": 69.0,
+    "Barra Chata 2 x 1/4": 30.5,
+    "Chapa Fina a Quente 3.00mm": 144.0,
+    "Viga W 200 x 15": 90.0,
+    "Cantoneira 1.1/2 x 1/8": 9.0,
+    "Tubo Redondo 2 SCH 40": 43.8,
+    "Chapa Galvanizada #24 (0.65mm)": 31.2,
+    "Viga I 3 x 5.7#": 34.2,
+    "Chapa Inox 430 0.5mm": 12.0,
+    "Tubo Retangular 60x40 #16 (1.55mm)": 18.6,
+    "Barra Chata 1 x 3/16": 11.4,
+    "Chapa Xadrez 1/4": 152.4,
+    "Viga I 10 x 25.4#": 152.4,
+    "Tubo Quadrado 50x50 #14": 18.2,
+    "Cantoneira 1 x 1/8": 7.3,
+    "Viga W 250 x 18": 108.0,
+    "Chapa Galvanizada #22 (0.80mm)": 38.4,
+    "Tubo Redondo 1 1/2 #16": 18.0,
+    "Chapa Fina a Frio #22 (0.75mm)": 36.0,
+    "Viga U 4 x 5.4#": 32.4,
+    "Chapa Aço Carbono 3/16": 114.3,
+    "Tubo Retangular 30x20 #20": 6.7,
+    "Barra Chata 1 1/4 x 1/4": 19.0,
+    "Chapa Inox 316 1.5mm": 28.8,
+    "Tubo Quadrado 70x70 #12": 49.3,
+    "Viga I 5 x 10#": 60.0,
+    "Cantoneira 2 1/2 x 3/16": 28.5,
+    "Tubo Redondo 4 SCH 80": 126.0,
+    "Chapa Grossa A572 1/2 pol": 609.6,
+    "Barra Chata 4 x 3/8": 91.4,
+    "Viga U 10 x 15.3#": 91.8,
+    "Chapa Naval A131": 150.0, 
+    "Tubo Retangular 150x50 #11": 89.0,
+    "Viga W 410 x 60": 360.0,
+    "Cantoneira 3 x 1/4": 45.7,
+    "Tubo Galvanizado 2 1/2": 44.0,
+    "Viga I 12 x 31.8#": 190.8,
+    "Barra Redonda 1 pol": 30.5,
+    "Chapa Aço Carbono 1 pol": 1219.0,
+    "Tubo Quadrado 120x120 #11": 107.0,
+    "Viga W 530 x 82": 492.0,
+    "Barra Chata 5 x 1/2": 152.4,
+    "Tubo Retangular 200x100 #10": 139.0,
+    "Chapa Galvanizada #20": 45.6,
+    "Viga U 12 x 20.7#": 124.2,
+    "Cantoneira 4 x 3/8": 73.1,
+    "Chapa Inox 304L 3.0mm": 57.6,
+    "Tubo Redondo 5 SCH 40": 130.0,
+    "Viga I 6 x 12.5#": 75.0,
+    "Barra Quadrada 1/2": 7.7,
+    "Tubo Quadrado 150x150 #10": 164.0,
+    "Chapa Aço Carbono 3/4": 914.4,
+    "Viga W 610 x 125": 750.0,
+    "Barra Chata 6 x 1": 365.7,
+    "Tubo Retangular 80x30 #18": 17.5,
+    "Viga U 3 x 4.1#": 24.6,
+    "Cantoneira 1 1/4 x 3/16": 14.3,
+    "Tubo Industrial Redondo 6": 120.0,
+    "Chapa Fina a Quente 4.75mm": 228.0,
+    "Viga I 8 x 23#": 138.0,
+    "Barra Redonda 3/4": 17.3,
+    "Chapa Galvanizada #18": 58.0,
+    "Tubo Quadrado 45x45 #16": 13.5,
+    "Viga W 150 x 13": 78.0,
+    "Barra Chata 1 1/2 x 1/8": 11.4,
+    "Tubo Retangular 70x30 #14": 29.5,
+    "Chapa Inox 430 1.0mm": 19.2,
+    "Viga U 5 x 6.7#": 40.2,
+    "Cantoneira 2 x 1/8": 14.6,
+    "Chapa Fina a Frio #16": 74.4,
+    "Tubo Industrial Redondo 2 1/2": 45.0,
+    "Barra Redonda 5/8": 11.9,
+    "Tubo Quadrado 35x35 #18": 10.3,
+    "Chapa Galvanizada #28": 20.6,
+    "Viga W 200 x 22.5": 135.0,
+    "Barra Chata 2 x 3/16": 22.8,
+    "Chapa Xadrez 1/8": 76.2,
+    "Tubo Retangular 50x20 #16": 13.0,
+    "Viga U 8 x 13.75#": 82.5,
+    "Cantoneira 2 1/2 x 1/4": 30.5,
+    "Tubo Redondo 3 SCH 40": 69.0,
+    "Chapa Fina a Quente 2.65mm": 127.2,
+    "Barra Quadrada 3/8": 4.3,
+    "Chapa Inox 304 0.8mm": 15.3,
+    "Tubo Quadrado 25x25 #20": 6.0,
+    "Viga W 310 x 21": 126.0,
+    "Barra Chata 1 1/2 x 3/16": 17.1,
+    "Tubo Retangular 40x30 #18": 13.0,
+    "Chapa Galvanizada #26": 24.0,
+    "Viga U 6 x 10.5#": 63.0,
+    "Barra Chata 1 x 1/8": 7.6,
+    "Viga W 150 x 22.5": 135.0,
+    "Tubo Retangular 100x40 #12": 52.0,
+    "Barra Redonda 1 1/4": 47.7,
+    "Chapa Aço Carbono 3/8": 228.6,
+    "Tubo Industrial Redondo 1 1/4": 16.0,
+    "Barra Chata 2 x 1/8": 15.2,
+    "Tubo Quadrado 20x20 #18": 5.0,
+    "Viga W 460 x 60": 360.0,
+    "Tubo Retangular 70x50 #14": 35.0,
+    "Cantoneira 3 x 1/4": 45.7,
+    "Chapa Fina a Quente 2.25mm": 108.0,
+    "Viga U 10 x 20#": 120.0,
+    "Tubo Schedule 40 3": 69.0,
+    "Barra Redonda 1 1/2": 68.6,
+    "Viga W 360 x 44": 264.0,
+    "Tubo Quadrado 90x90 #11": 77.0,
+    "Cantoneira 4 x 5/16": 60.9,
+    "Tubo Industrial Redondo 4": 75.0,
+    "Viga U 8 x 18.75#": 112.5,
+    "Barra Chata 3 x 3/8": 68.6,
+    "Tubo Retangular 120x80 #12": 72.0,
+    "Chapa Galvanizada #20": 45.6,
+    "Chapa Fina a Frio #20": 43.2,
+    "Tubo Quadrado 100x100 #10": 98.0,
+    "Cantoneira 5 x 1/2": 114.3,
+    "Chapa Aço Carbono 5/8": 762.0,
+    "Viga I 12 x 35#": 210.0,
+    "Tubo Retangular 90x50 #14": 40.0,
+    "Barra Redonda 2": 122.0,
+    "Viga W 610 x 113": 678.0,
+    "Tubo Quadrado 75x75 #12": 52.0,
+    "Barra Chata 4 x 1/4": 61.0,
+    "Chapa Naval A36 1/2": 304.8,
+    "Viga U 12 x 30#": 180.0,
+    "Chapa Aço Carbono 1/4": 152.4,
+    "Tubo Schedule 80 6": 210.0,
+    "Chapa Inox 316L 3.0mm": 57.6,
+    "Barra Redonda 2 1/2": 190.5,
+    "Viga I 10 x 30#": 180.0,
+    "Cantoneira 3 x 3/16": 27.4,
+    "Tubo Retangular 120x60 #11": 76.0,
+    "Chapa Galvanizada #16": 74.4,
+    "Chapa Fina a Quente 3.75mm": 180.0,
+    "Tubo Redondo 5 SCH 80": 175.0,
+    "Cantoneira 2 x 3/16": 21.7,
+    "Tubo Quadrado 150x150 #12": 136.0,
+    "Chapa Inox 430 1.5mm": 28.8,
+    "Viga W 250 x 25.7": 154.2,
+    "Tubo Retangular 80x40 #12": 37.0,
+    "Chapa Galvanizada #14": 92.0,
+    "Viga I 6 x 17.2#": 103.2,
+    "Tubo Redondo 3 1/2 SCH 40": 85.0,
+    "Viga U 10 x 25#": 150.0,
+    "Chapa Fina a Frio #14": 96.0,
+    "Barra Chata 3 x 1/4": 45.7,
+    "Viga W 460 x 74": 444.0,
+    "Tubo Quadrado 90x90 #14": 58.0,
+    "Chapa Aço Carbono 5/16": 190.5,
+    "Cantoneira 2 1/2 x 1/4": 30.5,
+    "Tubo Retangular 150x100 #11": 113.0,
+    "Viga I 12 x 35#": 210.0,
+    "Barra Redonda 7/8": 23.4,
+    "Viga W 530 x 92": 552.0,
+    "Tubo Quadrado 120x120 #12": 110.0,
+    "Chapa Fina a Quente 4.25mm": 204.0,
+    "Barra Chata 3 x 1/2": 91.4,
+    "Tubo Industrial Redondo 5": 90.0,
+    "Viga U 8 x 11.5#": 69.0,
+    "Chapa Galvanizada #22": 38.4,
+    "Cantoneira 1 1/2 x 1/4": 18.3,
+    "Viga I 5 x 10#": 60.0,
+    "Tubo Quadrado 50x50 #12": 29.0,
+    "Chapa Aço Carbono 3/16": 114.3,
+    "Barra Redonda 1/2": 7.6,
+    "Tubo Retangular 60x30 #16": 17.0,
+    "Viga W 150 x 18": 108.0
+};
 
 const todosOsProdutos = new Set(); 
 pedidosIniciais.forEach(pedido => {
-    Object.values(pedido.produtos).forEach(listaDeProdutos => {
-        listaDeProdutos.forEach(produto => {
-            todosOsProdutos.add(produto);
+    Object.values(pedido.produtos).forEach(listaDeItens => {
+        listaDeItens.forEach(item => {
+            if (typeof item === 'object' && item !== null && item.nome) {
+                todosOsProdutos.add(item.nome);
+            } else if (typeof item === 'string') {
+                todosOsProdutos.add(item);
+            }
         });
     });
 });
 
-const listaDeTodosOsProdutos = Array.from(todosOsProdutos).sort(); 
+const listaDeTodosOsProdutos = Array.from(todosOsProdutos).sort();
 
 const produtoParaCategoria = {};
 pedidosIniciais.forEach(pedido => {
@@ -254,7 +1779,7 @@ if (pedidosSalvos) {
 function produtosParaTexto(produtos) {
     let arr = [];
     for (let categoria in produtos) {
-        let itens = produtos[categoria].join(", ");
+        let itens = produtos[categoria].map(item => (typeof item === 'object' ? item.nome : item)).join(", ");
         arr.push(`${categoria}: ${itens}`);
     }
     return arr.join(" | ");
@@ -804,18 +2329,37 @@ function renderizarPedidosPorSetor(idPedidoEspecifico = null) {
             const setorDiv = document.createElement("div");
             let itensHTML = `<h4>Setor: ${setor}</h4>`;
 
-            pedido.produtos[setor].forEach(produto => {
+            pedido.produtos[setor].forEach(item => {
+                let produto, pesoSolicitado;
+                if (typeof item === 'string') {
+                    produto = item;
+                    pesoSolicitado = null; 
+                } else if (typeof item === 'object' && item !== null) {
+                    produto = item.nome;
+                    pesoSolicitado = item.pesoSolicitado || null;
+                } else {
+                    return; 
+                }
+
                 const peso = getDadosPesoPedido(pedido.id)[produto] !== undefined ? getDadosPesoPedido(pedido.id)[produto] : '';
                 const certificado = getDadosCertificadoPedido(pedido.id)[produto] !== undefined ? getDadosCertificadoPedido(pedido.id)[produto] : '';
                 const botoesDesabilitados = statusAtual !== "Em separação" || isSetorAlreadySent;
                 const fardosExistem = (localStorage.getItem(`fardos_${pedido.id}_${setor}_${produto}`) || "[]") !== "[]";
+                
+                const pesoTeorico = pesosTeoricosProdutos[produto] || null;
+
+                const textoPesoSolicitado = (typeof pesoSolicitado === 'number') ? formatarPesoCompleto(pesoSolicitado) : 'N/D';
+                
+                const placeholderPeso = 'Peso*'; 
+                const tooltipPeso = pesoTeorico ? ` title="Peso Teórico Sugerido: ${formatarPesoCompleto(pesoTeorico)}"` : '';
 
                 itensHTML += `
                     <div class="item">
-                        <span>${produto}:</span>
+                        <span>${produto} <b>(Solicitado: ${textoPesoSolicitado} kg)</b></span>
                         <div>
                             <div class="weight-input-container">
-                                <input type="text" inputmode="decimal" placeholder="Peso*" value="${formatarPesoCompleto(peso)}" id="peso-${pedido.id}-${setor}-${produto.replace(/\s/g, '-')}" ${botoesDesabilitados ? 'disabled' : ''} oninput="formatarMilhar(this)" onblur="salvarPesoCertificadoItem(${pedido.id}, '${setor}', '${produto}')" />
+                                <input type="text" inputmode="decimal" placeholder="${placeholderPeso}" value="${formatarPesoCompleto(peso)}" id="peso-${pedido.id}-${setor}-${produto.replace(/\s/g, '-')}" ${botoesDesabilitados ? 'disabled' : ''} oninput="formatarMilhar(this)" onblur="salvarPesoCertificadoItem(${pedido.id}, '${setor}', '${produto}')" />
+                                ${pesoTeorico ? `<i class="ph ph-info info-icon"${tooltipPeso}></i>` : ''}
                             </div>
                             <input type="text" placeholder="Certificado*" value="${certificado}" id="certificado-${pedido.id}-${setor}-${produto.replace(/\s/g, '-')}" ${botoesDesabilitados ? 'disabled' : ''} style="margin-left: 10px; width: 220px;" onblur="salvarPesoCertificadoItem(${pedido.id}, '${setor}', '${produto}')" />
                             <button class="btn-fatiar-fardos" onclick="abrirTelaFatiarFardos(${pedido.id}, '${setor}', '${produto}')" ${botoesDesabilitados ? 'disabled' : ''}>Fatiar Fardos</button>
@@ -833,7 +2377,6 @@ function renderizarPedidosPorSetor(idPedidoEspecifico = null) {
                     <button class="btn-iniciar-separacao" onclick="iniciarSeparacaoSetor(${pedido.id}, '${setor}')" ${statusAtual !== "Aguardando separação" ? 'disabled' : ''}>Iniciar Separação (${setor})</button>
                     <button class="btn-enviar" onclick="enviarSetor(${pedido.id}, '${setor}')" ${statusAtual !== "Em separação" ? 'disabled' : ''}>Enviar (${setor})</button>`;
             } else {
-
                 if (!esconderBotaoImpressaoSetor) {
                     buttonRow.innerHTML = `<button class="btn-imprimir-setor" onclick="imprimirEtiquetasPorSetor(${pedido.id}, '${setor}')">Imprimir Etiquetas do Setor (${setor})</button>`;
                 }
@@ -861,61 +2404,6 @@ function iniciarSeparacaoSetor(pedidoId, setor) {
         `O status do pedido será atualizado para "Em separação". Confirma?`,
         () => {
             setPedidoStatus(pedidoId, "Em separação");
-            renderizarPedidosPorSetor(pedidoUnicoVisualizado);
-        }
-    );
-}
-
-function enviarSetor(pedidoId, setor) {
-    const pedido = getPedidoById(pedidoId);
-    if (!pedido) return;
-
-    let dadosPeso = getDadosPesoPedido(pedidoId);
-    let dadosCertificado = getDadosCertificadoPedido(pedidoId);
-
-    pedido.produtos[setor].forEach(produto => {
-        const produtoSlug = produto.replace(/\s/g, '-');
-        const pesoInput = document.getElementById(`peso-${pedidoId}-${setor}-${produtoSlug}`);
-        const certificadoInput = document.getElementById(`certificado-${pedidoId}-${setor}-${produtoSlug}`);
-
-        if (pesoInput && !pesoInput.disabled) {
-            dadosPeso[produto] = desformatarPeso(pesoInput.value);
-        }
-        if (certificadoInput && !certificadoInput.disabled) {
-            dadosCertificado[produto] = certificadoInput.value.trim();
-        }
-    });
-
-    setDadosPesoPedido(pedidoId, dadosPeso);
-    setDadosCertificadoPedido(pedidoId, dadosCertificado);
-
-    let allWeightsEntered = true;
-    pedido.produtos[setor].forEach(produto => {
-        const pesoInput = document.getElementById(`peso-${pedidoId}-${setor}-${produto.replace(/\s/g, '-')}`);
-        const certificadoInput = document.getElementById(`certificado-${pedidoId}-${setor}-${produto.replace(/\s/g, '-')}`);
-        
-        const pesoNumerico = desformatarPeso(pesoInput.value); 
-        if (!pesoInput || pesoNumerico <= 0) {
-            allWeightsEntered = false;
-        }
-        if (!certificadoInput || certificadoInput.value.trim() === '') {
-            allWeightsEntered = false;
-        }
-    });
-
-    if (!allWeightsEntered) {
-        showModal("Erro", "Preencha o peso e o certificado para todos os produtos antes de enviar.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
-        return;
-    }
-
-    confirmarAcao(
-        `Confirmar Envio para ${setor}?`,
-        `Você está prestes a finalizar o envio do setor ${setor}. Confirma?`,
-        () => {
-            setSetorEnviado(pedidoId, setor);
-            if (verificarTodosSetoresEnviados(pedidoId)) {
-                setPedidoStatus(pedidoId, "Pedido separado");
-            }
             renderizarPedidosPorSetor(pedidoUnicoVisualizado);
         }
     );
@@ -1400,23 +2888,22 @@ function renderizarPedidosCarregamento() {
                 const itemListDiv = document.createElement("div");
                 itemListDiv.classList.add("item-list-container");
 
-                Object.keys(pedido.produtos).forEach(setor => {
-                    pedido.produtos[setor].forEach(produto => {
-                        const produtoSlug = produto.replace(/\s/g, '-');
-                        const isChecked = getStatusItemCarregado(pedido.id, produtoSlug);
-                        const isDisabled = pedidoCarregadoStatus === 'carregado' || pedidoCarregadoStatus === 'nao-carregado';
+                    Object.keys(pedido.produtos).forEach(setor => {
+                        pedido.produtos[setor].forEach(item => { 
+                            const produtoSlug = item.nome.replace(/\s/g, '-'); 
+                            const isChecked = getStatusItemCarregado(pedido.id, produtoSlug);
+                            const isDisabled = pedidoCarregadoStatus === 'carregado' || pedidoCarregadoStatus === 'nao-carregado';
 
-                        const itemDiv = document.createElement('div');
-                        itemDiv.className = 'item-carregamento';
-                        itemDiv.innerHTML = `
-                            <span>${produto}</span>
-                            <input type="checkbox" id="item-check-${pedido.id}-${produtoSlug}" 
-                                   onchange="salvarStatusItemCarregado(${pedido.id}, '${produtoSlug}', this.checked)"
-                                   ${isChecked ? 'checked' : ''} ${isDisabled ? 'disabled' : ''}>
-                        `;
-                        itemListDiv.appendChild(itemDiv);
+                            const itemDiv = document.createElement('div');
+                            itemDiv.className = 'item-carregamento';
+                            itemDiv.innerHTML = `
+                                <span>${item.nome}</span> <input type="checkbox" id="item-check-${pedido.id}-${produtoSlug}" 
+                                    onchange="salvarStatusItemCarregado(${pedido.id}, '${produtoSlug}', this.checked)"
+                                    ${isChecked ? 'checked' : ''} ${isDisabled ? 'disabled' : ''}>
+                            `;
+                            itemListDiv.appendChild(itemDiv);
+                        });
                     });
-                });
                 card.appendChild(itemListDiv);
             }
 
@@ -2018,10 +3505,12 @@ function imprimirEtiquetas(pedidoId) {
 
     let contadorItens = 0;
     for (const setor in pedido.produtos) {
-        pedido.produtos[setor].forEach(produto => {
+        pedido.produtos[setor].forEach(item => { 
             contadorItens++;
+            const produto = item.nome; 
             const volumeString = `${String(contadorItens).padStart(3, '0')}/${String(totalItens).padStart(3, '0')}`;
-            const peso = dadosPeso[produto] !== undefined ? dadosPeso[produto] : 'N/A';
+            
+            const peso = dadosPeso[produto] !== undefined ? formatarPesoCompleto(dadosPeso[produto]) : 'N/A';
             const certificado = dadosCertificado[produto] !== undefined ? dadosCertificado[produto] : 'N/A';
 
             const params = new URLSearchParams();
@@ -2417,10 +3906,12 @@ function imprimirEtiquetasPorSetor(pedidoId, setor) {
             <button id="printButton" onclick="window.print()" title="Imprimir Etiquetas"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg></button>
     `;
 
-    itensDoSetor.forEach((produto, index) => {
+    itensDoSetor.forEach((item, index) => { 
+        const produto = item.nome; 
         const contadorGlobalItens = indiceInicialSetor + index + 1;
         const volumeString = `${String(contadorGlobalItens).padStart(3, '0')}/${String(totalGeralItens).padStart(3, '0')}`;
-        const peso = dadosPeso[produto] !== undefined ? dadosPeso[produto] : 'N/A';
+        
+        const peso = dadosPeso[produto] !== undefined ? formatarPesoCompleto(dadosPeso[produto]) : 'N/A';
         const certificado = dadosCertificado[produto] !== undefined ? dadosCertificado[produto] : 'N/A';
 
         const params = new URLSearchParams();
@@ -2501,33 +3992,50 @@ function enviarSetor(pedidoId, setor) {
     const pedido = getPedidoById(pedidoId);
     if (!pedido) return;
 
-    let allWeightsEntered = true;
-    pedido.produtos[setor].forEach(produto => {
-        const pesoInput = document.getElementById(`peso-${pedidoId}-${setor}-${produto.replace(/\s/g, '-')}`);
-        const certificadoInput = document.getElementById(`certificado-${pedidoId}-${setor}-${produto.replace(/\s/g, '-')}`);
-        if (!pesoInput || pesoInput.value === '' || parseFloat(pesoInput.value) <= 0) {
-            allWeightsEntered = false;
-        }
-        if (!certificadoInput || certificadoInput.value.trim() === '') {
-            allWeightsEntered = false;
-        }
-    });
+    let allDataValid = true;
+    const dadosPesoTemporario = {};
+    const dadosCertificadoTemporario = {};
+    const produtosDoSetor = pedido.produtos[setor];
 
-    if (!allWeightsEntered) {
-        showModal("Erro de Validação", "Por favor, preencha o peso e o certificado para todos os produtos antes de enviar o setor.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+    for (const item of produtosDoSetor) {
+        const produto = (typeof item === 'object' && item !== null) ? item.nome : item;
+        const produtoSlug = produto.replace(/\s/g, '-');
+
+        const pesoInput = document.getElementById(`peso-${pedidoId}-${setor}-${produtoSlug}`);
+        const certificadoInput = document.getElementById(`certificado-${pedidoId}-${setor}-${produtoSlug}`);
+        
+        const pesoNumerico = desformatarPeso(pesoInput.value);
+
+        if (!pesoInput || !certificadoInput || certificadoInput.value.trim() === '' || pesoNumerico <= 0) {
+            allDataValid = false;
+            break; 
+        }
+
+        dadosPesoTemporario[produto] = pesoNumerico;
+        dadosCertificadoTemporario[produto] = certificadoInput.value.trim();
+    }
+
+    if (!allDataValid) {
+        showModal("Erro", "Preencha o peso e o certificado para todos os produtos antes de enviar.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
         return;
     }
 
+    let dadosPesoGeral = getDadosPesoPedido(pedidoId);
+    let dadosCertificadoGeral = getDadosCertificadoPedido(pedidoId);
+    
+    Object.assign(dadosPesoGeral, dadosPesoTemporario);
+    Object.assign(dadosCertificadoGeral, dadosCertificadoTemporario);
+
+    setDadosPesoPedido(pedidoId, dadosPesoGeral);
+    setDadosCertificadoPedido(pedidoId, dadosCertificadoGeral);
+
     confirmarAcao(
         `Confirmar Envio para ${setor}?`,
-        `Você está prestes a finalizar o envio do setor de ${setor} para a COT_${pedidoId}. Confirma?`,
+        `Você está prestes a finalizar o envio do setor ${setor}. Confirma?`,
         () => {
             setSetorEnviado(pedidoId, setor);
             if (verificarTodosSetoresEnviados(pedidoId)) {
                 setPedidoStatus(pedidoId, "Pedido separado");
-                showModal("Pedido Completo!", `Todos os setores da COT_${pedidoId} foram enviados. Status: "Pedido Separado".`, `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
-            } else {
-                showModal("Setor Enviado!", `O setor de ${setor} da COT_${pedidoId} foi enviado.`, `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
             }
             renderizarPedidosPorSetor(pedidoUnicoVisualizado);
         }
@@ -3587,10 +5095,22 @@ function showCreateOrderPage(clickedLink) {
     document.getElementById('dashboardContainer').style.display = 'none';
     document.getElementById('roteirizacaoPage').style.display = 'none';
     
-    document.getElementById('createOrderPage').style.display = 'block';
+    const createOrderPage = document.getElementById('createOrderPage');
+    createOrderPage.style.display = 'block';
 
     document.getElementById('orderForm').reset();
-    document.getElementById('orderItemsTableBody').innerHTML = '';
+    const tableBody = document.getElementById('orderItemsTableBody');
+    tableBody.innerHTML = '';
+
+    const tableHead = document.querySelector('#createOrderPage thead tr');
+    if (tableHead) {
+        tableHead.innerHTML = `
+            <th>Descrição do Produto</th>
+            <th>Peso Solicitado (kg)</th>
+            <th>Ação</th>
+        `;
+    }
+
     document.getElementById('orderData').valueAsDate = new Date();
     addOrderItemRow(); 
 }
@@ -3600,13 +5120,17 @@ function addOrderItemRow() {
     const newRow = tableBody.insertRow();
 
     let productOptions = listaDeTodosOsProdutos.map(p => `<option value="${p}">${p}</option>`).join('');
-    
+
     newRow.innerHTML = `
         <td>
             <select class="product-desc">${productOptions}</select>
         </td>
-        <td><input type="number" class="product-qty" value="1" min="1"></td>
-        <td><button type="button" class="btn-remove-item" onclick="this.closest('tr').remove()">Remover</button></td>
+        <td>
+            <input type="number" class="product-pesoSolicitado" placeholder="Ex: 1500" step="0.01" required>
+        </td>
+        <td>
+            <button type="button" class="btn-remove-item" onclick="this.closest('tr').remove()">Remover</button>
+        </td>
     `;
 }
 
@@ -3645,14 +5169,23 @@ function saveOrder() {
     const produtosAgrupados = {};
     for (const row of itemRows) {
         const descricao = row.querySelector('.product-desc').value;
+        const pesoInput = row.querySelector('.product-pesoSolicitado');
+        
+        if (!pesoInput.value || parseFloat(pesoInput.value) <= 0) {
+            showModal("Atenção", `Por favor, insira um peso solicitado válido para "${descricao}".`, `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+            return; 
+        }
+
+        const pesoSolicitado = parseFloat(pesoInput.value);
         const categoria = produtoParaCategoria[descricao] || 'Diversos';
+
         if (!produtosAgrupados[categoria]) {
             produtosAgrupados[categoria] = [];
         }
-        produtosAgrupados[categoria].push(descricao);
+        produtosAgrupados[categoria].push({ nome: descricao, pesoSolicitado: pesoSolicitado });
     }
 
-    const novoId = `${Math.floor(100000 + Math.random() * 900000)}`;
+    const novoId = Math.floor(100000 + Math.random() * 900000);
 
     const novoPedido = {
         id: novoId,
@@ -3662,14 +5195,15 @@ function saveOrder() {
         endereco: enderecoFinal,
         embarque: null,
         motorista: null,
-        produtos: produtosAgrupados
+        produtos: produtosAgrupados,
+        pesoEstimado: Object.values(produtosAgrupados).flat().reduce((acc, item) => acc + item.pesoSolicitado, 0)
     };
 
     pedidos.push(novoPedido);
     salvarPedidosNoLocalStorage(); 
     inicializarNotasFiscais();
 
-    showModal("Sucesso!", `Pedido ${novoId} criado para o cliente ${cliente}.`, `<button class="modal-button ok" onclick="closeModal(); showGestorView('consulta');">OK</button>`);
+    showModal("Sucesso!", `Pedido #${novoId} criado para o cliente ${cliente}.`, `<button class="modal-button ok" onclick="closeModal(); showGestorView('consulta', document.querySelector('a[data-view=consulta]'));">OK</button>`);
 }
 
 const orderForm = document.getElementById('orderForm');
@@ -3876,4 +5410,3 @@ function updateFilterDisplay() {
         cidadeLabel.textContent = Array.from(cidadeCheckboxes).map(cb => cb.value).join(', ');
     }
 }
-
