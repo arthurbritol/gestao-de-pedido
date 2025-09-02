@@ -3357,3 +3357,13 @@ button:disabled {
     display: inline-flex;
     align-items: center;
 }
+
+/* google maps */
+.btn-info { 
+    background-color: #17a2b8; 
+    color: white; 
+}
+
+.btn-info:hover:not(:disabled) { 
+    background-color: #117a8b; 
+}
