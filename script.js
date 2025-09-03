@@ -4291,7 +4291,7 @@ function renderResumoGerencial() {
     `;
 
     const statusOrderTop = [
-        'Carregamento Planejado',
+        'Carregamento Programado',
         'Aguardando separação',
         'Em separação',
         'Pedido separado'
@@ -4304,7 +4304,7 @@ function renderResumoGerencial() {
     ];
 
     const embarquesPorStatus = {
-        'Carregamento Planejado': [],
+        'Carregamento Programado': [],
         'Aguardando separação': [],
         'Em separação': [],
         'Pedido separado': [],
@@ -4315,18 +4315,18 @@ function renderResumoGerencial() {
     };
 
     const headerMap = {
-        'Carregamento Planejado': 'Carregamentos Planejados',
+        'Carregamento Programado': 'Carregamentos Programados',
         'Aguardando separação': 'Aguardando Separação',
         'Em separação': 'Em Separação',
         'Pedido separado': 'Separação Concluída',
         'Aguardando Carregamento': 'Aguardando Carregamento',
         'Em Carregamento': 'Em Carregamento',
         'Carregamento Concluído': 'Carregamento Concluído',
-        'Carregamento Não Concluído': 'Carregamento Não Concluído'
+        'Carregamento Não Concluído': 'Carregamentos Não Concluídos'
     };
-    
+
     const classMap = {
-        'Carregamento Planejado': 'carregamento-planejado',
+        'Carregamento Programado': 'carregamento-programado',
         'Aguardando separação': 'aguardando-separacao',
         'Em separação': 'separacao',
         'Pedido separado': 'concluido',
@@ -4347,26 +4347,28 @@ function renderResumoGerencial() {
         
         let statusFinal = '';
 
+        const isProgramado = cotacoesDoEmbarque.some(p => getPedidoStatus(p.id) === 'Carregamento Programado');
         const isPlanned = cotacoesDoEmbarque.some(p => getPedidoStatus(p.id) === 'Carregamento planejado');
         const anyInSeparation = cotacoesDoEmbarque.some(p => getPedidoStatus(p.id) === 'Em separação');
         const allAwaitingSeparation = cotacoesDoEmbarque.every(p => getPedidoStatus(p.id) === 'Aguardando separação');
         const allSeparated = cotacoesDoEmbarque.every(p => getPedidoStatus(p.id) === 'Pedido separado');
         
-        if (isPlanned) {
+        if (isProgramado) {
+            statusFinal = 'Carregamento Programado';
+        } else if (isPlanned) {
             statusFinal = 'Carregamento Planejado';
         } else if (allAwaitingSeparation) {
             statusFinal = 'Aguardando separação';
         } else if (anyInSeparation) {
             statusFinal = 'Em separação';
         } else if (allSeparated) {
-            statusFinal = 'Pedido separado'; 
+            statusFinal = 'Pedido separado';
         } else {
             statusFinal = 'Em separação'; 
         }
         
         if(statusFinal === 'Pedido separado') {
-            embarquesPorStatus[statusFinal].push(embarqueObj); 
-            
+            embarquesPorStatus[statusFinal].push(embarqueObj);
             const anyNotLoaded = cotacoesDoEmbarque.some(p => getPedidoCarregadoStatus(p.id) === 'nao-carregado');
             const allLoaded = cotacoesDoEmbarque.every(p => getPedidoCarregadoStatus(p.id) === 'carregado');
             const anyInLoading = cotacoesDoEmbarque.some(p => getPedidoCarregadoStatus(p.id) === 'em_carregamento');
@@ -4396,23 +4398,43 @@ function renderResumoGerencial() {
 
             const column = document.createElement('div');
             column.className = 'status-column';
-            const statusClass = 'status-' + classMap[statusKey]; 
+            const statusClass = 'status-' + classMap[statusKey];
 
             const embarquesDaColuna = embarquesPorStatus[statusKey];
             const totalEmbarques = embarquesDaColuna.length;
             let totalPeso = embarquesDaColuna.reduce((sum, emb) => sum + emb.cotacoes.reduce((s, p) => s + Object.values(getDadosPesoPedido(p.id)).reduce((sub, peso) => sub + (parseFloat(peso) || 0), 0), 0), 0);
 
             const cardsHTML = embarquesDaColuna.map(embarque => {
-                return `
-                    <div class="order-card" onclick="showEmbarqueDetailsModal('${embarque.nome}')">
+                const onclickAction = statusKey === 'Carregamento Programado' 
+                    ? `showProgramadoDetailsModal('${embarque.nome}')` 
+                    : `showEmbarqueDetailsModal('${embarque.nome}')`;
+
+                let cardContent = `
+                    <div class="order-info">
+                        <h5>Embarque #${embarque.nome}</h5>
+                        <p>${embarque.cotacoes.length} cotaç${embarque.cotacoes.length > 1 ? 'ões' : 'ão'}</p>
+                    </div>
+                `;
+
+                if (statusKey === 'Carregamento Programado') {
+                    const previsao = embarque.cotacoes[0]?.previsaoCarregamento || 'Data não definida';
+                    cardContent = `
                         <div class="order-info">
-                            <h5>Embarque #${embarque.nome}</h5>
-                            <p>${embarque.cotacoes.length} cotaç${embarque.cotacoes.length > 1 ? 'ões' : 'ão'}</p>
+                             <h5>Embarque #${embarque.nome}</h5>
+                             <p>${embarque.cotacoes.length} cotaç${embarque.cotacoes.length > 1 ? 'ões' : 'ão'}</p>
+                             <p class="previsao-data">Previsão: ${previsao}</p>
                         </div>
+                        <button class="btn-liberar-separacao" onclick="event.stopPropagation(); liberarParaSeparacao('${embarque.nome}')">Liberar</button>
+                    `;
+                }
+
+                return `
+                    <div class="order-card ${statusKey === 'Carregamento Programado' ? 'programado-card' : ''}" onclick="${onclickAction}">
+                        ${cardContent}
                     </div>
                 `;
             }).join('');
-
+            
             column.innerHTML = `
                 <div class="status-header ${statusClass}">${headerMap[statusKey]}</div>
                 <div class="status-summary">
