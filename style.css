@@ -3368,22 +3368,6 @@ button:disabled {
     background-color: #117a8b; 
 }
 
-/* Novos estilos para as tags de status manuais */
-.status-tag.aguardando-carga, .status-tag.carregamento-planejado {
-    background-color: #6c757d; 
-    color: var(--white);
-}
-
-.status-tag.liberado-logistica {
-    background-color: var(--blue-info);
-    color: var(--white);
-}
-
-.status-tag.saldo-insuficiente {
-    background-color: var(--red-error);
-    color: var(--white);
-}
-
 /* Adiciona um cursor de ponteiro para indicar que o status é clicável */
 .status-tag-clickable {
     cursor: pointer;
@@ -3496,4 +3480,82 @@ button:disabled {
 .status-select-colored option[value="Carregamento planejado"] {
     background-color: #e0e0e0;
     color: #333;
+}
+
+/* tela de resumo operacional */
+
+/* Planejado */
+.status-header.status-carregamento-planejado {
+    background-color: #575757;
+    color: white;
+}
+
+/* status de Aguardando */
+.status-header.status-aguardando-separacao,
+.status-header.status-aguardando-carregamento {
+    background-color: #EECB02;
+    color: #ffffff;
+}
+
+/* status "Em Andamento" */
+.status-header.status-separacao,
+.status-header.status-carregamento {
+    background-color: #003366;
+    color: white;
+}
+
+/* status "Concluído" */
+.status-header.status-concluido {
+    background-color: #198754;
+    color: white;
+}
+
+/* status de Não Concluído */
+.status-header.status-nao-carregado {
+    background-color: #e01a2d;
+    color: white;
+}
+
+/* programar carregamento */
+
+.programado-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.programado-card .order-info {
+    flex-grow: 1;
+}
+
+.previsao-data {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: var(--primary-blue);
+    margin-top: 5px !important;
+}
+
+.btn-liberar-separacao {
+    background-color: var(--green-success);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+.btn-liberar-separacao:hover {
+    background-color: #218838;
+}
+
+/* Estilo do Header para a nova coluna */
+.status-header.status-carregamento-programado {
+    background-color: #6c757d; 
+    color: white;
 }
