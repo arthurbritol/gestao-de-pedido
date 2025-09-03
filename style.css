@@ -3367,3 +3367,133 @@ button:disabled {
 .btn-info:hover:not(:disabled) { 
     background-color: #117a8b; 
 }
+
+/* Novos estilos para as tags de status manuais */
+.status-tag.aguardando-carga, .status-tag.carregamento-planejado {
+    background-color: #6c757d; 
+    color: var(--white);
+}
+
+.status-tag.liberado-logistica {
+    background-color: var(--blue-info);
+    color: var(--white);
+}
+
+.status-tag.saldo-insuficiente {
+    background-color: var(--red-error);
+    color: var(--white);
+}
+
+/* Adiciona um cursor de ponteiro para indicar que o status é clicável */
+.status-tag-clickable {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.status-tag-clickable:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Container para os controles de edição em linha */
+.status-edit-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.status-edit-container select {
+    padding: 6px 10px;
+    font-size: 13px;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius-small);
+    background-color: var(--white);
+}
+.btn-save-inline, .btn-cancel-inline {
+    border: none;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.btn-save-inline {
+    background-color: var(--green-success);
+    color: white;
+}
+.btn-save-inline:hover {
+    background-color: #218838;
+}
+.btn-cancel-inline {
+    background-color: var(--text-secondary);
+    color: white;
+}
+.btn-cancel-inline:hover {
+    background-color: #5a6268;
+}
+
+.status-select-colored {
+    background-color: var(--white);
+    color: var(--text-primary);
+    border: 1px solid var(--medium-gray);
+    padding: 6px 10px;
+    border-radius: var(--border-radius-small);
+    font-size: 13px;
+    -moz-appearance: none; 
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6"><path fill="%236c757d" d="M0 0l5 6 5-6z"/></svg>'); /* Seta customizada */
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 25px; 
+}
+
+/* Cores de fundo para o select baseado no status */
+.status-select-colored.aguardando-carga {
+    background-color: #e0e0e0; 
+    color: #333; 
+    border-color: #6c757d;
+}
+.status-select-colored.liberado-logistica {
+    background-color: #d6f2fe; 
+    color: #116a8d;
+    border-color: var(--blue-info);
+}
+.status-select-colored.saldo-insuficiente {
+    background-color: #ffe6e6; 
+    color: #a72727;
+    border-color: var(--red-error);
+}
+.status-select-colored.carregamento-planejado {
+    background-color: #e0e0e0; 
+    color: #333;
+    border-color: #6c757d;
+}
+.status-select-colored.default-status-color {
+    background-color: #f8f9fa; 
+    color: #495057;
+    border-color: #ced4da;
+}
+
+/* Estilos para as opções dentro do dropdown (opcional, nem todos os navegadores estilizam bem) */
+.status-select-colored option {
+    background-color: var(--white); 
+    color: var(--text-primary);
+}
+
+/* Exemplo de estilização de opções para navegadores que suportam (limitado) */
+.status-select-colored option[value="Aguardando carga"] {
+    background-color: #e0e0e0;
+    color: #333;
+}
+.status-select-colored option[value="Liberado logística"] {
+    background-color: #d6f2fe;
+    color: #116a8d;
+}
+.status-select-colored option[value="Saldo insuficiente"] {
+    background-color: #ffe6e6;
+    color: #a72727;
+}
+.status-select-colored option[value="Carregamento planejado"] {
+    background-color: #e0e0e0;
+    color: #333;
+}
