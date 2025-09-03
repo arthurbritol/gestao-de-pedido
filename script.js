@@ -1758,9 +1758,10 @@ const listaDeTodosOsProdutos = Array.from(todosOsProdutos).sort();
 const produtoParaCategoria = {};
 pedidosIniciais.forEach(pedido => {
     for (const categoria in pedido.produtos) {
-        pedido.produtos[categoria].forEach(produto => {
-            if (!produtoParaCategoria[produto]) {
-                produtoParaCategoria[produto] = categoria;
+        pedido.produtos[categoria].forEach(item => {
+            const produtoNome = item.nome;
+            if (produtoNome && !produtoParaCategoria[produtoNome]) {
+                produtoParaCategoria[produtoNome] = categoria;
             }
         });
     }
@@ -1925,9 +1926,6 @@ function setPedidoStatus(id, status) {
     if (pedidoIndex !== -1) {
         pedidos[pedidoIndex].status = status;
         salvarPedidosNoLocalStorage(); 
-    }
-    if (document.getElementById("dashboardWrapper").style.display === "flex") {
-        renderResumoGerencial();
     }
 }
 
@@ -4184,11 +4182,12 @@ function renderStatusColumns() {
 }
 
 function showEmbarqueDetailsModal(embarqueNome) {
-
-    alert(`Perfil de usuário detectado: ${usuarioLogadoRole}`);
-
     const pedidosDoEmbarque = pedidos.filter(p => p.embarque === embarqueNome);
-    
+    if (pedidosDoEmbarque.length === 0) {
+        showModal("Erro", "Nenhum pedido encontrado para este embarque.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+        return;
+    }
+
     let modalContentHTML = '';
 
     pedidosDoEmbarque.forEach(pedido => {
@@ -4203,37 +4202,38 @@ function showEmbarqueDetailsModal(embarqueNome) {
         let itensHTML = '';
         for (const setor in pedido.produtos) {
             itensHTML += `<h5 class="embarque-modal-setor">Setor: ${setor}</h5>`;
-            pedido.produtos[setor].forEach(produto => {
-                const statusClass = (dadosPeso[produto] !== undefined && dadosCertificado[produto]) ? 'concluido' : 'pendente';
 
-                if (usuarioLogadoRole === 'consultor') {
+            if (pedido.produtos[setor] && pedido.produtos[setor].length > 0) {
+                pedido.produtos[setor].forEach(item => {
+                    const produtoNome = (typeof item === 'object' && item !== null) ? item.nome : item;
+
+                    const peso = dadosPeso[produtoNome] !== undefined && dadosPeso[produtoNome] > 0 ? `${formatarPesoCompleto(dadosPeso[produtoNome])} kg` : 'Pendente';
+                    const certificado = dadosCertificado[produtoNome] || 'Pendente';
+                    const statusClass = (dadosPeso[produtoNome] !== undefined && dadosCertificado[produtoNome]) ? 'concluido' : 'pendente';
+                    
+                    let statusText = 'Pendente';
+                    if (statusClass === 'concluido') {
+                       statusText = 'Concluído';
+                    }
+
                     itensHTML += `
                         <div class="embarque-modal-item">
-                            <span class="material-name">${produto}</span>
-                            <div class="material-info">
-                                <span class="material-status ${statusClass}">${statusClass === 'concluido' ? 'Concluído' : 'Pendente'}</span>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    const peso = dadosPeso[produto] !== undefined ? `${dadosPeso[produto]} kg` : 'Pendente';
-                    const certificado = dadosCertificado[produto] || 'Pendente';
-                    itensHTML += `
-                        <div class="embarque-modal-item">
-                            <span class="material-name">${produto}</span>
+                            <span class="material-name">${produtoNome}</span> 
                             <div class="material-info">
                                 <span class="material-cert">Certificado: <strong>${certificado}</strong></span>
                                 <span class="material-weight">Peso: <strong>${peso}</strong></span>
-                                <span class="material-status ${statusClass}">${statusClass === 'concluido' ? 'Concluído' : 'Pendente'}</span>
+                                <span class="material-status ${statusClass}">${statusText}</span>
                             </div>
                         </div>
                     `;
-                }
-            });
+                });
+            } else {
+                itensHTML += `<p>Nenhum item neste setor.</p>`;
+            }
         }
 
         modalContentHTML += itensHTML;
-        modalContentHTML += `</div>`;
+        modalContentHTML += `</div>`; 
     });
 
     const modalTitle = `Detalhes do Embarque #${embarqueNome}`;
@@ -4463,13 +4463,17 @@ function renderConsultaPedidos() {
                 <input type="text" id="gestorFilterRota" placeholder="Filtrar por Rota...">
                 <select id="gestorFilterStatus">
                     <option value="">Todos os Status</option>
+                    <option value="Aguardando carga">Aguardando Carga</option>
+                    <option value="Liberado logística">Liberado Logística</option>
+                    <option value="Saldo insuficiente">Saldo Insuficiente</option>
+                    <option value="Carregamento planejado">Carregamento Planejado</option>
+                    <option value="Aguardando rota">Aguardando Rota</option>
                     <option value="Aguardando separação">Aguardando Separação</option>
                     <option value="Em separação">Em Separação</option>
-                    <option value="Pedido separado">Pedido Separado</option>
+                    <option value="Pedido separado">Separação Concluída</option>
                     <option value="Aguardando carregamento">Aguardando Carregamento</option>
                     <option value="Em carregamento">Em Carregamento</option>
                     <option value="Carregamento concluido">Carregamento Concluído</option>
-                    <option value="Nao carregado">Não Carregado</option>
                 </select>
                 <button class="btn-back" style="color: white; border: none;" onclick="updateConsultaPedidosList()">Filtrar</button>
             </div>
@@ -4481,11 +4485,16 @@ function renderConsultaPedidos() {
 }
 
 function updateConsultaPedidosList() {
+    const filterCotacaoEl = document.getElementById('gestorFilterCotacao');
+    const filterDataEl = document.getElementById('gestorFilterData');
+    const filterRotaEl = document.getElementById('gestorFilterRota');
+    const filterStatusEl = document.getElementById('gestorFilterStatus');
+
     const filters = {
-        cotacao: document.getElementById('gestorFilterCotacao').value.toLowerCase(),
-        data: document.getElementById('gestorFilterData').value,
-        rota: document.getElementById('gestorFilterRota').value.toLowerCase(),
-        status: document.getElementById('gestorFilterStatus').value
+        cotacao: filterCotacaoEl ? filterCotacaoEl.value.toLowerCase() : '',
+        data: filterDataEl ? filterDataEl.value : '',
+        rota: filterRotaEl ? filterRotaEl.value.toLowerCase() : '',
+        status: filterStatusEl ? filterStatusEl.value : ''
     };
 
     const listDiv = document.getElementById('gestorPedidosList');
@@ -4502,9 +4511,6 @@ function updateConsultaPedidosList() {
             const pCarregadoStatus = getPedidoCarregadoStatus(p.id);
 
             switch (filters.status) {
-                case 'Aguardando rota':
-                    statusMatch = pStatus === 'Aguardando rota';
-                    break;
                 case 'Aguardando carregamento':
                     statusMatch = pStatus === 'Pedido separado' && pCarregadoStatus === 'pendente';
                     break;
@@ -4514,53 +4520,22 @@ function updateConsultaPedidosList() {
                 case 'Carregamento concluido':
                     statusMatch = pCarregadoStatus === 'carregado';
                     break;
-                case 'Nao carregado':
-                    statusMatch = pCarregadoStatus === 'nao-carregado';
-                    break;
                 default:
                     statusMatch = pStatus === filters.status;
                     break;
             }
         }
-
         return cotacaoMatch && dataMatch && rotaMatch && statusMatch;
     });
 
     if (pedidosFiltrados.length === 0) {
-        listDiv.innerHTML = '<p>Nenhum pedido encontrado com os filtros aplicados.</p>';
+        listDiv.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 20px;">Nenhum pedido encontrado com os filtros aplicados.</p>';
         return;
     }
 
     pedidosFiltrados.forEach(pedido => {
-        const statusSeparacao = getPedidoStatus(pedido.id);
-        const statusCarregamento = getPedidoCarregadoStatus(pedido.id);
-        let statusFinalText = statusSeparacao;
-        let statusFinalClass = 'pendente';
-
-        if (statusSeparacao === 'Em separação') {
-            statusFinalClass = 'separacao';
-        } else if (statusSeparacao === 'Aguardando rota') {
-            statusFinalClass = 'aguardando-rota';
-        } else if (statusSeparacao === 'Pedido separado') {
-            statusFinalClass = 'separado';
-            if (statusCarregamento === 'pendente') {
-                statusFinalText = 'Aguardando Carregamento';
-                statusFinalClass = 'aguardando-carregamento';
-            }
-            if (statusCarregamento === 'em_carregamento') {
-                statusFinalText = 'Em Carregamento';
-                statusFinalClass = 'carregamento';
-            }
-            if (statusCarregamento === 'carregado') {
-                statusFinalText = 'Carregamento Concluído';
-                statusFinalClass = 'concluido';
-            }
-            if (statusCarregamento === 'nao-carregado') {
-                statusFinalText = 'Não Carregado';
-                statusFinalClass = 'nao-carregado';
-            }
-        }
-
+        const statusTagHTML = getStatusTagHTML(pedido);
+        
         let deleteButtonHTML = '';
         if (usuarioLogadoRole === 'consultor') {
             deleteButtonHTML = `<button class="btn-delete-pedido" onclick="confirmarExclusaoPedido('${pedido.id}')">Excluir</button>`;
@@ -4570,7 +4545,9 @@ function updateConsultaPedidosList() {
             <div class="consulta-pedido-card">
                 <div class="card-header">
                     <h4>COT_${pedido.id} - ${pedido.cliente}</h4>
-                    <span class="status-tag ${statusFinalClass}">${statusFinalText}</span>
+                    <div class="status-display-container" id="status-container-${pedido.id}">
+                        ${statusTagHTML}
+                    </div>
                 </div>
                 <div class="info-group">
                     <strong>Data</strong>
@@ -4597,6 +4574,164 @@ function updateConsultaPedidosList() {
             </div>
         `;
     });
+}
+
+function ativarEdicaoStatus(pedidoId, statusAtual) {
+    const container = document.getElementById(`status-container-${pedidoId}`);
+    const statusModificaveis = [
+        'Aguardando carga',
+        'Liberado logística',
+        'Saldo insuficiente',
+        'Carregamento planejado'
+    ];
+
+    let optionsHTML = statusModificaveis.map(status => 
+        `<option value="${status}" ${status === statusAtual ? 'selected' : ''}>${status}</option>`
+    ).join('');
+
+    let currentStatusClass = '';
+    switch(statusAtual) {
+        case 'Aguardando carga':
+            currentStatusClass = 'aguardando-carga';
+            break;
+        case 'Liberado logística':
+            currentStatusClass = 'liberado-logistica';
+            break;
+        case 'Saldo insuficiente':
+            currentStatusClass = 'saldo-insuficiente';
+            break;
+        case 'Carregamento planejado':
+            currentStatusClass = 'carregamento-planejado';
+            break;
+        default:
+            currentStatusClass = 'default-status-color'; 
+            break;
+    }
+
+    container.innerHTML = `
+        <div class="status-edit-container">
+            <select id="status-select-${pedidoId}" class="status-select-colored ${currentStatusClass}" onchange="this.className='status-select-colored ' + getStatusClassForValue(this.value)">
+                ${optionsHTML}
+            </select>
+            <button class="btn-save-inline" onclick="salvarStatusEditado(${pedidoId}, '${statusAtual}')">Salvar</button>
+            <button class="btn-cancel-inline" onclick="updateConsultaPedidosList()">Cancelar</button>
+        </div>
+    `;
+}
+
+function getStatusClassForValue(statusValue) {
+    switch(statusValue) {
+        case 'Aguardando carga': return 'aguardando-carga';
+        case 'Liberado logística': return 'liberado-logistica';
+        case 'Saldo insuficiente': return 'saldo-insuficiente';
+        case 'Carregamento planejado': return 'carregamento-planejado';
+        default: return 'default-status-color';
+    }
+}
+
+function salvarStatusEditado(pedidoId, statusAntigo) {
+    const selectElement = document.getElementById(`status-select-${pedidoId}`);
+    const novoStatus = selectElement.value;
+
+    if (novoStatus === statusAntigo) {
+        const container = document.getElementById(`status-container-${pedidoId}`);
+        const pedido = getPedidoById(pedidoId);
+        if (container && pedido) {
+            container.innerHTML = getStatusTagHTML(pedido);
+        }
+        return;
+    }
+
+    setPedidoStatus(pedidoId, novoStatus);
+
+    const container = document.getElementById(`status-container-${pedidoId}`);
+    const pedido = getPedidoById(pedidoId); 
+    if (container && pedido) {
+        container.innerHTML = getStatusTagHTML(pedido);
+    }
+    
+    showModal("Sucesso", "O status do pedido foi alterado com sucesso.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+}
+
+function getStatusTagHTML(pedido) {
+    const statusSeparacao = getPedidoStatus(pedido.id);
+    const statusCarregamento = getPedidoCarregadoStatus(pedido.id);
+    let statusFinalText = statusSeparacao;
+    let statusFinalClass = 'pendente'; 
+
+    if (statusCarregamento === 'carregado') {
+        statusFinalText = 'Carregamento Concluído';
+        statusFinalClass = 'concluido';
+    } else if (statusCarregamento === 'em_carregamento') {
+        statusFinalText = 'Em Carregamento';
+        statusFinalClass = 'carregamento';
+    } else if (statusCarregamento === 'nao-carregado') {
+        statusFinalText = 'Não Carregado';
+        statusFinalClass = 'nao-carregado';
+    } else if (statusSeparacao === 'Pedido separado') {
+        statusFinalText = 'Aguardando Carregamento';
+        statusFinalClass = 'aguardando-carregamento';
+    } else if (statusSeparacao === 'Em separação') {
+        statusFinalClass = 'separacao';
+    } else if (statusSeparacao === 'Aguardando rota') {
+        statusFinalClass = 'aguardando-rota';
+    } else if (statusSeparacao === 'Aguardando carga') {
+        statusFinalClass = 'aguardando-carga';
+    } else if (statusSeparacao === 'Liberado logística') {
+        statusFinalClass = 'liberado-logistica';
+    } else if (statusSeparacao === 'Saldo insuficiente') {
+        statusFinalClass = 'saldo-insuficiente';
+    } else if (statusSeparacao === 'Carregamento planejado') {
+        statusFinalClass = 'carregamento-planejado';
+    }
+
+    if (usuarioLogadoRole === 'gestor') {
+        return `<span class="status-tag ${statusFinalClass} status-tag-clickable" onclick="ativarEdicaoStatus(${pedido.id}, '${statusFinalText}')">${statusFinalText}</span>`;
+    } else {
+        return `<span class="status-tag ${statusFinalClass}">${statusFinalText}</span>`;
+    }
+}
+
+function salvarNovoStatus(pedidoId) {
+    const novoStatusRadio = document.querySelector('input[name="status-option"]:checked');
+    
+    if (!novoStatusRadio) {
+        showModal("Atenção", "Por favor, selecione um novo status.", `<button class="modal-button ok" onclick="abrirModalStatus(${pedidoId})">OK</button>`);
+        return;
+    }
+    
+    const novoStatus = novoStatusRadio.value;
+    
+    setPedidoStatus(pedidoId, novoStatus); 
+    closeModal(); 
+    
+    updateConsultaPedidosList(); 
+    
+    showModal("Sucesso", "O status do pedido foi alterado com sucesso.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+}
+
+function confirmarAtualizacaoManual(pedidoId) {
+    const selectElement = document.getElementById(`status-select-${pedidoId}`);
+    const novoStatus = selectElement.value;
+    const pedido = pedidos.find(p => p.id == pedidoId);
+    if (!pedido) return;
+    
+    const statusAntigo = getPedidoStatus(pedido.id);
+
+    if (selectElement.selectedIndex === 0) {
+        showModal("Atenção", "Nenhuma alteração de status foi selecionada.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+        return;
+    }
+
+    confirmarAcao(
+        "Alterar Status do Pedido?",
+        `Deseja alterar o status do pedido <strong>COT_${pedido.id}</strong> de "${statusAntigo}" para "${novoStatus}"?`,
+        () => {
+            setPedidoStatus(pedidoId, novoStatus);
+            updateConsultaPedidosList(); 
+            showModal("Sucesso", "O status do pedido foi alterado.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+        }
+    );
 }
 
 function confirmarExclusaoPedido(pedidoId) {
@@ -4658,63 +4793,6 @@ function toggleDropdown(cardElement) {
             dropdown.style.display = "block";
         }
     }
-}
-
-function showCotacaoDetails(pedidoId) {
-    const container = document.getElementById('dashboardContainer');
-    container.innerHTML = '';
-    container.style.display = 'block';
-
-    const pedido = pedidos.find(p => p.id === pedidoId);
-    if (!pedido) {
-        container.innerHTML = '<p>Erro: Cotação não encontrada.</p><button class="back-btn" onclick="renderResumoGerencial()">Voltar</button>';
-        return;
-    }
-
-    const dadosPeso = getDadosPesoPedido(pedido.id);
-    const dadosCertificado = getDadosCertificadoPedido(pedido.id);
-    let itensHTML = '';
-
-    for (const setor in pedido.produtos) {
-        if (pedido.produtos[setor].length > 0) {
-            itensHTML += `<h4 class="setor-title-details">${setor}</h4>`;
-            pedido.produtos[setor].forEach(produto => {
-                const peso = dadosPeso[produto] !== undefined ? `${dadosPeso[produto]} kg` : 'Pendente';
-                const certificado = dadosCertificado[produto] || 'Pendente';
-
-                const statusClass = (dadosPeso[produto] !== undefined && dadosCertificado[produto]) ? 'concluido' : 'pendente';
-
-                itensHTML += `
-                    <div class="material-detail-card">
-                        <span class="material-name">${produto}</span>
-                        <div class="material-info">
-                            <span class="material-cert">Certificado: <strong>${certificado}</strong></span>
-                            <span class="material-weight">Peso: <strong>${peso}</strong></span>
-                            <span class="material-status ${statusClass}">${statusClass === 'concluido' ? 'Concluído' : 'Pendente'}</span>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-    }
-
-    const detailsViewHTML = `
-        <div class="cotacao-details-view">
-            <div class="details-header">
-                <button class="back-btn" onclick="renderResumoGerencial()">< Voltar ao Resumo</button>
-                <h2>Detalhes da Cotação</h2>
-            </div>
-            <div class="details-subheader">
-                <h3>COT_${pedido.id} - ${pedido.cliente}</h3>
-                <p>Embarque: ${pedido.embarque}</p>
-            </div>
-            <div class="details-item-list">
-                ${itensHTML || '<p>Nenhum item encontrado para esta cotação.</p>'}
-            </div>
-        </div>
-    `;
-
-    container.innerHTML = detailsViewHTML;
 }
 
 let map, currentRouteLayer;
@@ -5402,6 +5480,7 @@ function atualizarListaPedidosFiltrados() {
  * Alterna a visibilidade de um dropdown de filtro.
  * @param {'estado' | 'cidade'} type 
  */
+
 function toggleFilterDropdown(type) {
     if (!event.target.closest('.filter-dropdown')) {
         closeAllFilterDropdowns();
@@ -5443,4 +5522,3 @@ function updateFilterDisplay() {
         cidadeLabel.textContent = Array.from(cidadeCheckboxes).map(cb => cb.value).join(', ');
     }
 }
-
