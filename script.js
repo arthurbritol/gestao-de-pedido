@@ -2181,7 +2181,7 @@ function fazerLoginGestor() {
 
         if (usuarioLogadoRole === 'consultor') {
             sidebarHTML = `
-                <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo Gerencial</a></li>
+                <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo Operacional</a></li>
                 <li><a href="#" data-view="consulta" onclick="showGestorView('consulta', this)">Consultar Pedidos</a></li>
                 <li><a href="#" data-view="gerar-pedido" onclick="showCreateOrderPage(this)">Gerar Pedido</a></li>
                 <li><a href="#" onclick="logout()">Sair</a></li>
@@ -2191,7 +2191,7 @@ function fazerLoginGestor() {
 
         } else { 
             sidebarHTML = `
-                <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo Gerencial</a></li>
+                <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo Operacional</a></li>
                 <li><a href="#" data-view="roteirizacao" onclick="showRoteirizacaoPage(this)">Roteirização Inteligente</a></li>
                 <li><a href="#" data-view="consulta" onclick="showGestorView('consulta', this)">Consultar Pedidos</a></li>
                 <li><a href="#" onclick="logout()">Sair</a></li>
@@ -4285,22 +4285,55 @@ function renderResumoGerencial() {
     container.innerHTML = `
         <div class="summary-dashboard">
             <h2>Resumo Gerencial de Status</h2>
-            <h3 style="margin-top: 20px;">Status de Separação</h3>
-            <div class="dashboard-main-content" id="separacaoStatusContent"></div>
-            <h3 style="margin-top: 40px;">Status de Carregamento</h3>
-            <div class="dashboard-main-content" id="carregamentoStatusContent"></div>
+            <div class="dashboard-main-content" id="gerencialStatusContentTop"></div>
+            <div class="dashboard-main-content" id="gerencialStatusContentBottom" style="margin-top: 20px;"></div>
         </div>
     `;
 
-    const embarquesPorStatusSeparacao = {
+    const statusOrderTop = [
+        'Carregamento Planejado',
+        'Aguardando separação',
+        'Em separação',
+        'Pedido separado'
+    ];
+    const statusOrderBottom = [
+        'Aguardando Carregamento',
+        'Em Carregamento',
+        'Carregamento Concluído',
+        'Carregamento Não Concluído'
+    ];
+
+    const embarquesPorStatus = {
+        'Carregamento Planejado': [],
         'Aguardando separação': [],
         'Em separação': [],
-        'Pedido separado': []
-    };
-    const embarquesPorStatusCarregamento = {
+        'Pedido separado': [],
         'Aguardando Carregamento': [],
         'Em Carregamento': [],
-        'Carregamento Concluído': []
+        'Carregamento Concluído': [],
+        'Carregamento Não Concluído': []
+    };
+
+    const headerMap = {
+        'Carregamento Planejado': 'Carregamentos Planejados',
+        'Aguardando separação': 'Aguardando Separação',
+        'Em separação': 'Em Separação',
+        'Pedido separado': 'Separação Concluída',
+        'Aguardando Carregamento': 'Aguardando Carregamento',
+        'Em Carregamento': 'Em Carregamento',
+        'Carregamento Concluído': 'Carregamento Concluído',
+        'Carregamento Não Concluído': 'Carregamento Não Concluído'
+    };
+    
+    const classMap = {
+        'Carregamento Planejado': 'carregamento-planejado',
+        'Aguardando separação': 'aguardando-separacao',
+        'Em separação': 'separacao',
+        'Pedido separado': 'concluido',
+        'Aguardando Carregamento': 'aguardando-carregamento',
+        'Em Carregamento': 'carregamento',
+        'Carregamento Concluído': 'concluido',
+        'Carregamento Não Concluído': 'nao-carregado'
     };
 
     const embarques = pedidos.filter(p => p.embarque !== null).reduce((acc, pedido) => {
@@ -4311,45 +4344,88 @@ function renderResumoGerencial() {
     for (const embarqueNome in embarques) {
         const cotacoesDoEmbarque = embarques[embarqueNome];
         const embarqueObj = { nome: embarqueNome, cotacoes: cotacoesDoEmbarque };
+        
+        let statusFinal = '';
 
-        const todosSeparados = cotacoesDoEmbarque.every(p => getPedidoStatus(p.id) === 'Pedido separado');
-        const algumEmSeparacao = cotacoesDoEmbarque.some(p => getPedidoStatus(p.id) === 'Em separação');
-
-        if (todosSeparados) {
-            embarquesPorStatusSeparacao['Pedido separado'].push(embarqueObj);
-        } else if (algumEmSeparacao) {
-            embarquesPorStatusSeparacao['Em separação'].push(embarqueObj);
+        const isPlanned = cotacoesDoEmbarque.some(p => getPedidoStatus(p.id) === 'Carregamento planejado');
+        const anyInSeparation = cotacoesDoEmbarque.some(p => getPedidoStatus(p.id) === 'Em separação');
+        const allAwaitingSeparation = cotacoesDoEmbarque.every(p => getPedidoStatus(p.id) === 'Aguardando separação');
+        const allSeparated = cotacoesDoEmbarque.every(p => getPedidoStatus(p.id) === 'Pedido separado');
+        
+        if (isPlanned) {
+            statusFinal = 'Carregamento Planejado';
+        } else if (allAwaitingSeparation) {
+            statusFinal = 'Aguardando separação';
+        } else if (anyInSeparation) {
+            statusFinal = 'Em separação';
+        } else if (allSeparated) {
+            statusFinal = 'Pedido separado'; 
         } else {
-            embarquesPorStatusSeparacao['Aguardando separação'].push(embarqueObj);
+            statusFinal = 'Em separação'; 
         }
-
-        if (todosSeparados) {
+        
+        if(statusFinal === 'Pedido separado') {
+            embarquesPorStatus[statusFinal].push(embarqueObj); 
+            
+            const anyNotLoaded = cotacoesDoEmbarque.some(p => getPedidoCarregadoStatus(p.id) === 'nao-carregado');
             const allLoaded = cotacoesDoEmbarque.every(p => getPedidoCarregadoStatus(p.id) === 'carregado');
             const anyInLoading = cotacoesDoEmbarque.some(p => getPedidoCarregadoStatus(p.id) === 'em_carregamento');
 
-            if (allLoaded) {
-                embarquesPorStatusCarregamento['Carregamento Concluído'].push(embarqueObj);
+            if (anyNotLoaded) {
+                embarquesPorStatus['Carregamento Não Concluído'].push(embarqueObj);
+            } else if (allLoaded) {
+                embarquesPorStatus['Carregamento Concluído'].push(embarqueObj);
             } else if (anyInLoading) {
-                embarquesPorStatusCarregamento['Em Carregamento'].push(embarqueObj);
+                embarquesPorStatus['Em Carregamento'].push(embarqueObj);
             } else {
-                embarquesPorStatusCarregamento['Aguardando Carregamento'].push(embarqueObj);
+                embarquesPorStatus['Aguardando Carregamento'].push(embarqueObj);
             }
+        } else if (statusFinal && embarquesPorStatus[statusFinal]) {
+            embarquesPorStatus[statusFinal].push(embarqueObj);
         }
     }
+    
+    [statusOrderTop, statusOrderBottom].forEach((order, index) => {
+        const contentDivId = index === 0 ? 'gerencialStatusContentTop' : 'gerencialStatusContentBottom';
+        const contentDiv = document.getElementById(contentDivId);
+        contentDiv.innerHTML = '';
+        contentDiv.style.gridTemplateColumns = `repeat(4, 1fr)`;
 
-    const headerMapSeparacao = {
-        'Aguardando separação': 'Aguardando Separação',
-        'Em separação': 'Em Separação',
-        'Pedido separado': 'Separação Concluída'
-    };
-    const headerMapCarregamento = {
-        'Aguardando Carregamento': 'Aguardando Carregamento',
-        'Em Carregamento': 'Em Carregamento',
-        'Carregamento Concluído': 'Carregamento Concluído'
-    };
+        order.forEach(statusKey => {
+            if (!headerMap[statusKey]) return; 
 
-    generateSectionHTML('separacaoStatusContent', embarquesPorStatusSeparacao, headerMapSeparacao);
-    generateSectionHTML('carregamentoStatusContent', embarquesPorStatusCarregamento, headerMapCarregamento);
+            const column = document.createElement('div');
+            column.className = 'status-column';
+            const statusClass = 'status-' + classMap[statusKey]; 
+
+            const embarquesDaColuna = embarquesPorStatus[statusKey];
+            const totalEmbarques = embarquesDaColuna.length;
+            let totalPeso = embarquesDaColuna.reduce((sum, emb) => sum + emb.cotacoes.reduce((s, p) => s + Object.values(getDadosPesoPedido(p.id)).reduce((sub, peso) => sub + (parseFloat(peso) || 0), 0), 0), 0);
+
+            const cardsHTML = embarquesDaColuna.map(embarque => {
+                return `
+                    <div class="order-card" onclick="showEmbarqueDetailsModal('${embarque.nome}')">
+                        <div class="order-info">
+                            <h5>Embarque #${embarque.nome}</h5>
+                            <p>${embarque.cotacoes.length} cotaç${embarque.cotacoes.length > 1 ? 'ões' : 'ão'}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            column.innerHTML = `
+                <div class="status-header ${statusClass}">${headerMap[statusKey]}</div>
+                <div class="status-summary">
+                    <div class="summary-item"><div class="value">${(totalPeso / 1000).toFixed(2).replace('.', ',')}</div><div class="label">Peso (Ton)</div></div>
+                    <div class="summary-item"><div class="value">${totalEmbarques}</div><div class="label">Embarques</div></div>
+                </div>
+                <div class="cards-container">
+                    ${cardsHTML || '<p class="empty-column-message">Nenhum embarque neste status.</p>'}
+                </div>
+            `;
+            contentDiv.appendChild(column);
+        });
+    });
 }
 
 function generateSectionHTML(contentDivId, statusObject, headerMap) {
@@ -5020,35 +5096,111 @@ function exportToGoogleMaps() {
 }
 
 function confirmarEmbarque() {
-    if (pedidosPendentes.length === 0) {
-        showModal("Erro", "Não há rota pendente para confirmar.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+    const selectedCheckboxes = Array.from(document.querySelectorAll('#pedidos-filtrados-list input:checked'));
+    if (selectedCheckboxes.length === 0) {
+        showModal("Atenção", "Selecione pelo menos um pedido para criar a rota.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
         return;
     }
 
     const nomeEmbarque = gerarNumeroEmbarqueAleatorio();
+    const pedidoIds = selectedCheckboxes.map(cb => parseInt(cb.dataset.id, 10));
 
-    const ordemDosPedidosIds = pedidosPendentes.map(pedido => pedido.id);
+    showModalPrevisaoCarregamento(pedidoIds, nomeEmbarque);
+}
 
-    localStorage.setItem(`embarque_ordem_${nomeEmbarque}`, JSON.stringify(ordemDosPedidosIds));
-    console.log(`Ordem do embarque #${nomeEmbarque} salva:`, ordemDosPedidosIds);
+function showModalPrevisaoCarregamento(pedidoIds, nomeEmbarque) {
+    const today = new Date().toISOString().split('T')[0];
+    const modalTitle = `Confirmar Embarque #${nomeEmbarque}`;
+    const modalMessage = `
+        <p>Selecione a data de <strong>previsão de carregamento</strong> para este embarque.</p>
+        <input type="date" id="previsaoCarregamentoDate" class="modal-input" value="${today}">
+        <div id="previsao-erro" class="modal-error"></div>
+    `;
+    const modalButtons = `
+        <button class="modal-button cancel" onclick="closeModal()">Cancelar</button>
+        <button class="modal-button confirm" onclick="salvarEmbarqueProgramado([${pedidoIds.join(',')}], '${nomeEmbarque}')">Confirmar e Programar</button>
+    `;
+    showModal(modalTitle, modalMessage, modalButtons);
+}
 
+function salvarEmbarqueProgramado(pedidoIds, nomeEmbarque) {
+    const dateInput = document.getElementById('previsaoCarregamentoDate');
+    const previsaoData = dateInput.value;
+    const erroDiv = document.getElementById('previsao-erro');
 
-    pedidosPendentes.forEach(pedidoPendente => {
-        const pedidoId = pedidoPendente.id;
+    if (!previsaoData) {
+        erroDiv.textContent = 'Por favor, selecione uma data.';
+        return;
+    }
+
+    const formattedDate = new Date(previsaoData + 'T00:00:00').toLocaleDateString('pt-BR');
+
+    pedidoIds.forEach(pedidoId => {
         const pedidoIndex = pedidos.findIndex(p => p.id === pedidoId);
         if (pedidoIndex !== -1) {
             pedidos[pedidoIndex].embarque = nomeEmbarque;
-            setPedidoStatus(pedidoId, "Aguardando separação");
+            pedidos[pedidoIndex].previsaoCarregamento = formattedDate;
+            setPedidoStatus(pedidoId, "Carregamento Programado");
         }
     });
 
+    localStorage.setItem(`embarque_ordem_${nomeEmbarque}`, JSON.stringify(pedidoIds));
     salvarPedidosNoLocalStorage();
+    closeModal();
+    showModal("Sucesso!", `O embarque #${nomeEmbarque} foi programado para ${formattedDate}.`, `<button class="modal-button ok" onclick="closeModal(); initializeMapAndFilters();">OK</button>`);
+}
 
-    showModal("Sucesso!", `O embarque #${nomeEmbarque} foi criado com ${pedidosPendentes.length} pedidos.`, `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
 
-    pedidosPendentes = [];
-    rotaPendente = null;
-    initializeMapAndFilters();
+function liberarParaSeparacao(embarqueNome) {
+    confirmarAcao(
+        `Liberar Embarque #${embarqueNome}?`,
+        'O status de todos os pedidos neste embarque será alterado para "Aguardando Separação".',
+        () => {
+            const pedidosDoEmbarque = pedidos.filter(p => p.embarque === embarqueNome);
+            pedidosDoEmbarque.forEach(pedido => {
+                setPedidoStatus(pedido.id, 'Aguardando separação');
+            });
+            salvarPedidosNoLocalStorage();
+            renderResumoGerencial();
+            closeModal();
+            showModal("Sucesso!", `Embarque #${embarqueNome} liberado para separação.`, '<button class="modal-button ok" onclick="closeModal()">OK</button>');
+        }
+    );
+}
+
+function showProgramadoDetailsModal(embarqueNome) {
+    const pedidosDoEmbarque = pedidos.filter(p => p.embarque === embarqueNome);
+    if (pedidosDoEmbarque.length === 0) {
+        showModal("Erro", "Nenhum pedido encontrado para este embarque.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+        return;
+    }
+
+    let modalContentHTML = '';
+    let previsaoData = '';
+
+    pedidosDoEmbarque.forEach(pedido => {
+        if (pedido.previsaoCarregamento && !previsaoData) {
+            previsaoData = pedido.previsaoCarregamento;
+        }
+        modalContentHTML += `
+            <div class="embarque-modal-cotacao">
+                <h4>COT_${pedido.id} - ${pedido.cliente}</h4>
+                <p style="font-size: 0.9em; color: var(--text-secondary);">${pedido.endereco}</p>
+            </div>
+        `;
+    });
+
+    if (previsaoData) {
+        modalContentHTML = `<p class="previsao-data-modal"><strong>Previsão de Carregamento:</strong> ${previsaoData}</p>` + modalContentHTML;
+    }
+
+    const modalTitle = `Detalhes do Embarque #${embarqueNome}`;
+    const modalButtons = `
+        <button class="modal-button cancel" onclick="closeModal()">Fechar</button>
+        <button class="modal-button confirm" onclick="liberarParaSeparacao('${embarqueNome}')">Liberar para Separação</button>
+    `;
+
+    showModal(modalTitle, modalContentHTML, modalButtons);
 }
 
 function cancelarRota() {
