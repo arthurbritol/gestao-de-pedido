@@ -4393,7 +4393,11 @@ function generateSectionHTML(contentDivId, statusObject, headerMap) {
 
 function showEmbarqueDetailsModal(embarqueNome) {
     const pedidosDoEmbarque = pedidos.filter(p => p.embarque === embarqueNome);
-    
+    if (pedidosDoEmbarque.length === 0) {
+        showModal("Erro", "Nenhum pedido encontrado para este embarque.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+        return;
+    }
+
     let modalContentHTML = '';
 
     pedidosDoEmbarque.forEach(pedido => {
@@ -4408,22 +4412,34 @@ function showEmbarqueDetailsModal(embarqueNome) {
         let itensHTML = '';
         for (const setor in pedido.produtos) {
             itensHTML += `<h5 class="embarque-modal-setor">Setor: ${setor}</h5>`;
-            pedido.produtos[setor].forEach(produto => {
-                const peso = dadosPeso[produto] !== undefined ? `${dadosPeso[produto]} kg` : 'Pendente';
-                const certificado = dadosCertificado[produto] || 'Pendente';
-                const statusClass = (dadosPeso[produto] !== undefined && dadosCertificado[produto]) ? 'concluido' : 'pendente';
 
-                itensHTML += `
-                    <div class="embarque-modal-item">
-                        <span class="material-name">${produto}</span>
-                        <div class="material-info">
-                            <span class="material-cert">Certificado: <strong>${certificado}</strong></span>
-                            <span class="material-weight">Peso: <strong>${peso}</strong></span>
-                            <span class="material-status ${statusClass}">${statusClass === 'concluido' ? 'Concluído' : 'Pendente'}</span>
+            if (pedido.produtos[setor] && pedido.produtos[setor].length > 0) {
+                pedido.produtos[setor].forEach(item => {
+                    const produtoNome = item.nome; 
+
+                    const peso = dadosPeso[produtoNome] !== undefined && dadosPeso[produtoNome] > 0 ? `${formatarPesoCompleto(dadosPeso[produtoNome])} kg` : 'Pendente';
+                    const certificado = dadosCertificado[produtoNome] || 'Pendente';
+                    const statusClass = (dadosPeso[produtoNome] !== undefined && dadosCertificado[produtoNome]) ? 'concluido' : 'pendente';
+                    
+                    let statusText = 'Pendente';
+                    if (statusClass === 'concluido') {
+                       statusText = 'Concluído';
+                    }
+
+                    itensHTML += `
+                        <div class="embarque-modal-item">
+                            <span class="material-name">${produtoNome}</span> 
+                            <div class="material-info">
+                                <span class="material-cert">Certificado: <strong>${certificado}</strong></span>
+                                <span class="material-weight">Peso: <strong>${peso}</strong></span>
+                                <span class="material-status ${statusClass}">${statusText}</span>
+                            </div>
                         </div>
-                    </div>
-                `;
-            });
+                    `;
+                });
+            } else {
+                itensHTML += `<p>Nenhum item neste setor.</p>`;
+            }
         }
 
         modalContentHTML += itensHTML;
@@ -5427,3 +5443,4 @@ function updateFilterDisplay() {
         cidadeLabel.textContent = Array.from(cidadeCheckboxes).map(cb => cb.value).join(', ');
     }
 }
+
