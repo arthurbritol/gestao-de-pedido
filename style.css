@@ -3554,9 +3554,93 @@ button:disabled {
     background-color: #218838;
 }
 
-/* Estilo do Header para a nova coluna */
 .status-header.status-carregamento-programado {
     background-color: #6c757d; 
     color: white;
 }
 
+#roteirizacaoSidebar .panel-header {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.panel-header-top {
+    margin-bottom: 15px;
+}
+
+.roteirizacao-filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 12px;
+}
+
+.filter-group-select {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group-select label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.filter-group-select select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: var(--border-radius-small);
+    border: 1px solid var(--medium-gray);
+    background-color: var(--light-gray);
+}
+
+#roteirizacao-summary {
+    padding: 20px 24px;
+    border-top: 1px solid var(--medium-gray);
+    background-color: var(--white);
+    flex-shrink: 0;
+}
+
+#roteirizacao-summary h3 {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--dark-blue);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.summary-details .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95em;
+    padding: 8px 0;
+}
+
+.summary-details .summary-row:first-child {
+    border-bottom: 1px dashed var(--medium-gray);
+}
+
+.summary-details .summary-row span:first-child {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.summary-details .summary-row span:last-child {
+    font-weight: 700;
+    font-size: 1.05em;
+    color: var(--primary-blue);
+}   
+
+.status-tag.liberado-logistica {
+    background-color: #d1ecf1; 
+    color: #0c5460; 
+    border: 1px solid #bee5eb;
+}
+
+.status-select-colored.liberado-logistica {
+    background-color: #d1ecf1; 
+    color: #0c5460;
+    border-color: #bee5eb;
+}
