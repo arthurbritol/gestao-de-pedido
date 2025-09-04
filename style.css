@@ -1372,9 +1372,9 @@ button:disabled {
 }
 
 .sidebar-logo {
-    width: 100%;
-    margin: -40px auto -20px auto;
-    height: auto;
+    width: 93%;
+    margin: 0px auto 10px auto;
+    height: 60px;
 }
 
 .sidebar ul {
@@ -3559,3 +3559,4 @@ button:disabled {
     background-color: #6c757d; 
     color: white;
 }
+
