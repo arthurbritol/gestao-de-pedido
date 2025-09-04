@@ -4972,12 +4972,14 @@ function initializeMapAndFilters() {
     
     document.getElementById('limparFiltrosBtn').onclick = () => {
         document.querySelectorAll('.filter-dropdown input[type="checkbox"]').forEach(cb => cb.checked = false);
+        document.getElementById('filtro-capacidade').value = 'todos';
+        document.getElementById('filtro-status-pedido').value = 'todos';
         atualizarFiltroCidade(); 
     };
 
-    atualizarFiltroCidade(); 
+    atualizarFiltroCidade();
+    atualizarResumoSelecao(); 
 }
-
 
 async function getCoordsForAddress(address, id, focusCoords, estado) {
     const url = new URL('https://api.openrouteservice.org/geocode/search');
@@ -5027,10 +5029,51 @@ function gerarNumeroEmbarqueAleatorio() {
 }
 
 async function generateRoute(optimized) {
-    const selectedCheckboxes = Array.from(document.querySelectorAll('#pedidos-filtrados-list input:checked'));
-    if (selectedCheckboxes.length === 0) {
-        showModal("Atenção", "Selecione pelo menos um pedido para criar a rota.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
-        return;
+    const capacidadeSelecionadaValor = document.getElementById('filtro-capacidade').value;
+    let stopsToRoute = []; 
+
+    if (capacidadeSelecionadaValor !== 'todos') {
+
+        const visibleOrderElements = document.querySelectorAll('#pedidos-filtrados-list .order-card input');
+        const visibleOrderIDs = Array.from(visibleOrderElements).map(input => parseInt(input.dataset.id, 10));
+        let availableOrders = pedidos.filter(p => visibleOrderIDs.includes(p.id));
+
+        const capacidadeMaxima = parseInt(capacidadeSelecionadaValor, 10);
+        let pesoAtual = 0;
+        let pedidosSelecionadosAutomaticamente = [];
+
+        availableOrders.sort((a, b) => calcularPesoTotalPedido(b) - calcularPesoTotalPedido(a));
+
+        for (const pedido of availableOrders) {
+            const pesoPedido = calcularPesoTotalPedido(pedido);
+            if (pesoAtual + pesoPedido <= capacidadeMaxima) {
+                pedidosSelecionadosAutomaticamente.push(pedido);
+                pesoAtual += pesoPedido;
+            }
+        }
+        stopsToRoute = pedidosSelecionadosAutomaticamente;
+
+        document.querySelectorAll('#pedidos-filtrados-list input:checked').forEach(cb => cb.checked = false); 
+        stopsToRoute.forEach(pedido => {
+            const cb = document.querySelector(`#pedidos-filtrados-list input[data-id="${pedido.id}"]`);
+            if (cb) cb.checked = true;
+        });
+        atualizarResumoSelecao(); 
+
+        if (stopsToRoute.length === 0) {
+            showModal("Seleção Automática Vazia", "Nenhum pedido na lista filtrada se encaixa na capacidade selecionada ou os pedidos disponíveis têm peso zero.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+            return;
+        }
+
+    } else {
+
+        const selectedCheckboxes = document.querySelectorAll('#pedidos-filtrados-list input:checked');
+        if (selectedCheckboxes.length === 0) {
+            showModal("Atenção", "Selecione pelo menos um pedido para criar a rota ou defina um filtro de capacidade para seleção automática.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
+            return;
+        }
+        const selectedIDs = Array.from(selectedCheckboxes).map(cb => parseInt(cb.dataset.id, 10));
+        stopsToRoute = pedidos.filter(p => selectedIDs.includes(p.id));
     }
 
     const estadosSelecionados = Array.from(document.querySelectorAll('#filtro-estado-content input:checked')).map(cb => cb.value);
@@ -5041,29 +5084,24 @@ async function generateRoute(optimized) {
     document.getElementById('montarManualBtn').disabled = true;
     document.getElementById('sugerirRotaBtn').innerHTML = `<i class="ph ph-spinner-gap ph-spin"></i> Gerando Rota...`;
 
-    showFeedbackMessage(document.getElementById('minuta-content'), 'spinner-gap ph-spin', 'Buscando coordenadas...');
+    showFeedbackMessage(document.getElementById('minuta-content'), 'spinner-gap ph-spin', 'Buscando coordenadas e otimizando a rota...');
 
     try {
-        const stopsPromises = selectedCheckboxes.map(cb => {
-            const pedidoId = cb.dataset.id;
-            const pedidoAtual = pedidos.find(p => p.id == pedidoId);
-            if (!pedidoAtual) {
-                throw new Error(`Pedido com ID #${pedidoId} não foi encontrado.`);
-            }
+        const stopsPromises = stopsToRoute.map(pedidoAtual => {
             if (pedidoAtual.coords) {
                 return Promise.resolve({ ...pedidoAtual, details: {} });
             }
             const enderecoCorreto = pedidoAtual.endereco;
-            return getCoordsForAddress(enderecoCorreto, pedidoId, CEDISA_LOCATION.coords, estadoParaFoco).then(result => ({
+            return getCoordsForAddress(enderecoCorreto, pedidoAtual.id, CEDISA_LOCATION.coords, estadoParaFoco).then(result => ({
                 ...pedidoAtual,
                 details: result.details,
                 coords: result.coords
             }));
         });
 
-        const stops = await Promise.all(stopsPromises);
+        const stopsComCoordenadas = await Promise.all(stopsPromises);
 
-        let finalOrderedStops = optimized ? await getOptimizedStops(stops, CEDISA_LOCATION) : stops;
+        let finalOrderedStops = optimized ? await getOptimizedStops(stopsComCoordenadas, CEDISA_LOCATION) : stopsComCoordenadas;
 
         const directionCoordinates = [
             [CEDISA_LOCATION.coords[0], CEDISA_LOCATION.coords[1]],
@@ -5565,7 +5603,6 @@ function formatarMilhar(input) {
 }
 
 /**
-
  * @param {string} endereco 
  * @returns {{cidade: string, estado: string}}
  */
@@ -5617,6 +5654,9 @@ function atualizarListaPedidosFiltrados() {
     const estadosSelecionados = Array.from(document.querySelectorAll('#filtro-estado-content input:checked')).map(cb => cb.value);
     const cidadesSelecionadas = Array.from(document.querySelectorAll('#filtro-cidade-content input:checked')).map(cb => cb.value);
     
+    const capacidadeSelecionada = document.getElementById('filtro-capacidade') ? document.getElementById('filtro-capacidade').value : 'todos';
+    const statusSelecionado = document.getElementById('filtro-status-pedido') ? document.getElementById('filtro-status-pedido').value : 'todos';
+
     const pedidosList = document.getElementById('pedidos-filtrados-list');
     pedidosList.innerHTML = '';
 
@@ -5628,7 +5668,6 @@ function atualizarListaPedidosFiltrados() {
             return estadosSelecionados.includes(estado);
         });
     }
-
     if (cidadesSelecionadas.length > 0) {
         pedidosFiltrados = pedidosFiltrados.filter(p => {
             const { cidade } = parseEndereco(p.endereco);
@@ -5636,18 +5675,34 @@ function atualizarListaPedidosFiltrados() {
         });
     }
 
+    if (statusSelecionado !== 'todos') {
+        pedidosFiltrados = pedidosFiltrados.filter(p => getPedidoStatus(p.id) === statusSelecionado);
+    } else {
+        const statusDisponiveis = ["Aguardando rota", "Liberado logística", "Carregamento Programado"];
+        pedidosFiltrados = pedidosFiltrados.filter(p => statusDisponiveis.includes(getPedidoStatus(p.id)));
+    }
+
+    if (capacidadeSelecionada !== 'todos') {
+        pedidosFiltrados = pedidosFiltrados.filter(p => {
+            const pesoPedido = calcularPesoTotalPedido(p);
+            return pesoPedido <= parseInt(capacidadeSelecionada, 10);
+        });
+    }
+
     if (pedidosFiltrados.length > 0) {
+        pedidosFiltrados.sort((a, b) => new Date(a.data) - new Date(b.data)); 
         pedidosFiltrados.forEach(pedido => {
             const card = document.createElement('label');
             card.className = 'order-card';
-            card.innerHTML = `<input type="checkbox" data-id="${pedido.id}"><div class="order-card-details"><h4>${pedido.cliente}</h4><p>#${pedido.id} - ${pedido.endereco}</p></div>`;
+            card.innerHTML = `<input type="checkbox" data-id="${pedido.id}" onchange="atualizarResumoSelecao()"><div class="order-card-details"><h4>${pedido.cliente}</h4><p>#${pedido.id} - ${pedido.endereco}</p></div>`;
             pedidosList.appendChild(card);
         });
     } else {
-        showFeedbackMessage(pedidosList, 'map-pin', 'Nenhum pedido encontrado para a localização selecionada.');
+        showFeedbackMessage(pedidosList, 'map-pin', 'Nenhum pedido encontrado para os filtros selecionados.');
     }
     
-    updateFilterDisplay(); 
+    updateFilterDisplay();
+    atualizarResumoSelecao(); 
 }
 
 /**
@@ -5695,4 +5750,103 @@ function updateFilterDisplay() {
     } else {
         cidadeLabel.textContent = Array.from(cidadeCheckboxes).map(cb => cb.value).join(', ');
     }
+}
+
+
+
+/**
+ * 
+ * @param {object} pedido 
+ * @returns {number}
+ */
+function calcularPesoTotalPedido(pedido) {
+    let pesoTotal = 0;
+    if (pedido && pedido.produtos) {
+        for (const categoria in pedido.produtos) {
+            if (Array.isArray(pedido.produtos[categoria])) {
+                pedido.produtos[categoria].forEach(item => {
+                    if (item && typeof item.pesoSolicitado === 'number') {
+                        pesoTotal += item.pesoSolicitado;
+                    }
+                });
+            }
+        }
+    }
+    return pesoTotal;
+}
+
+function atualizarResumoSelecao() {
+    const selectedCheckboxes = document.querySelectorAll('#pedidos-filtrados-list input:checked');
+    let totalWeight = 0;
+    const selectedIDs = [];
+
+    selectedCheckboxes.forEach(cb => {
+        selectedIDs.push(parseInt(cb.dataset.id, 10));
+    });
+
+    const selectedOrders = pedidos.filter(p => selectedIDs.includes(p.id));
+
+    selectedOrders.forEach(pedido => {
+        totalWeight += calcularPesoTotalPedido(pedido);
+    });
+
+    const countElement = document.getElementById('resumo-pedidos-count');
+    const weightElement = document.getElementById('resumo-pedidos-weight');
+    
+    if (countElement) countElement.textContent = selectedOrders.length;
+    if (weightElement) weightElement.textContent = `${formatarPesoCompleto(totalWeight)} kg`;
+}
+
+function atualizarListaPedidosFiltrados() {
+    const estadosSelecionados = Array.from(document.querySelectorAll('#filtro-estado-content input:checked')).map(cb => cb.value);
+    const cidadesSelecionadas = Array.from(document.querySelectorAll('#filtro-cidade-content input:checked')).map(cb => cb.value);
+
+    const capacidadeSelecionada = document.getElementById('filtro-capacidade') ? document.getElementById('filtro-capacidade').value : 'todos';
+    const statusSelecionado = document.getElementById('filtro-status-pedido') ? document.getElementById('filtro-status-pedido').value : 'todos';
+
+    const pedidosList = document.getElementById('pedidos-filtrados-list');
+    pedidosList.innerHTML = '';
+
+    let pedidosFiltrados = pedidos.filter(p => p.embarque === null);
+
+    if (estadosSelecionados.length > 0) {
+        pedidosFiltrados = pedidosFiltrados.filter(p => {
+            const { estado } = parseEndereco(p.endereco);
+            return estadosSelecionados.includes(estado);
+        });
+    }
+
+    if (cidadesSelecionadas.length > 0) {
+        pedidosFiltrados = pedidosFiltrados.filter(p => {
+            const { cidade } = parseEndereco(p.endereco);
+            return cidadesSelecionadas.includes(cidade);
+        });
+    }
+
+    if (statusSelecionado !== 'todos') {
+        pedidosFiltrados = pedidosFiltrados.filter(p => getPedidoStatus(p.id) === statusSelecionado);
+    }
+
+    if (capacidadeSelecionada !== 'todos') {
+        pedidosFiltrados = pedidosFiltrados.filter(p => {
+            const pesoPedido = calcularPesoTotalPedido(p);
+            return pesoPedido <= parseInt(capacidadeSelecionada, 10);
+        });
+    }
+
+    if (pedidosFiltrados.length > 0) {
+        pedidosFiltrados.sort((a, b) => new Date(a.data) - new Date(b.data)); 
+        
+        pedidosFiltrados.forEach(pedido => {
+            const card = document.createElement('label');
+            card.className = 'order-card';
+            card.innerHTML = `<input type="checkbox" data-id="${pedido.id}" onchange="atualizarResumoSelecao()"><div class="order-card-details"><h4>${pedido.cliente}</h4><p>#${pedido.id} - ${pedido.endereco}</p></div>`;
+            pedidosList.appendChild(card);
+        });
+    } else {
+        showFeedbackMessage(pedidosList, 'map-pin', 'Nenhum pedido encontrado para os filtros selecionados.');
+    }
+    
+    updateFilterDisplay();
+    atualizarResumoSelecao(); 
 }
