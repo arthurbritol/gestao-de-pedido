@@ -57,8 +57,10 @@
         <div class="sidebar">
             <img src="IMAGES/logo_cedisa_branco_redimensionada.png" alt="Logo" class="sidebar-logo">
             <ul>
-                <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo Operacional</a></li>
-                <li><a href="#" data-view="consulta" onclick="showGestorView('consulta', this)">Consultar Pedidos</a></li>
+                <li><a href="#" class="active" data-view="resumo" onclick="showGestorView('resumo', this)">Resumo
+                        Operacional</a></li>
+                <li><a href="#" data-view="consulta" onclick="showGestorView('consulta', this)">Consultar Pedidos</a>
+                </li>
                 <li><a href="#" onclick="logout()">Sair</a></li>
             </ul>
         </div>
@@ -331,29 +333,62 @@
                             class="ph ph-arrow-left"></i> Voltar</button>
                     <div class="panel-header-title">
                         <i class="ph-bold ph-list-checks"></i>
-                        <h2>Pedidos</h2>
+                        <h2>Pedidos Disponíveis</h2>
                     </div>
                 </div>
+
                 <div class="roteirizacao-filters">
                     <div class="filter-dropdown">
                         <button class="filter-btn" onclick="toggleFilterDropdown('estado')">
-                            <span id="filtro-estado-label">Estados</span> <i class="ph ph-caret-down"></i>
+                            <span id="filtro-estado-label">Estado</span> <i class="ph ph-caret-down"></i>
                         </button>
-                        <div id="filtro-estado-content" class="dropdown-content">
-                            </div>
+                        <div id="filtro-estado-content" class="dropdown-content"></div>
                     </div>
                     <div class="filter-dropdown">
                         <button class="filter-btn" onclick="toggleFilterDropdown('cidade')">
-                            <span id="filtro-cidade-label">Cidades</span> <i class="ph ph-caret-down"></i>
+                            <span id="filtro-cidade-label">Cidade</span> <i class="ph ph-caret-down"></i>
                         </button>
-                        <div id="filtro-cidade-content" class="dropdown-content">
-                            </div>
+                        <div id="filtro-cidade-content" class="dropdown-content"></div>
+                    </div>
+
+                    <div class="filter-group-select">
+                        <label for="filtro-capacidade">Capacidade Caminhão:</label>
+                        <select id="filtro-capacidade" onchange="atualizarListaPedidosFiltrados()">
+                            <option value="todos">Todos</option>
+                            <option value="14000">Até 14 Toneladas</option>
+                            <option value="32000">Até 32 Toneladas</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group-select">
+                        <label for="filtro-status-pedido">Status Pedido:</label>
+                        <select id="filtro-status-pedido" onchange="atualizarListaPedidosFiltrados()">
+                            <option value="todos">Todos Disponíveis</option>
+                            <option value="Aguardando rota">Aguardando Rota</option>
+                            <option value="Carregamento Programado">Carregamento Programado</option>
+                            <option value="Liberado logística">Liberado logística</option> 
+                        </select>
                     </div>
                 </div>
-                 <button id="limparFiltrosBtn" class="btn-limpar-filtros">Limpar Filtros</button>
+                <button id="limparFiltrosBtn" class="btn-limpar-filtros">Limpar Filtros</button>
             </div>
+
             <div class="sidebar-content">
                 <ul id="pedidos-filtrados-list" class="order-list"></ul>
+            </div>
+
+            <div class="sidebar-footer" id="roteirizacao-summary">
+                <h3>Resumo da Seleção</h3>
+                <div class="summary-details">
+                    <div class="summary-row">
+                        <span>Quantidade de Entregas:</span>
+                        <span id="resumo-pedidos-count">0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Peso Total Selecionado:</span>
+                        <span id="resumo-pedidos-weight">0,00 kg</span>
+                    </div>
+                </div>
             </div>
             <div class="sidebar-footer">
                 <button id="zerarEmbarquesBtn" class="btn btn-danger-outline"><i class="ph ph-trash"></i>Zerar Todos os
@@ -367,15 +402,20 @@
                     <i class="ph-bold ph-path"></i>
                     <h2>Minuta da Rota</h2>
                 </div>
-                    <div class="route-actions">
-                        <button id="sugerirRotaBtn" class="btn btn-primary"><i class="ph ph-magic-wand"></i>Sugerir Rota Otimizada</button>
-                        <button id="montarManualBtn" class="btn btn-secondary"><i class="ph ph-arrows-clockwise"></i>Montar Rota Manualmente</button>
-                        
-                        <button id="exportarGoogleMapsBtn" class="btn btn-info" style="display:none;"><i class="ph ph-map-pin-line"></i>Abrir no Google Maps</button>
-                        
-                        <button id="confirmarEmbarqueBtn" class="btn btn-success" style="display:none;"><i class="ph ph-check-circle"></i>Confirmar Embarque</button>
-                        <button id="cancelarRotaBtn" class="btn btn-danger" style="display:none;"><i class="ph ph-x-circle"></i>Cancelar</button>
-                    </div>
+                <div class="route-actions">
+                    <button id="sugerirRotaBtn" class="btn btn-primary"><i class="ph ph-magic-wand"></i>Sugerir Rota
+                        Otimizada</button>
+                    <button id="montarManualBtn" class="btn btn-secondary"><i class="ph ph-arrows-clockwise"></i>Montar
+                        Rota Manualmente</button>
+
+                    <button id="exportarGoogleMapsBtn" class="btn btn-info" style="display:none;"><i
+                            class="ph ph-map-pin-line"></i>Abrir no Google Maps</button>
+
+                    <button id="confirmarEmbarqueBtn" class="btn btn-success" style="display:none;"><i
+                            class="ph ph-check-circle"></i>Confirmar Embarque</button>
+                    <button id="cancelarRotaBtn" class="btn btn-danger" style="display:none;"><i
+                            class="ph ph-x-circle"></i>Cancelar</button>
+                </div>
                 <div id="minuta-content" class="route-stops-list">
                     <div class="feedback-message">
                         <i class="ph-bold ph-map-trifold"></i>
