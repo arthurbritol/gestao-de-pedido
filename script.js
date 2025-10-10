@@ -39,8 +39,8 @@ const usuarios = {
 };
 
 let pedidosIniciais = [
-    { id: 259773, cliente: "Aço Forte", status: "Aguardando rota", data: "2025-08-24", endereco: "Rua Castelo Branco, 1010, Centro, Vila Velha - ES, 29100-040", embarque: null, motorista: null, produtos: { Viga: [ { nome: "Viga I  x 12.5#", pesoSolicitado: 1850 }, { nome: "Viga W 250 x 25.7", pesoSolicitado: 650 } ] } },
-    { id: 283722, cliente: "Metal Capixaba", status: "Aguardando rota", data: "2025-08-24", endereco: "Rua Sete de Setembro, 400, Centro, Vitória - ES, 29015-000", embarque: null, motorista: null, produtos: { Tubo: [ { nome: "Tubo Galvanizado 1.1/", pesoSolicitado: 980 } ], "Cantoneira / Barra": [ { nome: "Barra Chata  x 1/", pesoSolicitado: 440 } ] } },
+    { id: 259773, cliente: "Aço Forte", telefone: "5527992753233", status: "Aguardando rota", data: "2025-08-24", endereco: "Rua Castelo Branco, 1010, Centro, Vila Velha - ES, 29100-040", embarque: null, motorista: null, produtos: { Viga: [ { nome: "Viga I  x 12.5#", pesoSolicitado: 1850 }, { nome: "Viga W 250 x 25.7", pesoSolicitado: 650 } ] } },
+    { id: 283722, cliente: "Metal Capixaba", telefone: "5527992753233", status: "Aguardando rota", data: "2025-08-24", endereco: "Rua Sete de Setembro, 400, Centro, Vitória - ES, 29015-000", embarque: null, motorista: null, produtos: { Tubo: [ { nome: "Tubo Galvanizado 1.1/", pesoSolicitado: 980 } ], "Cantoneira / Barra": [ { nome: "Barra Chata  x 1/", pesoSolicitado: 440 } ] } },
     { id: 280519, cliente: "Engemetal", status: "Aguardando rota", data: "2025-08-25", endereco: "Rua da Conceição, 800, Centro, Linhares - ES, 29900-260", embarque: null, motorista: null, produtos: { Chapa: [ { nome: "Chapa Aço Carbono 1/ (12.70mm)", pesoSolicitado: 2400 } ], Tubo: [ { nome: "Tubo Retangular 80x40 #14 (2.00mm)", pesoSolicitado: 220 } ] } },
     { id: 296741, cliente: "Ferroleste", status: "Aguardando rota", data: "2025-08-25", endereco: "Rua Santa Maria, 320, Vila Nova, Colatina - ES, 29702-230", embarque: null, motorista: null, produtos: { Viga: [ { nome: "Viga U  x 6.7#", pesoSolicitado: 1200 }, { nome: "Viga I  x 10#", pesoSolicitado: 950 } ] } },
     { id: 301784, cliente: "Metalúrgica União", status: "Aguardando rota", data: "2025-08-26", endereco: "Avenida Champagnat, 1085, Praia da Costa, Vila Velha - ES, 29101-920", embarque: null, motorista: null, produtos: { Tubo: [ { nome: "Tubo Quadrado 40x40 #18 (1.25mm)", pesoSolicitado: 350 } ], Chapa: [ { nome: "Chapa Inox 430 1.2mm Polida", pesoSolicitado: 880 } ] } },
@@ -694,7 +694,25 @@ function setPedidoStatus(id, status) {
     const pedidoIndex = pedidos.findIndex(p => p.id === id);
     if (pedidoIndex !== -1) {
         pedidos[pedidoIndex].status = status;
-        salvarPedidosNoLocalStorage(); 
+        salvarPedidosNoLocalStorage();
+
+        const pedido = pedidos[pedidoIndex];
+        if (pedido.telefone) {
+            fetch('http://localhost:3000/notificar', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    pedidoId: id,
+                    novoStatus: status,
+                    numeroCliente: pedido.telefone
+                }),
+            })
+            .then(response => response.json())
+            .then(data => console.log('Notificação enviada:', data))
+            .catch((error) => console.error('Erro ao enviar notificação:', error));
+        }
     }
 }
 
@@ -4619,4 +4637,3 @@ function atualizarListaPedidosFiltrados() {
     updateFilterDisplay();
     atualizarResumoSelecao(); 
 }
-

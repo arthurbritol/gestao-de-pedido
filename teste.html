@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Teste de Notificação WhatsApp</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; }
+        button { font-size: 1.5rem; padding: 15px 30px; cursor: pointer; }
+        #status { margin-top: 20px; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+
+    <button onclick="enviarNotificacao()">Testar Envio de Notificação</button>
+    <div id="status"></div>
+
+    <script>
+        async function enviarNotificacao() {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = "Enviando...";
+
+            const seuNumeroVerificado = "5527992753233"; 
+
+            try {
+                const response = await fetch('http://localhost:3000/notificar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        pedidoId: "TESTE123",
+                        novoStatus: "Em Teste",
+                        numeroCliente: seuNumeroVerificado
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    statusDiv.textContent = "Sucesso! Verifique seu WhatsApp.";
+                    statusDiv.style.color = "green";
+                } else {
+                    statusDiv.textContent = "Falha no envio. Verifique o terminal do servidor.";
+                    statusDiv.style.color = "red";
+                }
+                console.log(data);
+
+            } catch (error) {
+                statusDiv.textContent = "Erro de conexão com o servidor. O server.js está rodando?";
+                statusDiv.style.color = "red";
+                console.error('Erro de conexão:', error);
+            }
+        }
+    </script>
+
+</body>
+</html>

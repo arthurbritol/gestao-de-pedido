@@ -1,0 +1,26 @@
+{
+  "name": "gestao-pedidos-backend",
+  "version": "1.0.0",
+  "description": "Servidor para notificações do sistema de gestão de pedidos.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "request": "^2.88.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arthurbritol/gestao-de-pedido.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arthurbritol/gestao-de-pedido/issues"
+  },
+  "homepage": "https://github.com/arthurbritol/gestao-de-pedido#readme"
+}
