@@ -14,6 +14,7 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-fixes.css">
 
 </head>
 
@@ -42,8 +43,7 @@
             <button class="user-option-button" onclick="continueToNextScreen()">Continuar</button>
         </div>
     </div>
-
-    <div class="login-container" id="gestorLoginPage" style="display: none;">
+    <div class="login-container hidden" id="gestorLoginPage">
         <div class="login-box">
             <h2>Acesso Gerencial</h2> <input type="text" id="gestorUsername" placeholder="Usuário"
                 autocomplete="username" />
@@ -51,6 +51,7 @@
             <button onclick="fazerLoginGestor()">Acessar Dashboard</button>
             <div class="login-error" id="gestorLoginErro"></div>
         </div>
+    </div>
     </div>
 
     <div class="dashboard-wrapper" id="dashboardWrapper" style="display: none;">

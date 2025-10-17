@@ -28,7 +28,7 @@ app.post('/notificar', async (req, res) => {
         return res.status(400).json({ error: 'Número do cliente não fornecido.' });
     }
 
-    const mensagem = `O status do seu pedido #${pedidoId} foi atualizado para: ${novoStatus}.`;
+    const mensagem = `Olá! O status do seu pedido #${pedidoId} foi atualizado para: ${novoStatus}.`;
     console.log(`Mensagem a ser enviada: "${mensagem}"`);
 
 
