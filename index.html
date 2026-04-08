@@ -164,37 +164,89 @@
     </div>
 
     <div class="user-selection-container" id="materialSelectionPage" style="display: none;">
-        <div class="user-selection-box">
+        <div class="user-selection-box scrollable-box">
             <img src="IMAGES/logo_cedisa_redimensionada_proporcional.png" alt="Logo" class="logo">
-            <h2>Qual material você irá separar?</h2>
-            <div class="user-option" data-material-type="Chapa" onclick="selectMaterialType('Chapa')">
-                <img src="IMAGES/chapa-de-aco.png" alt="Icone Chapa" class="icon">
-                <div class="text-content">
-                    <h3>Chapa</h3>
-                    <p>Pedidos contendo chapas</p>
-                </div>
-            </div>
-            <div class="user-option" data-material-type="Tubo" onclick="selectMaterialType('Tubo')">
-                <img src="IMAGES/tubos.png" alt="Icone Tubo" class="icon">
-                <div class="text-content">
-                    <h3>Tubo</h3>
-                    <p>Pedidos contendo tubos</p>
-                </div>
-            </div>
-            <div class="user-option" data-material-type="Viga" onclick="selectMaterialType('Viga')">
-                <img src="IMAGES/viga-de-aco.png" alt="Icone Viga" class="icon">
-                <div class="text-content">
-                    <h3>Viga</h3>
-                    <p>Pedidos contendo vigas</p>
-                </div>
-            </div>
+            <h2>Qual setor você irá separar?</h2>
+            
             <div class="user-option" data-material-type="Todos" onclick="selectMaterialType('Todos')">
                 <img src="IMAGES/aco-laminado.png" alt="Icone Todos" class="icon">
                 <div class="text-content">
-                    <h3>Todos os Materiais</h3>
-                    <p>Visualizar pedidos de todos os tipos de materiais</p>
+                    <h3>Todos os setores</h3>
+                    <p>Visualizar todos os setores</p>
                 </div>
             </div>
+
+            <div class="user-option" data-material-type="BOBINAS" onclick="selectMaterialType('BOBINAS')">
+                <img src="IMAGES/chapa-de-aco.png" alt="Icone Bobinas" class="icon"> <div class="text-content">
+                    <h3>BOBINAS</h3>
+                    <p>Bobinas</p>
+                </div>
+            </div>
+
+            <div class="user-option" data-material-type="CERCADO DA PEDRA" onclick="selectMaterialType('CERCADO DA PEDRA')">
+                <img src="IMAGES/chapa-de-aco.png" alt="Icone Customizados" class="icon">
+                <div class="text-content">
+                    <h3>CERCADO DA PEDRA</h3>
+                    <p>CUSTOMIZADOS</p>
+                </div>
+            </div>
+
+            <div class="user-option" data-material-type="GALPAO A1" onclick="selectMaterialType('GALPAO A1')">
+                <img src="IMAGES/chapa-de-aco.png" alt="Icone CGU" class="icon">
+                <div class="text-content">
+                    <h3>GALPAO A1</h3>
+                    <p>CGU</p>
+                </div>
+            </div>
+
+            <div class="user-option" data-material-type="GALPAO A1 E A2" onclick="selectMaterialType('GALPAO A1 E A2')">
+                <img src="IMAGES/viga-de-aco.png" alt="Icone A1 e A2" class="icon">
+                <div class="text-content">
+                    <h3>GALPAO A1 E A2</h3>
+                    <p>BARRAS, CANTONEIRAS, VIGAS I e U, TUBOS NBR</p>
+                </div>
+            </div>
+
+            <div class="user-option" data-material-type="GALPAO A2" onclick="selectMaterialType('GALPAO A2')">
+                <img src="IMAGES/viga-de-aco.png" alt="Icone A2" class="icon">
+                <div class="text-content">
+                    <h3>GALPAO A2</h3>
+                    <p>VERGALHÃO, TELA e TRELIÇA</p>
+                </div>
+            </div>
+
+            <div class="user-option" data-material-type="GALPAO A3" onclick="selectMaterialType('GALPAO A3')">
+                <img src="IMAGES/viga-de-aco.png" alt="Icone A3" class="icon">
+                <div class="text-content">
+                    <h3>GALPAO A3</h3>
+                    <p>VIGAS W</p>
+                </div>
+            </div>
+
+            <div class="user-option" data-material-type="GALPAO B1" onclick="selectMaterialType('GALPAO B1')">
+                <img src="IMAGES/chapa-de-aco.png" alt="Icone B1" class="icon">
+                <div class="text-content">
+                    <h3>GALPAO B1</h3>
+                    <p>TELHA, LAMBRIL e CALHA</p>
+                </div>
+            </div>
+
+            <div class="user-option" data-material-type="GALPAO B2, B3 E B4" onclick="selectMaterialType('GALPAO B2, B3 E B4')">
+                <img src="IMAGES/tubos.png" alt="Icone Tubos" class="icon">
+                <div class="text-content">
+                    <h3>GALPAO B2, B3 E B4</h3>
+                    <p>PERFIL e TUBOS INDUSTRIAIS</p>
+                </div>
+            </div>
+
+            <div class="user-option" data-material-type="GALPAO B5 E B6" onclick="selectMaterialType('GALPAO B5 E B6')">
+                <img src="IMAGES/chapa-de-aco.png" alt="Icone B5 e B6" class="icon">
+                <div class="text-content">
+                    <h3>GALPAO B5 E B6</h3>
+                    <p>CZL e CFQ</p>
+                </div>
+            </div>
+
             <button class="user-option-button" onclick="continueToFilterScreen()">Continuar</button>
         </div>
     </div>
