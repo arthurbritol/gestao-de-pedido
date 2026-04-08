@@ -3071,7 +3071,7 @@ function showEmbarqueDetailsModal(embarqueNome) {
                         const temCertificado = certificado && certificado !== 'Pendente' && certificado !== '';
                         const btnClass = temCertificado ? 'concluido' : 'pendente';
                         const btnLabel = temCertificado
-                            ? `<i class="ph ph-certificate"></i> Cert: ${certificado}`
+                            ? `<i class="ph ph-certificate"></i> Certificado: ${certificado}`
                             : `<i class="ph ph-warning"></i> Sem Certificado`;
                         certificadoHTML = `
                             <button 
