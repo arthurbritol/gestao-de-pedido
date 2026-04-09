@@ -4439,7 +4439,7 @@ async function validarCertificadoEmbarque(elementoBotao, idCertificado) {
             window.open(dados.linkDownload, '_blank');
 
             setTimeout(() => {
-                elementoBotao.innerHTML = 'Certificado';
+                elementoBotao.innerHTML = 'Baixado';
                 elementoBotao.style.backgroundColor = '';
             }, 3000);
         } else {
