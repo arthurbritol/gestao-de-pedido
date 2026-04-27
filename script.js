@@ -39,30 +39,630 @@ const usuarios = {
 };
 
 let pedidosIniciais = [
-{ 
-  id: 12345, 
-  cliente: "Aço Forte", 
-  telefone: "5527992753233", 
-  status: "Aguardando rota", 
-  data: "2026-04-07", 
-  endereco: "Avenida Talma Rodrigues Ribeiro, 1500, Portal de Jacaraípe, Serra - ES, 29173-735", 
-  embarque: null, 
-  motorista: null, 
-  produtos: { 
-     "GALPAO A3": [ 
-         { nome: "Viga W 250 x 25.7", pesoSolicitado: 650 } 
-     ],
-     "GALPAO B2, B3 E B4": [
-         { nome: "Tubo Quadrado 40x40 #18", pesoSolicitado: 350 }
-     ],
-     "BOBINAS": [
-         { nome: "Bobina Fina a Frio", pesoSolicitado: 1200 }
-     ]
-  } 
-}
+
+{
+  id: 20001,
+  cliente: "Aço Forte",
+  telefone: "5527992753233",
+  status: "Aguardando rota",
+  data: "2026-04-10",
+  endereco: "Avenida Talma Rodrigues Ribeiro, 1500, Portal de Jacaraípe, Serra - ES, 29173-735",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO A3": [
+      { nome: "Viga W 250 x 25.7", pesoSolicitado: 925 }
+    ],
+    "GALPAO B2": [
+      { nome: "Tubo Quadrado 40x40 #18 (1.25mm)", pesoSolicitado: 480 }
+    ],
+    "BOBINAS": [
+      { nome: "Chapa Fina a Frio #24 (0.60mm)", pesoSolicitado: 860 }
+    ]
+  }
+},
+{
+  id: 20013,
+  cliente: "Aço Capixaba",
+  telefone: "5527998112233",
+  status: "Aguardando rota",
+  data: "2026-04-20",
+  endereco: "Av. Carlos Lindenberg, 4560, Vila Velha - ES, 29118-000",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO A3": [
+      { nome: "Viga W 250 x 25.7", pesoSolicitado: 1200 }
+    ]
+  }
+},
+{
+  id: 20014,
+  cliente: "Metal Rio",
+  telefone: "5521998877665",
+  status: "Aguardando rota",
+  data: "2026-04-20",
+  endereco: "Rua Maxwell, 800, Vila Isabel, Rio de Janeiro - RJ, 20541-100",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO A1": [
+      { nome: "Chapa Grossa 3/ (19.05mm)", pesoSolicitado: 1800 }
+    ]
+  }
+},
+{
+  id: 20015,
+  cliente: "Paulista Estruturas",
+  telefone: "5511985544332",
+  status: "Aguardando rota",
+  data: "2026-04-21",
+  endereco: "Av. do Estado, 5200, Cambuci, São Paulo - SP, 01516-000",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO A1 E A2": [
+      { nome: "Cantoneira 2 x 1/8", pesoSolicitado: 420 },
+      { nome: "Barra Chata 2 x 1/4", pesoSolicitado: 380 }
+    ]
+  }
+},
+{
+  id: 20016,
+  cliente: "Minas Perfilados",
+  telefone: "5531994455667",
+  status: "Aguardando rota",
+  data: "2026-04-21",
+  endereco: "Av. Antônio Carlos, 6627, Pampulha, Belo Horizonte - MG, 31270-901",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO B2, B3 E B4": [
+      { nome: "Tubo Retangular 80x40 #14 (2.00mm)", pesoSolicitado: 690 }
+    ]
+  }
+},
+{
+  id: 20017,
+  cliente: "Bahia Metais",
+  telefone: "5571993344556",
+  status: "Aguardando rota",
+  data: "2026-04-22",
+  endereco: "Av. Aliomar Baleeiro, 8230, São Cristóvão, Salvador - BA, 41510-015",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "BOBINAS": [
+      { nome: "Chapa Fina a Frio #16 (1.55mm)", pesoSolicitado: 1400 }
+    ]
+  }
+},
+{
+  id: 20018,
+  cliente: "Nordeste Tubos",
+  telefone: "5581989988776",
+  status: "Aguardando rota",
+  data: "2026-04-22",
+  endereco: "Av. Norte Miguel Arraes, 3500, Casa Amarela, Recife - PE, 52051-000",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO B2, B3 E B4": [
+      { nome: "Tubo Quadrado 60x60 #18 (1.25mm)", pesoSolicitado: 510 }
+    ]
+  }
+},
+{
+  id: 20019,
+  cliente: "Ceará Industrial",
+  telefone: "5585992233445",
+  status: "Aguardando rota",
+  data: "2026-04-23",
+  endereco: "Av. Mister Hull, 4500, Presidente Kennedy, Fortaleza - CE, 60356-001",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO A2": [
+      { nome: "Vergalhão CA50 12.5mm", pesoSolicitado: 980 }
+    ]
+  }
+},
+{
+  id: 20020,
+  cliente: "Brasília Aços",
+  telefone: "5561996677885",
+  status: "Aguardando rota",
+  data: "2026-04-23",
+  endereco: "SIA Trecho 10, Lote 1285, Brasília - DF, 71200-100",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "CERCADO DA PEDRA": [
+      { nome: "Chapa Xadrez 1/4", pesoSolicitado: 620 }
+    ]
+  }
+},
+{
+  id: 20021,
+  cliente: "Goiás Estrutural",
+  telefone: "5562993344556",
+  status: "Aguardando rota",
+  data: "2026-04-24",
+  endereco: "Av. Anhanguera, 6200, Setor Oeste, Goiânia - GO, 74110-010",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO A3": [
+      { nome: "Viga W 360 x 57.8", pesoSolicitado: 1500 }
+    ]
+  }
+},
+{
+  id: 20022,
+  cliente: "Paraná Metais",
+  telefone: "5541988776654",
+  status: "Aguardando rota",
+  data: "2026-04-24",
+  endereco: "Rua Marechal Floriano Peixoto, 3450, Curitiba - PR, 80230-000",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO A1 E A2": [
+      { nome: "Viga I  x 18.4#", pesoSolicitado: 760 }
+    ]
+  }
+},
+{
+  id: 20023,
+  cliente: "Santa Catarina Steel",
+  telefone: "5548997766554",
+  status: "Aguardando rota",
+  data: "2026-04-25",
+  endereco: "Rua Dona Francisca, 7800, Joinville - SC, 89219-600",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO B5 E B6": [
+      { nome: "Chapa Galvanizada #22 (0.80mm)", pesoSolicitado: 880 }
+    ]
+  }
+},
+{
+  id: 20024,
+  cliente: "Sul Estruturas",
+  telefone: "5551988776654",
+  status: "Aguardando rota",
+  data: "2026-04-25",
+  endereco: "Av. Assis Brasil, 6200, Sarandi, Porto Alegre - RS, 91110-001",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO A1": [
+      { nome: "Chapa Aço Carbono 1/ (6.35mm)", pesoSolicitado: 1100 }
+    ]
+  }
+},
+{
+  id: 20025,
+  cliente: "Amazonas Metais",
+  telefone: "5592995566774",
+  status: "Aguardando rota",
+  data: "2026-04-26",
+  endereco: "Av. Torquato Tapajós, 8500, Tarumã, Manaus - AM, 69093-415",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "BOBINAS": [
+      { nome: "Chapa Fina a Frio #20 (0.90mm)", pesoSolicitado: 1250 }
+    ]
+  }
+},
+{
+  id: 20026,
+  cliente: "Interior Metais",
+  telefone: "5516998877665",
+  status: "Aguardando rota",
+  data: "2026-04-26",
+  endereco: "Av. Brasil, 4200, Ribeirão Preto - SP, 14075-000",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO B2, B3 E B4": [
+      { nome: "Tubo Retangular 50x30 #16 (1.55mm)", pesoSolicitado: 580 }
+    ]
+  }
+},
+{
+  id: 20027,
+  cliente: "Metal Norte",
+  telefone: "5591994433221",
+  status: "Aguardando rota",
+  data: "2026-04-27",
+  endereco: "Rod. BR-316, Km 7, Ananindeua - PA, 67130-000",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO A3": [
+      { nome: "Viga W 150 x 18.0", pesoSolicitado: 890 }
+    ]
+  }
+},
+{
+  id: 20028,
+  cliente: "Interior Minas",
+  telefone: "5534998877665",
+  status: "Aguardando rota",
+  data: "2026-04-27",
+  endereco: "Av. Brasil, 2100, Uberlândia - MG, 38400-678",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO A1 E A2": [
+      { nome: "Barra Chata 3 x 1/8", pesoSolicitado: 460 }
+    ]
+  }
+},
+{
+  id: 20029,
+  cliente: "Serra Tubos",
+  telefone: "5527999988776",
+  status: "Aguardando rota",
+  data: "2026-04-28",
+  endereco: "Av. Eldes Scherrer Souza, 2400, Serra - ES, 29166-804",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO B2, B3 E B4": [
+      { nome: "Tubo Quadrado 100x100 #11 (3.00mm)", pesoSolicitado: 980 }
+    ]
+  }
+},
+{
+  id: 20030,
+  cliente: "Vitória Metais",
+  telefone: "5527991122334",
+  status: "Aguardando rota",
+  data: "2026-04-28",
+  endereco: "Av. Nossa Senhora da Penha, 3000, Vitória - ES, 29056-909",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "CERCADO DA PEDRA": [
+      { nome: "Chapa Perfurada 2.00mm", pesoSolicitado: 540 }
+    ]
+  }
+},
+{
+  id: 20002,
+  cliente: "Metalúrgica Paulista",
+  telefone: "5527992753233",
+  status: "Programado",
+  data: "2026-04-11",
+  endereco: "Rua Serra de Bragança, 1240, Tatuapé, São Paulo - SP, 03318-001",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO A1": [
+      { nome: "Chapa Aço Carbono 3/ (9.53mm)", pesoSolicitado: 1800 }
+    ],
+    "GALPAO A2": [
+      { nome: "Barra Chata  x 1/", pesoSolicitado: 650 }
+    ]
+  }
+},
+{
+  id: 20003,
+  cliente: "Rio Aços Industriais",
+  telefone: "5527992753233",
+  status: "Aguardando rota",
+  data: "2026-04-12",
+  endereco: "Avenida Brasil, 3490, Bonsucesso, Rio de Janeiro - RJ, 21040-361",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO A1": [
+      { nome: "Viga I  x 18.4#", pesoSolicitado: 720 }
+    ],
+    "GALPAO B1": [
+      { nome: "Tubo Retangular 80x40 #14 (2.00mm)", pesoSolicitado: 510 }
+    ],
+    "GALPAO B3": [
+      { nome: "Cantoneira / Barra", pesoSolicitado: 390 }
+    ]
+  }
+},
+{
+  id: 20004,
+  cliente: "Minas Steel",
+  telefone: "5527992753233",
+  status: "Programado",
+  data: "2026-04-13",
+  endereco: "Avenida Amazonas, 9000, Gameleira, Belo Horizonte - MG, 30510-000",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO B1": [
+      { nome: "Viga U  x 11.5#", pesoSolicitado: 980 }
+    ],
+    "GALPAO B2": [
+      { nome: "Chapa Aço Carbono 1/ (6.35mm)", pesoSolicitado: 1250 }
+    ]
+  }
+},
+{
+  id: 20005,
+  cliente: "Sul Metais",
+  telefone: "5527992753233",
+  status: "Aguardando rota",
+  data: "2026-04-14",
+  endereco: "Avenida Sertório, 6600, Sarandi, Porto Alegre - RS, 91110-580",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO A2": [
+      { nome: "Viga W 200 x 22.5", pesoSolicitado: 840 }
+    ],
+    "GALPAO B4": [
+      { nome: "Tubo Industrial Quadrado 40x40 #14 (2.00mm)", pesoSolicitado: 460 }
+    ],
+    "GALPAO A3": [
+      { nome: "Chapa Inox 304 1.0mm Escovada", pesoSolicitado: 310 }
+    ]
+  }
+},
+{
+  id: 20006,
+  cliente: "Nordeste Metal",
+  telefone: "5527992753233",
+  status: "Aguardando rota",
+  data: "2026-04-15",
+  endereco: "Av. Abdias de Carvalho, 1678, Recife - PE, 50710-210",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "BOBINAS": [
+      { nome: "Chapa Fina a Frio #20 (0.90mm)", pesoSolicitado: 1200 }
+    ],
+    "GALPAO B5 E B6": [
+      { nome: "Chapa Galvanizada #22 (0.80mm)", pesoSolicitado: 820 }
+    ]
+  }
+},
+{
+  id: 20007,
+  cliente: "Ceará Estruturas",
+  telefone: "5527992753233",
+  status: "Programado",
+  data: "2026-04-16",
+  endereco: "Av. Dedé Brasil, 505, Fortaleza - CE, 60811-550",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO A3": [
+      { nome: "Viga W 360 x 57.8", pesoSolicitado: 1400 }
+    ],
+    "GALPAO A1 E A2": [
+      { nome: "Cantoneira 2 1/2 x 1/4", pesoSolicitado: 520 }
+    ]
+  }
+},
+{
+  id: 20008,
+  cliente: "Brasília Aço",
+  telefone: "5527992753233",
+  status: "Aguardando rota",
+  data: "2026-04-16",
+  endereco: "SIA Trecho 3, Lote 625, Brasília - DF, 71200-030",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO A1": [
+      { nome: "Chapa Grossa 3/ (19.05mm)", pesoSolicitado: 1850 }
+    ],
+    "CERCADO DA PEDRA": [
+      { nome: "Chapa Xadrez 1/ (6.35mm)", pesoSolicitado: 680 }
+    ]
+  }
+},
+{
+  id: 20009,
+  cliente: "Goiás Metais",
+  telefone: "5527992753233",
+  status: "Programado",
+  data: "2026-04-17",
+  endereco: "Av. Perimetral Norte, 4120, Goiânia - GO, 74445-190",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO B2, B3 E B4": [
+      { nome: "Tubo Retangular 80x40 #14 (2.00mm)", pesoSolicitado: 760 }
+    ],
+    "GALPAO A1 E A2": [
+      { nome: "Viga U  x 6.7#", pesoSolicitado: 490 }
+    ]
+  }
+},
+{
+  id: 20010,
+  cliente: "Amazon Steel",
+  telefone: "5527992753233",
+  status: "Aguardando rota",
+  data: "2026-04-18",
+  endereco: "Av. Torquato Tapajós, 4500, Manaus - AM, 69093-415",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "BOBINAS": [
+      { nome: "Chapa Fina a Frio #16 (1.55mm)", pesoSolicitado: 980 }
+    ],
+    "CERCADO DA PEDRA": [
+      { nome: "Chapa Inox 304 3.0mm Polida", pesoSolicitado: 430 }
+    ]
+  }
+},
+{
+  id: 20011,
+  cliente: "Sul Catarinense Aços",
+  telefone: "5527992753233",
+  status: "Programado",
+  data: "2026-04-18",
+  endereco: "Rua Blumenau, 2100, Joinville - SC, 89204-250",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO A3": [
+      { nome: "Viga W 250 x 32.7", pesoSolicitado: 1100 }
+    ],
+    "GALPAO B2, B3 E B4": [
+      { nome: "Tubo Quadrado 60x60 #18 (1.25mm)", pesoSolicitado: 540 }
+    ]
+  }
+},
+{
+  id: 20012,
+  cliente: "Paraná Estruturas",
+  telefone: "5527992753233",
+  status: "Aguardando rota",
+  data: "2026-04-19",
+  endereco: "Rua João Negrão, 2222, Rebouças, Curitiba - PR, 80230-150",
+  embarque: null,
+  motorista: null,
+  produtos: {
+    "GALPAO A2": [
+      { nome: "Vergalhão CA50 12.5mm", pesoSolicitado: 950 }
+    ],
+    "GALPAO A1 E A2": [
+      { nome: "Barra Chata 2 x 1/4", pesoSolicitado: 410 }
+    ]
+  }
+},
+
+  {
+    id: 30001,
+    cliente: "Alpha Metalúrgica Ltda",
+    telefone: "5527992753233",
+    status: "Aguardando rota",
+    data: "2026-04-27",
+    endereco: "Avenida Marechal Campos, 1468, Maruípe, Vitória - ES, 29043-260",
+    embarque: null,
+    motorista: null,
+    produtos: { Diversos: [{ nome: "Bobinas de Aço", pesoSolicitado: 1800 }] },
+    pesoEstimado: 1800
+  },
+  {
+    id: 30002,
+    cliente: "Ferro Forte Indústria",
+    telefone: "5527992753233",
+    status: "Aguardando rota",
+    data: "2026-04-27",
+    endereco: "Rua Henrique Moscoso, 525, Centro, Vitória - ES, 29010-330",
+    embarque: null,
+    motorista: null,
+    produtos: { Diversos: [{ nome: "Chapas de Aço", pesoSolicitado: 2200 }] },
+    pesoEstimado: 2200
+  },
+  {
+    id: 30003,
+    cliente: "Nova Aço Brasil",
+    telefone: "5527992753233",
+    status: "Aguardando rota",
+    data: "2026-04-27",
+    endereco: "Rodovia BR-101, km 267, Jardim Limoeiro, Serra - ES, 29164-130",
+    embarque: null,
+    motorista: null,
+    produtos: { Diversos: [{ nome: "Perfis Metálicos", pesoSolicitado: 2600 }] },
+    pesoEstimado: 2600
+  },
+  {
+    id: 30004,
+    cliente: "Metal Prime Soluções",
+    telefone: "5527992753233",
+    status: "Aguardando rota",
+    data: "2026-04-27",
+    endereco: "Rua Sete de Setembro, 318, Centro, Vila Velha - ES, 29100-320",
+    embarque: null,
+    motorista: null,
+    produtos: { Diversos: [{ nome: "Tubos de Aço", pesoSolicitado: 1950 }] },
+    pesoEstimado: 1950
+  },
+  {
+    id: 30005,
+    cliente: "Estrutura Forte Engenharia",
+    telefone: "5527992753233",
+    status: "Aguardando rota",
+    data: "2026-04-27",
+    endereco: "Avenida Carlos Lindemberg, 500, Ibes, Vila Velha - ES, 29108-020",
+    embarque: null,
+    motorista: null,
+    produtos: { Diversos: [{ nome: "Vigas Metálicas", pesoSolicitado: 3100 }] },
+    pesoEstimado: 3100
+  },
+
+  // --- Sudeste ---
+  {
+    id: 30006,
+    cliente: "Aço Paulista Comércio",
+    telefone: "5527992753233",
+    status: "Aguardando rota",
+    data: "2026-04-27",
+    endereco: "Avenida do Estado, 5500, Cambuci, São Paulo - SP, 01516-000",
+    embarque: null,
+    motorista: null,
+    produtos: { Diversos: [{ nome: "Chapas Grossas", pesoSolicitado: 2800 }] },
+    pesoEstimado: 2800
+  },
+  {
+    id: 30007,
+    cliente: "Metalúrgica Horizonte",
+    telefone: "5527992753233",
+    status: "Aguardando rota",
+    data: "2026-04-27",
+    endereco: "Rua Serra de Bragança, 1240, Tatuapé, São Paulo - SP, 03318-001",
+    embarque: null,
+    motorista: null,
+    produtos: { Diversos: [{ nome: "Perfis U", pesoSolicitado: 2400 }] },
+    pesoEstimado: 2400
+  },
+  {
+    id: 30008,
+    cliente: "Rio Aços Soluções",
+    telefone: "5527992753233",
+    status: "Aguardando rota",
+    data: "2026-04-27",
+    endereco: "Avenida Brasil, 3490, Bonsucesso, Rio de Janeiro - RJ, 21040-361",
+    embarque: null,
+    motorista: null,
+    produtos: { Diversos: [{ nome: "Tubos Industriais", pesoSolicitado: 2700 }] },
+    pesoEstimado: 2700
+  },
+
+  // --- Sul ---
+  {
+    id: 30009,
+    cliente: "Metal Sul Distribuidora",
+    telefone: "5527992753233",
+    status: "Aguardando rota",
+    data: "2026-04-27",
+    endereco: "Avenida Sertório, 4500, Sarandi, Porto Alegre - RS, 91110-561",
+    embarque: null,
+    motorista: null,
+    produtos: { Diversos: [{ nome: "Placas Metálicas", pesoSolicitado: 2900 }] },
+    pesoEstimado: 2900
+  },
+  {
+    id: 30010,
+    cliente: "Estruturas Catarinenses",
+    telefone: "5527992753233",
+    status: "Aguardando rota",
+    data: "2026-04-27",
+    endereco: "Rua Felipe Schmidt, 755, Centro, Florianópolis - SC, 88010-001",
+    embarque: null,
+    motorista: null,
+    produtos: { Diversos: [{ nome: "Aço Laminado", pesoSolicitado: 2100 }] },
+    pesoEstimado: 2100
+  }
 ];
 
-let pedidosPendentes = []; 
 const CEDISA_LOCATION = { name: 'Cedisa Central de Aço - Matriz', coords: [-40.366593, -20.065453] };
 
 const pesosTeoricosProdutos = {
@@ -3454,13 +4054,52 @@ function toggleDropdown(cardElement) {
     }
 }
 
-let map, currentRouteLayer;
-const OPENROUTESERVICE_API_KEY = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjJlZTY2Nzc2YjRhZjQ5Zjk5OTVhYmI3N2VmOTljMTM3IiwiaCI6Im11cm11cjY0In0=";
 
-function decodePolyline(encoded) { let p = []; let i = 0, len = encoded.length; let lat = 0, lng = 0; while (i < len) { let b, shift = 0, result = 0; do { b = encoded.charAt(i++).charCodeAt(0) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20); let dlat = ((result & 1) ? ~(result >> 1) : (result >> 1)); lat += dlat; shift = 0, result = 0; do { b = encoded.charAt(i++).charCodeAt(0) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20); let dlng = ((result & 1) ? ~(result >> 1) : (result >> 1)); lng += dlng; p.push([lat / 1E5, lng / 1E5]); } return p; }
-function formatDuration(seconds) { if (isNaN(seconds) || seconds < 0) return "00h 00m"; const h = Math.floor(seconds / 3600); const m = Math.floor((seconds % 3600) / 60); return `${h}h ${m}m`; }
-function formatDistance(meters) { if (isNaN(meters) || meters < 0) return "0.0 km"; return (meters / 1000).toFixed(1) + ' km'; }
+const MAPBOX_TOKEN = "pk.eyJ1IjoiYXJ0aHVybHVjaW8iLCJhIjoiY21pc3RvbzFvMWdwNjNnb2JmcmEwc2d1aCJ9.Beceh-8jTiFrhXzs93C-4w";
 
+let map = null;
+let currentRouteLayer = null;
+let pedidosPendentes = [];
+let rotaPendente = null;
+
+const LIMITE_SUGESTAO_PARADAS =15;
+
+function decodePolyline(encoded) {
+    let points = [];
+    let index = 0, lat = 0, lng = 0;
+
+    while (index < encoded.length) {
+        let b, shift = 0, result = 0;
+        do {
+            b = encoded.charCodeAt(index++) - 63;
+            result |= (b & 0x1f) << shift;
+            shift += 5;
+        } while (b >= 0x20);
+        lat += (result & 1) ? ~(result >> 1) : (result >> 1);
+
+        shift = 0;
+        result = 0;
+        do {
+            b = encoded.charCodeAt(index++) - 63;
+            result |= (b & 0x1f) << shift;
+            shift += 5;
+        } while (b >= 0x20);
+        lng += (result & 1) ? ~(result >> 1) : (result >> 1);
+
+        points.push([lat / 1e5, lng / 1e5]);
+    }
+    return points;
+}
+
+function formatDistance(m) {
+    return ((m || 0) / 1000).toFixed(1) + " km";
+}
+
+function formatDuration(s) {
+    const h = Math.floor(s / 3600);
+    const m = Math.floor((s % 3600) / 60);
+    return `${h}h ${m}m`;
+}
 
 function showRoteirizacaoPage(clickedLink) {
     const links = document.querySelectorAll('#dashboardWrapper .sidebar a');
@@ -3475,17 +4114,21 @@ function showRoteirizacaoPage(clickedLink) {
 }
 
 function initializeMap() {
-    if (map) {
-        map.remove();
-        map = null;
-    }
-    map = L.map('map').setView([-20.198, -40.252], 10);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors', maxZoom: 18,
-    }).addTo(map);
-    setTimeout(() => {
-        if (map) map.invalidateSize();
-    }, 10);
+    if (map) map.remove();
+
+    map = L.map("map").setView([-20.198, -40.252], 10);
+
+    L.tileLayer(
+        `https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
+        {
+            tileSize: 512,
+            zoomOffset: -1,
+            maxZoom: 20,
+            attribution: '© Mapbox © OpenStreetMap'
+        }
+    ).addTo(map);
+
+    setTimeout(() => map.invalidateSize(), 100);
 }
 
 function showFeedbackMessage(container, icon, message, isError = false) {
@@ -3542,42 +4185,21 @@ function initializeMapAndFilters() {
     atualizarResumoSelecao(); 
 }
 
-async function getCoordsForAddress(address, id, focusCoords, estado) {
-    const url = new URL('https://api.openrouteservice.org/geocode/search');
-    url.searchParams.append('api_key', OPENROUTESERVICE_API_KEY);
-    url.searchParams.append('text', address);
-    url.searchParams.append('boundary.country', 'BR');
 
-    if (estado) {
-        url.searchParams.append('boundary.administrative.region', estado);
+async function getCoordsForAddressMapbox(address, id) {
+    const encoded = encodeURIComponent(address);
+    const url = 
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encoded}.json` +
+        `?access_token=${MAPBOX_TOKEN}&country=BR&limit=1`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (!data.features || !data.features.length) {
+        throw new Error(`Endereço não encontrado (Pedido #${id})`);
     }
 
-    url.searchParams.append('boundary.rect.min_lon', BOUNDING_BOX_BRASIL.min_lon);
-    url.searchParams.append('boundary.rect.min_lat', BOUNDING_BOX_BRASIL.min_lat);
-    url.searchParams.append('boundary.rect.max_lon', BOUNDING_BOX_BRASIL.max_lon);
-    url.searchParams.append('boundary.rect.max_lat', BOUNDING_BOX_BRASIL.max_lat);
-
-    if (focusCoords) {
-        url.searchParams.append('focus.point.lon', focusCoords[0]);
-        url.searchParams.append('focus.point.lat', focusCoords[1]);
-    }
-
-    const response = await fetch(url);
-    const data = await response.json();
-
-    if (!response.ok || !data.features || data.features.length === 0) {
-        let errorMessage = `Endereço do pedido #${id} não foi encontrado: "${address}"`;
-        if (estado) {
-            errorMessage = `Endereço do pedido #${id} não foi encontrado no estado de ${estado}: "${address}"`;
-        }
-        throw new Error(errorMessage);
-    }
-
-    const feature = data.features[0];
-    return {
-        details: feature.properties,
-        coords: feature.geometry.coordinates
-    };
+    return data.features[0].geometry.coordinates;
 }
 
 function gerarNumeroEmbarqueAleatorio() {
@@ -3587,116 +4209,6 @@ function gerarNumeroEmbarqueAleatorio() {
         novoNumero = Math.floor(10000 + Math.random() * 90000);
     } while (embarquesExistentes.has(String(novoNumero)));
     return String(novoNumero);
-}
-
-async function generateRoute(optimized) {
-    const capacidadeSelecionadaValor = document.getElementById('filtro-capacidade').value;
-    let stopsToRoute = []; 
-
-    if (capacidadeSelecionadaValor !== 'todos') {
-
-        const visibleOrderElements = document.querySelectorAll('#pedidos-filtrados-list .order-card input');
-        const visibleOrderIDs = Array.from(visibleOrderElements).map(input => parseInt(input.dataset.id, 10));
-        let availableOrders = pedidos.filter(p => visibleOrderIDs.includes(p.id));
-
-        const capacidadeMaxima = parseInt(capacidadeSelecionadaValor, 10);
-        let pesoAtual = 0;
-        let pedidosSelecionadosAutomaticamente = [];
-
-        availableOrders.sort((a, b) => calcularPesoTotalPedido(b) - calcularPesoTotalPedido(a));
-
-        for (const pedido of availableOrders) {
-            const pesoPedido = calcularPesoTotalPedido(pedido);
-            if (pesoAtual + pesoPedido <= capacidadeMaxima) {
-                pedidosSelecionadosAutomaticamente.push(pedido);
-                pesoAtual += pesoPedido;
-            }
-        }
-        stopsToRoute = pedidosSelecionadosAutomaticamente;
-
-        document.querySelectorAll('#pedidos-filtrados-list input:checked').forEach(cb => cb.checked = false); 
-        stopsToRoute.forEach(pedido => {
-            const cb = document.querySelector(`#pedidos-filtrados-list input[data-id="${pedido.id}"]`);
-            if (cb) cb.checked = true;
-        });
-        atualizarResumoSelecao(); 
-
-        if (stopsToRoute.length === 0) {
-            showModal("Seleção Automática Vazia", "Nenhum pedido na lista filtrada se encaixa na capacidade selecionada ou os pedidos disponíveis têm peso zero.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
-            return;
-        }
-
-    } else {
-
-        const selectedCheckboxes = document.querySelectorAll('#pedidos-filtrados-list input:checked');
-        if (selectedCheckboxes.length === 0) {
-            showModal("Atenção", "Selecione pelo menos um pedido para criar a rota ou defina um filtro de capacidade para seleção automática.", `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
-            return;
-        }
-        const selectedIDs = Array.from(selectedCheckboxes).map(cb => parseInt(cb.dataset.id, 10));
-        stopsToRoute = pedidos.filter(p => selectedIDs.includes(p.id));
-    }
-
-    const estadosSelecionados = Array.from(document.querySelectorAll('#filtro-estado-content input:checked')).map(cb => cb.value);
-    const estadoParaFoco = estadosSelecionados.length === 1 ? estadosSelecionados[0] : null;
-
-    mostrarBotoesAcao(false);
-    document.getElementById('sugerirRotaBtn').disabled = true;
-    document.getElementById('montarManualBtn').disabled = true;
-    document.getElementById('sugerirRotaBtn').innerHTML = `<i class="ph ph-spinner-gap ph-spin"></i> Gerando Rota...`;
-
-    showFeedbackMessage(document.getElementById('minuta-content'), 'spinner-gap ph-spin', 'Buscando coordenadas e otimizando a rota...');
-
-    try {
-        const stopsPromises = stopsToRoute.map(pedidoAtual => {
-            if (pedidoAtual.coords) {
-                return Promise.resolve({ ...pedidoAtual, details: {} });
-            }
-            const enderecoCorreto = pedidoAtual.endereco;
-            return getCoordsForAddress(enderecoCorreto, pedidoAtual.id, CEDISA_LOCATION.coords, estadoParaFoco).then(result => ({
-                ...pedidoAtual,
-                details: result.details,
-                coords: result.coords
-            }));
-        });
-
-        const stopsComCoordenadas = await Promise.all(stopsPromises);
-
-        let finalOrderedStops = optimized ? await getOptimizedStops(stopsComCoordenadas, CEDISA_LOCATION) : stopsComCoordenadas;
-
-        const directionCoordinates = [
-            [CEDISA_LOCATION.coords[0], CEDISA_LOCATION.coords[1]],
-            ...finalOrderedStops.map(s => [s.coords[0], s.coords[1]])
-        ];
-        
-        const dirResponse = await fetch('https://api.openrouteservice.org/v2/directions/driving-car', {
-            method: 'POST',
-            headers: { 'Authorization': OPENROUTESERVICE_API_KEY, 'Content-Type': 'application/json' },
-            body: JSON.stringify({ coordinates: directionCoordinates })
-        });
-
-        if (!dirResponse.ok) throw new Error(`Não foi possível encontrar uma rota. Status: ${dirResponse.status}.`);
-
-        const routeJson = await dirResponse.json();
-        if (!routeJson.routes || routeJson.routes.length === 0) {
-            throw new Error("A API não retornou nenhuma rota para os pontos selecionados.");
-        }
-        const route = routeJson.routes[0];
-
-        pedidosPendentes = finalOrderedStops;
-        rotaPendente = route; 
-
-        displayRouteOnMapAndPanel(finalOrderedStops, route, CEDISA_LOCATION);
-        mostrarBotoesAcao(true);
-
-    } catch (error) {
-        console.error('Erro ao gerar rota:', error);
-        showFeedbackMessage(document.getElementById('minuta-content'), 'warning-circle', error.message, true);
-    } finally {
-        document.getElementById('sugerirRotaBtn').disabled = false;
-        document.getElementById('montarManualBtn').disabled = false;
-        document.getElementById('sugerirRotaBtn').innerHTML = `<i class="ph ph-magic-wand"></i> Sugerir Rota Otimizada`;
-    }
 }
 
 function exportToGoogleMaps() {
@@ -3847,47 +4359,28 @@ function zerarTodosEmbarques() {
     );
 }
 
-async function getOptimizedStops(stops, origin) {
+async function getOptimizedStopsMapbox(stops, origin) {
+    const coordStr = [
+        `${origin.coords[0]},${origin.coords[1]}`,
+        ...stops.map(p => `${p.coords[0]},${p.coords[1]}`)
+    ].join(";");
 
-    const stopIndexMap = new Map(stops.map((stop, index) => [index, stop]));
+    const url =
+        `https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${coordStr}` +
+        `?access_token=${MAPBOX_TOKEN}&roundtrip=false&source=first`;
 
-    const optimizationRequest = {
-        jobs: stops.map((stop, index) => ({ id: index, location: stop.coords })),
-        vehicles: [{ id: 1, profile: 'driving-car', start: origin.coords }]
-    };
+    const res = await fetch(url);
+    const data = await res.json();
 
-    const optResponse = await fetch('https://api.openrouteservice.org/optimization', {
-        method: 'POST',
-        headers: { 'Authorization': OPENROUTESERVICE_API_KEY, 'Content-Type': 'application/json' },
-        body: JSON.stringify(optimizationRequest)
-    });
-
-    if (!optResponse.ok) {
-        throw new Error(`Falha na API de otimização. Status: ${optResponse.status}`);
+    if (data.code !== "Ok") {
+        console.error(data);
+        throw new Error("Falha na otimização da rota.");
     }
 
-    const optResult = await optResponse.json();
-
-    if (optResult.code === 2) { 
-        throw new Error(`Otimização inalcançável: ${optResult.error}.`);
-    }
-
-    if (optResult.unassigned && optResult.unassigned.length > 0) {
-        const unassignedIds = optResult.unassigned.map(job => job.id);
-        const unassignedClientes = stops
-            .filter((stop, index) => unassignedIds.includes(index))
-            .map(stop => stop.cliente)
-            .join(', ');
-        throw new Error(`A API não conseguiu incluir ${optResult.unassigned.length} paradas na rota. Pedidos não incluídos: ${unassignedClientes}`);
-    }
-    
-    if (!optResult.routes || optResult.routes.length === 0 || !optResult.routes[0].steps) {
-        throw new Error("A API de otimização retornou uma resposta inválida.");
-    }
-
-    return optResult.routes[0].steps
-        .filter(step => step.type === 'job')
-        .map(step => stopIndexMap.get(step.id));
+    return data.waypoints
+        .filter(wp => wp.waypoint_index !== 0)
+        .sort((a, b) => a.waypoint_index - b.waypoint_index)
+        .map(wp => stops[wp.waypoint_index - 1]);
 }
 
 function displayRouteOnMapAndPanel(orderedStops, route, origin) {
@@ -3918,8 +4411,8 @@ function displayRouteOnMapAndPanel(orderedStops, route, origin) {
 
     routeSummaryInfo.innerHTML = `
         <div class="summary-item"><p>${orderedStops.length}</p><span>Paradas</span></div>
-        <div class="summary-item"><p>${formatDistance(route.summary.distance)}</p><span>Distância</span></div>
-        <div class="summary-item"><p>${formatDuration(route.summary.duration)}</p><span>Duração</span></div>`;
+        <div class="summary-item"><p>${formatDistance(route.distance)}</p><span>Distância</span></div>
+        <div class="summary-item"><p>${formatDuration(route.duration)}</p><span>Duração</span></div>`;
     routeSummaryInfo.style.display = 'flex';
     
     if (map) {
@@ -3955,10 +4448,26 @@ function displayRouteOnMapAndPanel(orderedStops, route, origin) {
     }
 }
 
-function decodePolyline(encoded) { let p = []; let i = 0, len = encoded.length; let lat = 0, lng = 0; while (i < len) { let b, shift = 0, result = 0; do { b = encoded.charAt(i++).charCodeAt(0) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20); let dlat = ((result & 1) ? ~(result >> 1) : (result >> 1)); lat += dlat; shift = 0, result = 0; do { b = encoded.charAt(i++).charCodeAt(0) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20); let dlng = ((result & 1) ? ~(result >> 1) : (result >> 1)); lng += dlng; p.push([lat / 1E5, lng / 1E5]); } return p; }
+async function getRouteMapbox(stops, origin) {
+    const coordStr = [
+        `${origin.coords[0]},${origin.coords[1]}`,
+        ...stops.map(p => `${p.coords[0]},${p.coords[1]}`)
+    ].join(";");
 
-document.getElementById('sugerirRotaBtn').addEventListener('click', () => generateRoute(true));
-document.getElementById('montarManualBtn').addEventListener('click', () => generateRoute(false));
+    const url =
+        `https://api.mapbox.com/directions/v5/mapbox/driving/${coordStr}` +
+        `?geometries=polyline&overview=full&access_token=${MAPBOX_TOKEN}`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (!data.routes || !data.routes.length) {
+        throw new Error
+    }
+
+    return data.routes[0];
+}
+
 document.getElementById('confirmarEmbarqueBtn').addEventListener('click', confirmarEmbarque);
 document.getElementById('cancelarRotaBtn').addEventListener('click', cancelarRota);
 document.getElementById('zerarEmbarquesBtn').addEventListener('click', zerarTodosEmbarques);
@@ -4320,21 +4829,13 @@ function updateFilterDisplay() {
  * @param {object} pedido 
  * @returns {number}
  */
+
 function calcularPesoTotalPedido(pedido) {
-    let pesoTotal = 0;
-    if (pedido && pedido.produtos) {
-        for (const categoria in pedido.produtos) {
-            if (Array.isArray(pedido.produtos[categoria])) {
-                pedido.produtos[categoria].forEach(item => {
-                    if (item && typeof item.pesoSolicitado === 'number') {
-                        pesoTotal += item.pesoSolicitado;
-                    }
-                });
-            }
-        }
-    }
-    return pesoTotal;
+    return Object.values(pedido.produtos || {})
+        .flat()
+        .reduce((s, i) => s + (i.pesoSolicitado || 0), 0);
 }
+
 
 function atualizarResumoSelecao() {
     const selectedCheckboxes = document.querySelectorAll('#pedidos-filtrados-list input:checked');
@@ -4412,9 +4913,9 @@ function atualizarListaPedidosFiltrados() {
     atualizarResumoSelecao(); 
 }
 
-// =========================================================
-// VALIDAÇÃO DE CERTIFICADO - BUSCA NATIVA SHAREPOINT (PARCIAL)
-// =========================================================
+// =========================
+// VALIDAÇÃO DE CERTIFICADO
+// =========================
 async function validarCertificadoEmbarque(elementoBotao, idCertificado) {
     if (!idCertificado) return;
 
@@ -4452,3 +4953,173 @@ async function validarCertificadoEmbarque(elementoBotao, idCertificado) {
         elementoBotao.innerHTML = 'Erro de Servidor';
     }
 }
+
+function filtrarPedidosPorCapacidade(pedidosAbertos, capacidadeKg) {
+    let pesoAtual = 0;
+    const selecionados = [];
+
+    // prioriza pedidos mais próximos DA ORIGEM
+    pedidosAbertos.sort((a, b) => {
+        if (!a.coords || !b.coords) return 0;
+        const da = L.latLng(a.coords[1], a.coords[0])
+                     .distanceTo(L.latLng(CEDISA_LOCATION.coords[1], CEDISA_LOCATION.coords[0]));
+        const db = L.latLng(b.coords[1], b.coords[0])
+                     .distanceTo(L.latLng(CEDISA_LOCATION.coords[1], CEDISA_LOCATION.coords[0]));
+        return da - db;
+    });
+
+    for (const pedido of pedidosAbertos) {
+        const peso = calcularPesoTotalPedido(pedido);
+        if (pesoAtual + peso <= capacidadeKg) {
+            selecionados.push(pedido);
+            pesoAtual += peso;
+        }
+    }
+
+    return selecionados;
+}
+
+async function sugerirRotaInteligente() {
+    try {
+        const capacidade = getCapacidadeSelecionadaKg();
+        if (!capacidade) {
+            showModal("Atenção", "Selecione a capacidade do caminhão.");
+            return;
+        }
+
+        let pedidosBase = getPedidosVisiveisEmAberto();
+        if (!pedidosBase.length) {
+            showFeedbackMessage(
+                document.getElementById("minuta-content"),
+                "map-pin",
+                "Nenhum pedido disponível.",
+                true
+            );
+            return;
+        }
+
+        // Garantir coordenadas
+        for (const p of pedidosBase) {
+            if (!p.coords) {
+                p.coords = await getCoordsForAddressMapbox(p.endereco, p.id);
+            }
+        }
+
+        // Selecionar pedidos por capacidade
+        const pedidosSelecionados =
+            selecionarPedidosPorCapacidade(pedidosBase, capacidade);
+
+        if (!pedidosSelecionados.length) {
+            showModal("Aviso", "Nenhum pedido cabe na capacidade selecionada.");
+            return;
+        }
+
+        // ✅ Limitar sugestão para 15 paradas
+        let pedidosFinal = pedidosSelecionados;
+
+        if (pedidosFinal.length > LIMITE_SUGESTAO_PARADAS) {
+            pedidosFinal = pedidosFinal.slice(0, LIMITE_SUGESTAO_PARADAS);
+
+            showFeedbackMessage(
+                document.getElementById("minuta-content"),
+                "info",
+                `Foram selecionadas automaticamente as ${LIMITE_SUGESTAO_PARADAS} paradas mais adequadas para esta rota.`
+            );
+        }
+
+        // ===============================
+        // SINCRONIZAR SELEÇÃO NA INTERFACE
+        // ===============================
+
+        // 1. Desmarcar todos os checkboxes
+        document
+            .querySelectorAll('#pedidos-filtrados-list input[type="checkbox"]')
+            .forEach(cb => cb.checked = false);
+
+        // 2. Marcar apenas os pedidos selecionados na sugestão
+        pedidosFinal.forEach(pedido => {
+            const checkbox = document.querySelector(
+                `#pedidos-filtrados-list input[data-id="${pedido.id}"]`
+            );
+            if (checkbox) checkbox.checked = true;
+        });
+
+        // 3. Atualizar resumo da seleção
+        atualizarResumoSelecao();
+        ``
+
+        // Gerar rota via Mapbox Directions
+        const route = await getRouteMapbox(
+            pedidosFinal,
+            CEDISA_LOCATION
+        );
+
+        pedidosPendentes = pedidosFinal;
+        rotaPendente = route;
+
+        displayRouteOnMapAndPanel(
+            pedidosFinal,
+            route,
+            CEDISA_LOCATION
+        );
+
+        mostrarBotoesAcao(true);
+
+    } catch (e) {
+        console.error(e);
+        showFeedbackMessage(
+            document.getElementById("minuta-content"),
+            "warning-circle",
+            e.message,
+            true
+        );
+    }
+}
+``
+
+function getCapacidadeSelecionadaKg() {
+    const sel = document.getElementById("filtro-capacidade");
+    if (!sel || sel.value === "todos") return null;
+    return parseInt(sel.value, 10);
+}
+
+
+function getPedidosVisiveisEmAberto() {
+    const ids = Array.from(
+        document.querySelectorAll("#pedidos-filtrados-list input")
+    ).map(i => parseInt(i.dataset.id, 10));
+
+    return pedidos.filter(p => ids.includes(p.id) && p.embarque === null);
+}
+
+
+function selecionarPedidosPorCapacidade(pedidos, capacidade) {
+    let pesoAtual = 0;
+    const selecionados = [];
+
+    pedidos.sort((a, b) => {
+        if (!a.coords || !b.coords) return 0;
+        const da = L.latLng(a.coords[1], a.coords[0])
+            .distanceTo(L.latLng(CEDISA_LOCATION.coords[1], CEDISA_LOCATION.coords[0]));
+        const db = L.latLng(b.coords[1], b.coords[0])
+            .distanceTo(L.latLng(CEDISA_LOCATION.coords[1], CEDISA_LOCATION.coords[0]));
+        return da - db;
+    });
+
+    for (const p of pedidos) {
+        const peso = calcularPesoTotalPedido(p);
+        if (pesoAtual + peso <= capacidade) {
+            selecionados.push(p);
+            pesoAtual += peso;
+        }
+    }
+    return selecionados;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("sugerirRotaBtn");
+    if (btn) btn.addEventListener("click", sugerirRotaInteligente);
+
+    const exportBtn = document.getElementById("exportarGoogleMapsBtn");
+    if (exportBtn) exportBtn.addEventListener("click", exportToGoogleMaps);
+});
