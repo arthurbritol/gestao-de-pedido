@@ -896,7 +896,6 @@ body {
     background: rgb(255, 255, 255);
     padding: 30px;
     border-radius: 20px;
-    backdrop-filter: blur(50px);
     box-shadow: 0 8px 32px rgb(0 0 0 / 66%);
     text-align: center;
     width: 700px;
@@ -3643,39 +3642,4 @@ button:disabled {
     background-color: #d1ecf1; 
     color: #0c5460;
     border-color: #bee5eb;
-}
-
-/* Adiciona rolagem na caixa de seleção de setores para caber todas as opções */
-.scrollable-box {
-    max-height: 85vh;
-    overflow-y: auto;
-}
-
-/* Ocultar a barra de rolagem (opcional, deixa mais clean) */
-.scrollable-box::-webkit-scrollbar {
-    width: 6px;
-}
-.scrollable-box::-webkit-scrollbar-thumb {
-    background-color: var(--medium-gray);
-    border-radius: 4px;
-}
-
-.btn-validar-cert {
-    cursor: pointer;
-    border: none;
-    border-radius: 6px;
-    padding: 5px 12px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    transition: opacity 0.2s, transform 0.1s;
-    white-space: nowrap;
-}
-
-.btn-validar-cert:hover {
-    opacity: 0.85;
-    transform: scale(1.03);
-}
-
-.btn-validar-cert:active {
-    transform: scale(0.97);
 }
