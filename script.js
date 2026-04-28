@@ -38,631 +38,6 @@ const usuarios = {
     "consultor": "1234"
 };
 
-let pedidosIniciais = [
-
-{
-  id: 20001,
-  cliente: "Aço Forte",
-  telefone: "5527992753233",
-  status: "Aguardando rota",
-  data: "2026-04-10",
-  endereco: "Avenida Talma Rodrigues Ribeiro, 1500, Portal de Jacaraípe, Serra - ES, 29173-735",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO A3": [
-      { nome: "Viga W 250 x 25.7", pesoSolicitado: 925 }
-    ],
-    "GALPAO B2": [
-      { nome: "Tubo Quadrado 40x40 #18 (1.25mm)", pesoSolicitado: 480 }
-    ],
-    "BOBINAS": [
-      { nome: "Chapa Fina a Frio #24 (0.60mm)", pesoSolicitado: 860 }
-    ]
-  }
-},
-{
-  id: 20013,
-  cliente: "Aço Capixaba",
-  telefone: "5527998112233",
-  status: "Aguardando rota",
-  data: "2026-04-20",
-  endereco: "Av. Carlos Lindenberg, 4560, Vila Velha - ES, 29118-000",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO A3": [
-      { nome: "Viga W 250 x 25.7", pesoSolicitado: 1200 }
-    ]
-  }
-},
-{
-  id: 20014,
-  cliente: "Metal Rio",
-  telefone: "5521998877665",
-  status: "Aguardando rota",
-  data: "2026-04-20",
-  endereco: "Rua Maxwell, 800, Vila Isabel, Rio de Janeiro - RJ, 20541-100",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO A1": [
-      { nome: "Chapa Grossa 3/ (19.05mm)", pesoSolicitado: 1800 }
-    ]
-  }
-},
-{
-  id: 20015,
-  cliente: "Paulista Estruturas",
-  telefone: "5511985544332",
-  status: "Aguardando rota",
-  data: "2026-04-21",
-  endereco: "Av. do Estado, 5200, Cambuci, São Paulo - SP, 01516-000",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO A1 E A2": [
-      { nome: "Cantoneira 2 x 1/8", pesoSolicitado: 420 },
-      { nome: "Barra Chata 2 x 1/4", pesoSolicitado: 380 }
-    ]
-  }
-},
-{
-  id: 20016,
-  cliente: "Minas Perfilados",
-  telefone: "5531994455667",
-  status: "Aguardando rota",
-  data: "2026-04-21",
-  endereco: "Av. Antônio Carlos, 6627, Pampulha, Belo Horizonte - MG, 31270-901",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO B2, B3 E B4": [
-      { nome: "Tubo Retangular 80x40 #14 (2.00mm)", pesoSolicitado: 690 }
-    ]
-  }
-},
-{
-  id: 20017,
-  cliente: "Bahia Metais",
-  telefone: "5571993344556",
-  status: "Aguardando rota",
-  data: "2026-04-22",
-  endereco: "Av. Aliomar Baleeiro, 8230, São Cristóvão, Salvador - BA, 41510-015",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "BOBINAS": [
-      { nome: "Chapa Fina a Frio #16 (1.55mm)", pesoSolicitado: 1400 }
-    ]
-  }
-},
-{
-  id: 20018,
-  cliente: "Nordeste Tubos",
-  telefone: "5581989988776",
-  status: "Aguardando rota",
-  data: "2026-04-22",
-  endereco: "Av. Norte Miguel Arraes, 3500, Casa Amarela, Recife - PE, 52051-000",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO B2, B3 E B4": [
-      { nome: "Tubo Quadrado 60x60 #18 (1.25mm)", pesoSolicitado: 510 }
-    ]
-  }
-},
-{
-  id: 20019,
-  cliente: "Ceará Industrial",
-  telefone: "5585992233445",
-  status: "Aguardando rota",
-  data: "2026-04-23",
-  endereco: "Av. Mister Hull, 4500, Presidente Kennedy, Fortaleza - CE, 60356-001",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO A2": [
-      { nome: "Vergalhão CA50 12.5mm", pesoSolicitado: 980 }
-    ]
-  }
-},
-{
-  id: 20020,
-  cliente: "Brasília Aços",
-  telefone: "5561996677885",
-  status: "Aguardando rota",
-  data: "2026-04-23",
-  endereco: "SIA Trecho 10, Lote 1285, Brasília - DF, 71200-100",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "CERCADO DA PEDRA": [
-      { nome: "Chapa Xadrez 1/4", pesoSolicitado: 620 }
-    ]
-  }
-},
-{
-  id: 20021,
-  cliente: "Goiás Estrutural",
-  telefone: "5562993344556",
-  status: "Aguardando rota",
-  data: "2026-04-24",
-  endereco: "Av. Anhanguera, 6200, Setor Oeste, Goiânia - GO, 74110-010",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO A3": [
-      { nome: "Viga W 360 x 57.8", pesoSolicitado: 1500 }
-    ]
-  }
-},
-{
-  id: 20022,
-  cliente: "Paraná Metais",
-  telefone: "5541988776654",
-  status: "Aguardando rota",
-  data: "2026-04-24",
-  endereco: "Rua Marechal Floriano Peixoto, 3450, Curitiba - PR, 80230-000",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO A1 E A2": [
-      { nome: "Viga I  x 18.4#", pesoSolicitado: 760 }
-    ]
-  }
-},
-{
-  id: 20023,
-  cliente: "Santa Catarina Steel",
-  telefone: "5548997766554",
-  status: "Aguardando rota",
-  data: "2026-04-25",
-  endereco: "Rua Dona Francisca, 7800, Joinville - SC, 89219-600",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO B5 E B6": [
-      { nome: "Chapa Galvanizada #22 (0.80mm)", pesoSolicitado: 880 }
-    ]
-  }
-},
-{
-  id: 20024,
-  cliente: "Sul Estruturas",
-  telefone: "5551988776654",
-  status: "Aguardando rota",
-  data: "2026-04-25",
-  endereco: "Av. Assis Brasil, 6200, Sarandi, Porto Alegre - RS, 91110-001",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO A1": [
-      { nome: "Chapa Aço Carbono 1/ (6.35mm)", pesoSolicitado: 1100 }
-    ]
-  }
-},
-{
-  id: 20025,
-  cliente: "Amazonas Metais",
-  telefone: "5592995566774",
-  status: "Aguardando rota",
-  data: "2026-04-26",
-  endereco: "Av. Torquato Tapajós, 8500, Tarumã, Manaus - AM, 69093-415",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "BOBINAS": [
-      { nome: "Chapa Fina a Frio #20 (0.90mm)", pesoSolicitado: 1250 }
-    ]
-  }
-},
-{
-  id: 20026,
-  cliente: "Interior Metais",
-  telefone: "5516998877665",
-  status: "Aguardando rota",
-  data: "2026-04-26",
-  endereco: "Av. Brasil, 4200, Ribeirão Preto - SP, 14075-000",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO B2, B3 E B4": [
-      { nome: "Tubo Retangular 50x30 #16 (1.55mm)", pesoSolicitado: 580 }
-    ]
-  }
-},
-{
-  id: 20027,
-  cliente: "Metal Norte",
-  telefone: "5591994433221",
-  status: "Aguardando rota",
-  data: "2026-04-27",
-  endereco: "Rod. BR-316, Km 7, Ananindeua - PA, 67130-000",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO A3": [
-      { nome: "Viga W 150 x 18.0", pesoSolicitado: 890 }
-    ]
-  }
-},
-{
-  id: 20028,
-  cliente: "Interior Minas",
-  telefone: "5534998877665",
-  status: "Aguardando rota",
-  data: "2026-04-27",
-  endereco: "Av. Brasil, 2100, Uberlândia - MG, 38400-678",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO A1 E A2": [
-      { nome: "Barra Chata 3 x 1/8", pesoSolicitado: 460 }
-    ]
-  }
-},
-{
-  id: 20029,
-  cliente: "Serra Tubos",
-  telefone: "5527999988776",
-  status: "Aguardando rota",
-  data: "2026-04-28",
-  endereco: "Av. Eldes Scherrer Souza, 2400, Serra - ES, 29166-804",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO B2, B3 E B4": [
-      { nome: "Tubo Quadrado 100x100 #11 (3.00mm)", pesoSolicitado: 980 }
-    ]
-  }
-},
-{
-  id: 20030,
-  cliente: "Vitória Metais",
-  telefone: "5527991122334",
-  status: "Aguardando rota",
-  data: "2026-04-28",
-  endereco: "Av. Nossa Senhora da Penha, 3000, Vitória - ES, 29056-909",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "CERCADO DA PEDRA": [
-      { nome: "Chapa Perfurada 2.00mm", pesoSolicitado: 540 }
-    ]
-  }
-},
-{
-  id: 20002,
-  cliente: "Metalúrgica Paulista",
-  telefone: "5527992753233",
-  status: "Programado",
-  data: "2026-04-11",
-  endereco: "Rua Serra de Bragança, 1240, Tatuapé, São Paulo - SP, 03318-001",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO A1": [
-      { nome: "Chapa Aço Carbono 3/ (9.53mm)", pesoSolicitado: 1800 }
-    ],
-    "GALPAO A2": [
-      { nome: "Barra Chata  x 1/", pesoSolicitado: 650 }
-    ]
-  }
-},
-{
-  id: 20003,
-  cliente: "Rio Aços Industriais",
-  telefone: "5527992753233",
-  status: "Aguardando rota",
-  data: "2026-04-12",
-  endereco: "Avenida Brasil, 3490, Bonsucesso, Rio de Janeiro - RJ, 21040-361",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO A1": [
-      { nome: "Viga I  x 18.4#", pesoSolicitado: 720 }
-    ],
-    "GALPAO B1": [
-      { nome: "Tubo Retangular 80x40 #14 (2.00mm)", pesoSolicitado: 510 }
-    ],
-    "GALPAO B3": [
-      { nome: "Cantoneira / Barra", pesoSolicitado: 390 }
-    ]
-  }
-},
-{
-  id: 20004,
-  cliente: "Minas Steel",
-  telefone: "5527992753233",
-  status: "Programado",
-  data: "2026-04-13",
-  endereco: "Avenida Amazonas, 9000, Gameleira, Belo Horizonte - MG, 30510-000",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO B1": [
-      { nome: "Viga U  x 11.5#", pesoSolicitado: 980 }
-    ],
-    "GALPAO B2": [
-      { nome: "Chapa Aço Carbono 1/ (6.35mm)", pesoSolicitado: 1250 }
-    ]
-  }
-},
-{
-  id: 20005,
-  cliente: "Sul Metais",
-  telefone: "5527992753233",
-  status: "Aguardando rota",
-  data: "2026-04-14",
-  endereco: "Avenida Sertório, 6600, Sarandi, Porto Alegre - RS, 91110-580",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO A2": [
-      { nome: "Viga W 200 x 22.5", pesoSolicitado: 840 }
-    ],
-    "GALPAO B4": [
-      { nome: "Tubo Industrial Quadrado 40x40 #14 (2.00mm)", pesoSolicitado: 460 }
-    ],
-    "GALPAO A3": [
-      { nome: "Chapa Inox 304 1.0mm Escovada", pesoSolicitado: 310 }
-    ]
-  }
-},
-{
-  id: 20006,
-  cliente: "Nordeste Metal",
-  telefone: "5527992753233",
-  status: "Aguardando rota",
-  data: "2026-04-15",
-  endereco: "Av. Abdias de Carvalho, 1678, Recife - PE, 50710-210",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "BOBINAS": [
-      { nome: "Chapa Fina a Frio #20 (0.90mm)", pesoSolicitado: 1200 }
-    ],
-    "GALPAO B5 E B6": [
-      { nome: "Chapa Galvanizada #22 (0.80mm)", pesoSolicitado: 820 }
-    ]
-  }
-},
-{
-  id: 20007,
-  cliente: "Ceará Estruturas",
-  telefone: "5527992753233",
-  status: "Programado",
-  data: "2026-04-16",
-  endereco: "Av. Dedé Brasil, 505, Fortaleza - CE, 60811-550",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO A3": [
-      { nome: "Viga W 360 x 57.8", pesoSolicitado: 1400 }
-    ],
-    "GALPAO A1 E A2": [
-      { nome: "Cantoneira 2 1/2 x 1/4", pesoSolicitado: 520 }
-    ]
-  }
-},
-{
-  id: 20008,
-  cliente: "Brasília Aço",
-  telefone: "5527992753233",
-  status: "Aguardando rota",
-  data: "2026-04-16",
-  endereco: "SIA Trecho 3, Lote 625, Brasília - DF, 71200-030",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO A1": [
-      { nome: "Chapa Grossa 3/ (19.05mm)", pesoSolicitado: 1850 }
-    ],
-    "CERCADO DA PEDRA": [
-      { nome: "Chapa Xadrez 1/ (6.35mm)", pesoSolicitado: 680 }
-    ]
-  }
-},
-{
-  id: 20009,
-  cliente: "Goiás Metais",
-  telefone: "5527992753233",
-  status: "Programado",
-  data: "2026-04-17",
-  endereco: "Av. Perimetral Norte, 4120, Goiânia - GO, 74445-190",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO B2, B3 E B4": [
-      { nome: "Tubo Retangular 80x40 #14 (2.00mm)", pesoSolicitado: 760 }
-    ],
-    "GALPAO A1 E A2": [
-      { nome: "Viga U  x 6.7#", pesoSolicitado: 490 }
-    ]
-  }
-},
-{
-  id: 20010,
-  cliente: "Amazon Steel",
-  telefone: "5527992753233",
-  status: "Aguardando rota",
-  data: "2026-04-18",
-  endereco: "Av. Torquato Tapajós, 4500, Manaus - AM, 69093-415",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "BOBINAS": [
-      { nome: "Chapa Fina a Frio #16 (1.55mm)", pesoSolicitado: 980 }
-    ],
-    "CERCADO DA PEDRA": [
-      { nome: "Chapa Inox 304 3.0mm Polida", pesoSolicitado: 430 }
-    ]
-  }
-},
-{
-  id: 20011,
-  cliente: "Sul Catarinense Aços",
-  telefone: "5527992753233",
-  status: "Programado",
-  data: "2026-04-18",
-  endereco: "Rua Blumenau, 2100, Joinville - SC, 89204-250",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO A3": [
-      { nome: "Viga W 250 x 32.7", pesoSolicitado: 1100 }
-    ],
-    "GALPAO B2, B3 E B4": [
-      { nome: "Tubo Quadrado 60x60 #18 (1.25mm)", pesoSolicitado: 540 }
-    ]
-  }
-},
-{
-  id: 20012,
-  cliente: "Paraná Estruturas",
-  telefone: "5527992753233",
-  status: "Aguardando rota",
-  data: "2026-04-19",
-  endereco: "Rua João Negrão, 2222, Rebouças, Curitiba - PR, 80230-150",
-  embarque: null,
-  motorista: null,
-  produtos: {
-    "GALPAO A2": [
-      { nome: "Vergalhão CA50 12.5mm", pesoSolicitado: 950 }
-    ],
-    "GALPAO A1 E A2": [
-      { nome: "Barra Chata 2 x 1/4", pesoSolicitado: 410 }
-    ]
-  }
-},
-
-  {
-    id: 30001,
-    cliente: "Alpha Metalúrgica Ltda",
-    telefone: "5527992753233",
-    status: "Aguardando rota",
-    data: "2026-04-27",
-    endereco: "Avenida Marechal Campos, 1468, Maruípe, Vitória - ES, 29043-260",
-    embarque: null,
-    motorista: null,
-    produtos: { Diversos: [{ nome: "Bobinas de Aço", pesoSolicitado: 1800 }] },
-    pesoEstimado: 1800
-  },
-  {
-    id: 30002,
-    cliente: "Ferro Forte Indústria",
-    telefone: "5527992753233",
-    status: "Aguardando rota",
-    data: "2026-04-27",
-    endereco: "Rua Henrique Moscoso, 525, Centro, Vitória - ES, 29010-330",
-    embarque: null,
-    motorista: null,
-    produtos: { Diversos: [{ nome: "Chapas de Aço", pesoSolicitado: 2200 }] },
-    pesoEstimado: 2200
-  },
-  {
-    id: 30003,
-    cliente: "Nova Aço Brasil",
-    telefone: "5527992753233",
-    status: "Aguardando rota",
-    data: "2026-04-27",
-    endereco: "Rodovia BR-101, km 267, Jardim Limoeiro, Serra - ES, 29164-130",
-    embarque: null,
-    motorista: null,
-    produtos: { Diversos: [{ nome: "Perfis Metálicos", pesoSolicitado: 2600 }] },
-    pesoEstimado: 2600
-  },
-  {
-    id: 30004,
-    cliente: "Metal Prime Soluções",
-    telefone: "5527992753233",
-    status: "Aguardando rota",
-    data: "2026-04-27",
-    endereco: "Rua Sete de Setembro, 318, Centro, Vila Velha - ES, 29100-320",
-    embarque: null,
-    motorista: null,
-    produtos: { Diversos: [{ nome: "Tubos de Aço", pesoSolicitado: 1950 }] },
-    pesoEstimado: 1950
-  },
-  {
-    id: 30005,
-    cliente: "Estrutura Forte Engenharia",
-    telefone: "5527992753233",
-    status: "Aguardando rota",
-    data: "2026-04-27",
-    endereco: "Avenida Carlos Lindemberg, 500, Ibes, Vila Velha - ES, 29108-020",
-    embarque: null,
-    motorista: null,
-    produtos: { Diversos: [{ nome: "Vigas Metálicas", pesoSolicitado: 3100 }] },
-    pesoEstimado: 3100
-  },
-
-  // --- Sudeste ---
-  {
-    id: 30006,
-    cliente: "Aço Paulista Comércio",
-    telefone: "5527992753233",
-    status: "Aguardando rota",
-    data: "2026-04-27",
-    endereco: "Avenida do Estado, 5500, Cambuci, São Paulo - SP, 01516-000",
-    embarque: null,
-    motorista: null,
-    produtos: { Diversos: [{ nome: "Chapas Grossas", pesoSolicitado: 2800 }] },
-    pesoEstimado: 2800
-  },
-  {
-    id: 30007,
-    cliente: "Metalúrgica Horizonte",
-    telefone: "5527992753233",
-    status: "Aguardando rota",
-    data: "2026-04-27",
-    endereco: "Rua Serra de Bragança, 1240, Tatuapé, São Paulo - SP, 03318-001",
-    embarque: null,
-    motorista: null,
-    produtos: { Diversos: [{ nome: "Perfis U", pesoSolicitado: 2400 }] },
-    pesoEstimado: 2400
-  },
-  {
-    id: 30008,
-    cliente: "Rio Aços Soluções",
-    telefone: "5527992753233",
-    status: "Aguardando rota",
-    data: "2026-04-27",
-    endereco: "Avenida Brasil, 3490, Bonsucesso, Rio de Janeiro - RJ, 21040-361",
-    embarque: null,
-    motorista: null,
-    produtos: { Diversos: [{ nome: "Tubos Industriais", pesoSolicitado: 2700 }] },
-    pesoEstimado: 2700
-  },
-
-  // --- Sul ---
-  {
-    id: 30009,
-    cliente: "Metal Sul Distribuidora",
-    telefone: "5527992753233",
-    status: "Aguardando rota",
-    data: "2026-04-27",
-    endereco: "Avenida Sertório, 4500, Sarandi, Porto Alegre - RS, 91110-561",
-    embarque: null,
-    motorista: null,
-    produtos: { Diversos: [{ nome: "Placas Metálicas", pesoSolicitado: 2900 }] },
-    pesoEstimado: 2900
-  },
-  {
-    id: 30010,
-    cliente: "Estruturas Catarinenses",
-    telefone: "5527992753233",
-    status: "Aguardando rota",
-    data: "2026-04-27",
-    endereco: "Rua Felipe Schmidt, 755, Centro, Florianópolis - SC, 88010-001",
-    embarque: null,
-    motorista: null,
-    produtos: { Diversos: [{ nome: "Aço Laminado", pesoSolicitado: 2100 }] },
-    pesoEstimado: 2100
-  }
-];
-
 const CEDISA_LOCATION = { name: 'Cedisa Central de Aço - Matriz', coords: [-40.366593, -20.065453] };
 
 const pesosTeoricosProdutos = {
@@ -1108,29 +483,42 @@ function getPedidoStatus(id) {
 }
 
 function setPedidoStatus(id, status) {
-    localStorage.setItem(`${localStoragePedidoStatusKey}_${id}`, status);
-    const pedidoIndex = pedidos.findIndex(p => p.id === id);
-    if (pedidoIndex !== -1) {
-        pedidos[pedidoIndex].status = status;
-        salvarPedidosNoLocalStorage();
+    // mantém o localStorage (se ainda fizer sentido pra você)
+    localStorage.setItem(
+        `${localStoragePedidoStatusKey}_${id}`,
+        status
+    );
 
-        const pedido = pedidos[pedidoIndex];
-        if (pedido.telefone) {
-            fetch('http://localhost:3000/notificar', { 
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    pedidoId: id,
-                    novoStatus: status,
-                    numeroCliente: pedido.telefone
-                }),
+    const pedidoIndex = pedidos.findIndex(p => p.id === id);
+    if (pedidoIndex === -1) return;
+
+    // ✅ 1. PRIMEIRO obtemos o pedido
+    const pedido = pedidos[pedidoIndex];
+
+    // ✅ 2. Depois alteramos o status
+    pedido.status = status;
+
+    // ✅ 3. Agora salvamos corretamente no banco
+    salvarPedidosNoBanco(pedido);
+
+    // ✅ 4. Envio opcional de notificação
+    if (pedido.telefone) {
+        fetch("http://localhost:3000/notificar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                pedidoId: id,
+                novoStatus: status,
+                numeroCliente: pedido.telefone
             })
-            .then(response => response.json())
-            .then(data => console.log('Notificação enviada:', data))
-            .catch((error) => console.error('Erro ao enviar notificação:', error));
-        }
+        })
+        .then(response => response.json())
+        .then(data => console.log("Notificação enviada:", data))
+        .catch(error =>
+            console.error("Erro ao enviar notificação:", error)
+        );
     }
 }
 
@@ -1206,9 +594,15 @@ setDadosPesoPedido = function (id, dados) {
     }
 };
 
-function salvarPedidosNoLocalStorage() {
-    localStorage.setItem('todosOsPedidos', JSON.stringify(pedidos));
-    console.log('Pedidos foram salvos no localStorage.', pedidos); 
+
+async function salvarPedidosNoBanco() {
+  for (const pedido of pedidos) {
+    await fetch("http://localhost:3000/api/pedidos", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(pedido)
+    });
+  }
 }
 
 function getDadosCertificadoPedido(id) {
@@ -1807,30 +1201,41 @@ function confirmResetAllData() {
 function resetAllOrderData() {
     closeModal();
 
+    // 1️⃣ limpar localStorage (seu código, mantido)
     const keysToRemove = [];
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (!key.startsWith('todosOsPedidos') && ( 
-            key.startsWith(localStorageDadosPesoKey) ||
-            key.startsWith(localStorageCertificadoKey) ||
-            key.startsWith(localStorageSetorEnviadoKey) ||
-            key.startsWith(localStoragePedidoStatusKey) ||
-            key.startsWith(localStoragePedidoCarregadoKey) ||
-            key.startsWith(localStorageObservacaoCarregamentoKey) ||
-            key.startsWith(localStoragePedidoMotoristaKey) ||
-            key.startsWith(localStorageItemCarregadoKey) ||
-            key.startsWith(localStoragePedidoParcialKey) ||
-            key.startsWith("fardos_") ||
-            key.startsWith("embarque_"))) {
+        if (
+            !key.startsWith('todosOsPedidos') &&
+            (
+                key.startsWith(localStorageDadosPesoKey) ||
+                key.startsWith(localStorageCertificadoKey) ||
+                key.startsWith(localStorageSetorEnviadoKey) ||
+                key.startsWith(localStoragePedidoStatusKey) ||
+                key.startsWith(localStoragePedidoCarregadoKey) ||
+                key.startsWith(localStorageObservacaoCarregamentoKey) ||
+                key.startsWith(localStoragePedidoMotoristaKey) ||
+                key.startsWith(localStorageItemCarregadoKey) ||
+                key.startsWith(localStoragePedidoParcialKey) ||
+                key.startsWith("fardos_") ||
+                key.startsWith("embarque_")
+            )
+        ) {
             keysToRemove.push(key);
         }
     }
     keysToRemove.forEach(key => localStorage.removeItem(key));
 
-    pedidos = pedidosIniciais.map(p => ({
-        ...p
-    }));
-    salvarPedidosNoLocalStorage();
+    // 2️⃣ RESETAR PEDIDOS EXISTENTES (SEM RECRIAR)
+    pedidos.forEach(pedido => {
+        pedido.status = "Aguardando rota";
+        pedido.embarque = null;
+        pedido.motorista = null;
+        pedido.previsaoCarregamento = null;
+
+        // ✅ atualiza no banco (upsert por id)
+        salvarPedidosNoBanco(pedido);
+    });
 
     showModal(
         "Dados Zerados!",
@@ -1839,9 +1244,52 @@ function resetAllOrderData() {
     );
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    inicializarNotasFiscais();
+async function carregarPedidosDoBanco() {
+    const res = await fetch("http://localhost:3000/api/pedidos");
+
+    if (!res.ok) {
+        throw new Error("Falha ao buscar pedidos do banco");
+    }
+
+    pedidos = await res.json();
+}
+
+async function carregarPedidos() {
+    try {
+        await carregarPedidosDoBanco();
+
+        localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
+        console.log("Pedidos carregados do banco de dados");
+
+    } catch (erro) {
+        console.warn("Banco indisponível. Usando localStorage.", erro);
+
+        const cache = localStorage.getItem("pedidos");
+        pedidos = cache ? JSON.parse(cache) : [];
+    }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+    await carregarPedidos();   async function carregarPedidos() {
+    try {
+        // 1️⃣ tenta buscar do backend
+        await carregarPedidosDoBanco();
+
+        // 2️⃣ salva cache local
+        localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
+        console.log("✅ Pedidos carregados do backend");
+    } catch (erro) {
+        console.warn("⚠️ Backend indisponível, usando localStorage", erro);
+
+        const cache = localStorage.getItem("pedidos");
+        pedidos = cache ? JSON.parse(cache) : [];
+    }
+}
+
     showUserSelectionPage();
+    initializeMap();
 });
 
 function showLoaderDashboard() {
@@ -4009,7 +3457,7 @@ function excluirPedido(pedidoId) {
 
     if (index > -1) {
         pedidos.splice(index, 1); 
-        salvarPedidosNoLocalStorage(); 
+        salvarPedidosNoBanco(pedido); 
         console.log(`Pedido COT_${pedidoId} foi excluído.`);
         
         updateConsultaPedidosList();
@@ -4266,21 +3714,40 @@ function salvarEmbarqueProgramado(pedidoIds, nomeEmbarque) {
         return;
     }
 
-    const formattedDate = new Date(previsaoData + 'T00:00:00').toLocaleDateString('pt-BR');
+    const formattedDate = new Date(previsaoData + 'T00:00:00')
+        .toLocaleDateString('pt-BR');
 
     pedidoIds.forEach(pedidoId => {
         const pedidoIndex = pedidos.findIndex(p => p.id === pedidoId);
-        if (pedidoIndex !== -1) {
-            pedidos[pedidoIndex].embarque = nomeEmbarque;
-            pedidos[pedidoIndex].previsaoCarregamento = formattedDate;
-            setPedidoStatus(pedidoId, "Carregamento Programado");
-        }
+        if (pedidoIndex === -1) return;
+
+        // ✅ obtém o pedido
+        const pedido = pedidos[pedidoIndex];
+
+        // ✅ atualiza dados do embarque
+        pedido.embarque = nomeEmbarque;
+        pedido.previsaoCarregamento = formattedDate;
+
+        // ✅ atualiza status (já salva no banco lá dentro)
+        setPedidoStatus(pedidoId, "Carregamento Programado");
+
+        // ✅ salva o pedido atualizado no banco
+        salvarPedidosNoBanco(pedido);
     });
 
-    localStorage.setItem(`embarque_ordem_${nomeEmbarque}`, JSON.stringify(pedidoIds));
-    salvarPedidosNoLocalStorage();
+    // mantém o localStorage se quiser como backup
+    localStorage.setItem(
+        `embarque_ordem_${nomeEmbarque}`,
+        JSON.stringify(pedidoIds)
+    );
+
     closeModal();
-    showModal("Sucesso!", `O embarque #${nomeEmbarque} foi programado para ${formattedDate}.`, `<button class="modal-button ok" onclick="closeModal(); initializeMapAndFilters();">OK</button>`);
+
+    showModal(
+        "Sucesso!",
+        `O embarque #${nomeEmbarque} foi programado para ${formattedDate}.`,
+        `<button class="modal-button ok" onclick="closeModal(); initializeMapAndFilters();">OK</button>`
+    );
 }
 
 
@@ -4293,7 +3760,7 @@ function liberarParaSeparacao(embarqueNome) {
             pedidosDoEmbarque.forEach(pedido => {
                 setPedidoStatus(pedido.id, 'Aguardando separação');
             });
-            salvarPedidosNoLocalStorage();
+            salvarPedidosNoBanco(pedido);
             renderResumoGerencial();
             closeModal();
             showModal("Sucesso!", `Embarque #${embarqueNome} liberado para separação.`, '<button class="modal-button ok" onclick="closeModal()">OK</button>');
@@ -4593,7 +4060,7 @@ function saveOrder() {
     };
 
     pedidos.push(novoPedido);
-    salvarPedidosNoLocalStorage(); 
+    salvarPedidosNoBanco(pedido); 
     inicializarNotasFiscais();
 
     showModal("Sucesso!", `Pedido #${novoId} criado para o cliente ${cliente}.`, `<button class="modal-button ok" onclick="closeModal(); showGestorView('consulta', document.querySelector('a[data-view=consulta]'));">OK</button>`);
