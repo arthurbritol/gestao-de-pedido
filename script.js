@@ -38,6 +38,46 @@ const usuarios = {
     "consultor": "1234"
 };
 
+let pedidosIniciais = [
+
+    {
+    id: 20001,
+    cliente: "Aço Forte",
+    telefone: "5527992753233",
+    status: "Aguardando rota",
+    data: "2026-04-10",
+    endereco: "Avenida Talma Rodrigues Ribeiro, 1500, Portal de Jacaraípe, Serra - ES, 29173-735",
+    embarque: null,
+    motorista: null,
+    produtos: {
+        "GALPAO A3": [
+        { nome: "Viga W 250 x 25.7", pesoSolicitado: 925 }
+        ],
+        "GALPAO B2": [
+        { nome: "Tubo Quadrado 40x40 #18 (1.25mm)", pesoSolicitado: 480 }
+        ],
+        "BOBINAS": [
+        { nome: "Chapa Fina a Frio #24 (0.60mm)", pesoSolicitado: 860 }
+        ]
+    }
+    },
+    {
+    id: 20013,
+    cliente: "Aço Capixaba",
+    telefone: "5527998112233",
+    status: "Aguardando rota",
+    data: "2026-04-20",
+    endereco: "Av. Carlos Lindenberg, 4560, Vila Velha - ES, 29118-000",
+    embarque: null,
+    motorista: null,
+    produtos: {
+        "GALPAO A3": [
+        { nome: "Viga W 250 x 25.7", pesoSolicitado: 1200 }
+        ]
+    }
+    }
+]
+
 const CEDISA_LOCATION = { name: 'Cedisa Central de Aço - Matriz', coords: [-40.366593, -20.065453] };
 
 const pesosTeoricosProdutos = {
