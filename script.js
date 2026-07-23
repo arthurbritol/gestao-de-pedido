@@ -3801,7 +3801,6 @@ function liberarParaSeparacao(embarqueNome) {
             pedidosDoEmbarque.forEach(pedido => {
                 setPedidoStatus(pedido.id, 'Aguardando separação');
             });
-            salvarPedidosNoBanco(pedido);
             renderResumoGerencial();
             closeModal();
             showModal("Sucesso!", `Embarque #${embarqueNome} liberado para separação.`, '<button class="modal-button ok" onclick="closeModal()">OK</button>');
@@ -4624,9 +4623,58 @@ function selecionarPedidosPorCapacidade(pedidos, capacidade) {
     return selecionados;
 }
 
+async function montarRotaManualmente() {
+    try {
+        const idsSelecionados = Array.from(document.querySelectorAll('#pedidos-filtrados-list input[type="checkbox"]:checked')).map(cb => parseInt(cb.dataset.id, 10));
+        
+        if (!idsSelecionados.length) {
+            showModal("Atenção", "Selecione pelo menos um pedido marcando a caixinha na lista antes de montar a rota manualmente.");
+            return;
+        }
+
+        const pedidosFinal = pedidos.filter(p => idsSelecionados.includes(p.id));
+
+        // Garantir coordenadas
+        for (const p of pedidosFinal) {
+            if (!p.coords) {
+                p.coords = await getCoordsForAddressMapbox(p.endereco, p.id);
+            }
+        }
+
+        // Gerar rota via Mapbox Directions
+        const route = await getRouteMapbox(
+            pedidosFinal,
+            CEDISA_LOCATION
+        );
+
+        pedidosPendentes = pedidosFinal;
+        rotaPendente = route;
+
+        displayRouteOnMapAndPanel(
+            pedidosFinal,
+            route,
+            CEDISA_LOCATION
+        );
+
+        mostrarBotoesAcao(true);
+
+    } catch (e) {
+        console.error(e);
+        showFeedbackMessage(
+            document.getElementById("minuta-content"),
+            "warning-circle",
+            e.message || "Erro ao montar rota manual.",
+            true
+        );
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("sugerirRotaBtn");
-    if (btn) btn.addEventListener("click", sugerirRotaInteligente);
+    const btnSugerir = document.getElementById("sugerirRotaBtn");
+    if (btnSugerir) btnSugerir.addEventListener("click", sugerirRotaInteligente);
+
+    const btnManual = document.getElementById("montarManualBtn");
+    if (btnManual) btnManual.addEventListener("click", montarRotaManualmente);
 
     const exportBtn = document.getElementById("exportarGoogleMapsBtn");
     if (exportBtn) exportBtn.addEventListener("click", exportToGoogleMaps);
