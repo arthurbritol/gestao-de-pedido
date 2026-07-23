@@ -628,16 +628,41 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 async function salvarPedidosNoBanco(pedidoEspecifico = null) {
   const pedidosParaSalvar = pedidoEspecifico ? [pedidoEspecifico] : pedidos;
   for (const pedido of pedidosParaSalvar) {
-    await fetch(`${SUPABASE_URL}/rest/v1/pedidos`, {
-      method: "POST",
-      headers: { 
-        "Content-Type": "application/json",
-        "apikey": SUPABASE_KEY,
-        "Authorization": `Bearer ${SUPABASE_KEY}`,
-        "Prefer": "resolution=merge-duplicates"
-      },
-      body: JSON.stringify(pedido)
-    });
+    
+    // Limpar propriedades de runtime que não existem no Supabase (ex: coords)
+    const pedidoLimpo = {
+      id: pedido.id,
+      cotacao: pedido.cotacao || null,
+      cliente: pedido.cliente || null,
+      telefone: pedido.telefone || null,
+      endereco: pedido.endereco || null,
+      status: pedido.status || null,
+      data: pedido.data || null,
+      embarque: pedido.embarque || null,
+      motorista: pedido.motorista || null,
+      peso_estimado: pedido.peso_estimado || 0,
+      produtos: pedido.produtos || {}
+    };
+
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/pedidos`, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${SUPABASE_KEY}`,
+          "Prefer": "resolution=merge-duplicates"
+        },
+        body: JSON.stringify(pedidoLimpo)
+      });
+      
+      if (!response.ok) {
+        const errText = await response.text();
+        console.error("Erro do Supabase ao salvar pedido:", errText);
+      }
+    } catch (error) {
+      console.error("Falha na requisição para salvar no Supabase:", error);
+    }
   }
 }
 
