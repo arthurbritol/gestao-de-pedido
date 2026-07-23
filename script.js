@@ -541,25 +541,12 @@ function setPedidoStatus(id, status) {
     // ✅ 3. Agora salvamos corretamente no banco
     salvarPedidosNoBanco(pedido);
 
-    // ✅ 4. Envio opcional de notificação
+    // ✅ 4. Envio opcional de notificação (desativado temporariamente pois estamos serverless)
+    /*
     if (pedido.telefone) {
-        fetch("http://localhost:3000/notificar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                pedidoId: id,
-                novoStatus: status,
-                numeroCliente: pedido.telefone
-            })
-        })
-        .then(response => response.json())
-        .then(data => console.log("Notificação enviada:", data))
-        .catch(error =>
-            console.error("Erro ao enviar notificação:", error)
-        );
+        // Logica futura de notificação se necessário
     }
+    */
 }
 
 function getPedidoCarregadoStatus(id) {
@@ -635,11 +622,20 @@ setDadosPesoPedido = function (id, dados) {
 };
 
 
-async function salvarPedidosNoBanco() {
-  for (const pedido of pedidos) {
-    await fetch("http://localhost:3000/api/pedidos", {
+const SUPABASE_URL = "https://ungbusaxamlbnthkprpy.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVuZ2J1c2F4YW1sYm50aGtwcnB5Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NzM3NTE3MiwiZXhwIjoyMDkyOTUxMTcyfQ.fa5SYKnUL1gvfKUvV-yuEJsTCuD0fsJPpPP3kawI_O8";
+
+async function salvarPedidosNoBanco(pedidoEspecifico = null) {
+  const pedidosParaSalvar = pedidoEspecifico ? [pedidoEspecifico] : pedidos;
+  for (const pedido of pedidosParaSalvar) {
+    await fetch(`${SUPABASE_URL}/rest/v1/pedidos`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_KEY,
+        "Authorization": `Bearer ${SUPABASE_KEY}`,
+        "Prefer": "resolution=merge-duplicates"
+      },
       body: JSON.stringify(pedido)
     });
   }
@@ -1285,10 +1281,15 @@ function resetAllOrderData() {
 }
 
 async function carregarPedidosDoBanco() {
-    const res = await fetch("http://localhost:3000/api/pedidos");
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/pedidos`, {
+        headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization": `Bearer ${SUPABASE_KEY}`
+        }
+    });
 
     if (!res.ok) {
-        throw new Error("Falha ao buscar pedidos do banco");
+        throw new Error("Falha ao buscar pedidos do Supabase");
     }
 
     pedidos = await res.json();
