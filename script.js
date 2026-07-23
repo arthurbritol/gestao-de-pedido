@@ -632,7 +632,6 @@ async function salvarPedidosNoBanco(pedidoEspecifico = null) {
     // Limpar propriedades de runtime que não existem no Supabase (ex: coords)
     const pedidoLimpo = {
       id: pedido.id,
-      cotacao: pedido.cotacao || null,
       cliente: pedido.cliente || null,
       telefone: pedido.telefone || null,
       endereco: pedido.endereco || null,
