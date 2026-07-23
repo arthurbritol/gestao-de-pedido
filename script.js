@@ -1704,9 +1704,10 @@ function marcarPedidoCarregado(pedidoId) {
     const unCheckedItems = [];
     for (const setor in pedido.produtos) {
         pedido.produtos[setor].forEach(produto => {
-            const produtoSlug = produto.replace(/\s/g, '-');
+            const nomeProduto = typeof produto === 'string' ? produto : produto.nome;
+            const produtoSlug = nomeProduto.replace(/\s/g, '-');
             if (!getStatusItemCarregado(pedidoId, produtoSlug)) {
-                unCheckedItems.push(produto);
+                unCheckedItems.push(nomeProduto);
             }
         });
     }
@@ -1891,7 +1892,8 @@ function gerarPDF(pedidoId) {
 
     for (const setor in pedido.produtos) {
         pedido.produtos[setor].forEach(produto => {
-            const peso = parseFloat(dadosPeso[produto]) || 0;
+            const nomeProduto = typeof produto === 'string' ? produto : produto.nome;
+            const peso = parseFloat(dadosPeso[nomeProduto]) || 0;
             pesoTotal += peso;
         });
     }
