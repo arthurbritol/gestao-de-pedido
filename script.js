@@ -1720,6 +1720,7 @@ function marcarPedidoCarregado(pedidoId) {
             `Todos os itens da COT_${pedidoId} foram marcados. Deseja finalizar o carregamento?`,
             () => {
                 setPedidoCarregadoStatus(pedidoId, "carregado");
+                setPedidoStatus(pedidoId, "Em carregamento");
                 localStorage.removeItem(`${localStoragePedidoParcialKey}_${pedidoId}`);
                 showModal("Sucesso", `Pedido COT_${pedidoId} marcado como "Embarque Carregado".`, `<button class="modal-button ok" onclick="closeModal()">OK</button>`);
             }
